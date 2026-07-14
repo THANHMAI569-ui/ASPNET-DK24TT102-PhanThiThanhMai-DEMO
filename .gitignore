@@ -1,0 +1,44 @@
+## ==========================================================================
+##  CookingAdvisor - .gitignore
+## ==========================================================================
+
+## --- Project-internal files (NOT for GitHub) ---------------------------
+## Rule file & planning docs live locally only, per project decision.
+/CLAUDE.md
+/docs/
+
+## --- .NET / Visual Studio / Rider build output -------------------------
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+[Ll]og/
+[Ll]ogs/
+
+## --- User-specific / secrets -------------------------------------------
+*.user
+*.suo
+secrets.json
+appsettings.*.local.json
+.env
+.env.*
+
+## --- Rider / JetBrains --------------------------------------------------
+.idea/
+*.sln.iml
+
+## --- Visual Studio / VS Code -------------------------------------------
+.vs/
+.vscode/
+
+## --- macOS / Windows noise ---------------------------------------------
+.DS_Store
+Thumbs.db
+
+## --- Test / coverage ----------------------------------------------------
+[Tt]est[Rr]esult*/
+*.coverage
+coverage/
+
+## --- NuGet --------------------------------------------------------------
+*.nupkg
+.packages/
