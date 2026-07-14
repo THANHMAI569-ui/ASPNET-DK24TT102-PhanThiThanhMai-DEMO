@@ -1,54 +1,85 @@
 # Hướng dẫn cài đặt CookingAdvisor
 
-> Phần chi tiết (docker-compose, script seed) sẽ được bổ sung ở Phase 1.
-> Tài liệu này tóm tắt cách dựng môi trường chạy trên **macOS** và **Windows**.
+Yêu cầu: **.NET SDK 10** và một **SQL Server**. Dự án dùng **EF Core Code-First** nên
+DB được dựng tự động từ migrations — không cần import file `.bak`.
 
-## Yêu cầu chung
+Cùng một mã nguồn chạy **giống hệt** trên macOS và Windows; chỉ khác **chuỗi kết
+nối** (nằm trong cấu hình, không nằm trong code).
 
-- .NET SDK **10.0** trở lên — https://dotnet.microsoft.com/download
-- Công cụ EF Core: `dotnet tool install --global dotnet-ef`
-- Một instance **SQL Server** (xem bên dưới theo hệ điều hành)
+---
 
-## macOS (dùng OrbStack / Docker)
-
-SQL Server không chạy native trên macOS nên ta chạy trong container Linux:
+## 1. Chuẩn bị công cụ
 
 ```bash
-# Từ thư mục setup/ (docker-compose.yml sẽ có ở Phase 1)
+dotnet --version          # cần >= 10.0
+dotnet tool install --global dotnet-ef   # nếu chưa có
+```
+
+## 2. Dựng SQL Server
+
+Chọn 1 trong 3 cách — cách nào cũng ra cùng kết quả:
+
+### Cách A — Docker (khuyến nghị, giống nhau trên macOS & Windows)
+
+macOS dùng **OrbStack** hoặc Docker Desktop; Windows dùng **Docker Desktop**. Cùng
+một file `docker-compose.yml`:
+
+```bash
+cd setup
 docker compose up -d
-# SQL Server sẽ lắng nghe ở localhost:1433
+# SQL Server lắng nghe ở localhost:1433, tài khoản sa / CookAdvisor@2026
 ```
 
-Connection string mẫu:
-```
-Server=localhost,1433;Database=CookingAdvisor;User Id=sa;Password=Your_password123;TrustServerCertificate=True;
-```
+> Mật khẩu SA mặc định `CookAdvisor@2026` chỉ dùng cho DEV cục bộ. Đổi bằng biến
+> môi trường `MSSQL_SA_PASSWORD` trước khi `docker compose up` nếu muốn.
+> Trên Apple Silicon, image chạy dưới giả lập amd64 (đã cấu hình sẵn trong compose).
 
-## Windows
+### Cách B — SQL Server native trên Windows
 
-Cài **SQL Server Express** hoặc **Developer Edition**, rồi dùng connection string:
-```
-Server=localhost\SQLEXPRESS;Database=CookingAdvisor;Trusted_Connection=True;TrustServerCertificate=True;
-```
+Cài **SQL Server Express/Developer**. Dùng SQL authentication (bật mixed mode) với
+tài khoản `sa`, hoặc tạo login riêng. Chuỗi kết nối ở mục 3.
 
-## Cấu hình mật khẩu an toàn (không commit lên GitHub)
+### Cách C — LocalDB (Windows, nhẹ nhất cho demo)
+
+Có sẵn khi cài Visual Studio. Chuỗi kết nối ở mục 3.
+
+## 3. Cấu hình chuỗi kết nối (KHÔNG commit mật khẩu)
+
+Đặt qua **User Secrets** (không nằm trong repo):
 
 ```bash
 cd src/CookingAdvisor
-dotnet user-secrets init
-dotnet user-secrets set "ConnectionStrings:DefaultConnection" "<chuỗi kết nối của bạn>"
+dotnet user-secrets set "ConnectionStrings:DefaultConnection" "<chuỗi phù hợp bên dưới>"
 ```
 
-## Tạo database & seed dữ liệu
+| Môi trường | Chuỗi kết nối |
+|---|---|
+| **Docker (Mac/Win)** | `Server=localhost,1433;Database=CookingAdvisor;User Id=sa;Password=CookAdvisor@2026;TrustServerCertificate=True` |
+| **SQL Server native (Win)** | `Server=localhost;Database=CookingAdvisor;User Id=sa;Password=<mật khẩu của bạn>;TrustServerCertificate=True` |
+| **LocalDB (Win)** | `Server=(localdb)\\MSSQLLocalDB;Database=CookingAdvisor;Trusted_Connection=True;TrustServerCertificate=True` |
+
+> `TrustServerCertificate=True` cần cho cả hai (chứng chỉ dev tự ký).
+> Tiếng Việt được lưu bằng `nvarchar` (Unicode) nên hiển thị đúng trên mọi môi trường.
+
+## 4. Tạo database & chạy
 
 ```bash
-dotnet ef database update --project src/CookingAdvisor
-# Dữ liệu mẫu (danh mục, nguyên liệu, ~25 món ăn, tài khoản admin)
-# được nạp tự động khi chạy lần đầu qua DbInitializer.
+# từ thư mục gốc repo
+dotnet ef database update --project src/CookingAdvisor   # dựng schema từ migrations
+dotnet run --project src/CookingAdvisor                  # chạy app
 ```
 
-## Tài khoản mặc định (sau khi seed)
+Lần chạy đầu, `DbInitializer` nạp dữ liệu mẫu (danh mục, nguyên liệu, ~25 món ăn,
+tài khoản admin).
+
+## 5. Tài khoản mặc định (sau khi seed)
 
 | Vai | Email | Mật khẩu |
 |---|---|---|
-| Admin | admin@cookingadvisor.local | *(ghi ở Phase 1)* |
+| Admin | *(thiết lập ở Phase 1 — Ngày 3)* | *(sẽ ghi ở đây)* |
+
+## Ghi chú cross-platform
+
+Engine trong container Docker chính là **SQL Server for Linux của Microsoft** — cùng
+T-SQL, cùng provider EF Core với SQL Server trên Windows. Vì vậy code, migration,
+truy vấn **giống hệt** nhau; chỉ chuỗi kết nối thay đổi theo môi trường.
