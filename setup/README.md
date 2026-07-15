@@ -72,6 +72,23 @@ dotnet run --project src/CookingAdvisor                  # chạy app
 Lần chạy đầu, `DbInitializer` nạp dữ liệu mẫu (danh mục, nguyên liệu, ~25 món ăn,
 tài khoản admin).
 
+### Cách khác cho Windows: import trực tiếp bằng SSMS (không cần cài `dotnet-ef`)
+
+Nếu máy Windows (Visual Studio) chưa cài `dotnet-ef` CLI, có thể dựng schema bằng
+script T-SQL xuất sẵn từ migration thay vì bước `dotnet ef database update` ở trên:
+
+```
+setup/sql/InitialCreate.sql
+```
+
+Mở file này bằng **SQL Server Management Studio** (hoặc `sqlcmd`), kết nối tới
+instance SQL Server, chọn/tạo database `CookingAdvisor`, rồi **Execute**. Script là
+**idempotent** (tự kiểm tra `__EFMigrationsHistory`, chạy lại nhiều lần không lỗi),
+sinh ra từ đúng migration `InitialCreate` nên schema giống hệt bản chạy qua EF Core
+— không lệch pha giữa 2 hệ điều hành. Nếu sau này có thêm migration mới, chạy lại
+`dotnet ef migrations script --idempotent --project src/CookingAdvisor -o setup/sql/InitialCreate.sql`
+để cập nhật file này.
+
 ## 5. Tài khoản mặc định (sau khi seed)
 
 | Vai | Email | Mật khẩu |
