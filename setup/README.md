@@ -93,7 +93,10 @@ sinh ra từ đúng migration `InitialCreate` nên schema giống hệt bản ch
 
 | Vai | Email | Mật khẩu |
 |---|---|---|
-| Admin | *(thiết lập ở Phase 1 — Ngày 3)* | *(sẽ ghi ở đây)* |
+| Admin | `admin@cookingadvisor.local` | `Admin@2026!Cook` |
+
+> Tài khoản seed cho môi trường DEV/demo (đồ án), không dùng cho production.
+> Được tạo tự động bởi `DbInitializer` khi chạy app lần đầu trên DB trống.
 
 ## Ghi chú cross-platform
 

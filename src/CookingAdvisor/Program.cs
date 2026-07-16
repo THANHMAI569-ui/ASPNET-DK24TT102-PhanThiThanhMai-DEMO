@@ -1,4 +1,6 @@
 using CookingAdvisor.Data;
+using CookingAdvisor.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,7 +15,23 @@ if (string.IsNullOrWhiteSpace(connectionString))
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
 
+builder.Services
+    .AddIdentity<ApplicationUser, IdentityRole>(options =>
+    {
+        options.Password.RequiredLength = 8;
+        options.User.RequireUniqueEmail = true;
+    })
+    .AddEntityFrameworkStores<AppDbContext>()
+    .AddDefaultTokenProviders();
+
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    await db.Database.MigrateAsync();
+    await DbInitializer.SeedAsync(scope.ServiceProvider);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -26,6 +44,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
