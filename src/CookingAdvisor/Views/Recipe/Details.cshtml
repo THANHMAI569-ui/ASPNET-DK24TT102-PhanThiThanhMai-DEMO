@@ -1,0 +1,45 @@
+@model RecipeDetailViewModel
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="row g-4">
+    <div class="col-md-5">
+        <img src="@(string.IsNullOrEmpty(Model.ImageUrl) ? Url.Content("~/images/recipe-placeholder.svg") : Model.ImageUrl)"
+             class="img-fluid rounded" alt="@Model.Name"/>
+    </div>
+    <div class="col-md-7">
+        <span class="badge bg-secondary mb-2">@Model.CategoryName</span>
+        <h1>@Model.Name</h1>
+        @if (!string.IsNullOrEmpty(Model.Description))
+        {
+            <p class="text-muted">@Model.Description</p>
+        }
+        <ul class="list-inline">
+            <li class="list-inline-item">Khẩu phần: @Model.Servings người</li>
+            <li class="list-inline-item">Chuẩn bị: @Model.PrepMinutes phút</li>
+            <li class="list-inline-item">Nấu: @Model.CookMinutes phút</li>
+            <li class="list-inline-item">Độ khó: @Model.Difficulty.ToDisplayName()</li>
+            <li class="list-inline-item">Vùng miền: @Model.Region.ToDisplayName()</li>
+            <li class="list-inline-item">Calo/khẩu phần: @Model.CaloriesPerServing kcal</li>
+        </ul>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-5">
+        <h4>Nguyên liệu</h4>
+        <ul class="list-group list-group-flush">
+            @foreach (var ingredient in Model.Ingredients)
+            {
+                <li class="list-group-item">@ingredient.Name — @ingredient.Quantity.ToString("0.##") @ingredient.Unit</li>
+            }
+        </ul>
+    </div>
+    <div class="col-md-7">
+        <h4>Cách làm</h4>
+        <p style="white-space: pre-line;">@Model.Instructions</p>
+    </div>
+</div>
+
+<a asp-controller="Recipe" asp-action="Index" class="btn btn-outline-secondary mt-4">&larr; Quay lại danh sách</a>

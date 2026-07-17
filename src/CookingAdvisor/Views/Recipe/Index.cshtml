@@ -1,0 +1,28 @@
+@model IReadOnlyList<RecipeListItemViewModel>
+@{
+    ViewData["Title"] = "Món ăn";
+}
+
+<h1 class="mb-4">Danh sách món ăn</h1>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
+    @foreach (var recipe in Model)
+    {
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <img src="@(string.IsNullOrEmpty(recipe.ImageUrl) ? Url.Content("~/images/recipe-placeholder.svg") : recipe.ImageUrl)"
+                     class="card-img-top" alt="@recipe.Name" style="height: 180px; object-fit: cover;"/>
+                <div class="card-body d-flex flex-column">
+                    <span class="badge bg-secondary align-self-start mb-2">@recipe.CategoryName</span>
+                    <h5 class="card-title">@recipe.Name</h5>
+                    <p class="card-text text-muted mt-auto">
+                        Thời gian nấu: @recipe.TotalMinutes phút &middot; @recipe.Difficulty.ToDisplayName()
+                    </p>
+                    <a asp-controller="Recipe" asp-action="Details" asp-route-id="@recipe.Id" class="btn btn-outline-primary btn-sm">
+                        Xem chi tiết
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

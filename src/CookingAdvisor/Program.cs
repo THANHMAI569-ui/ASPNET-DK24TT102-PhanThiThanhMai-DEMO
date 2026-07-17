@@ -1,5 +1,6 @@
 using CookingAdvisor.Data;
 using CookingAdvisor.Models;
+using CookingAdvisor.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,6 +24,8 @@ builder.Services
     })
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
+
+builder.Services.AddScoped<RecipeService>();
 
 var app = builder.Build();
 
