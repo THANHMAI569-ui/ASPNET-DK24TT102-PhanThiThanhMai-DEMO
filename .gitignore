@@ -42,3 +42,6 @@ coverage/
 ## --- NuGet --------------------------------------------------------------
 *.nupkg
 .packages/
+
+## --- CodeGraph index (local dev tool, not for GitHub) --------------------
+.codegraph/
