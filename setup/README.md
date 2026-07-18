@@ -87,6 +87,11 @@ instance SQL Server, chọn/tạo database `CookingAdvisor`, rồi **Execute**. 
 sinh ra từ đúng migration `InitialCreate` nên schema giống hệt bản chạy qua EF Core
 — không lệch pha giữa 2 hệ điều hành. Nếu sau này có thêm migration mới, chạy lại
 `dotnet ef migrations script --idempotent --project src/CookingAdvisor -o setup/sql/InitialCreate.sql`
+
+> Script này chỉ tạo **schema** (bảng, cột, FK), không có dữ liệu mẫu. Sau khi
+> Execute xong, vẫn cần chạy `dotnet run --project src/CookingAdvisor` **một lần**
+> để `DbInitializer` seed dữ liệu (roles, admin, danh mục, nguyên liệu, món ăn) —
+> vì phần seed nằm trong code C#, không nằm trong file SQL.
 để cập nhật file này.
 
 ## 5. Tài khoản mặc định (sau khi seed)
