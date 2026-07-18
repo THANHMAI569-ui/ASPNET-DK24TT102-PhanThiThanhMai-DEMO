@@ -1,14 +1,15 @@
 using CookingAdvisor.Services;
+using CookingAdvisor.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CookingAdvisor.Controllers;
 
 public class RecipeController(RecipeService recipeService) : Controller
 {
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(RecipeFilterViewModel filter)
     {
-        var recipes = await recipeService.GetRecipesAsync();
-        return View(recipes);
+        var model = await recipeService.SearchRecipesAsync(filter);
+        return View(model);
     }
 
     public async Task<IActionResult> Details(int id)

@@ -1,28 +1,128 @@
-@model IReadOnlyList<RecipeListItemViewModel>
+@model RecipeListViewModel
 @{
     ViewData["Title"] = "Món ăn";
+    var f = Model.Filter;
 }
 
 <h1 class="mb-4">Danh sách món ăn</h1>
 
-<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
-    @foreach (var recipe in Model)
-    {
-        <div class="col">
-            <div class="card h-100 shadow-sm">
-                <img src="@(string.IsNullOrEmpty(recipe.ImageUrl) ? Url.Content("~/images/recipe-placeholder.svg") : recipe.ImageUrl)"
-                     class="card-img-top" alt="@recipe.Name" style="height: 180px; object-fit: cover;"/>
-                <div class="card-body d-flex flex-column">
-                    <span class="badge bg-secondary align-self-start mb-2">@recipe.CategoryName</span>
-                    <h5 class="card-title">@recipe.Name</h5>
-                    <p class="card-text text-muted mt-auto">
-                        Thời gian nấu: @recipe.TotalMinutes phút &middot; @recipe.Difficulty.ToDisplayName()
-                    </p>
-                    <a asp-controller="Recipe" asp-action="Details" asp-route-id="@recipe.Id" class="btn btn-outline-primary btn-sm">
-                        Xem chi tiết
-                    </a>
+<form asp-action="Index" method="get" class="card card-body bg-light mb-4">
+    <div class="row g-3 align-items-end">
+        <div class="col-12 col-md-4">
+            <label for="Keyword" class="form-label">Tìm theo tên</label>
+            <input type="text" id="Keyword" name="Keyword" value="@f.Keyword"
+                   class="form-control" placeholder="Ví dụ: phở, gà, canh..." />
+        </div>
+        <div class="col-6 col-md-2">
+            <label for="CategoryId" class="form-label">Danh mục</label>
+            <select id="CategoryId" name="CategoryId" class="form-select">
+                <option value="">Tất cả</option>
+                @foreach (var c in Model.Categories)
+                {
+                    <option value="@c.Id" selected="@(f.CategoryId == c.Id)">@c.Name</option>
+                }
+            </select>
+        </div>
+        <div class="col-6 col-md-2">
+            <label for="Region" class="form-label">Vùng miền</label>
+            <select id="Region" name="Region" class="form-select">
+                <option value="">Tất cả</option>
+                @foreach (var region in Enum.GetValues<Region>())
+                {
+                    <option value="@region" selected="@(f.Region == region)">@region.ToDisplayName()</option>
+                }
+            </select>
+        </div>
+        <div class="col-6 col-md-2">
+            <label for="Difficulty" class="form-label">Độ khó</label>
+            <select id="Difficulty" name="Difficulty" class="form-select">
+                <option value="">Tất cả</option>
+                @foreach (var difficulty in Enum.GetValues<Difficulty>())
+                {
+                    <option value="@difficulty" selected="@(f.Difficulty == difficulty)">@difficulty.ToDisplayName()</option>
+                }
+            </select>
+        </div>
+        <div class="col-6 col-md-2">
+            <label for="MaxCookMinutes" class="form-label">Thời gian nấu tối đa (phút)</label>
+            <input type="number" id="MaxCookMinutes" name="MaxCookMinutes" value="@f.MaxCookMinutes"
+                   min="0" step="5" class="form-control" placeholder="Không giới hạn" />
+        </div>
+    </div>
+    <div class="mt-3 d-flex gap-2">
+        <button type="submit" class="btn btn-primary">Lọc</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Xóa lọc</a>
+    </div>
+</form>
+
+<p class="text-muted">Tìm thấy <strong>@Model.TotalCount</strong> món.</p>
+
+@if (Model.Recipes.Count == 0)
+{
+    <div class="alert alert-info">Không có món nào khớp bộ lọc. Thử nới điều kiện tìm kiếm.</div>
+}
+else
+{
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
+        @foreach (var recipe in Model.Recipes)
+        {
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <img src="@(string.IsNullOrEmpty(recipe.ImageUrl) ? Url.Content("~/images/recipe-placeholder.svg") : recipe.ImageUrl)"
+                         class="card-img-top" alt="@recipe.Name" style="height: 180px; object-fit: cover;"/>
+                    <div class="card-body d-flex flex-column">
+                        <span class="badge bg-secondary align-self-start mb-2">@recipe.CategoryName</span>
+                        <h5 class="card-title">@recipe.Name</h5>
+                        <p class="card-text text-muted mt-auto">
+                            Thời gian nấu: @recipe.TotalMinutes phút &middot; @recipe.Difficulty.ToDisplayName()
+                        </p>
+                        <a asp-controller="Recipe" asp-action="Details" asp-route-id="@recipe.Id" class="btn btn-outline-primary btn-sm">
+                            Xem chi tiết
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
+        }
+    </div>
+
+    @if (Model.TotalPages > 1)
+    {
+        <nav class="mt-4" aria-label="Phân trang">
+            <ul class="pagination justify-content-center">
+                <li class="page-item @(Model.HasPrevious ? "" : "disabled")">
+                    <a class="page-link"
+                       asp-action="Index"
+                       asp-route-Keyword="@f.Keyword"
+                       asp-route-CategoryId="@f.CategoryId"
+                       asp-route-Region="@f.Region"
+                       asp-route-Difficulty="@f.Difficulty"
+                       asp-route-MaxCookMinutes="@f.MaxCookMinutes"
+                       asp-route-Page="@(Model.Page - 1)">Trước</a>
+                </li>
+                @for (var p = 1; p <= Model.TotalPages; p++)
+                {
+                    <li class="page-item @(p == Model.Page ? "active" : "")">
+                        <a class="page-link"
+                           asp-action="Index"
+                           asp-route-Keyword="@f.Keyword"
+                           asp-route-CategoryId="@f.CategoryId"
+                           asp-route-Region="@f.Region"
+                           asp-route-Difficulty="@f.Difficulty"
+                           asp-route-MaxCookMinutes="@f.MaxCookMinutes"
+                           asp-route-Page="@p">@p</a>
+                    </li>
+                }
+                <li class="page-item @(Model.HasNext ? "" : "disabled")">
+                    <a class="page-link"
+                       asp-action="Index"
+                       asp-route-Keyword="@f.Keyword"
+                       asp-route-CategoryId="@f.CategoryId"
+                       asp-route-Region="@f.Region"
+                       asp-route-Difficulty="@f.Difficulty"
+                       asp-route-MaxCookMinutes="@f.MaxCookMinutes"
+                       asp-route-Page="@(Model.Page + 1)">Sau</a>
+                </li>
+            </ul>
+        </nav>
     }
-</div>
+}
