@@ -1,0 +1,35 @@
+@{
+    ViewData["Title"] = "Quản trị";
+}
+
+<h1 class="mb-4">Khu quản trị</h1>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Món ăn</h5>
+                <p class="display-6">@ViewBag.RecipeCount</p>
+                <a asp-controller="Recipes" asp-action="Index" class="btn btn-primary">Quản lý món ăn</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Nguyên liệu</h5>
+                <p class="display-6">@ViewBag.IngredientCount</p>
+                <a asp-controller="Ingredients" asp-action="Index" class="btn btn-primary">Quản lý nguyên liệu</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Danh mục</h5>
+                <p class="display-6">@ViewBag.CategoryCount</p>
+                <a asp-controller="Categories" asp-action="Index" class="btn btn-primary">Quản lý danh mục</a>
+            </div>
+        </div>
+    </div>
+</div>

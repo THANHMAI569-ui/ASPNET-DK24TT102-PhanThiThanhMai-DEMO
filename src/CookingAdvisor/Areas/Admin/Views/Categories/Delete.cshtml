@@ -1,0 +1,21 @@
+@model CategoryListItemViewModel
+@{
+    ViewData["Title"] = "Xóa danh mục";
+}
+
+<h1 class="mb-4">Xóa danh mục</h1>
+
+<div class="card card-body col-12 col-md-6">
+    <p>Bạn có chắc muốn xóa danh mục <strong>@Model.Name</strong>?</p>
+    @if (Model.RecipeCount > 0)
+    {
+        <div class="alert alert-warning">
+            Danh mục đang có <strong>@Model.RecipeCount</strong> món ăn nên không thể xóa. Hãy chuyển hoặc xóa các món trước.
+        </div>
+    }
+    <form asp-action="Delete" method="post" class="d-flex gap-2">
+        <input type="hidden" name="id" value="@Model.Id" />
+        <button type="submit" class="btn btn-danger" disabled="@(Model.RecipeCount > 0)">Xóa</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Hủy</a>
+    </form>
+</div>

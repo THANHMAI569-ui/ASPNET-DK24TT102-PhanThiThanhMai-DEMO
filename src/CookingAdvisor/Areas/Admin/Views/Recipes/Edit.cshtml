@@ -1,0 +1,19 @@
+@model RecipeFormViewModel
+@{
+    ViewData["Title"] = "Sửa món ăn";
+}
+
+<h1 class="mb-4">Sửa món ăn</h1>
+
+<form asp-action="Edit" method="post" class="card card-body">
+    <input type="hidden" asp-for="Id" />
+    <partial name="_Form" model="Model" />
+    <div class="d-flex gap-2 mt-4">
+        <button type="submit" class="btn btn-primary">Lưu</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Hủy</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

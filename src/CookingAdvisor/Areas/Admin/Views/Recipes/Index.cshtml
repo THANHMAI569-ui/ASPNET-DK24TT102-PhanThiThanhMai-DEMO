@@ -1,0 +1,47 @@
+@model IReadOnlyList<RecipeAdminListItemViewModel>
+@{
+    ViewData["Title"] = "Quản lý món ăn";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Món ăn</h1>
+    <a asp-action="Create" class="btn btn-primary">+ Thêm món ăn</a>
+</div>
+
+@if (Model.Count == 0)
+{
+    <div class="alert alert-info">Chưa có món ăn nào.</div>
+}
+else
+{
+    <table class="table table-striped align-middle">
+        <thead>
+            <tr>
+                <th>Tên món</th>
+                <th>Danh mục</th>
+                <th>Vùng miền</th>
+                <th>Độ khó</th>
+                <th class="text-center">Nguyên liệu</th>
+                <th class="text-end">Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var recipe in Model)
+            {
+                <tr>
+                    <td>@recipe.Name</td>
+                    <td>@recipe.CategoryName</td>
+                    <td>@recipe.Region.ToDisplayName()</td>
+                    <td>@recipe.Difficulty.ToDisplayName()</td>
+                    <td class="text-center">@recipe.IngredientCount</td>
+                    <td class="text-end">
+                        <a asp-action="Edit" asp-route-id="@recipe.Id" class="btn btn-sm btn-outline-secondary">Sửa</a>
+                        <a asp-action="Delete" asp-route-id="@recipe.Id" class="btn btn-sm btn-outline-danger">Xóa</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<a asp-controller="Dashboard" asp-action="Index" class="btn btn-link">&larr; Về khu quản trị</a>

@@ -1,0 +1,18 @@
+@model RecipeAdminListItemViewModel
+@{
+    ViewData["Title"] = "Xóa món ăn";
+}
+
+<h1 class="mb-4">Xóa món ăn</h1>
+
+<div class="card card-body col-12 col-md-6">
+    <p>Bạn có chắc muốn xóa món <strong>@Model.Name</strong> (@Model.CategoryName)?</p>
+    <div class="alert alert-warning">
+        Thao tác này sẽ xóa món cùng @Model.IngredientCount dòng nguyên liệu của nó và không thể hoàn tác.
+    </div>
+    <form asp-action="Delete" method="post" class="d-flex gap-2">
+        <input type="hidden" name="id" value="@Model.Id" />
+        <button type="submit" class="btn btn-danger">Xóa</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Hủy</a>
+    </form>
+</div>

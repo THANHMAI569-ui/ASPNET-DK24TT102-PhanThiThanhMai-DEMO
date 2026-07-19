@@ -1,0 +1,21 @@
+@model IngredientListItemViewModel
+@{
+    ViewData["Title"] = "Xóa nguyên liệu";
+}
+
+<h1 class="mb-4">Xóa nguyên liệu</h1>
+
+<div class="card card-body col-12 col-md-6">
+    <p>Bạn có chắc muốn xóa nguyên liệu <strong>@Model.Name</strong> (@Model.Unit)?</p>
+    @if (Model.UsageCount > 0)
+    {
+        <div class="alert alert-warning">
+            Nguyên liệu đang được dùng trong <strong>@Model.UsageCount</strong> món nên không thể xóa.
+        </div>
+    }
+    <form asp-action="Delete" method="post" class="d-flex gap-2">
+        <input type="hidden" name="id" value="@Model.Id" />
+        <button type="submit" class="btn btn-danger" disabled="@(Model.UsageCount > 0)">Xóa</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Hủy</a>
+    </form>
+</div>

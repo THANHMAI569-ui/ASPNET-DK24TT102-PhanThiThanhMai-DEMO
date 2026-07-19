@@ -1,0 +1,162 @@
+@model RecipeFormViewModel
+
+<div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
+
+<div class="row g-3">
+    <div class="col-12 col-md-8">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="col-12 col-md-4">
+        <label asp-for="CategoryId" class="form-label"></label>
+        <select asp-for="CategoryId" class="form-select">
+            <option value="0">— Chọn danh mục —</option>
+            @foreach (var c in Model.CategoryOptions)
+            {
+                <option value="@c.Id">@c.Name</option>
+            }
+        </select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+
+    <div class="col-6 col-md-3">
+        <label asp-for="Region" class="form-label"></label>
+        <select name="Region" class="form-select">
+            @foreach (var region in Enum.GetValues<Region>())
+            {
+                <option value="@region" selected="@(Model.Region == region)">@region.ToDisplayName()</option>
+            }
+        </select>
+    </div>
+    <div class="col-6 col-md-3">
+        <label asp-for="Difficulty" class="form-label"></label>
+        <select name="Difficulty" class="form-select">
+            @foreach (var difficulty in Enum.GetValues<Difficulty>())
+            {
+                <option value="@difficulty" selected="@(Model.Difficulty == difficulty)">@difficulty.ToDisplayName()</option>
+            }
+        </select>
+    </div>
+    <div class="col-6 col-md-2">
+        <label asp-for="Servings" class="form-label"></label>
+        <input asp-for="Servings" type="number" min="1" class="form-control" />
+        <span asp-validation-for="Servings" class="text-danger"></span>
+    </div>
+    <div class="col-6 col-md-2">
+        <label asp-for="PrepMinutes" class="form-label"></label>
+        <input asp-for="PrepMinutes" type="number" min="0" class="form-control" />
+        <span asp-validation-for="PrepMinutes" class="text-danger"></span>
+    </div>
+    <div class="col-6 col-md-2">
+        <label asp-for="CookMinutes" class="form-label"></label>
+        <input asp-for="CookMinutes" type="number" min="0" class="form-control" />
+        <span asp-validation-for="CookMinutes" class="text-danger"></span>
+    </div>
+
+    <div class="col-6 col-md-3">
+        <label asp-for="CaloriesPerServing" class="form-label"></label>
+        <input asp-for="CaloriesPerServing" type="number" min="0" class="form-control" />
+        <span asp-validation-for="CaloriesPerServing" class="text-danger"></span>
+    </div>
+    <div class="col-12 col-md-9">
+        <label asp-for="ImageUrl" class="form-label"></label>
+        <input asp-for="ImageUrl" class="form-control" placeholder="https://..." />
+        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+    </div>
+
+    <div class="col-12">
+        <label asp-for="Description" class="form-label"></label>
+        <textarea asp-for="Description" class="form-control" rows="2"></textarea>
+    </div>
+    <div class="col-12">
+        <label asp-for="Instructions" class="form-label"></label>
+        <textarea asp-for="Instructions" class="form-control" rows="4"></textarea>
+    </div>
+</div>
+
+<hr class="my-4" />
+<h5>Nguyên liệu</h5>
+<table class="table align-middle">
+    <thead>
+        <tr>
+            <th>Nguyên liệu</th>
+            <th style="width: 140px;">Số lượng</th>
+            <th style="width: 120px;">Đơn vị</th>
+            <th style="width: 60px;"></th>
+        </tr>
+    </thead>
+    <tbody id="ingredients-body">
+        @for (var i = 0; i < Model.Ingredients.Count; i++)
+        {
+            var item = Model.Ingredients[i];
+            <tr class="ingredient-row">
+                <td>
+                    <input type="hidden" name="Ingredients.Index" value="@i" />
+                    <select name="Ingredients[@i].IngredientId" class="form-select">
+                        <option value="0">— Chọn nguyên liệu —</option>
+                        @foreach (var opt in Model.IngredientOptions)
+                        {
+                            <option value="@opt.Id" data-unit="@opt.Unit" selected="@(opt.Id == item.IngredientId)">@opt.Name</option>
+                        }
+                    </select>
+                </td>
+                <td><input name="Ingredients[@i].Quantity" value="@item.Quantity" type="number" step="0.01" min="0" class="form-control" /></td>
+                <td><input name="Ingredients[@i].Unit" value="@item.Unit" class="form-control" /></td>
+                <td><button type="button" class="btn btn-outline-danger btn-sm remove-ingredient">&times;</button></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<button type="button" id="add-ingredient" class="btn btn-outline-secondary btn-sm">+ Thêm nguyên liệu</button>
+
+<template id="ingredient-row-template">
+    <tr class="ingredient-row">
+        <td>
+            <input type="hidden" name="Ingredients.Index" value="__i__" />
+            <select name="Ingredients[__i__].IngredientId" class="form-select">
+                <option value="0">— Chọn nguyên liệu —</option>
+                @foreach (var opt in Model.IngredientOptions)
+                {
+                    <option value="@opt.Id" data-unit="@opt.Unit">@opt.Name</option>
+                }
+            </select>
+        </td>
+        <td><input name="Ingredients[__i__].Quantity" type="number" step="0.01" min="0" class="form-control" /></td>
+        <td><input name="Ingredients[__i__].Unit" class="form-control" /></td>
+        <td><button type="button" class="btn btn-outline-danger btn-sm remove-ingredient">&times;</button></td>
+    </tr>
+</template>
+
+<script>
+    (function () {
+        var body = document.getElementById('ingredients-body');
+        var template = document.getElementById('ingredient-row-template').innerHTML;
+        var counter = @Model.Ingredients.Count;
+
+        document.getElementById('add-ingredient').addEventListener('click', function () {
+            var html = template.replace(/__i__/g, counter++);
+            var holder = document.createElement('tbody');
+            holder.innerHTML = html.trim();
+            body.appendChild(holder.firstChild);
+        });
+
+        body.addEventListener('click', function (e) {
+            if (e.target.classList.contains('remove-ingredient')) {
+                var row = e.target.closest('tr');
+                row.parentNode.removeChild(row);
+            }
+        });
+
+        body.addEventListener('change', function (e) {
+            if (e.target.tagName === 'SELECT') {
+                var option = e.target.options[e.target.selectedIndex];
+                var unit = option.getAttribute('data-unit');
+                var unitInput = e.target.closest('tr').querySelector('input[name$=".Unit"]');
+                if (unit && unitInput && !unitInput.value) {
+                    unitInput.value = unit;
+                }
+            }
+        });
+    })();
+</script>
