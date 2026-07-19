@@ -25,6 +25,13 @@ builder.Services
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
 
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Account/Login";
+    options.LogoutPath = "/Account/Logout";
+    options.AccessDeniedPath = "/Account/AccessDenied";
+});
+
 builder.Services.AddScoped<RecipeService>();
 
 var app = builder.Build();
@@ -51,6 +58,11 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
+
+app.MapControllerRoute(
+        name: "areas",
+        pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}")
+    .WithStaticAssets();
 
 app.MapControllerRoute(
         name: "default",
