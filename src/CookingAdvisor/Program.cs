@@ -33,6 +33,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 });
 
 builder.Services.AddScoped<RecipeService>();
+builder.Services.AddScoped<SuggestionService>();
 
 var app = builder.Build();
 
