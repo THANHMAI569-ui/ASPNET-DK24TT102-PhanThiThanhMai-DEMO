@@ -9,6 +9,14 @@ namespace CookingAdvisor.Services;
 // cookable-now first → coverage descending → fewer missing ingredients.
 public class SuggestionService(AppDbContext db)
 {
+    public async Task<List<IngredientOptionViewModel>> GetIngredientOptionsAsync()
+    {
+        return await db.Ingredients
+            .OrderBy(i => i.Name)
+            .Select(i => new IngredientOptionViewModel { Id = i.Id, Name = i.Name, Unit = i.Unit })
+            .ToListAsync();
+    }
+
     public async Task<List<RecipeSuggestionViewModel>> SuggestAsync(IReadOnlyCollection<int> ownedIngredientIds)
     {
         var owned = ownedIngredientIds.ToHashSet();

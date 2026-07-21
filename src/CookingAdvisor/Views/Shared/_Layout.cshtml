@@ -25,7 +25,10 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Recipe" asp-action="Index">Món ăn</a>
                     </li>
-                    <!-- TODO: Gợi ý nguyên liệu, Thực đơn tuần (Phase 3-4) -->
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Suggestion" asp-action="Index">Gợi ý nguyên liệu</a>
+                    </li>
+                    <!-- TODO: Thực đơn tuần (Phase 4) -->
                     @if (User.IsInRole("Admin"))
                     {
                         <li class="nav-item">

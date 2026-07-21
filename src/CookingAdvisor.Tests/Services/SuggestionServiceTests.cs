@@ -127,4 +127,19 @@ public class SuggestionServiceTests
 
         Assert.Empty(results);
     }
+
+    [Fact]
+    public async Task GetIngredientOptionsAsync_ReturnsAllIngredientsOrderedByName()
+    {
+        await using var db = CreateDb();
+        db.Ingredients.Add(new Ingredient { Id = 1, Name = "Tỏi", Unit = "g", Group = "Gia vị" });
+        db.Ingredients.Add(new Ingredient { Id = 2, Name = "Cà chua", Unit = "g", Group = "Rau" });
+        await db.SaveChangesAsync();
+        var service = new SuggestionService(db);
+
+        var options = await service.GetIngredientOptionsAsync();
+
+        Assert.Equal(["Cà chua", "Tỏi"], options.Select(o => o.Name).ToList());
+        Assert.Equal([2, 1], options.Select(o => o.Id).ToList());
+    }
 }

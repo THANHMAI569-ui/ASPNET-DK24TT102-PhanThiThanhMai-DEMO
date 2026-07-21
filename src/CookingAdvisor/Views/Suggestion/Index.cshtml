@@ -1,0 +1,138 @@
+@model SuggestionViewModel
+@{
+    ViewData["Title"] = "Gợi ý theo nguyên liệu";
+}
+
+<h1 class="mb-4">Gợi ý món theo nguyên liệu có sẵn</h1>
+
+<form asp-action="Index" method="get" id="suggestionForm" class="card card-body bg-light mb-4">
+    <label for="ingredientSearch" class="form-label">Thêm nguyên liệu bạn đang có</label>
+    <div class="input-group mb-3" style="max-width: 500px;">
+        <input type="text" id="ingredientSearch" class="form-control" list="ingredientOptions"
+               placeholder="Ví dụ: thịt heo, cà chua..." autocomplete="off"/>
+        <button type="button" id="addIngredientBtn" class="btn btn-outline-primary">Thêm</button>
+    </div>
+    <datalist id="ingredientOptions">
+        @foreach (var ingredient in Model.Ingredients)
+        {
+            <option data-id="@ingredient.Id" value="@ingredient.Name"></option>
+        }
+    </datalist>
+
+    <div id="selectedIngredients" class="d-flex flex-wrap gap-2 mb-3">
+        @foreach (var id in Model.SelectedIngredientIds)
+        {
+            var name = Model.Ingredients.FirstOrDefault(i => i.Id == id)?.Name ?? $"#{id}";
+            <span class="badge bg-primary d-flex align-items-center gap-2 py-2" data-ingredient-chip data-id="@id">
+                @name
+                <button type="button" class="btn-close btn-close-white" style="font-size: 0.55rem;" aria-label="Xóa @name"></button>
+                <input type="hidden" name="ingredientIds" value="@id"/>
+            </span>
+        }
+    </div>
+
+    <button type="submit" id="submitBtn" class="btn btn-success align-self-start" disabled="@(Model.SelectedIngredientIds.Count == 0)">
+        Gợi ý món
+    </button>
+</form>
+
+@if (Model.HasSearched)
+{
+    <h3 class="mb-3">Kết quả gợi ý</h3>
+
+    @if (Model.Results.Count == 0)
+    {
+        <div class="alert alert-info">Không tìm thấy món nào khớp với nguyên liệu đã chọn.</div>
+    }
+    else
+    {
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
+            @foreach (var recipe in Model.Results)
+            {
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <img src="@(string.IsNullOrEmpty(recipe.ImageUrl) ? Url.Content("~/images/recipe-placeholder.svg") : recipe.ImageUrl)"
+                             class="card-img-top" alt="@recipe.Name" style="height: 180px; object-fit: cover;"/>
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">@recipe.Name</h5>
+                            @if (recipe.CanCookNow)
+                            {
+                                <span class="badge bg-success align-self-start mb-2">Đủ nguyên liệu</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-warning text-dark align-self-start mb-2">Thiếu: @string.Join(", ", recipe.MissingIngredients)</span>
+                            }
+                            <a asp-controller="Recipe" asp-action="Details" asp-route-id="@recipe.RecipeId" class="btn btn-outline-primary btn-sm mt-auto">
+                                Xem chi tiết
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+}
+
+@section Scripts {
+    <script>
+        (function () {
+            const searchInput = document.getElementById('ingredientSearch');
+            const addBtn = document.getElementById('addIngredientBtn');
+            const container = document.getElementById('selectedIngredients');
+            const submitBtn = document.getElementById('submitBtn');
+            const options = Array.from(document.getElementById('ingredientOptions').querySelectorAll('option'));
+
+            function findOptionByName(name) {
+                const normalized = name.trim().toLowerCase();
+                return options.find(opt => opt.value.toLowerCase() === normalized);
+            }
+
+            function chipExists(id) {
+                return container.querySelector('[data-ingredient-chip][data-id="' + id + '"]') !== null;
+            }
+
+            function updateSubmitState() {
+                submitBtn.disabled = container.querySelectorAll('[data-ingredient-chip]').length === 0;
+            }
+
+            function bindRemove(chip) {
+                chip.querySelector('button').addEventListener('click', () => {
+                    chip.remove();
+                    updateSubmitState();
+                });
+            }
+
+            function addChip(id, name) {
+                if (chipExists(id)) return;
+                const span = document.createElement('span');
+                span.className = 'badge bg-primary d-flex align-items-center gap-2 py-2';
+                span.setAttribute('data-ingredient-chip', '');
+                span.setAttribute('data-id', id);
+                span.innerHTML = name +
+                    ' <button type="button" class="btn-close btn-close-white" style="font-size: 0.55rem;" aria-label="Xóa ' + name + '"></button>' +
+                    '<input type="hidden" name="ingredientIds" value="' + id + '">';
+                bindRemove(span);
+                container.appendChild(span);
+                updateSubmitState();
+            }
+
+            addBtn.addEventListener('click', () => {
+                const option = findOptionByName(searchInput.value);
+                if (!option) return;
+                addChip(option.dataset.id, option.value);
+                searchInput.value = '';
+                searchInput.focus();
+            });
+
+            searchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    addBtn.click();
+                }
+            });
+
+            container.querySelectorAll('[data-ingredient-chip]').forEach(bindRemove);
+        })();
+    </script>
+}
