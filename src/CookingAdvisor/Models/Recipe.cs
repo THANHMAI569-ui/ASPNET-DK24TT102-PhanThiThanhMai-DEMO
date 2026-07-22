@@ -13,6 +13,8 @@ public class Recipe
     public Region Region { get; set; }
     public int CaloriesPerServing { get; set; }
     public string? ImageUrl { get; set; }
+    public MealTypeFlags SuitableMealTypes { get; set; } =
+        MealTypeFlags.Breakfast | MealTypeFlags.Lunch | MealTypeFlags.Dinner;
 
     public int CategoryId { get; set; }
     public Category Category { get; set; } = null!;

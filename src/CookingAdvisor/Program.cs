@@ -34,6 +34,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 builder.Services.AddScoped<RecipeService>();
 builder.Services.AddScoped<SuggestionService>();
+builder.Services.AddScoped<MenuPlannerService>();
 
 var app = builder.Build();
 
