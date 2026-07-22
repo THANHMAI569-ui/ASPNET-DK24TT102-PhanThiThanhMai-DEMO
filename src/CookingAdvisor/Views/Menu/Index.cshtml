@@ -1,0 +1,48 @@
+@model MenuIndexViewModel
+@{
+    ViewData["Title"] = "Thực đơn tuần";
+}
+
+<h1 class="mb-4">Thực đơn tuần</h1>
+
+<form asp-action="Generate" method="post" class="card card-body bg-light mb-4">
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
+    <div class="row g-3">
+        <div class="col-md-4">
+            <label asp-for="Form.Name" class="form-label">Tên thực đơn</label>
+            <input asp-for="Form.Name" class="form-control"/>
+            <span asp-validation-for="Form.Name" class="text-danger"></span>
+        </div>
+        <div class="col-md-3">
+            <label asp-for="Form.WeekStartDate" class="form-label">Bắt đầu tuần</label>
+            <input asp-for="Form.WeekStartDate" type="date" class="form-control"/>
+        </div>
+        <div class="col-md-3">
+            <label asp-for="Form.Region" class="form-label">Vùng miền</label>
+            <select asp-for="Form.Region" class="form-select" asp-items="Html.GetEnumSelectList<Region>()">
+                <option value="">Tất cả</option>
+            </select>
+        </div>
+        <div class="col-md-2 d-flex align-items-end">
+            <button type="submit" class="btn btn-success w-100">Tạo thực đơn</button>
+        </div>
+    </div>
+</form>
+
+<h3 class="mb-3">Thực đơn đã tạo</h3>
+@if (Model.Plans.Count == 0)
+{
+    <div class="alert alert-info">Chưa có thực đơn nào. Tạo thực đơn đầu tiên ở trên.</div>
+}
+else
+{
+    <ul class="list-group">
+        @foreach (var plan in Model.Plans)
+        {
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a asp-action="Details" asp-route-id="@plan.Id">@plan.Name</a>
+                <span class="text-muted">Tuần @plan.WeekStartDate.ToString("dd/MM/yyyy")</span>
+            </li>
+        }
+    </ul>
+}

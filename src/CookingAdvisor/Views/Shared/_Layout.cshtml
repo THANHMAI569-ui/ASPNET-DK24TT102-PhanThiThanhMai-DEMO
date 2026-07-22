@@ -28,7 +28,9 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Suggestion" asp-action="Index">Gợi ý nguyên liệu</a>
                     </li>
-                    <!-- TODO: Thực đơn tuần (Phase 4) -->
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Menu" asp-action="Index">Thực đơn tuần</a>
+                    </li>
                     @if (User.IsInRole("Admin"))
                     {
                         <li class="nav-item">

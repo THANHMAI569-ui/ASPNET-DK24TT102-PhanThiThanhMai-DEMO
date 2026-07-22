@@ -1,0 +1,47 @@
+@model MenuPlanDetailsViewModel
+@{
+    ViewData["Title"] = Model.Name;
+    string[] mealLabels = ["Sáng", "Trưa", "Tối"];
+    string[] weekdayLabels = ["Chủ nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"];
+}
+
+<h1 class="mb-1">@Model.Name</h1>
+<p class="text-muted mb-4">Tuần bắt đầu @Model.WeekStartDate.ToString("dd/MM/yyyy")</p>
+
+<div class="table-responsive">
+    <table class="table table-bordered align-middle text-center">
+        <thead class="table-light">
+            <tr>
+                <th>Bữa</th>
+                @foreach (var day in Model.Days)
+                {
+                    var date = Model.WeekStartDate.AddDays(day.DayOfWeek);
+                    <th>
+                        @weekdayLabels[(int)date.DayOfWeek]<br/>
+                        <small class="text-muted">@date.ToString("dd/MM")</small>
+                    </th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var mealType in new[] { MealType.Breakfast, MealType.Lunch, MealType.Dinner })
+            {
+                <tr>
+                    <th class="table-light">@mealLabels[(int)mealType]</th>
+                    @foreach (var day in Model.Days)
+                    {
+                        var meal = day.Meals.FirstOrDefault(m => m.MealType == mealType);
+                        <td>
+                            @if (meal is not null)
+                            {
+                                <a asp-controller="Recipe" asp-action="Details" asp-route-id="@meal.RecipeId">@meal.RecipeName</a>
+                            }
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<a asp-action="Index" class="btn btn-outline-secondary">&larr; Quay lại</a>
