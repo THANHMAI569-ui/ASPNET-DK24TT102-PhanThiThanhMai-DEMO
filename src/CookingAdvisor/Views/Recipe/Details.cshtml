@@ -23,6 +23,16 @@
             <li class="list-inline-item">Vùng miền: @Model.Region.ToDisplayName()</li>
             <li class="list-inline-item">Calo/khẩu phần: @Model.CaloriesPerServing kcal</li>
         </ul>
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <form asp-controller="Favorite" asp-action="Toggle" method="post">
+                <input type="hidden" name="recipeId" value="@Model.Id"/>
+                <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString"/>
+                <button type="submit" class="btn btn-sm @(Model.IsFavorite ? "btn-danger" : "btn-outline-danger")">
+                    @(Model.IsFavorite ? "♥ Bỏ yêu thích" : "♡ Thêm yêu thích")
+                </button>
+            </form>
+        }
     </div>
 </div>
 

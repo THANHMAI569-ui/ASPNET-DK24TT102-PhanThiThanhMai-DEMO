@@ -31,16 +31,52 @@
                     @foreach (var day in Model.Days)
                     {
                         var meal = day.Meals.FirstOrDefault(m => m.MealType == mealType);
-                        <td>
+                        <td style="min-width: 180px;">
                             @if (meal is not null)
                             {
-                                <a asp-controller="Recipe" asp-action="Details" asp-route-id="@meal.RecipeId">@meal.RecipeName</a>
+                                <a asp-controller="Recipe" asp-action="Details" asp-route-id="@meal.RecipeId" class="d-block">@meal.RecipeName</a>
+                                <span class="text-muted small">@meal.CaloriesPerServing kcal</span>
+                            }
+                            else
+                            {
+                                <span class="text-muted small fst-italic">Chưa có món</span>
+                            }
+                            <form asp-action="UpdateItem" method="post" class="mt-1">
+                                <input type="hidden" name="planId" value="@Model.Id"/>
+                                <input type="hidden" name="dayOfWeek" value="@day.DayOfWeek"/>
+                                <input type="hidden" name="mealType" value="@mealType"/>
+                                <select name="recipeId" class="form-select form-select-sm" onchange="this.form.submit()">
+                                    <option value="">— Đổi món —</option>
+                                    @foreach (var opt in Model.RecipeOptions)
+                                    {
+                                        <option value="@opt.Id" selected="@(meal is not null && meal.RecipeId == opt.Id)">@opt.Name</option>
+                                    }
+                                </select>
+                            </form>
+                            @if (meal is not null)
+                            {
+                                <form asp-action="DeleteItem" method="post" class="mt-1"
+                                      onsubmit="return confirm('Xóa món này khỏi thực đơn?')">
+                                    <input type="hidden" name="planId" value="@Model.Id"/>
+                                    <input type="hidden" name="dayOfWeek" value="@day.DayOfWeek"/>
+                                    <input type="hidden" name="mealType" value="@mealType"/>
+                                    <button type="submit" class="btn btn-sm btn-outline-danger w-100">Xóa</button>
+                                </form>
                             }
                         </td>
                     }
                 </tr>
             }
         </tbody>
+        <tfoot class="table-light">
+            <tr>
+                <th>Tổng calo</th>
+                @foreach (var day in Model.Days)
+                {
+                    <th>@day.TotalCalories kcal</th>
+                }
+            </tr>
+        </tfoot>
     </table>
 </div>
 

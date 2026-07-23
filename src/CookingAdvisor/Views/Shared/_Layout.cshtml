@@ -31,6 +31,12 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Menu" asp-action="Index">Thực đơn tuần</a>
                     </li>
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Favorite" asp-action="Index">Món yêu thích</a>
+                        </li>
+                    }
                     @if (User.IsInRole("Admin"))
                     {
                         <li class="nav-item">

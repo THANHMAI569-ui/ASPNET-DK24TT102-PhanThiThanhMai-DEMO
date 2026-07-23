@@ -1,10 +1,11 @@
+using System.Security.Claims;
 using CookingAdvisor.Services;
 using CookingAdvisor.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CookingAdvisor.Controllers;
 
-public class RecipeController(RecipeService recipeService) : Controller
+public class RecipeController(RecipeService recipeService, FavoriteService favoriteService) : Controller
 {
     public async Task<IActionResult> Index(RecipeFilterViewModel filter)
     {
@@ -17,6 +18,12 @@ public class RecipeController(RecipeService recipeService) : Controller
         var recipe = await recipeService.GetRecipeDetailAsync(id);
         if (recipe is null)
             return NotFound();
+
+        if (User.Identity?.IsAuthenticated == true)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+            recipe.IsFavorite = await favoriteService.IsFavoriteAsync(userId, id);
+        }
 
         return View(recipe);
     }

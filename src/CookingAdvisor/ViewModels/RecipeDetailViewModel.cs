@@ -17,6 +17,7 @@ public class RecipeDetailViewModel
     public string? ImageUrl { get; set; }
     public required string CategoryName { get; set; }
     public IReadOnlyList<RecipeIngredientViewModel> Ingredients { get; set; } = [];
+    public bool IsFavorite { get; set; }
 
     public int TotalMinutes => PrepMinutes + CookMinutes;
 }

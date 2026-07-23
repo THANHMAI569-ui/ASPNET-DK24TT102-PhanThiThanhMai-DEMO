@@ -8,6 +8,7 @@ public class MenuPlanDetailsViewModel
     public required string Name { get; set; }
     public DateOnly WeekStartDate { get; set; }
     public IReadOnlyList<MenuDayViewModel> Days { get; set; } = [];
+    public IReadOnlyList<RecipeOptionViewModel> RecipeOptions { get; set; } = [];
 }
 
 public class MenuDayViewModel
@@ -15,6 +16,8 @@ public class MenuDayViewModel
     // 0-6, offset from WeekStartDate
     public int DayOfWeek { get; set; }
     public IReadOnlyList<MenuMealViewModel> Meals { get; set; } = [];
+
+    public int TotalCalories => Meals.Sum(m => m.CaloriesPerServing);
 }
 
 public class MenuMealViewModel
@@ -23,4 +26,11 @@ public class MenuMealViewModel
     public int RecipeId { get; set; }
     public required string RecipeName { get; set; }
     public string? ImageUrl { get; set; }
+    public int CaloriesPerServing { get; set; }
+}
+
+public class RecipeOptionViewModel
+{
+    public int Id { get; set; }
+    public required string Name { get; set; }
 }
