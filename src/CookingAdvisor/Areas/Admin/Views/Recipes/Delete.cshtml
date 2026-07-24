@@ -10,9 +10,15 @@
     <div class="alert alert-warning">
         Thao tác này sẽ xóa món cùng @Model.IngredientCount dòng nguyên liệu của nó và không thể hoàn tác.
     </div>
+    @if (Model.MenuPlanUsageCount > 0)
+    {
+        <div class="alert alert-warning">
+            Món đang được dùng trong <strong>@Model.MenuPlanUsageCount</strong> thực đơn nên không thể xóa.
+        </div>
+    }
     <form asp-action="Delete" method="post" class="d-flex gap-2">
         <input type="hidden" name="id" value="@Model.Id" />
-        <button type="submit" class="btn btn-danger">Xóa</button>
+        <button type="submit" class="btn btn-danger" disabled="@(Model.MenuPlanUsageCount > 0)">Xóa</button>
         <a asp-action="Index" class="btn btn-outline-secondary">Hủy</a>
     </form>
 </div>

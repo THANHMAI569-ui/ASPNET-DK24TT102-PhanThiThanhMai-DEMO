@@ -10,4 +10,5 @@ public class RecipeAdminListItemViewModel
     public Region Region { get; set; }
     public Difficulty Difficulty { get; set; }
     public int IngredientCount { get; set; }
+    public int MenuPlanUsageCount { get; set; }
 }

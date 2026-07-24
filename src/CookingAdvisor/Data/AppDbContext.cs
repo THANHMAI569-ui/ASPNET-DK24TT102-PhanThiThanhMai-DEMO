@@ -15,6 +15,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbCo
     public DbSet<MenuPlan> MenuPlans => Set<MenuPlan>();
     public DbSet<MenuPlanItem> MenuPlanItems => Set<MenuPlanItem>();
     public DbSet<Favorite> Favorites => Set<Favorite>();
+    public DbSet<ShoppingList> ShoppingLists => Set<ShoppingList>();
+    public DbSet<ShoppingListItem> ShoppingListItems => Set<ShoppingListItem>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -71,8 +73,38 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbCo
                 .OnDelete(DeleteBehavior.Cascade);
 
             entity.HasOne(mpi => mpi.Recipe)
-                .WithMany()
+                .WithMany(r => r.MenuPlanItems)
                 .HasForeignKey(mpi => mpi.RecipeId)
+                .OnDelete(DeleteBehavior.Restrict);
+        });
+
+        builder.Entity<ShoppingList>(entity =>
+        {
+            entity.HasIndex(l => l.MenuPlanId).IsUnique();
+
+            entity.HasOne(l => l.MenuPlan)
+                .WithMany()
+                .HasForeignKey(l => l.MenuPlanId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            entity.HasOne(l => l.User)
+                .WithMany()
+                .HasForeignKey(l => l.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+        });
+
+        builder.Entity<ShoppingListItem>(entity =>
+        {
+            entity.Property(i => i.Quantity).HasPrecision(10, 2);
+
+            entity.HasOne(i => i.ShoppingList)
+                .WithMany(l => l.Items)
+                .HasForeignKey(i => i.ShoppingListId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            entity.HasOne(i => i.Ingredient)
+                .WithMany()
+                .HasForeignKey(i => i.IngredientId)
                 .OnDelete(DeleteBehavior.Restrict);
         });
     }

@@ -20,4 +20,5 @@ public class Recipe
     public Category Category { get; set; } = null!;
 
     public ICollection<RecipeIngredient> RecipeIngredients { get; set; } = new List<RecipeIngredient>();
+    public ICollection<MenuPlanItem> MenuPlanItems { get; set; } = new List<MenuPlanItem>();
 }

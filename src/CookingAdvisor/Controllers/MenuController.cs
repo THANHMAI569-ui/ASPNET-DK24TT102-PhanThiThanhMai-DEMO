@@ -79,7 +79,11 @@ public class MenuController(MenuPlannerService plannerService, AppDbContext db) 
             RecipeOptions = await db.Recipes
                 .OrderBy(r => r.Name)
                 .Select(r => new RecipeOptionViewModel { Id = r.Id, Name = r.Name })
-                .ToListAsync()
+                .ToListAsync(),
+            ShoppingListId = await db.ShoppingLists
+                .Where(l => l.MenuPlanId == id)
+                .Select(l => (int?)l.Id)
+                .FirstOrDefaultAsync()
         };
         return View(model);
     }

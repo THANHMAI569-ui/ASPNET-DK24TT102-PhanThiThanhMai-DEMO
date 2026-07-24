@@ -22,21 +22,23 @@
 
     <div class="col-6 col-md-3">
         <label asp-for="Region" class="form-label"></label>
-        <select name="Region" class="form-select">
+        <select asp-for="Region" class="form-select">
             @foreach (var region in Enum.GetValues<Region>())
             {
                 <option value="@region" selected="@(Model.Region == region)">@region.ToDisplayName()</option>
             }
         </select>
+        <span asp-validation-for="Region" class="text-danger"></span>
     </div>
     <div class="col-6 col-md-3">
         <label asp-for="Difficulty" class="form-label"></label>
-        <select name="Difficulty" class="form-select">
+        <select asp-for="Difficulty" class="form-select">
             @foreach (var difficulty in Enum.GetValues<Difficulty>())
             {
                 <option value="@difficulty" selected="@(Model.Difficulty == difficulty)">@difficulty.ToDisplayName()</option>
             }
         </select>
+        <span asp-validation-for="Difficulty" class="text-danger"></span>
     </div>
     <div class="col-6 col-md-2">
         <label asp-for="Servings" class="form-label"></label>

@@ -44,6 +44,9 @@ public class RecipesController(AppDbContext db) : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(RecipeFormViewModel model)
     {
+        if (!model.Ingredients.Any(i => i.IngredientId > 0))
+            ModelState.AddModelError(string.Empty, "Vui lòng thêm ít nhất một nguyên liệu.");
+
         if (!ModelState.IsValid)
         {
             await PopulateOptionsAsync(model);
@@ -102,6 +105,9 @@ public class RecipesController(AppDbContext db) : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(RecipeFormViewModel model)
     {
+        if (!model.Ingredients.Any(i => i.IngredientId > 0))
+            ModelState.AddModelError(string.Empty, "Vui lòng thêm ít nhất một nguyên liệu.");
+
         if (!ModelState.IsValid)
         {
             await PopulateOptionsAsync(model);
@@ -136,7 +142,8 @@ public class RecipesController(AppDbContext db) : Controller
                 CategoryName = r.Category.Name,
                 Region = r.Region,
                 Difficulty = r.Difficulty,
-                IngredientCount = r.RecipeIngredients.Count
+                IngredientCount = r.RecipeIngredients.Count,
+                MenuPlanUsageCount = r.MenuPlanItems.Count
             })
             .FirstOrDefaultAsync();
 
@@ -150,9 +157,18 @@ public class RecipesController(AppDbContext db) : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
-        var recipe = await db.Recipes.FindAsync(id);
+        var recipe = await db.Recipes
+            .Include(r => r.MenuPlanItems)
+            .FirstOrDefaultAsync(r => r.Id == id);
+
         if (recipe is null)
             return NotFound();
+
+        if (recipe.MenuPlanItems.Count > 0)
+        {
+            TempData["Error"] = $"Không thể xóa: món ăn đang được dùng trong {recipe.MenuPlanItems.Count} thực đơn.";
+            return RedirectToAction(nameof(Index));
+        }
 
         // RecipeIngredient rows cascade-delete with the recipe (see AppDbContext).
         db.Recipes.Remove(recipe);

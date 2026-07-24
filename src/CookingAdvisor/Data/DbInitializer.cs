@@ -374,7 +374,15 @@ public static class DbInitializer
                 "Vắt chanh lấy nước cốt, hòa cùng đường và một chút muối, thêm nước lọc và đá " +
                 "trước khi dùng.",
                 MealTypeFlags.None,
-                ("Chanh", 4m, "quả"), ("Muối", 10m, "g"), ("Đường", 60m, "g"))
+                ("Chanh", 4m, "quả"), ("Muối", 10m, "g"), ("Đường", 60m, "g")),
+
+            BuildRecipe("Cá hấp gừng hành", "Hấp", Region.North, Difficulty.Easy, 4, 15, 20, 210,
+                "Cá hấp gừng hành giữ trọn vị ngọt tự nhiên, thanh đạm và dễ tiêu.",
+                "Xếp gừng và hành tím thái lát lên cá, hấp cách thủy tới khi cá chín tới. Phi thơm " +
+                "hành lá với dầu ăn, rưới cùng nước mắm lên cá trước khi dùng.",
+                MainMeals,
+                ("Cá basa", 0.6m, "kg"), ("Gừng", 1m, "củ"), ("Hành lá", 1m, "bó"),
+                ("Hành tím", 2m, "củ"), ("Nước mắm", 30m, "ml"))
         ];
 
         db.Recipes.AddRange(recipes);

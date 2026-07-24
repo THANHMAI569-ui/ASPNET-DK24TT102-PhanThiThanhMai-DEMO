@@ -36,6 +36,7 @@ builder.Services.AddScoped<RecipeService>();
 builder.Services.AddScoped<SuggestionService>();
 builder.Services.AddScoped<MenuPlannerService>();
 builder.Services.AddScoped<FavoriteService>();
+builder.Services.AddScoped<ShoppingListService>();
 
 var app = builder.Build();
 

@@ -9,6 +9,7 @@ public class MenuPlanDetailsViewModel
     public DateOnly WeekStartDate { get; set; }
     public IReadOnlyList<MenuDayViewModel> Days { get; set; } = [];
     public IReadOnlyList<RecipeOptionViewModel> RecipeOptions { get; set; } = [];
+    public int? ShoppingListId { get; set; }
 }
 
 public class MenuDayViewModel

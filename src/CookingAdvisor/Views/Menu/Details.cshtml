@@ -6,7 +6,23 @@
 }
 
 <h1 class="mb-1">@Model.Name</h1>
-<p class="text-muted mb-4">Tuần bắt đầu @Model.WeekStartDate.ToString("dd/MM/yyyy")</p>
+<p class="text-muted mb-2">Tuần bắt đầu @Model.WeekStartDate.ToString("dd/MM/yyyy")</p>
+
+<div class="mb-4">
+    @if (Model.ShoppingListId is null)
+    {
+        <form asp-controller="ShoppingList" asp-action="Generate" method="post">
+            <input type="hidden" name="menuPlanId" value="@Model.Id"/>
+            <button type="submit" class="btn btn-success btn-sm">Tạo danh sách đi chợ</button>
+        </form>
+    }
+    else
+    {
+        <a asp-controller="ShoppingList" asp-action="Details" asp-route-id="@Model.ShoppingListId" class="btn btn-outline-success btn-sm">
+            Xem danh sách đi chợ
+        </a>
+    }
+</div>
 
 <div class="table-responsive">
     <table class="table table-bordered align-middle text-center">

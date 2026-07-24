@@ -1,0 +1,37 @@
+@model ShoppingListDetailsViewModel
+@{
+    ViewData["Title"] = "Danh sách đi chợ";
+}
+
+<h1 class="mb-1">Danh sách đi chợ</h1>
+<p class="text-muted mb-4">Thực đơn: @Model.MenuPlanName</p>
+
+@if (Model.Items.Count == 0)
+{
+    <div class="alert alert-info">Thực đơn chưa có món nào nên danh sách đi chợ đang trống.</div>
+}
+else
+{
+    <div class="list-group mb-4">
+        @foreach (var group in Model.Items.GroupBy(i => i.Group))
+        {
+            <div class="list-group-item bg-light fw-semibold">@group.Key</div>
+            @foreach (var item in group)
+            {
+                <div class="list-group-item d-flex align-items-center gap-3">
+                    <form asp-action="TogglePurchased" method="post" class="d-flex align-items-center gap-2 flex-fill mb-0">
+                        <input type="hidden" name="id" value="@Model.Id"/>
+                        <input type="hidden" name="itemId" value="@item.Id"/>
+                        <input type="checkbox" class="form-check-input" onchange="this.form.submit()"
+                               checked="@item.IsPurchased"/>
+                        <span class="@(item.IsPurchased ? "text-decoration-line-through text-muted" : "")">
+                            @item.IngredientName — @item.Quantity.ToString("0.##") @item.Unit
+                        </span>
+                    </form>
+                </div>
+            }
+        }
+    </div>
+}
+
+<a asp-controller="Menu" asp-action="Details" asp-route-id="@Model.MenuPlanId" class="btn btn-outline-secondary">&larr; Quay lại thực đơn</a>
