@@ -1,0 +1,66 @@
+\begin{figure}[H]
+\centering
+\resizebox{!}{0.82\textheight}{%
+\begin{tikzpicture}[x=3.4cm, y=1.15cm]
+
+  % --- Doi tuong tren dau ------------------------------------------
+  \node[seqpart] (ND) at (0,0) {Người dùng};
+  \node[seqpart] (VW) at (1,0) {View\\Suggestion/Index};
+  \node[seqpart] (CT) at (2,0) {Suggestion\\Controller};
+  \node[seqpart] (SV) at (3,0) {Suggestion\\Service};
+  \node[seqpart] (DB) at (4,0) {AppDbContext /\\SQL Server};
+
+  \foreach \x in {0,1,2,3,4} \draw[seqlife] (\x,-0.5) -- (\x,-20.55);
+
+  % --- Cac thong diep chinh -----------------------------------------
+  \draw[seqmsg] (0,-1.4) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{1. Tick nguyên liệu đang có} (1,-1.4);
+  \draw[seqmsg] (0,-2.3) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{2. Bấm ``Gợi ý món''} (1,-2.3);
+  \draw[seqmsg] (1,-3.2) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{3. GET /Suggestion?ingredientIds=...} (2,-3.2);
+  \draw[seqmsg] (2,-4.1) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{4. GetIngredientOptionsAsync()} (3,-4.1);
+  \draw[seqmsg] (3,-5.0) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{5. Truy vấn Ingredients, sắp theo tên} (4,-5.0);
+  \draw[seqret] (4,-5.9) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{6. Danh sách nguyên liệu} (3,-5.9);
+  \draw[seqret] (3,-6.8) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{7. List IngredientOptionViewModel} (2,-6.8);
+  \draw[seqmsg] (2,-7.7) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{8. SuggestAsync(ownedIngredientIds)} (3,-7.7);
+
+  % --- Khung alt ------------------------------------------------------
+  \draw[seqframe] (1.5,-8.2) rectangle (4.55,-18.45);
+  \node[seqlab, anchor=north west] at (1.5,-8.2) {alt};
+  \node[font=\scriptsize\itshape, anchor=north west] at (1.65,-8.55) {Tập nguyên liệu rỗng};
+
+  \draw[seqret] (3,-9.5) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{9. Danh sách rỗng} (2,-9.5);
+
+  \draw[seqframe, dashed] (1.5,-10.0) -- (4.55,-10.0);
+  \node[font=\scriptsize\itshape, anchor=north west] at (1.65,-10.35) {Có ít nhất một nguyên liệu};
+
+  \draw[seqmsg] (3,-11.3) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{10. Lấy món có giao với tập đã chọn} (4,-11.3);
+  \draw[seqret] (4,-12.2) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{11. Món kèm danh sách nguyên liệu} (3,-12.2);
+
+  % --- Khung loop long ben trong alt ---------------------------------
+  \draw[seqframe] (2.55,-12.7) rectangle (3.85,-16.35);
+  \node[seqlab, anchor=north west] at (2.55,-12.7) {loop};
+  \node[font=\scriptsize\itshape, anchor=north west] at (2.85,-13.0) {Với mỗi món R};
+
+  \draw[seqmsg] (3,-13.6) -- (3.35,-13.6) -- (3.35,-13.95) -- (3,-13.95);
+  \node[fill=white, inner sep=2pt, font=\scriptsize, align=center, anchor=west] at (3.4,-13.775) {12. missing =\\$I_R \setminus A$};
+
+  \draw[seqmsg] (3,-14.6) -- (3.35,-14.6) -- (3.35,-14.95) -- (3,-14.95);
+  \node[fill=white, inner sep=2pt, font=\scriptsize, align=center, anchor=west] at (3.4,-14.775) {13. matched =\\$|I_R| - |\text{missing}|$};
+
+  \draw[seqmsg] (3,-15.6) -- (3.35,-15.6) -- (3.35,-15.95) -- (3,-15.95);
+  \node[fill=white, inner sep=2pt, font=\scriptsize, align=center, anchor=west] at (3.4,-15.775) {14. coverage =\\matched / $|I_R|$};
+
+  % --- Sau loop, van trong nhanh 2 cua alt ---------------------------
+  \draw[seqmsg] (3,-16.85) -- (3.35,-16.85) -- (3.35,-17.2) -- (3,-17.2);
+  \node[fill=white, inner sep=2pt, font=\scriptsize, align=center, anchor=west] at (3.4,-17.025) {15. Xếp hạng\\bốn tiêu chí};
+
+  \draw[seqret] (3,-18.0) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{16. Danh sách đã xếp hạng} (2,-18.0);
+
+  % --- Ket thuc alt, tra ve cho nguoi dung ----------------------------
+  \draw[seqret] (2,-19.25) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{17. SuggestionViewModel} (1,-19.25);
+  \draw[seqret] (1,-20.05) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize, text width=3.0cm, align=center]{18. Lưới món kèm nhãn ``Đủ nguyên liệu'' hoặc ``Thiếu N nguyên liệu''} (0,-20.05);
+
+\end{tikzpicture}%
+}
+\caption{Sơ đồ tuần tự chức năng gợi ý theo nguyên liệu}
+\label{fig:seq-goi-y}
+\end{figure}

@@ -1,0 +1,87 @@
+% ============================================================
+%  Kieu ve chung cho toan bo so do TikZ.
+%  Nguyen tac: TRANG DEN tuyet doi - chi net den + fill=white.
+%  Khong dung mau nao khac, khong dung fill xam.
+% ============================================================
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, shapes.multipart, shapes.misc, arrows.meta,
+                positioning, fit, backgrounds, calc, decorations.pathreplacing}
+
+\tikzset{
+  % --- Use case ---------------------------------------------
+  ucell/.style={draw, ellipse, fill=white, minimum width=4.6cm,
+    minimum height=0.9cm, align=center, font=\small, thick, inner sep=1pt},
+  ucsys/.style={draw, dashed, thick, rounded corners=6pt, fill=none},
+  ucincl/.style={dashed, ->, >=Stealth, font=\scriptsize\itshape},
+  ucline/.style={thick},
+  % --- Luu do / hoat dong -----------------------------------
+  proc/.style={draw, fill=white, minimum width=5.0cm, minimum height=0.8cm,
+    align=center, font=\small, thick},
+  procs/.style={draw, fill=white, minimum width=3.2cm, minimum height=0.8cm,
+    align=center, font=\small, thick},
+  dec/.style={draw, diamond, fill=white, aspect=2.4,
+    minimum width=4.0cm, minimum height=0.9cm, align=center,
+    font=\small, thick, inner sep=1pt},
+  term/.style={draw, rounded rectangle, fill=white, minimum width=2.4cm,
+    minimum height=0.7cm, align=center, font=\small, thick},
+  store/.style={draw, cylinder, shape border rotate=90, aspect=0.25,
+    fill=white, minimum width=3.0cm, minimum height=1.2cm,
+    align=center, font=\small, thick},
+  fl/.style={->, >=Stealth, thick},
+  flb/.style={<->, >=Stealth, thick},
+  lbl/.style={font=\scriptsize, fill=white, inner sep=1.5pt},
+  % --- Tuan tu ----------------------------------------------
+  seqpart/.style={draw, fill=white, minimum width=3.0cm,
+    minimum height=0.8cm, align=center, font=\small\bfseries, thick},
+  seqmsg/.style={->, >=Stealth, thick, font=\small},
+  seqret/.style={->, >=Stealth, thick, dashed, font=\small},
+  seqlife/.style={dashed, black!55, thin},
+  seqnote/.style={draw, fill=white, align=center, font=\scriptsize,
+    thick, inner sep=3pt},
+  seqframe/.style={draw, thick, fill=none},
+  seqlab/.style={draw, thick, fill=white, font=\scriptsize\bfseries,
+    inner sep=2pt},
+  % --- So do lop / ERD --------------------------------------
+  classbox/.style={draw, rectangle split, rectangle split parts=3,
+    rectangle split part fill={white, white, white},
+    minimum width=3.9cm, align=left, font=\scriptsize, thick,
+    inner xsep=5pt, inner ysep=3pt},
+  classbox2/.style={draw, rectangle split, rectangle split parts=2,
+    rectangle split part fill={white, white},
+    minimum width=3.9cm, align=left, font=\scriptsize, thick,
+    inner xsep=5pt, inner ysep=3pt},
+  erdent/.style={draw, rectangle split, rectangle split parts=2,
+    rectangle split part fill={white, white},
+    align=left, font=\scriptsize, thick, minimum width=3.0cm,
+    inner xsep=5pt, inner ysep=3pt},
+  % --- Kien truc / trien khai -------------------------------
+  tier/.style={draw, rounded corners=4pt, minimum width=7.4cm,
+    minimum height=1.1cm, align=center, font=\small, thick, fill=white},
+  nodebox/.style={draw, thick, fill=white, minimum width=5.2cm,
+    minimum height=1.5cm, align=center, font=\small},
+  artifact/.style={draw, thick, fill=white, minimum width=4.2cm,
+    minimum height=0.75cm, align=center, font=\scriptsize},
+  devgroup/.style={draw, thick, dashed, rounded corners=5pt, fill=none,
+    inner sep=8pt},
+  arr/.style={->, >=Stealth, thick},
+  arrd/.style={->, >=Stealth, thick, dashed},
+  % --- Phan ra chuc nang ------------------------------------
+  fbox/.style={draw, thick, fill=white, align=center, font=\small,
+    minimum width=3.2cm, minimum height=0.8cm},
+  fboxs/.style={draw, thick, fill=white, align=center, font=\scriptsize,
+    minimum width=2.9cm, minimum height=0.75cm},
+  fline/.style={thick}
+}
+
+% Nguoi dung dang que (tac nhan trong so do use case)
+\newcommand{\stickman}[4]{%
+  \coordinate (#1) at (#2,#3);
+  \begin{scope}[shift={(#2,#3)}]
+    \draw[very thick] (0,0.55) circle (0.17);
+    \draw[very thick] (0,0.38) -- (0,-0.12);
+    \draw[very thick] (-0.30,0.18) -- (0.30,0.18);
+    \draw[very thick] (0,-0.12) -- (-0.20,-0.50);
+    \draw[very thick] (0,-0.12) -- (0.20,-0.50);
+  \end{scope}
+  \node[font=\small, align=center, text width=2.6cm] at (#2,#3-0.92) {#4};
+}

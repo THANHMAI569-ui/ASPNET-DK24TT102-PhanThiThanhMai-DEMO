@@ -1,0 +1,236 @@
+% ============================================================
+%  DO AN MON HOC: CHUYEN DE ASP.NET
+%  Xay dung website goi y nau an va lap thuc don cho gia dinh
+%  Sinh vien: Phan Thi Thanh Mai - Lop DK24TT102
+%
+%  Bien dich: xelatex thesis.tex (3 luot) hoac ./build.sh
+%  Yeu cau: XeLaTeX + font he thong "Times New Roman"
+% ============================================================
+\documentclass[a4paper,oneside]{report}
+
+% === Co chu 13pt (quy dinh TVU) ==============================
+% Lop report chuan chi co 10/11/12pt. Goi fontsize cho phep dat
+% co chu tuy y va tinh lai toan bo \large, \small, \footnotesize...
+\usepackage[fontsize=13pt]{fontsize}
+\usepackage{anyfontsize}
+
+% === Font Times New Roman that (Unicode) =====================
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\setmonofont{Courier New}[Scale=MatchLowercase]
+\usepackage{unicode-math}
+\setmathfont{XITSMath-Regular.otf}[
+  BoldFont = XITSMath-Bold.otf,
+  math-style = TeX
+]
+
+% === Tieng Viet ==============================================
+\usepackage[vietnamese]{babel}
+
+% === Le trang: tren 2, duoi 2, trai 3.0, phai 2 (quy dinh TVU)
+% Khoi chu ket thuc dung o moc 2cm; so trang nam duoi moc do, cach mep giay
+% 1,2cm, giong cach Word dat footer ben trong le duoi.
+\usepackage[top=2cm, bottom=2cm, left=3cm, right=2cm,
+            footskip=0.8cm]{geometry}
+
+% === Gian dong 1.5, cach doan 6pt (quy dinh TVU) =============
+\usepackage{setspace}
+\setstretch{1.5}
+\usepackage{parskip}
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{1.2em}
+\usepackage{microtype}
+\sloppy
+\clubpenalty=10000
+\widowpenalty=10000
+
+% === So trang goc phai duoi (quy dinh TVU) ===================
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyfoot[R]{\thepage}%
+  \renewcommand{\headrulewidth}{0pt}%
+}
+
+% === Tieu de chuong / muc: danh so A-rap 1.1, 1.1.1 ==========
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\large\bfseries\centering}
+  {\MakeUppercase{\chaptername} \thechapter.}{6pt}{\large\MakeUppercase}
+\titlespacing*{\chapter}{0pt}{0pt}{18pt}
+\titleformat{\section}{\normalfont\bfseries}{\thesection.}{0.6em}{}
+\titleformat{\subsection}{\normalfont\bfseries}{\thesubsection.}{0.6em}{}
+\titleformat{\subsubsection}{\normalfont\itshape\bfseries}{\thesubsubsection.}{0.6em}{}
+\titlespacing*{\section}{0pt}{10pt}{4pt}
+\titlespacing*{\subsection}{0pt}{8pt}{3pt}
+\titlespacing*{\subsubsection}{0pt}{6pt}{2pt}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+% Tieu de cho cac phan khong danh so (TOM TAT, MO DAU, PHU LUC...)
+\newcommand{\unnumberedchapter}[1]{%
+  \clearpage
+  \phantomsection
+  \addcontentsline{toc}{chapter}{#1}%
+  \begin{center}
+    {\large\bfseries\MakeUppercase{#1}}
+  \end{center}
+  \vspace{6pt}
+}
+
+% Muc khong danh so nhung van vao muc luc (dung trong MO DAU, PHU LUC)
+\newcommand{\unnumberedsection}[1]{%
+  \par\vspace{8pt}\phantomsection
+  \addcontentsline{toc}{section}{#1}%
+  \noindent{\bfseries #1}\par\vspace{2pt}\nopagebreak
+}
+\newcommand{\unnumberedsubsection}[1]{%
+  \par\vspace{6pt}\phantomsection
+  \addcontentsline{toc}{subsection}{#1}%
+  \noindent{\bfseries #1}\par\vspace{2pt}\nopagebreak
+}
+
+% === Muc luc =================================================
+\usepackage{tocloft}
+\renewcommand{\cftchapfont}{\bfseries}
+\renewcommand{\cftchappagefont}{\bfseries}
+% Muc luc doc la "Chuong 1. Tong quan" thay vi "1 Tong quan"
+\renewcommand{\cftchappresnum}{\chaptername\ }
+\renewcommand{\cftchapaftersnum}{.}
+\setlength{\cftchapnumwidth}{5.4em}
+\renewcommand{\cftsecaftersnum}{.}
+\renewcommand{\cftsubsecaftersnum}{.}
+\renewcommand{\cftsubsubsecaftersnum}{.}
+\setlength{\cftsecnumwidth}{2.6em}
+\setlength{\cftsubsecnumwidth}{3.4em}
+\setlength{\cftsubsubsecnumwidth}{4.2em}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\setlength{\cftbeforechapskip}{3pt}
+\renewcommand{\cftfigpresnum}{\figurename\ }
+\renewcommand{\cfttabpresnum}{\tablename\ }
+\setlength{\cftfignumwidth}{4.6em}
+\setlength{\cfttabnumwidth}{4.6em}
+
+% === Hinh anh ================================================
+\usepackage{graphicx}
+\graphicspath{{../images/}{../diagrams/}{figures/}}
+\usepackage{float}
+\usepackage{rotating}  % so do qua rong: xoay ngang tron trang
+\usepackage{caption}
+% Nhan hinh/bang dang "Hinh 3.1." va "Bang 3.1." theo thoi quen tieng Viet
+\captionsetup{font=small, labelfont=bf, justification=centering,
+              labelsep=period, skip=4pt}
+\captionsetup[table]{skip=2pt}
+
+% === Bang ====================================================
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{etoolbox}
+\usepackage{colortbl}
+\usepackage{xcolor}
+\definecolor{rowgray}{gray}{0.93}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcommand{\rowhl}{\rowcolor{rowgray}}
+\renewcommand{\arraystretch}{1.15}
+
+% Bang va hinh dung gian dong don cho gon
+% Cot p{} trong bang can canh trai (khong can deu hai ben) de tranh cac
+% khoang trang lon giua tu trong o hep.
+\AtBeginEnvironment{tabular}{\setstretch{1.0}\small\raggedright\arraybackslash}
+\AtBeginEnvironment{tabularx}{\setstretch{1.0}\small\raggedright\arraybackslash}
+\AtBeginEnvironment{longtable}{\setstretch{1.0}\small\raggedright\arraybackslash}
+
+% === Ma nguon, ma gia ========================================
+% Dung fancyvrb/fvextra chu KHONG dung listings: goi listings cat nho cac ky
+% tu tieng Viet co dau khi bien dich bang XeLaTeX (thu roi, chu bi vo).
+\usepackage{fvextra}
+\fvset{
+  frame=single,
+  framesep=4pt,
+  fontsize=\footnotesize,
+  baselinestretch=1.0,
+  breaklines=true,
+  breaksymbolleft={},
+  breaksymbolright={},
+  breakindent=2em,
+  xleftmargin=4pt,
+  xrightmargin=2pt,
+  samepage=false
+}
+\DefineVerbatimEnvironment{codeblock}{Verbatim}{}
+
+
+% === Toan, danh sach, lien ket ===============================
+\usepackage{amsmath}
+\usepackage{enumitem}
+\setlist{topsep=3pt, itemsep=1pt, parsep=2pt}
+\usepackage[
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=black,
+  breaklinks=true,
+  pdftitle={Xay dung website goi y nau an va lap thuc don cho gia dinh},
+  pdfauthor={Phan Thi Thanh Mai},
+  hidelinks
+]{hyperref}
+\usepackage{url}
+\usepackage{xurl}   % cho phep ngat dong o moi ky tu trong URL dai
+\urlstyle{same}
+
+% === Lenh rieng ==============================================
+\usepackage{seqsplit}
+\newcommand{\code}[1]{\texttt{#1}}
+% Danh cho dinh danh dai (ten ca kiem thu) khong the ngat dong theo cach
+% thong thuong: cho phep xuong dong o bat ky ky tu nao.
+\newcommand{\codelong}[1]{\texttt{\seqsplit{#1}}}
+\newcommand{\placeholder}[1]{[\textit{#1}]}
+% Tai lieu tham khao dang [n]: danh sach thu cong theo dinh dang IEEE
+\newcommand{\tltk}[1]{[#1]}
+
+% === TikZ (toan bo so do trang den) ==========================
+\input{figures/tikz-styles}
+
+\begin{document}
+
+% ============================================================
+%  PHAN DAU: bia, nhan xet, loi cam on, cac danh muc
+% ============================================================
+\pagestyle{empty}
+\input{frontmatter/bia-chinh}
+\input{frontmatter/bia-phu}
+\input{frontmatter/nhan-xet}
+\input{frontmatter/loi-cam-on}
+
+\pagestyle{fancy}
+\pagenumbering{roman}
+\setcounter{page}{1}
+
+\input{frontmatter/muc-luc}
+\input{chapters/00-tom-tat}
+
+% ============================================================
+%  THAN BAI: danh so lai tu 1 bat dau o MO DAU
+% ============================================================
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\input{chapters/00-mo-dau}
+\input{chapters/01-tong-quan}
+\input{chapters/02-nghien-cuu-ly-thuyet}
+\input{chapters/03-hien-thuc-hoa}
+\input{chapters/04-ket-qua}
+\input{chapters/05-ket-luan}
+\input{chapters/06-tai-lieu-tham-khao}
+\input{chapters/07-phu-luc}
+
+\end{document}

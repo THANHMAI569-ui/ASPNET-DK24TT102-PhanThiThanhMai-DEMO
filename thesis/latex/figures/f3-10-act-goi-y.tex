@@ -1,0 +1,48 @@
+\begin{figure}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}
+
+  % --- Lan boi (swimlane) ---------------------------------------
+  \draw[thin] (-3.7,0.9) rectangle (4.5,-19.6);
+  \draw[thin] (4.5,0.9) rectangle (17.2,-19.6);
+  \node[font=\bfseries\small] at (0.4,0.55) {Người dùng};
+  \node[font=\bfseries\small] at (10.85,0.55) {Hệ thống};
+
+  % --- Cac nut --------------------------------------------------
+  \node[term] (A0)  at (0,0)     {Bắt đầu};
+  \node[proc] (A1)  at (0,-1.6)  {Mở trang Gợi ý\\nguyên liệu};
+  \node[proc] (A2)  at (9,-3.2)  {Nạp danh sách nguyên liệu,\\sắp theo tên};
+  \node[proc] (A3)  at (0,-4.8)  {Tick các nguyên liệu\\đang có};
+  \node[proc] (A4)  at (0,-6.4)  {Bấm nút Gợi ý món};
+  \node[dec]  (A5)  at (9,-8.4)  {Đã chọn nguyên liệu\\nào chưa?};
+  \node[procs](A6)  at (15.2,-8.4) {Hiển thị trạng thái ban đầu\\kèm hướng dẫn};
+  \node[proc] (A7)  at (9,-10.6) {Tính độ phủ cho từng món\\và xếp hạng};
+  \node[dec]  (A8)  at (9,-12.6) {Có món phù hợp?};
+  \node[procs](A9)  at (15.2,-12.6){Hiển thị trạng thái rỗng};
+  \node[term] (A10) at (15.2,-14.6){Kết thúc};
+  \node[proc] (A11) at (9,-15.4) {Hiển thị lưới món kèm nhãn\\Đủ nguyên liệu hoặc\\Thiếu N nguyên liệu};
+  \node[proc] (A12) at (0,-17.2) {Mở chi tiết món để xem\\công thức (tùy chọn)};
+  \node[term] (A13) at (0,-18.8) {Kết thúc};
+
+  % --- Cac mui ten ------------------------------------------------
+  \draw[fl] (A0.south) -- (A1.north);
+  \draw[fl] (A1.east)  -- (A2.west);
+  \draw[fl] (A2.south) -- (A3.north);
+  \draw[fl] (A3.south) -- (A4.north);
+  \draw[fl] (A4.east)  -- (A5.west);
+  \draw[fl] (A5.east)  -- node[lbl, above]{Chưa} (A6.west);
+  \draw[fl] (A6.north) -- (15.2,-4.8) -- (A3.east);
+  \draw[fl] (A5.south) -- node[lbl, right]{Rồi} (A7.north);
+  \draw[fl] (A7.south) -- (A8.north);
+  \draw[fl] (A8.east)  -- node[lbl, above]{Không} (A9.west);
+  \draw[fl] (A9.south) -- (A10.north);
+  \draw[fl] (A8.south) -- node[lbl, right]{Có} (A11.north);
+  \draw[fl] (A11.west) -- (A12.east);
+  \draw[fl] (A12.south)-- (A13.north);
+
+\end{tikzpicture}%
+}
+\caption{Sơ đồ hoạt động của chức năng gợi ý theo nguyên liệu}
+\label{fig:act-goi-y}
+\end{figure}

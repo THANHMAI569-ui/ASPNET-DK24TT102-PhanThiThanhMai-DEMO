@@ -1,0 +1,48 @@
+\begin{figure}[H]
+\centering
+\resizebox{!}{0.85\textheight}{%
+\begin{tikzpicture}[node distance=8mm and 20mm]
+
+\node[term] (START) {Bắt đầu};
+\node[proc, below=of START] (P1) {Nhận tập nguyên liệu $A$\\người dùng đang có};
+\node[dec, below=of P1] (D1) {$A$ rỗng?};
+
+\node[procs, right=32mm of D1] (PEMPTY) {Trả về danh sách rỗng};
+\node[term, below=of PEMPTY] (ENDE) {Kết thúc};
+
+\node[proc, below=13mm of D1] (P2) {Truy vấn các món $R$ có ít nhất\\một nguyên liệu thuộc $A$};
+\node[dec, below=of P2] (D2) {Còn món chưa xét?};
+
+\node[procs, right=32mm of D2] (P3) {missing = $I_R \setminus A$};
+\node[procs, below=of P3] (P4) {matched = $|I_R| - |$missing$|$};
+\node[procs, below=of P4] (P5) {coverage = matched / $|I_R|$};
+\node[procs, below=of P5] (P6) {canCookNow = (missing rỗng)};
+
+\node[proc, below=13mm of D2, text width=7.4cm] (PRANK) {Xếp hạng theo thứ tự từ điển:\\
+1. canCookNow giảm dần,\\
+2. coverage giảm dần,\\
+3. $|$missing$|$ tăng dần,\\
+4. tên món A-Z};
+\node[proc, below=of PRANK] (PFINAL) {Trả về danh sách đã xếp hạng\\kèm nhãn và nguyên liệu còn thiếu};
+\node[term, below=of PFINAL] (END2) {Kết thúc};
+
+\draw[fl] (START) -- (P1);
+\draw[fl] (P1) -- (D1);
+\draw[fl] (D1) -- (PEMPTY) node[lbl, midway] {Có};
+\draw[fl] (PEMPTY) -- (ENDE);
+\draw[fl] (D1) -- (P2) node[lbl, midway] {Không};
+\draw[fl] (P2) -- (D2);
+\draw[fl] (D2) -- (P3) node[lbl, midway] {Có};
+\draw[fl] (P3) -- (P4);
+\draw[fl] (P4) -- (P5);
+\draw[fl] (P5) -- (P6);
+\draw[fl] (P6.south) -- ++(0,-4mm) -| ($(D2.east)+(2.4,0)$) -- (D2.east);
+\draw[fl] (D2) -- (PRANK) node[lbl, midway] {Không};
+\draw[fl] (PRANK) -- (PFINAL);
+\draw[fl] (PFINAL) -- (END2);
+
+\end{tikzpicture}%
+}
+\caption{Lưu đồ thuật toán gợi ý theo nguyên liệu}
+\label{fig:flow-goi-y}
+\end{figure}

@@ -1,0 +1,54 @@
+\begin{figure}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[node distance=1.4cm and 1.4cm]
+
+  % --- Hang 1: Controller --------------------------------------
+  \node[procs] (RC) at (0,11) {RecipeController};
+  \node[procs] (SC) at (8,11) {SuggestionController};
+  \node[procs] (MC) at (16,11) {MenuController};
+  \node[procs] (SLC) at (24,11) {ShoppingListController};
+  \node[procs] (FC) at (32,11) {FavoriteController};
+
+  % --- Hang 2: Service -------------------------------------------
+  \node[classbox] (RS) at (0,5) {\textbf{RecipeService}
+    \nodepart{two} +PageSize: int
+    \nodepart{three} +SearchRecipesAsync(RecipeFilterViewModel)\\+GetHomeAsync(int)\\+GetRecipeDetailAsync(int)};
+  \node[classbox] (SS) at (8,5) {\textbf{SuggestionService}
+    \nodepart{two} ~
+    \nodepart{three} +GetIngredientOptionsAsync()\\+SuggestAsync(IReadOnlyCollection)};
+  \node[classbox] (MPS) at (16,5) {\textbf{MenuPlannerService}
+    \nodepart{two} -DailyCalorieTarget: int\\-Meals: array
+    \nodepart{three} +GenerateWeeklyPlanAsync(userId,\\planName, weekStartDate, region)};
+  \node[classbox] (SLS) at (24,5) {\textbf{ShoppingListService}
+    \nodepart{two} ~
+    \nodepart{three} +GenerateFromMenuPlanAsync(userId, menuPlanId)};
+  \node[classbox] (FS) at (32,5) {\textbf{FavoriteService}
+    \nodepart{two} ~
+    \nodepart{three} +GetFavoritesAsync(userId)\\+IsFavoriteAsync(userId, recipeId)\\+ToggleFavoriteAsync(userId, recipeId)};
+
+  % --- Hang 3: AppDbContext ---------------------------------------
+  \node[classbox] (DB) at (16,-2.5) {\textbf{AppDbContext}
+    \nodepart{two} +DbSet$<$Recipe$>$ Recipes\\+DbSet$<$Ingredient$>$ Ingredients\\+DbSet$<$Category$>$ Categories\\+DbSet$<$RecipeIngredient$>$ RecipeIngredients\\+DbSet$<$MenuPlan$>$ MenuPlans\\+DbSet$<$MenuPlanItem$>$ MenuPlanItems\\+DbSet$<$Favorite$>$ Favorites\\+DbSet$<$ShoppingList$>$ ShoppingLists\\+DbSet$<$ShoppingListItem$>$ ShoppingListItems
+    \nodepart{three} \#OnModelCreating(ModelBuilder)};
+
+  % --- Quan he: Controller -> Service (net dut) -------------------
+  \draw[arrd] (RC) -- (RS) node[lbl, pos=0.5] {sử dụng};
+  \draw[arrd] (RC.south) -- ++(0,-2.7) -| (FS.west) node[lbl, pos=0.15] {sử dụng};
+  \draw[arrd] (SC) -- (SS) node[lbl, pos=0.5] {sử dụng};
+  \draw[arrd] (MC) -- (MPS) node[lbl, pos=0.5] {sử dụng};
+  \draw[arrd] (SLC) -- (SLS) node[lbl, pos=0.5] {sử dụng};
+  \draw[arrd] (FC) -- (FS) node[lbl, pos=0.5] {sử dụng};
+
+  % --- Quan he: Service -> AppDbContext (net dut) ------------------
+  \draw[arrd] (RS) -- (DB);
+  \draw[arrd] (SS) -- (DB);
+  \draw[arrd] (MPS) -- (DB);
+  \draw[arrd] (SLS) -- (DB);
+  \draw[arrd] (FS) -- (DB);
+
+\end{tikzpicture}%
+}
+\caption{Sơ đồ lớp tầng dịch vụ và quan hệ với tầng điều khiển}
+\label{fig:lop-service}
+\end{figure}

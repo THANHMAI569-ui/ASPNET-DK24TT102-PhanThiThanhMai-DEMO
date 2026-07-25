@@ -1,0 +1,57 @@
+% So do use case tong quat.
+% Bo tri MOT cot ellipse va dat moi tac nhan ngang tam khoi ca su dung cua
+% rieng no: nho vay khong duong noi nao cat qua ellipse khac.
+\begin{figure}[H]
+\centering
+\resizebox{!}{0.84\textheight}{%
+\begin{tikzpicture}[x=1cm, y=1cm,
+    uc/.style={ucell, minimum width=7.6cm, minimum height=1.05cm, text width=6.0cm, align=center},
+    inh/.style={thick, -{Triangle[open, length=3mm, width=3mm]}}]
+
+  % ---------- Cac ca su dung, mot cot ----------
+  \node[uc] (uc1)  at (9.5,   0.0) {UC1. Duyệt và tìm kiếm món ăn};
+  \node[uc] (uc2)  at (9.5,  -1.5) {UC2. Lọc theo danh mục, vùng miền,\\độ khó, thời gian nấu};
+  \node[uc] (uc3)  at (9.5,  -3.0) {UC3. Sắp xếp danh sách món};
+  \node[uc] (uc4)  at (9.5,  -4.5) {UC4. Xem chi tiết món ăn};
+  \node[uc] (uc5)  at (9.5,  -6.0) {UC5. Gợi ý món theo nguyên liệu sẵn có};
+  \node[uc] (uc6)  at (9.5,  -7.5) {UC6. Đăng ký tài khoản};
+  \node[uc] (uc7)  at (9.5,  -9.0) {UC7. Đăng nhập và đăng xuất};
+
+  \node[uc] (uc8)  at (9.5, -11.0) {UC8. Sinh thực đơn tuần tự động};
+  \node[uc] (uc9)  at (9.5, -12.5) {UC9. Chỉnh sửa thủ công từng bữa};
+  \node[uc] (uc10) at (9.5, -14.0) {UC10. Tạo danh sách đi chợ};
+  \node[uc] (uc11) at (9.5, -15.5) {UC11. Đánh dấu đã mua};
+  \node[uc] (uc12) at (9.5, -17.0) {UC12. Quản lý món yêu thích};
+
+  \node[uc] (uc13) at (9.5, -19.0) {UC13. Quản lý món ăn};
+  \node[uc] (uc14) at (9.5, -20.5) {UC14. Quản lý nguyên liệu};
+  \node[uc] (uc15) at (9.5, -22.0) {UC15. Quản lý danh mục};
+  \node[uc] (uc16) at (9.5, -23.5) {UC16. Xem thống kê tổng quan};
+
+  % ---------- Bien he thong ----------
+  \node[font=\bfseries] (systitle) at (9.5, 1.5) {Hệ thống CookingAdvisor};
+  \node[ucsys, fit=(uc1)(uc16)(systitle), inner sep=8pt] {};
+
+  % ---------- Tac nhan, dat ngang tam khoi ca su dung cua minh ----------
+  \stickman{khach}{1.6}{-4.5}{Khách}
+  \stickman{nguoidung}{1.6}{-14.0}{Người dùng}
+  \stickman{quantri}{1.6}{-21.2}{Quản trị viên}
+
+  \foreach \t in {uc1,uc2,uc3,uc4,uc5,uc6,uc7}
+    \draw[ucline] (khach) -- (\t.west);
+  \foreach \t in {uc8,uc9,uc10,uc11,uc12}
+    \draw[ucline] (nguoidung) -- (\t.west);
+  \foreach \t in {uc13,uc14,uc15,uc16}
+    \draw[ucline] (quantri) -- (\t.west);
+
+  % ---------- Ke thua quyen giua cac tac nhan ----------
+  \draw[inh] (nguoidung) -- ++(-2.4,0) |- (khach);
+  \node[lbl, rotate=90, anchor=south] at (-0.8,-9.2) {kế thừa quyền};
+  \draw[inh] (quantri) -- ++(-2.4,0) |- (nguoidung);
+  \node[lbl, rotate=90, anchor=south] at (-0.8,-17.6) {kế thừa quyền};
+
+\end{tikzpicture}%
+}
+\caption{Sơ đồ use case tổng quát của hệ thống}
+\label{fig:use-case}
+\end{figure}

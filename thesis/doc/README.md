@@ -1,11 +1,37 @@
 # Tài liệu báo cáo
 
+> **Bản chính từ 26/07/2026 là bản LaTeX ở `thesis/latex/`.**
+> `thesis/pdf/bao-cao-day-du.pdf` được sinh từ `thesis/latex/thesis.tex`
+> (chạy `thesis/latex/build.sh`, dùng XeLaTeX). Toàn bộ pipeline Markdown +
+> pandoc mô tả bên dưới được **giữ lại làm lưu trữ**, không còn là nguồn để
+> sửa nội dung. Nếu sửa nội dung báo cáo thì sửa trong `thesis/latex/`.
+
+## Bản chính: LaTeX
+
+| Tệp | Nội dung |
+|---|---|
+| `../latex/thesis.tex` | Tệp chính, chứa preamble và gọi các phần |
+| `../latex/frontmatter/` | Bìa chính, bìa phụ, 2 trang nhận xét, lời cảm ơn, mục lục |
+| `../latex/chapters/` | Tóm tắt, Mở đầu, Chương 1-5, TLTK, Phụ lục |
+| `../latex/figures/` | 17 sơ đồ vẽ bằng TikZ, trắng đen, vector |
+| `../latex/build.sh` | Biên dịch và chép sang `../pdf/bao-cao-day-du.pdf` |
+
+```bash
+cd thesis/latex && ./build.sh
+```
+
+Yêu cầu: TeX Live có `xelatex` và font hệ thống **Times New Roman**,
+**Courier New**.
+
+---
+
+## Lưu trữ: pipeline Markdown + pandoc (không còn dùng)
+
 ## Bản để nộp
 
 | Tệp | Nội dung |
 |---|---|
 | `bao-cao-day-du.docx` | **Bản đầy đủ**, ghép cả ba phần, có mục lục tự động |
-| `../pdf/bao-cao-day-du.pdf` | Bản PDF xuất từ tệp .docx ở trên |
 
 ## Bản nguồn để sửa
 

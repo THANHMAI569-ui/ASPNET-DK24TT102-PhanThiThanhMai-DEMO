@@ -1,0 +1,55 @@
+\begin{figure}[H]
+\centering
+\resizebox{!}{0.9\textheight}{%
+\begin{tikzpicture}[node distance=8mm and 20mm]
+
+\node[term] (START) {Bắt đầu};
+\node[proc, below=of START] (P1) {Nhận userId, menuPlanId};
+\node[proc, below=of P1, text width=8.2cm] (P2) {Nạp MenuPlan kèm Items, Recipe,\\
+RecipeIngredients với điều kiện\\
+Id = menuPlanId VÀ UserId = userId};
+\node[dec, below=of P2] (D1) {plan là null?};
+
+\node[procs, right=32mm of D1, text width=3.4cm] (PERR) {Ném ngoại lệ: chặn truy cập chéo người dùng};
+\node[term, below=of PERR] (ENDERR) {Kết thúc};
+
+\node[proc, below=13mm of D1] (P3) {tatCa = danh sách rỗng};
+\node[dec, below=of P3] (D2) {Còn suất ăn chưa duyệt?};
+
+\node[procs, right=32mm of D2, text width=3.6cm] (P4) {Thêm toàn bộ RecipeIngredient của món ở suất này vào tatCa};
+
+\node[proc, below=13mm of D2, text width=8.0cm] (P5) {Gộp nhóm tatCa theo khóa ghép (IngredientId, Unit)};
+\node[proc, below=of P5, text width=8.0cm] (P6) {Với mỗi nhóm: tạo ShoppingListItem với tổng Quantity};
+\node[dec, below=of P6] (D3) {Đã có ShoppingList của thực đơn này?};
+
+\node[procs, right=32mm of D3, text width=3.4cm] (P7) {Xóa toàn bộ dòng cũ của danh sách};
+
+\node[proc, below=13mm of D3] (P8) {Tạo ShoppingList mới};
+\node[proc, below=of P8, text width=7.0cm] (P9) {Gán các dòng đã gộp và lưu};
+\node[proc, below=of P9] (P10) {Trả về ShoppingList};
+\node[term, below=of P10] (END) {Kết thúc};
+
+\draw[fl] (START) -- (P1);
+\draw[fl] (P1) -- (P2);
+\draw[fl] (P2) -- (D1);
+\draw[fl] (D1) -- (PERR) node[lbl, midway] {Có};
+\draw[fl] (PERR) -- (ENDERR);
+\draw[fl] (D1) -- (P3) node[lbl, midway] {Không};
+\draw[fl] (P3) -- (D2);
+\draw[fl] (D2) -- (P4) node[lbl, midway] {Có};
+\draw[fl] (P4.south) -- ++(0,-4mm) -| (D2.west);
+\draw[fl] (D2) -- (P5) node[lbl, midway] {Không};
+\draw[fl] (P5) -- (P6);
+\draw[fl] (P6) -- (D3);
+\draw[fl] (D3) -- (P7) node[lbl, midway] {Có};
+\draw[fl] (P7.south) -- ++(0,-6mm) -| (P9.east);
+\draw[fl] (D3) -- (P8) node[lbl, midway] {Không};
+\draw[fl] (P8) -- (P9);
+\draw[fl] (P9) -- (P10);
+\draw[fl] (P10) -- (END);
+
+\end{tikzpicture}%
+}
+\caption{Lưu đồ thuật toán sinh danh sách đi chợ}
+\label{fig:flow-di-cho}
+\end{figure}

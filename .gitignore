@@ -45,3 +45,14 @@ coverage/
 
 ## --- CodeGraph index (local dev tool, not for GitHub) --------------------
 .codegraph/
+
+## --- LaTeX build output (bao cao) ---------------------------------------
+thesis/latex/build/
+*.aux
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.xdv
+*.synctex.gz

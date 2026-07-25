@@ -1,0 +1,54 @@
+\begin{figure}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}
+
+  % --- Lan boi (swimlane) ---------------------------------------
+  \draw[thin] (-3.2,0.9) rectangle (4.5,-25.5);
+  \draw[thin] (4.5,0.9) rectangle (17.2,-25.5);
+  \node[font=\bfseries\small] at (0.65,0.55) {Người dùng};
+  \node[font=\bfseries\small] at (10.85,0.55) {Hệ thống};
+
+  % --- Cac nut --------------------------------------------------
+  \node[term]  (C0)  at (0,0)      {Bắt đầu};
+  \node[proc]  (C1)  at (0,-1.6)   {Mở chi tiết một thực đơn đã lưu};
+  \node[proc]  (C2)  at (0,-3.2)   {Bấm nút Tạo danh sách};
+  \node[proc]  (C3)  at (9,-5.0)   {Nạp thực đơn kèm điều kiện lọc\\theo người dùng đang đăng nhập};
+  \node[dec]   (C4)  at (9,-7.2)   {Thực đơn thuộc về\\người dùng này?};
+  \node[procs] (C5)  at (15.2,-7.2){Trả về lỗi truy cập};
+  \node[term]  (C6)  at (15.2,-9.2){Kết thúc};
+  \node[proc]  (C7)  at (9,-9.4)   {Duyệt toàn bộ 21 suất ăn,\\thu thập nguyên liệu};
+  \node[proc]  (C8)  at (9,-11.0)  {Gộp nhóm theo cặp (nguyên liệu,\\đơn vị) và cộng dồn khối lượng};
+  \node[dec]   (C9)  at (9,-13.2)  {Thực đơn đã có\\danh sách đi chợ?};
+  \node[procs] (C10) at (15.2,-13.2){Xóa toàn bộ dòng cũ};
+  \node[proc]  (C11) at (9,-15.4)  {Tạo danh sách mới};
+  \node[proc]  (C12) at (9,-17.4)  {Ghi các dòng đã gộp};
+  \node[proc]  (C13) at (9,-19.2)  {Hiển thị danh sách theo nhóm\\nguyên liệu kèm thanh tiến độ};
+  \node[proc]  (C14) at (0,-21.2)  {Đánh dấu đã mua từng nguyên liệu};
+  \node[proc]  (C15) at (9,-23.2)  {Cập nhật thanh tiến độ};
+  \node[term]  (C16) at (9,-24.8)  {Kết thúc};
+
+  % --- Cac mui ten ------------------------------------------------
+  \draw[fl] (C0.south) -- (C1.north);
+  \draw[fl] (C1.south) -- (C2.north);
+  \draw[fl] (C2.east)  -- (C3.west);
+  \draw[fl] (C3.south) -- (C4.north);
+  \draw[fl] (C4.east)  -- node[lbl, above]{Không} (C5.west);
+  \draw[fl] (C5.south) -- (C6.north);
+  \draw[fl] (C4.south) -- node[lbl, right]{Có} (C7.north);
+  \draw[fl] (C7.south) -- (C8.north);
+  \draw[fl] (C8.south) -- (C9.north);
+  \draw[fl] (C9.east)  -- node[lbl, above]{Có} (C10.west);
+  \draw[fl] (C9.south) -- node[lbl, right]{Không} (C11.north);
+  \draw[fl] (C10.south)-- (15.2,-17.4) -- (C12.east);
+  \draw[fl] (C11.south)-- (C12.north);
+  \draw[fl] (C12.south)-- (C13.north);
+  \draw[fl] (C13.west) -- (C14.east);
+  \draw[fl] (C14.east) -- (C15.west);
+  \draw[fl] (C15.south)-- (C16.north);
+
+\end{tikzpicture}%
+}
+\caption{Sơ đồ hoạt động của chức năng lập danh sách đi chợ}
+\label{fig:act-di-cho}
+\end{figure}

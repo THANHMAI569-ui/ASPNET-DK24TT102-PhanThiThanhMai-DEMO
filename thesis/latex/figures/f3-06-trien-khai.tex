@@ -1,0 +1,54 @@
+% So do trien khai: 3 nut thiet bi xep doc, moi nut chua cac thanh phan
+% duoc trien khai; khung net dut ghi chu hai phuong an chay SQL Server.
+\begin{figure}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[x=1cm, y=1cm,
+    % Khung nut thiet bi ve SAU cac thanh phan ben trong nen phai fill=none,
+    % neu khong khung se de len va che mat chu.
+    devnode/.style={draw, thick, fill=none, inner sep=5pt}]
+
+  % ---------- Nut 1: may nguoi dung ----------
+  \node[artifact, minimum width=5.6cm] (a1) at (0,0) {Trình duyệt web (Chrome)};
+  \node[above=2mm of a1, font=\small\bfseries] (t1) {Máy người dùng};
+  \node[devnode, fit=(a1)(t1)] (n1) {};
+
+  % ---------- Nut 2: may chu ung dung ----------
+  \node[artifact, minimum width=6.6cm] (b1) at (0,-3.6)
+    {CookingAdvisor.dll (ASP.NET Core MVC)};
+  \node[artifact, minimum width=6.6cm, below=1.5mm of b1] (b2)
+    {Controllers, Services, ViewModels};
+  \node[artifact, minimum width=6.6cm, below=1.5mm of b2] (b3)
+    {Views (Razor)};
+  \node[artifact, minimum width=6.6cm, below=1.5mm of b3] (b4)
+    {wwwroot: CSS, JavaScript, ảnh};
+  \node[above=2mm of b1, font=\small\bfseries, align=center] (t2)
+    {Máy chủ ứng dụng\\{\scriptsize\mdseries .NET 10, máy chủ Kestrel}};
+  \node[devnode, fit=(b1)(b2)(b3)(b4)(t2)] (n2) {};
+
+  % ---------- Nut 3: may chu co so du lieu ----------
+  \node[artifact, minimum width=5.6cm] (c1) at (0,-9.4) {SQL Server 2022};
+  \node[artifact, minimum width=5.6cm, below=1.5mm of c1] (c2)
+    {CSDL CookingAdvisor};
+  \node[above=2mm of c1, font=\small\bfseries] (t3) {Máy chủ cơ sở dữ liệu};
+  \node[devnode, fit=(c1)(c2)(t3)] (n3) {};
+
+  % ---------- Ghi chu hai phuong an ----------
+  \node[devgroup, right=1.4cm of n3, text width=6.4cm, align=left,
+        font=\scriptsize] (note)
+    {Hai phương án tương đương:\\[2pt]
+     1. Container Docker hoặc OrbStack trên macOS.\\[2pt]
+     2. SQL Server Express hoặc Developer cài trực tiếp trên Windows.};
+  \draw[thick, dashed] (n3.east) -- (note.west);
+
+  % ---------- Ket noi ----------
+  \draw[arr] (n1.south) -- node[lbl, right] {HTTP} (n2.north);
+  \draw[arr] (n2.south) -- node[lbl, right, align=left]
+    {TDS, cổng 1433\\{\scriptsize chuỗi kết nối lấy từ User Secrets}}
+    (n3.north);
+
+\end{tikzpicture}%
+}
+\caption{Sơ đồ triển khai hệ thống}
+\label{fig:trien-khai}
+\end{figure}

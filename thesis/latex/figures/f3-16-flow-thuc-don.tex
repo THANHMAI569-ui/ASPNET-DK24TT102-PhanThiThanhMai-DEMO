@@ -1,0 +1,96 @@
+% So do nay rat nhieu khoi; de o kho doc thi phai xoay ngang tron trang.
+\begin{sidewaysfigure}
+\centering
+\resizebox{0.90\textheight}{!}{%
+\begin{tikzpicture}[node distance=7mm and 18mm]
+
+% ================= COT 1 =================
+\node[term] (START) {Bắt đầu};
+\node[proc, below=of START, text width=7.4cm] (P1) {Nhận userId, tên thực đơn,\\
+tuần bắt đầu, vùng miền (tùy chọn)};
+\node[proc, below=of P1] (P2) {candidates = món thỏa\\bộ lọc vùng miền};
+\node[dec, below=of P2] (D1) {candidates rỗng?};
+
+\node[procs, right=28mm of D1, text width=3.2cm] (PERR) {Ném ngoại lệ: không có món để sinh thực đơn};
+\node[term, below=of PERR] (ENDERR) {Kết thúc};
+
+\node[proc, below=12mm of D1] (P3) {favoriteIds = món yêu\\thích của người dùng};
+\node[proc, below=of P3] (P4) {used = rỗng; useCounts = rỗng;\\d = 0};
+\node[dec, below=of P4] (D2) {d $<$ 7?};
+
+\node[procs, left=28mm of D2, text width=3.2cm] (PSAVE) {Lưu MenuPlan kèm 21 MenuPlanItem};
+\node[term, below=of PSAVE] (ENDSAVE) {Kết thúc};
+
+\node[proc, below=12mm of D2] (P5) {dayCalories = 0; m = 0};
+\node[dec, below=of P5] (D3) {m $<$ 3?};
+
+\node[procs, right=28mm of D3, text width=2.6cm] (P6) {d = d + 1};
+
+\node[draw, circle, fill=white, thick, minimum size=7mm,
+  inner sep=0pt, font=\small\bfseries, below=12mm of D3] (CONNA) {A};
+\node[draw, circle, fill=white, thick, minimum size=7mm,
+  inner sep=0pt, font=\small\bfseries, left=16mm of D3] (CONNB) {B};
+
+% ================= COT 2 =================
+\node[draw, circle, fill=white, thick, minimum size=7mm,
+  inner sep=0pt, font=\small\bfseries] (CONNA2) at (13,0) {A};
+\node[proc, below=of CONNA2] (P7) {suitable = candidates\\hợp bữa m};
+\node[proc, below=of P7] (P8) {pool = suitable $\setminus$ used};
+\node[dec, below=of P8] (D4) {pool rỗng?};
+
+\node[proc, below=12mm of D4] (P9) {repeating = false.\\Sắp: ưu tiên món yêu thích};
+
+\node[procs, right=34mm of D4, text width=3.0cm] (P10) {repeating = true;\\pool = suitable};
+\node[dec, below=of P10] (D5) {pool vẫn rỗng?};
+\node[procs, right=28mm of D5, text width=3.0cm] (P11) {Nới ràng buộc bữa:\\pool = candidates};
+\node[proc, below=12mm of D5, text width=5.0cm] (P12) {Sắp: ít lần dùng nhất\\trước, rồi tới món yêu thích};
+
+\node[proc, below=12mm of P9, text width=7.0cm] (P13) {Tiêu chí phụ: $|$dayCalories + calo món\\
+$-$ mốc bữa$|$ nhỏ nhất.\\
+Tiêu chí cuối: Id tăng dần};
+\node[proc, below=of P13, text width=7.2cm] (P14) {Gán món vào ô $(d, m)$. Cập nhật\\
+dayCalories, used, useCounts};
+\node[proc, below=of P14] (P15) {m = m + 1};
+
+\node[draw, circle, fill=white, thick, minimum size=7mm,
+  inner sep=0pt, font=\small\bfseries, below=12mm of P15] (CONNB2) {B};
+
+% ================= MUI TEN COT 1 =================
+\draw[fl] (START) -- (P1);
+\draw[fl] (P1) -- (P2);
+\draw[fl] (P2) -- (D1);
+\draw[fl] (D1) -- (PERR) node[lbl, midway] {Có};
+\draw[fl] (PERR) -- (ENDERR);
+\draw[fl] (D1) -- (P3) node[lbl, midway] {Không};
+\draw[fl] (P3) -- (P4);
+\draw[fl] (P4) -- (D2);
+\draw[fl] (D2) -- (PSAVE) node[lbl, midway] {Không};
+\draw[fl] (PSAVE) -- (ENDSAVE);
+\draw[fl] (D2) -- (P5) node[lbl, midway] {Có};
+\draw[fl] (P5) -- (D3);
+\draw[fl] (D3) -- (P6) node[lbl, midway] {Không};
+\draw[fl] (P6.south) -- ++(0,-4mm) -| (D2.east);
+\draw[fl] (D3) -- (CONNA) node[lbl, midway] {Có};
+\draw[fl] (CONNB) -- (D3.west);
+
+% ================= MUI TEN COT 2 =================
+\draw[fl] (CONNA2) -- (P7);
+\draw[fl] (P7) -- (P8);
+\draw[fl] (P8) -- (D4);
+\draw[fl] (D4) -- (P9) node[lbl, midway] {Không};
+\draw[fl] (D4) -- (P10) node[lbl, midway] {Có};
+\draw[fl] (P10) -- (D5);
+\draw[fl] (D5) -- (P11) node[lbl, midway] {Có};
+\draw[fl] (D5) -- (P12) node[lbl, midway] {Không};
+\draw[fl] (P11.south) -- ++(0,-4mm) -| (P12.east);
+\draw[fl] (P9) -- (P13);
+\draw[fl] (P12.south) -- ++(0,-4mm) -| (P13.east);
+\draw[fl] (P13) -- (P14);
+\draw[fl] (P14) -- (P15);
+\draw[fl] (P15) -- (CONNB2);
+
+\end{tikzpicture}%
+}
+\caption{Lưu đồ thuật toán sinh thực đơn tuần}
+\label{fig:flow-thuc-don}
+\end{sidewaysfigure}

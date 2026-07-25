@@ -1,0 +1,51 @@
+% Kien truc phan tang: 5 tang xep doc; luong yeu cau di xuong ve o canh trai,
+% luong tra ve di len o canh phai; khoi Identity dat ben phai, noi net dut.
+\begin{figure}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[x=1cm, y=1cm]
+
+  \node[tier, minimum width=9.6cm] (B)  at (0,0)
+    {Trình duyệt\\(Razor View + Bootstrap)};
+  \node[tier, minimum width=9.6cm] (C)  at (0,-3.0)
+    {Tầng Controllers\\Home, Recipe, Suggestion, Menu,\\ShoppingList, Favorite, Account, Admin};
+  \node[tier, minimum width=9.6cm] (S)  at (0,-6.4)
+    {Tầng Services\\RecipeService, SuggestionService,\\MenuPlannerService, ShoppingListService,\\FavoriteService};
+  \node[tier, minimum width=9.6cm] (D)  at (0,-9.8)
+    {AppDbContext\\(Entity Framework Core)};
+  \node[store, minimum width=6.0cm, minimum height=1.7cm] (DB) at (0,-12.3)
+    {SQL Server};
+
+  % --- Luong yeu cau: di xuong, ve o canh trai ---
+  \draw[fl] ([xshift=-3.2cm]B.south) -- node[lbl, left] {HTTP request}
+            ([xshift=-3.2cm]C.north);
+  \draw[fl] ([xshift=-3.2cm]C.south) -- node[lbl, left] {gọi nghiệp vụ}
+            ([xshift=-3.2cm]S.north);
+  \draw[fl] ([xshift=-3.2cm]S.south) -- node[lbl, left] {LINQ}
+            ([xshift=-3.2cm]D.north);
+  \draw[fl] ([xshift=-1.8cm]D.south) -- node[lbl, left] {SQL}
+            ([xshift=-1.8cm]DB.north);
+
+  % --- Luong tra ve: di len, ve o canh phai ---
+  \draw[fl] ([xshift=1.8cm]DB.north) -- node[lbl, right] {bản ghi}
+            ([xshift=1.8cm]D.south);
+  \draw[fl] ([xshift=3.2cm]D.north)  -- node[lbl, right] {thực thể}
+            ([xshift=3.2cm]S.south);
+  \draw[fl] ([xshift=3.2cm]S.north)  -- node[lbl, right] {ViewModel}
+            ([xshift=3.2cm]C.south);
+  \draw[fl] ([xshift=3.2cm]C.north)  -- node[lbl, right] {HTML}
+            ([xshift=3.2cm]B.south);
+
+  % --- ASP.NET Core Identity, cat ngang qua tang Controllers va DbContext ---
+  \node[tier, minimum width=5.4cm, minimum height=1.7cm] (I) at (9.4,-6.4)
+    {ASP.NET Core Identity\\xác thực và phân quyền};
+  \draw[arrd] (I.north) |- node[lbl, pos=0.82, above] {bộ lọc [Authorize]}
+            ([yshift=0.35cm]C.east);
+  \draw[arrd] (I.south) |- node[lbl, pos=0.82, below] {bảng AspNet*}
+            ([yshift=-0.35cm]D.east);
+
+\end{tikzpicture}%
+}
+\caption{Kiến trúc phân tầng và luồng xử lý một yêu cầu}
+\label{fig:kien-truc}
+\end{figure}

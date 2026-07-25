@@ -1,0 +1,156 @@
+% ============================================================
+%  CHUONG 5. KET LUAN VA HUONG PHAT TRIEN
+% ============================================================
+\chapter{Kết luận và hướng phát triển}
+\label{ch:ket-luan}
+
+\section{Kết luận}
+
+Đồ án đã hoàn thành việc xây dựng \textbf{CookingAdvisor}, một ứng dụng web hỗ
+trợ người nấu ăn trong gia đình ở ba khâu: tìm món từ nguyên liệu sẵn có, lập
+thực đơn cho cả tuần và tổng hợp danh sách đi chợ.
+
+\subsection{Kết quả đạt được}
+
+\textbf{Về mặt chức năng,} hệ thống cung cấp 20 chức năng phân thành ba nhóm theo
+mức quyền truy cập, chạy hoàn chỉnh đầu-cuối trên cơ sở dữ liệu mẫu gồm 26 món ăn
+Việt Nam, 40 nguyên liệu và 10 danh mục. Toàn bộ sáu mục tiêu đặt ra ở phần Mở
+đầu đều đã đạt, với kết quả kiểm chứng cụ thể trình bày ở
+mục~\ref{sec:ket-qua-dat-duoc}.
+
+\textbf{Về mặt thuật toán,} ba thuật toán lõi đã được thiết kế, cài đặt và kiểm
+chứng:
+
+\begin{itemize}
+  \item \textit{Thuật toán gợi ý theo nguyên liệu} sử dụng độ phủ tập hợp kết hợp
+        xếp hạng bốn tiêu chí. Đóng góp đáng chú ý ở đây là lập luận chọn độ phủ
+        thay cho hệ số Jaccard: do Jaccard là độ đo đối xứng nên nó phạt cả phần
+        nguyên liệu dư của người dùng, dẫn tới việc một món nấu được ngay có thể
+        bị xếp hạng rất thấp.
+  \item \textit{Thuật toán sinh thực đơn tuần} theo hướng tham lam có ràng buộc,
+        với thứ tự nới lỏng ràng buộc được quy định rõ ràng và ràng buộc vùng
+        miền được giữ cứng.
+  \item \textit{Thuật toán sinh danh sách đi chợ} gộp nhóm theo khóa ghép (nguyên
+        liệu, đơn vị), bảo đảm không cộng dồn nhầm hai giá trị khác đơn vị.
+\end{itemize}
+
+\textbf{Về mặt kiểm chứng,} bộ 29 ca kiểm thử đơn vị đã phát hiện được hai khiếm
+khuyết mà việc quan sát bằng mắt thường khó nhận ra:
+
+\begin{enumerate}[label=\arabic*.]
+  \item \textit{Suy thoái tính đa dạng của thực đơn.} Khi thư viện món không đủ
+        lớn, tiêu chí phụ theo năng lượng khiến thuật toán chọn lại đúng một món
+        cho hầu hết các suất còn trống, đo được là một món chiếm 12 suất. Sau khi
+        bổ sung tiêu chí rải đều theo số lần đã dùng, thực đơn đạt 17 món khác
+        nhau trên 21 suất.
+  \item \textit{Thứ tự không xác định khi phân trang.} Việc sắp xếp chỉ theo một
+        khóa duy nhất khiến các bản ghi có giá trị bằng nhau không có thứ tự ổn
+        định, dẫn tới nguy cơ một món xuất hiện ở hai trang. Đã khắc phục bằng
+        khóa sắp xếp phụ theo tên món.
+\end{enumerate}
+
+Việc phát hiện được hai khiếm khuyết này là minh chứng cho giá trị thực tế của
+kiểm thử tự động, đồng thời cho thấy quyết định kiến trúc tách tầng Service khỏi
+tầng Controller (mục~\ref{sec:kien-truc}) đã phát huy tác dụng: nếu logic nằm
+trong Controller, việc viết các ca kiểm thử này sẽ khó khăn hơn nhiều.
+
+\textbf{Về mặt giao diện,} hệ thống hiển thị đúng trên dải màn hình từ 375 px tới
+1440 px, không xuất hiện cuộn ngang, hỗ trợ chế độ tối và đạt chuẩn tương phản
+WCAG 2.1 mức AA với cặp màu thấp nhất đo được là 4,69:1.
+
+\subsection{Đóng góp của đồ án}
+
+So với các ứng dụng đã khảo sát ở mục~\ref{sec:khao-sat}, đồ án có ba điểm khác
+biệt.
+
+\textbf{Thứ nhất, tích hợp trọn vẹn ba chức năng trong một luồng công việc liền
+mạch.} Các sản phẩm khảo sát thường mạnh ở một khâu và thiếu ở khâu khác. Mealime
+lập được thực đơn nhưng không hỗ trợ truy vấn ngược từ nguyên liệu. Paprika quản
+lý công thức và danh sách đi chợ tốt nhưng không tự động hóa việc lập thực đơn.
+Các trang trong nước chủ yếu dừng ở việc cung cấp nội dung.
+
+\textbf{Thứ hai, dữ liệu món ăn Việt Nam được chuẩn hóa về định lượng.} Bảng
+trung gian giữa món ăn và nguyên liệu mang thêm thuộc tính khối lượng và đơn vị.
+Đây là điều kiện tiên quyết để danh sách đi chợ có thể cộng dồn chính xác, điều
+mà các nền tảng có nội dung do cộng đồng đóng góp khó bảo đảm.
+
+\textbf{Thứ ba, thuật toán minh bạch và kiểm chứng được.} Toàn bộ tiêu chí xếp
+hạng và thứ tự nới lỏng ràng buộc đều được phát biểu tường minh, có mã giả, có
+lưu đồ và có ca kiểm thử tương ứng.
+
+\subsection{Hạn chế}
+
+Đồ án còn tám hạn chế đã nêu chi tiết ở mục~\ref{sec:han-che}. Trong đó, ba hạn
+chế có ảnh hưởng lớn nhất tới trải nghiệm người dùng là:
+
+\begin{itemize}
+  \item Thuật toán gợi ý mới xét việc \textbf{có hay không có} một nguyên liệu,
+        chưa xét người dùng có \textbf{đủ khối lượng} hay không.
+  \item Kết quả gợi ý \textbf{giống nhau với mọi người dùng}, chưa khai thác lịch
+        sử nấu ăn để cá nhân hóa.
+  \item Thông tin dinh dưỡng mới dừng ở \textbf{năng lượng theo khẩu phần}, chưa
+        bóc tách các thành phần dinh dưỡng chi tiết.
+\end{itemize}
+
+\section{Hướng phát triển}
+
+\subsection{Hoàn thiện các thuật toán hiện có}
+
+\textbf{Gợi ý có xét định lượng.} Mở rộng mô hình dữ liệu để người dùng khai báo
+được khối lượng nguyên liệu đang có, không chỉ khai báo có hay không. Khi đó điều
+kiện ``nấu được ngay'' trở thành: với mọi nguyên liệu $i$ của món, khối lượng
+người dùng có phải lớn hơn hoặc bằng khối lượng công thức yêu cầu. Thay đổi này
+cũng cho phép danh sách đi chợ \textbf{trừ đi phần đã có}, chỉ liệt kê phần còn
+thiếu.
+
+\textbf{Lập thực đơn theo hướng tối ưu.} Thay chiến lược tham lam bằng một thuật
+toán tìm kiếm cục bộ hoặc quy hoạch ràng buộc, để tổng năng lượng theo ngày bám
+sát mục tiêu hơn. Có thể bổ sung các ràng buộc mới như cân đối nhóm thực phẩm
+trong tuần hoặc tránh lặp cùng một nguyên liệu chính trong hai ngày liên tiếp.
+
+\textbf{Cá nhân hóa kết quả gợi ý.} Khi hệ thống đã tích lũy đủ dữ liệu về lịch
+sử nấu ăn và món yêu thích, có thể áp dụng kỹ thuật lọc cộng tác để bổ sung một
+tiêu chí xếp hạng dựa trên mức độ phù hợp với khẩu vị của từng người dùng. Cần
+lưu ý đây là hướng chỉ khả thi khi đã có người dùng thực, do các phương pháp này
+gặp vấn đề khởi đầu nguội trên hệ thống mới.
+
+\subsection{Mở rộng chức năng}
+
+\begin{table}[H]
+\centering
+\caption{Các hướng mở rộng chức năng}
+\label{tab:mo-rong}
+\begin{tabularx}{\textwidth}{p{4.2cm} Y}
+\toprule
+\bfseries Hướng mở rộng & \bfseries Nội dung \\
+\midrule
+Dinh dưỡng chi tiết & Bổ sung đạm, béo, tinh bột, chất xơ; cảnh báo theo chế độ
+  ăn hoặc bệnh lý \\
+\rowhl Quản lý tài khoản & Đổi mật khẩu, quên mật khẩu, xác thực email, trang hồ
+  sơ cá nhân \\
+Tải ảnh lên & Thay việc nhập đường dẫn ảnh bằng chức năng tải tệp và tự tạo ảnh
+  thu nhỏ \\
+\rowhl Cộng đồng & Cho phép người dùng đóng góp công thức, đánh giá và bình
+  luận \\
+Chia sẻ thực đơn & Xuất thực đơn tuần ra tệp hoặc chia sẻ qua đường dẫn công
+  khai \\
+\rowhl In danh sách đi chợ & Xuất bản in hoặc tệp PDF để mang theo khi đi chợ \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Cải thiện kỹ thuật}
+
+\textbf{Phân trang và tìm kiếm cho khu quản trị.} Hiện các danh sách trong khu
+quản trị hiển thị toàn bộ bản ghi. Với quy mô dữ liệu mẫu thì chưa gây trở ngại,
+nhưng sẽ trở thành hạn chế khi số món tăng lên.
+
+\textbf{Bổ sung kiểm thử tích hợp và kiểm thử giao diện tự động.} Hiện phần giao
+diện mới được kiểm tra thủ công. Có thể bổ sung kiểm thử tích hợp cho các luồng
+Controller và kiểm thử giao diện tự động cho các kịch bản chính. Việc này cũng
+giúp phủ được nhóm hành vi mà nhà cung cấp EF Core In-Memory không mô phỏng được,
+như đã nêu ở mục~\ref{sec:kiem-thu}.
+
+\textbf{Ứng dụng di động.} Bối cảnh sử dụng thực tế của chức năng danh sách đi
+chợ là khi người dùng đang ở chợ hoặc siêu thị. Một ứng dụng di động có khả năng
+hoạt động ngoại tuyến sẽ phù hợp hơn giao diện web.

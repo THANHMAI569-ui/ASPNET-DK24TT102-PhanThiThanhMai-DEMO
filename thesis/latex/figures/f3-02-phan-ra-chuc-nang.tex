@@ -1,0 +1,70 @@
+\begin{figure}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}
+
+  % --- Muc 1: goc ---------------------------------------------
+  \node[fbox] (ROOT) at (7,1.6) {Hệ thống\\CookingAdvisor};
+
+  % --- Muc 2: ba nhom ------------------------------------------
+  \node[fbox] (GA) at (0,0)  {Nhóm A. Chức năng\\cho Khách};
+  \node[fbox] (GB) at (7,0)  {Nhóm B. Chức năng\\cho Người dùng};
+  \node[fbox] (GC) at (14,0) {Nhóm C. Chức năng\\quản trị};
+
+  \draw[fline] (7,0.75) -- (0,0.75) -- (GA.north);
+  \draw[fline] (7,0.75) -- (14,0.75) -- (GC.north);
+  \draw[fline] (ROOT.south) -- (7,0.75) -- (GB.north);
+
+  % --- Muc 3: la nhom A (9 muc), truc doc tai x=0 ---------------
+  \def\dy{1.05}
+  \foreach \i/\lbl in {%
+    0/{A1. Xem trang chủ},%
+    1/{A2. Duyệt danh sách\\món ăn},%
+    2/{A3. Tìm kiếm theo\\tên món},%
+    3/{A4. Lọc nâng cao},%
+    4/{A5. Sắp xếp kết quả},%
+    5/{A6. Xem chi tiết\\món ăn},%
+    6/{A7. Gợi ý theo\\nguyên liệu},%
+    7/{A8. Đăng ký\\tài khoản},%
+    8/{A9. Đăng nhập,\\đăng xuất}%
+  }{
+    \pgfmathsetmacro{\y}{-1.3-\i*\dy}
+    \node[fboxs, text width=2.6cm] (LA\i) at (2.9,\y) {\lbl};
+    \draw[fline] (0,\y) -- (LA\i.west);
+  }
+  \draw[fline] (GA.south) -- (0,-8.9);
+
+  % --- Muc 3: la nhom B (7 muc), truc doc tai x=7 ----------------
+  \foreach \i/\lbl in {%
+    0/{B1. Sinh thực đơn\\tuần},%
+    1/{B2. Xem lịch\\thực đơn},%
+    2/{B3. Sửa thủ công\\từng bữa},%
+    3/{B4. Xem thực đơn\\đã lưu},%
+    4/{B5. Tạo danh sách\\đi chợ},%
+    5/{B6. Đánh dấu đã mua},%
+    6/{B7. Quản lý món\\yêu thích}%
+  }{
+    \pgfmathsetmacro{\y}{-1.3-\i*\dy}
+    \node[fboxs, text width=2.6cm] (LB\i) at (9.9,\y) {\lbl};
+    \draw[fline] (7,\y) -- (LB\i.west);
+  }
+  \draw[fline] (GB.south) -- (7,-7.8);
+
+  % --- Muc 3: la nhom C (4 muc), truc doc tai x=14 ---------------
+  \foreach \i/\lbl in {%
+    0/{C1. Xem bảng\\điều khiển},%
+    1/{C2. Quản lý món ăn},%
+    2/{C3. Quản lý\\nguyên liệu},%
+    3/{C4. Quản lý\\danh mục}%
+  }{
+    \pgfmathsetmacro{\y}{-1.3-\i*\dy}
+    \node[fboxs, text width=2.6cm] (LC\i) at (16.9,\y) {\lbl};
+    \draw[fline] (14,\y) -- (LC\i.west);
+  }
+  \draw[fline] (GC.south) -- (14,-4.65);
+
+\end{tikzpicture}%
+}
+\caption{Sơ đồ phân rã chức năng của hệ thống}
+\label{fig:phan-ra}
+\end{figure}

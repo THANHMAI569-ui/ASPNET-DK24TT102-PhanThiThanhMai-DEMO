@@ -1,0 +1,335 @@
+% ============================================================
+%  PHU LUC
+% ============================================================
+\unnumberedchapter{Phụ lục}
+
+\unnumberedsection{Phụ lục A. Hướng dẫn cài đặt và chạy hệ thống}
+
+Hệ thống dùng EF Core theo hướng Code-First nên cơ sở dữ liệu được dựng tự động
+từ migrations, \textbf{không cần nhập tệp sao lưu} \code{.bak}. Cùng một mã nguồn
+chạy giống hệt nhau trên macOS và Windows; điểm khác biệt duy nhất là \textbf{chuỗi
+kết nối}, vốn nằm trong cấu hình chứ không nằm trong mã nguồn.
+
+\unnumberedsubsection{A.1. Chuẩn bị công cụ}
+
+\begin{codeblock}
+dotnet --version                          # can tu 10.0 tro len
+dotnet tool install --global dotnet-ef    # neu chua co
+\end{codeblock}
+
+\unnumberedsubsection{A.2. Dựng SQL Server}
+
+Chọn một trong ba cách, kết quả như nhau.
+
+\textbf{Cách A, Docker (khuyến nghị, giống nhau trên macOS và Windows).} macOS
+dùng OrbStack hoặc Docker Desktop; Windows dùng Docker Desktop. Cùng một tệp
+\code{docker-compose.yml}:
+
+\begin{codeblock}
+cd setup
+docker compose up -d
+# SQL Server lang nghe o localhost:1433, tai khoan sa / CookAdvisor@2026
+\end{codeblock}
+
+Mật khẩu SA mặc định chỉ dùng cho môi trường phát triển cục bộ, có thể đổi bằng
+biến môi trường \code{MSSQL\_\allowbreak{}SA\_\allowbreak{}PASSWORD} trước khi chạy lệnh trên. Trên máy
+Apple Silicon, ảnh container chạy dưới giả lập amd64, cấu hình đã có sẵn trong
+tệp compose.
+
+\textbf{Cách B, SQL Server cài trực tiếp trên Windows.} Cài bản Express hoặc
+Developer, bật chế độ xác thực hỗn hợp và dùng tài khoản \code{sa} hoặc tạo login
+riêng.
+
+\textbf{Cách C, LocalDB (Windows, nhẹ nhất cho demo).} Có sẵn khi cài Visual
+Studio.
+
+\unnumberedsubsection{A.3. Cấu hình chuỗi kết nối}
+
+Chuỗi kết nối chứa mật khẩu nên \textbf{không được đưa vào mã nguồn}. Đặt qua
+User Secrets:
+
+\begin{codeblock}
+cd src/CookingAdvisor
+dotnet user-secrets set "ConnectionStrings:DefaultConnection" "<chuoi phu hop>"
+\end{codeblock}
+
+\begin{table}[H]
+\centering
+\caption{Chuỗi kết nối theo từng môi trường}
+\label{tab:chuoi-ket-noi}
+\begin{tabularx}{\textwidth}{p{4.0cm} Y}
+\toprule
+\bfseries Môi trường & \bfseries Chuỗi kết nối \\
+\midrule
+Docker (macOS hoặc Windows) &
+  \codelong{Server=localhost,1433;Database=CookingAdvisor;User Id=sa;
+  Password=CookAdvisor@2026;TrustServerCertificate=True} \\
+\rowhl SQL Server cài trực tiếp (Windows) &
+  \codelong{Server=localhost;Database=CookingAdvisor;User Id=sa;
+  Password=<mật khẩu của bạn>;TrustServerCertificate=True} \\
+LocalDB (Windows) &
+  \codelong{Server=(localdb)\textbackslash MSSQLLocalDB;Database=CookingAdvisor;
+  Trusted\_\allowbreak{}Connection=True;TrustServerCertificate=True} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Tham số \code{TrustServerCertificate=True} cần thiết vì chứng chỉ của môi trường
+phát triển là chứng chỉ tự ký. Tiếng Việt được lưu bằng kiểu \code{nvarchar}
+(Unicode) nên hiển thị đúng trên mọi môi trường.
+
+\unnumberedsubsection{A.4. Tạo cơ sở dữ liệu và chạy ứng dụng}
+
+\begin{codeblock}
+# tu thu muc goc cua repository
+dotnet ef database update --project src/CookingAdvisor   # dung luoc do
+dotnet run --project src/CookingAdvisor                  # chay ung dung
+\end{codeblock}
+
+Ở lần chạy đầu tiên, lớp \code{DbInitializer} nạp dữ liệu mẫu gồm danh mục,
+nguyên liệu, 26 món ăn và tài khoản quản trị.
+
+\unnumberedsubsection{A.5. Cách thay thế cho Windows: dùng script T-SQL}
+
+Nếu máy Windows chưa cài công cụ dòng lệnh \code{dotnet-ef}, có thể dựng lược đồ
+bằng script T-SQL đã xuất sẵn tại \codelong{setup/sql/InitialCreate.sql}. Mở tệp bằng
+SQL Server Management Studio hoặc \code{sqlcmd}, kết nối tới máy chủ, chọn hoặc
+tạo cơ sở dữ liệu \code{CookingAdvisor} rồi thực thi.
+
+Script này có tính lũy đẳng: nó tự kiểm tra bảng \code{\_\allowbreak{}\_\allowbreak{}EFMigrationsHistory}
+nên chạy lại nhiều lần không gây lỗi. Script được sinh ra từ toàn bộ chuỗi
+migrations hiện có nên lược đồ giống hệt bản dựng qua EF Core; khi có migration
+mới cần sinh lại script theo lệnh trong \code{setup/README.md}.
+
+Lưu ý: script chỉ tạo \textbf{lược đồ} (bảng, cột, khóa ngoại), không chứa dữ liệu
+mẫu. Sau khi thực thi xong vẫn cần chạy ứng dụng \textbf{một lần} để
+\code{DbInitializer} nạp dữ liệu, vì phần nạp dữ liệu nằm trong mã C\# chứ không
+nằm trong tệp SQL.
+
+\unnumberedsubsection{A.6. Tài khoản mặc định}
+
+\begin{table}[H]
+\centering
+\caption{Tài khoản quản trị mặc định của môi trường demo}
+\label{tab:tai-khoan}
+\begin{tabularx}{\textwidth}{p{3.4cm} Y Y}
+\toprule
+\bfseries Vai trò & \bfseries Email & \bfseries Mật khẩu \\
+\midrule
+Quản trị viên & \codelong{admin@cookingadvisor.local} & \code{Admin@2026!Cook} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Tài khoản này được tạo tự động khi chạy ứng dụng lần đầu trên cơ sở dữ liệu
+trống, chỉ dùng cho môi trường demo của đồ án.
+
+\unnumberedsubsection{A.7. Chạy kiểm thử}
+
+\begin{codeblock}
+dotnet test src/CookingAdvisor.sln
+\end{codeblock}
+
+Bộ kiểm thử dùng nhà cung cấp EF Core In-Memory nên chạy được mà không cần khởi
+động SQL Server.
+
+\unnumberedsection{Phụ lục B. Cấu trúc mã nguồn}
+
+\begin{codeblock}
+CookingAdvisor/
+  setup/                       Tai nguyen cai dat
+    docker-compose.yml         Cau hinh container SQL Server
+    sql/InitialCreate.sql      Script T-SQL dung luoc do
+    README.md                  Huong dan cai dat
+  src/
+    CookingAdvisor.sln
+    CookingAdvisor/            Project web
+      Controllers/             Tang dieu khien
+      Areas/Admin/             Khu vuc quan tri
+      Services/                Tang nghiep vu, chua ba thuat toan loi
+      Models/                  Thuc the EF Core va kieu liet ke
+      ViewModels/              Du lieu truyen cho View
+      Data/                    AppDbContext va DbInitializer
+      Views/                   Giao dien Razor
+      TagHelpers/              Tag helper cho he thong bieu tuong
+      Migrations/              Lich su thay doi luoc do
+      wwwroot/                 CSS, JavaScript, phong chu, anh
+    CookingAdvisor.Tests/      Du an kiem thu xUnit
+  thesis/                      Tai lieu do an
+    doc/                       Ban .docx cua bao cao
+    pdf/                       Ban .pdf de nop
+    latex/                     Nguon LaTeX cua ban bao cao chinh
+    images/                    Anh chup giao dien
+    diagrams/                  So do (ma nguon Mermaid va anh)
+\end{codeblock}
+
+\unnumberedsection{Phụ lục C. Nguồn ảnh minh họa món ăn}
+
+Toàn bộ 26 ảnh món ăn sử dụng trong hệ thống được tải từ \textbf{Wikimedia
+Commons}, đều thuộc các giấy phép cho phép sử dụng tự do (CC0, Public Domain, CC
+BY, CC BY-SA). Ảnh đã được giảm kích thước về 900 px chiều ngang.
+
+Danh sách đầy đủ gồm tên món, tên tệp, tác giả, giấy phép và đường dẫn tới trang
+nguồn được lưu tại \codelong{src/CookingAdvisor/wwwroot/images/recipes/CREDITS.md}.
+Bảng~\ref{tab:nguon-anh} trích một số mục tiêu biểu.
+
+\begin{table}[H]
+\centering
+\caption{Một số nguồn ảnh minh họa món ăn tiêu biểu}
+\label{tab:nguon-anh}
+\begin{tabularx}{\textwidth}{Y Y p{3.4cm}}
+\toprule
+\bfseries Món ăn & \bfseries Tác giả & \bfseries Giấy phép \\
+\midrule
+Phở bò & Andy Li & CC0 \\
+\rowhl Bún chả & Phương Huy & Public Domain \\
+Bún bò Huế & Baoothersks & CC BY-SA 4.0 \\
+\rowhl Cơm tấm thịt nướng & Tokeisan & Public Domain \\
+Gỏi cuốn & Tran Hai Duong & CC0 \\
+\rowhl Chả giò & Satdeep Gill & CC BY-SA 4.0 \\
+Bánh xèo & Orderinchaos & CC BY-SA 4.0 \\
+\rowhl Rau muống xào tỏi & Andy Wright & CC BY 2.0 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\unnumberedsection{Phụ lục D. Mã nguồn tiêu biểu}
+
+\unnumberedsubsection{D.1. Thuật toán gợi ý theo nguyên liệu}
+
+Trích từ \codelong{src/CookingAdvisor/Services/SuggestionService.cs}:
+
+\begin{codeblock}
+public async Task<List<RecipeSuggestionViewModel>> SuggestAsync(
+    IReadOnlyCollection<int> ownedIngredientIds)
+{
+    var owned = ownedIngredientIds.ToHashSet();
+    if (owned.Count == 0)
+        return [];
+
+    // Recipes sharing no ingredient with the owned set are not worth suggesting.
+    var recipes = await db.Recipes
+        .Where(r => r.RecipeIngredients.Any(ri => owned.Contains(ri.IngredientId)))
+        .Select(r => new { /* ... */ })
+        .ToListAsync();
+
+    return recipes
+        .Select(r =>
+        {
+            var missing = r.Ingredients
+                .Where(i => !owned.Contains(i.IngredientId))
+                .Select(i => i.Name)
+                .OrderBy(name => name)
+                .ToList();
+
+            return new RecipeSuggestionViewModel
+            {
+                TotalIngredientCount = r.Ingredients.Count,
+                MatchedCount = r.Ingredients.Count - missing.Count,
+                MissingIngredients = missing
+                /* ... */
+            };
+        })
+        .OrderByDescending(s => s.CanCookNow)
+        .ThenByDescending(s => s.Coverage)
+        .ThenBy(s => s.MissingIngredients.Count)
+        .ThenBy(s => s.Name)
+        .ToList();
+}
+\end{codeblock}
+
+\unnumberedsubsection{D.2. Xử lý trường hợp phải lặp món trong thuật toán lập
+thực đơn}
+
+Trích từ \codelong{src/CookingAdvisor/Services/MenuPlannerService.cs}. Đây là đoạn
+khắc phục khiếm khuyết suy thoái tính đa dạng đã trình bày ở
+mục~\ref{sec:khiem-khuyet}:
+
+\begin{codeblock}
+var suitable = candidates.Where(c => c.SuitableMealTypes.HasFlag(flag)).ToList();
+var pool = suitable.Where(c => !used.Contains(c.Id)).ToList();
+
+// Repeats only become necessary once every suitable dish has been
+// used; meal-type suitability is relaxed only after that.
+var repeating = pool.Count == 0;
+if (repeating) pool = suitable;
+if (pool.Count == 0) pool = candidates;
+
+var ordered = repeating
+    // Variety beats preference once repeats are unavoidable: without
+    // this key the calorie tie-break returns the same dish for every
+    // remaining slot, so one dish fills the week and the rest go unused.
+    ? pool.OrderBy(c => useCounts.GetValueOrDefault(c.Id))
+        .ThenByDescending(c => favoriteIds.Contains(c.Id))
+    : pool.OrderByDescending(c => favoriteIds.Contains(c.Id));
+
+var chosen = ordered
+    .ThenBy(c => Math.Abs(dayCalories + c.CaloriesPerServing - mealTarget))
+    .ThenBy(c => c.Id)
+    .First();
+\end{codeblock}
+
+\unnumberedsubsection{D.3. Gộp nhóm sinh danh sách đi chợ}
+
+Trích từ \codelong{src/CookingAdvisor/Services/ShoppingListService.cs}:
+
+\begin{codeblock}
+var plan = await db.MenuPlans
+    .Include(p => p.Items).ThenInclude(i => i.Recipe)
+        .ThenInclude(r => r.RecipeIngredients)
+    .FirstOrDefaultAsync(p => p.Id == menuPlanId && p.UserId == userId);
+
+if (plan is null)
+    throw new InvalidOperationException("Menu plan not found.");
+
+var aggregated = plan.Items
+    .SelectMany(i => i.Recipe.RecipeIngredients)
+    .GroupBy(ri => (ri.IngredientId, ri.Unit))
+    .Select(g => new ShoppingListItem
+    {
+        IngredientId = g.Key.IngredientId,
+        Unit = g.Key.Unit,
+        Quantity = g.Sum(ri => ri.Quantity)
+    })
+    .ToList();
+\end{codeblock}
+
+\unnumberedsubsection{D.4. Ca kiểm thử tiêu biểu}
+
+Trích từ \codelong{src/CookingAdvisor.Tests/Services/RecipeServiceSortTests.cs}. Ca
+kiểm thử này đã được xác nhận là có hiệu lực bằng cách tạm gỡ khóa sắp xếp phụ
+khỏi mã nguồn và quan sát ca kiểm thử chuyển sang trạng thái không đạt:
+
+\begin{codeblock}
+[Fact]
+public async Task Breaks_ties_by_name_so_paging_cannot_repeat_a_dish()
+{
+    using var db = CreateDb();
+    // Every dish shares one calorie value, so the tie-break is the only thing
+    // deciding the order. Seeded in reverse name order on purpose: if the
+    // tie-break were missing, the provider would fall back to insertion order
+    // and page 1 would start at "Mon 12" instead of "Mon 01".
+    var recipes = Enumerable.Range(1, RecipeService.PageSize + 3)
+        .Select(i => BuildRecipe(i, $"Mon {i:D2}", 10, 10, 500))
+        .Reverse()
+        .ToArray();
+    await SeedAsync(db, recipes);
+
+    var service = new RecipeService(db);
+    var firstPage = await service.SearchRecipesAsync(
+        new RecipeFilterViewModel { Sort = RecipeSortOrder.CaloriesDesc, Page = 1 });
+    var secondPage = await service.SearchRecipesAsync(
+        new RecipeFilterViewModel { Sort = RecipeSortOrder.CaloriesDesc, Page = 2 });
+
+    Assert.Equal(
+        Enumerable.Range(1, RecipeService.PageSize).Select(i => $"Mon {i:D2}"),
+        firstPage.Recipes.Select(r => r.Name));
+
+    var seen = firstPage.Recipes.Select(r => r.Id)
+        .Concat(secondPage.Recipes.Select(r => r.Id))
+        .ToList();
+
+    Assert.Equal(seen.Count, seen.Distinct().Count());
+    Assert.Equal(recipes.Length, seen.Count);
+}
+\end{codeblock}

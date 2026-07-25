@@ -1,0 +1,56 @@
+\begin{figure}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[node distance=1.2cm and 1.2cm]
+
+  % --- Cot trai: nguoi dung ---------------------------------
+  \node[classbox2] (USER) at (0,17) {\textbf{ApplicationUser}
+    \nodepart{two} +string Id\\+string FullName\\+string FamilyName};
+  \node[classbox2] (PLAN) at (0,11) {\textbf{MenuPlan}
+    \nodepart{two} +int Id\\+string UserId\\+string Name\\+DateOnly WeekStartDate\\+DateTime CreatedAt};
+  \node[classbox2] (SLIST) at (0,5) {\textbf{ShoppingList}
+    \nodepart{two} +int Id\\+int MenuPlanId\\+string UserId\\+DateTime CreatedAt};
+
+  % --- Cot giua: lop giao ------------------------------------
+  \node[classbox2] (FAV) at (6.5,14.5) {\textbf{Favorite}
+    \nodepart{two} +string UserId\\+int RecipeId};
+  \node[classbox2] (PITEM) at (6.5,9) {\textbf{MenuPlanItem}
+    \nodepart{two} +int Id\\+int MenuPlanId\\+int DayOfWeek\\+MealType MealType\\+int RecipeId};
+  \node[classbox2] (SITEM) at (6.5,3) {\textbf{ShoppingListItem}
+    \nodepart{two} +int Id\\+int IngredientId\\+decimal Quantity\\+string Unit\\+bool IsPurchased};
+
+  % --- Cot Recipe ---------------------------------------------
+  \node[classbox2] (CAT) at (13,17) {\textbf{Category}
+    \nodepart{two} +int Id\\+string Name};
+  \node[classbox2] (RECIPE) at (13,10) {\textbf{Recipe}
+    \nodepart{two} +int Id\\+string Name\\+string Description\\+string Instructions\\+int Servings\\+int PrepMinutes\\+int CookMinutes\\+Difficulty Difficulty\\+Region Region\\+int CaloriesPerServing\\+MealTypeFlags SuitableMealTypes\\+int CategoryId};
+
+  % --- Cot phai: nguyen lieu -----------------------------------
+  \node[classbox2] (RI) at (19.5,13.5) {\textbf{RecipeIngredient}
+    \nodepart{two} +int RecipeId\\+int IngredientId\\+decimal Quantity\\+string Unit};
+  \node[classbox2] (ING) at (19.5,7.5) {\textbf{Ingredient}
+    \nodepart{two} +int Id\\+string Name\\+string Unit\\+string Group};
+
+  % --- Quan he: nguoi dung -------------------------------------
+  \draw[arr] (USER) -- (PLAN) node[lbl, pos=0.1] {1} node[lbl, pos=0.9] {*};
+  \draw[arr] (USER.west) -- ++(-1.8,0) |- (SLIST.west) node[lbl, pos=0.05] {1} node[lbl, pos=0.95] {*};
+  \draw[arr] (USER.east) -| (FAV.north) node[lbl, pos=0.1] {1} node[lbl, pos=0.9] {*};
+
+  % --- Quan he: menu / cho -------------------------------------
+  \draw[arr] (PLAN) -- (SLIST) node[lbl, pos=0.1] {1} node[lbl, pos=0.9] {1};
+  \draw[arr] (PLAN.east) -| (PITEM.north) node[lbl, pos=0.1] {1} node[lbl, pos=0.9] {*};
+  \draw[arr] (SLIST.east) -| (SITEM.north) node[lbl, pos=0.1] {1} node[lbl, pos=0.9] {*};
+
+  % --- Quan he: recipe / category / ingredient -----------------
+  \draw[arr] (CAT) -- (RECIPE) node[lbl, pos=0.1] {1} node[lbl, pos=0.9] {*};
+  \draw[arr] (RECIPE.west) -| (PITEM.east) node[lbl, pos=0.1] {1} node[lbl, pos=0.9] {*};
+  \draw[arr] (RECIPE.north) -| (FAV.east) node[lbl, pos=0.1] {1} node[lbl, pos=0.9] {*};
+  \draw[arr] (RECIPE.east) -| (RI.west) node[lbl, pos=0.1] {1} node[lbl, pos=0.9] {*};
+  \draw[arr] (ING.north) -- (RI.south) node[lbl, pos=0.1] {1} node[lbl, pos=0.9] {*};
+  \draw[arr] (ING.south) |- ++(0,-4) -| (SITEM.east) node[lbl, pos=0.05] {1} node[lbl, pos=0.95] {*};
+
+\end{tikzpicture}%
+}
+\caption{Sơ đồ lớp tầng thực thể}
+\label{fig:lop-thuc-the}
+\end{figure}

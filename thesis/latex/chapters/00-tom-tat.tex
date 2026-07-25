@@ -1,0 +1,46 @@
+% ============================================================
+%  TOM TAT DO AN
+% ============================================================
+\unnumberedchapter{Tóm tắt đồ án}
+
+Việc quyết định ``hôm nay ăn gì'' là một công việc lặp lại hằng ngày của mỗi gia
+đình. Công việc này có quy mô nhỏ nhưng tốn thời gian và dễ dẫn tới hai hệ quả:
+thực đơn lặp đi lặp lại quanh vài món quen thuộc, và nguyên liệu đã mua bị bỏ
+phí do không được sử dụng kịp thời. Người nội trợ thường phải tự ghi nhớ mình
+đang có những nguyên liệu gì, tự nghĩ ra món phù hợp, rồi tự lập danh sách đi
+chợ cho cả tuần. Ba việc này hiện chưa được hỗ trợ một cách liền mạch bởi các
+công cụ phổ biến tại Việt Nam.
+
+Đồ án xây dựng \textbf{CookingAdvisor}, một ứng dụng web hỗ trợ người nấu ăn
+trong gia đình giải quyết đồng thời ba việc nêu trên. Hệ thống được phát triển
+trên nền tảng \textbf{ASP.NET Core MVC (.NET 10)}, sử dụng \textbf{Entity
+Framework Core} theo hướng Code-First với hệ quản trị cơ sở dữ liệu \textbf{SQL
+Server}, và \textbf{ASP.NET Core Identity} cho xác thực, phân quyền theo hai vai
+trò Quản trị viên và Người dùng.
+
+Đóng góp về mặt kỹ thuật của đồ án nằm ở ba thuật toán được thiết kế và cài đặt
+trong tầng nghiệp vụ. Thứ nhất, \textbf{thuật toán gợi ý theo nguyên liệu sẵn
+có} đối chiếu tập nguyên liệu người dùng đang có với tập nguyên liệu của từng
+món, tính độ phủ và xếp hạng theo thứ tự ưu tiên: món nấu được ngay, độ phủ giảm
+dần, số nguyên liệu còn thiếu ít nhất. Thứ hai, \textbf{thuật toán sinh thực đơn
+tuần} theo hướng tham lam có ràng buộc, lấp đầy 21 suất ăn (7 ngày $\times$ 3
+bữa) với mục tiêu tránh lặp món, tôn trọng ràng buộc vùng miền và cân đối tổng
+năng lượng theo ngày. Thứ ba, \textbf{thuật toán sinh danh sách đi chợ} gộp toàn
+bộ nguyên liệu của thực đơn theo cặp (nguyên liệu, đơn vị) và cộng dồn khối
+lượng.
+
+Kết quả đạt được là một hệ thống hoàn chỉnh, chạy được đầu-cuối với cơ sở dữ
+liệu mẫu gồm 26 món ăn Việt Nam, 40 nguyên liệu và 10 danh mục. Hệ thống cung
+cấp 20 chức năng, phân thành ba nhóm theo mức quyền truy cập. Phần kiểm thử gồm
+\textbf{29 ca kiểm thử đơn vị} viết bằng xUnit, tập trung vào ba thuật toán lõi,
+toàn bộ đạt. Quá trình kiểm thử đã phát hiện và khắc phục một khiếm khuyết thực
+tế của thuật toán sinh thực đơn. Cụ thể, khi thư viện món không đủ lớn, tiêu chí
+phụ theo năng lượng khiến hệ thống chọn lặp lại đúng một món cho mọi suất còn
+trống. Sau khi bổ sung tiêu chí rải đều theo số lần đã sử dụng, thực đơn sinh ra
+đạt 17 món khác nhau trên 21 suất. Giao diện được thiết kế theo hướng thương mại
+điện tử, đáp ứng trên dải màn hình từ 375 px đến 1440 px và đạt chuẩn tương phản
+WCAG 2.1 mức AA.
+
+\vspace{6pt}
+\noindent\textbf{Từ khóa:} gợi ý món ăn, lập thực đơn, độ phủ tập hợp, thuật
+toán tham lam, ASP.NET Core MVC, Entity Framework Core.

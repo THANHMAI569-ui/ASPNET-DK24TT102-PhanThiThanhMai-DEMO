@@ -1,0 +1,119 @@
+% ============================================================
+%  MO DAU
+% ============================================================
+\unnumberedchapter{Mở đầu}
+
+\unnumberedsection{1. Lý do chọn đề tài}
+
+Bữa cơm gia đình là một hoạt động diễn ra hằng ngày và liên tục. Đi kèm với nó
+là một chuỗi quyết định nhỏ nhưng lặp lại: nấu món gì, cần mua thêm nguyên liệu
+nào, làm sao để cả tuần không bị trùng món và vẫn cân đối về dinh dưỡng. Người
+đảm nhiệm việc bếp núc trong gia đình phải xử lý chuỗi quyết định này bằng trí
+nhớ và kinh nghiệm cá nhân.
+
+Thực tế đó dẫn tới ba khó khăn cụ thể.
+
+\textbf{Thứ nhất, khó tận dụng nguyên liệu sẵn có.} Người dùng thường ở trong
+tình huống ngược với các công cụ hiện có: họ không tìm kiếm theo tên món, mà
+xuất phát từ những nguyên liệu đang có trong tủ lạnh và cần biết có thể nấu được
+món gì. Việc tra cứu theo chiều này đòi hỏi phải đối chiếu thủ công từng công
+thức, một việc gần như không khả thi khi số lượng công thức lớn.
+
+\textbf{Thứ hai, khó lập thực đơn cho cả tuần.} Lập thực đơn tuần là bài toán có
+ràng buộc: phải tránh lặp món, phải phù hợp với từng bữa trong ngày, và nên cân
+đối năng lượng. Khi làm thủ công, người dùng có xu hướng quay lại một nhóm nhỏ
+các món quen thuộc, làm bữa ăn trở nên đơn điệu.
+
+\textbf{Thứ ba, khó lập danh sách đi chợ chính xác.} Sau khi đã có thực đơn,
+việc tổng hợp nguyên liệu cần mua đòi hỏi phải cộng dồn khối lượng của cùng một
+nguyên liệu xuất hiện ở nhiều món khác nhau. Sai sót ở bước này dẫn tới mua
+thiếu, phải đi chợ nhiều lần, hoặc mua thừa gây lãng phí.
+
+Ba khó khăn trên có bản chất là các bài toán xử lý dữ liệu có cấu trúc, hoàn
+toàn có thể tự động hóa bằng phần mềm. Đây chính là lý do đề tài được lựa chọn:
+xây dựng một hệ thống giải quyết trọn vẹn cả ba khâu trong một luồng công việc
+liền mạch, thay vì chỉ giải quyết riêng lẻ từng khâu.
+
+\unnumberedsection{2. Mục tiêu của đề tài}
+
+Đồ án đặt ra các mục tiêu cụ thể sau:
+
+\begin{enumerate}[label=\arabic*.]
+  \item Xây dựng ứng dụng web quản lý được kho dữ liệu món ăn Việt Nam, bao gồm
+        công thức, nguyên liệu, danh mục, vùng miền, độ khó và thông tin năng
+        lượng.
+  \item Thiết kế và cài đặt thuật toán \textbf{gợi ý món ăn theo tập nguyên liệu
+        sẵn có}, có khả năng xếp hạng kết quả theo mức độ phù hợp và chỉ rõ
+        những nguyên liệu còn thiếu của từng món.
+  \item Thiết kế và cài đặt thuật toán \textbf{sinh thực đơn tuần tự động} với
+        các ràng buộc về tính đa dạng, sự phù hợp theo bữa và cân đối năng
+        lượng, đồng thời cho phép người dùng chỉnh sửa thủ công từng suất ăn.
+  \item Xây dựng chức năng \textbf{sinh danh sách đi chợ} tự động từ thực đơn đã
+        lập, có gộp nhóm và cộng dồn khối lượng nguyên liệu.
+  \item Triển khai cơ chế xác thực và phân quyền theo vai trò, tách bạch chức
+        năng dành cho khách, người dùng đã đăng nhập và quản trị viên.
+  \item Kiểm chứng tính đúng đắn của các thuật toán lõi bằng kiểm thử đơn vị tự
+        động.
+\end{enumerate}
+
+\unnumberedsection{3. Đối tượng và phạm vi nghiên cứu}
+
+\textbf{Đối tượng nghiên cứu.} Đối tượng của đề tài gồm hai nhóm. Về mặt người
+dùng, đó là người trực tiếp nấu ăn trong gia đình Việt Nam, có nhu cầu lên thực
+đơn và đi chợ định kỳ. Về mặt kỹ thuật, đó là các phương pháp biểu diễn quan hệ
+nhiều - nhiều giữa món ăn và nguyên liệu, các độ đo tương đồng tập hợp phục vụ
+xếp hạng, và các thuật toán tham lam có ràng buộc phục vụ bài toán xếp lịch.
+
+\textbf{Phạm vi nghiên cứu.} Đồ án giới hạn trong các nội dung sau:
+
+\begin{itemize}
+  \item Hình thức triển khai là \textbf{ứng dụng web} chạy trên trình duyệt,
+        không phát triển ứng dụng di động gốc.
+  \item Thuật toán gợi ý dựa trên \textbf{đối sánh tập hợp nguyên liệu}, không
+        sử dụng các mô hình học máy hay lọc cộng tác. Lựa chọn này xuất phát từ
+        đặc thù bài toán: hệ thống mới, chưa có dữ liệu hành vi người dùng để
+        huấn luyện mô hình.
+  \item Thuật toán lập thực đơn theo hướng \textbf{tham lam có ràng buộc}, không
+        giải bài toán tối ưu toàn cục.
+  \item Thông tin dinh dưỡng giới hạn ở mức \textbf{năng lượng (kcal) theo khẩu
+        phần}, chưa bóc tách các thành phần đạm, béo, tinh bột hay vi chất.
+  \item Dữ liệu mẫu gồm 26 món ăn Việt Nam phổ biến, đủ để minh họa và kiểm
+        chứng thuật toán, không nhằm mục tiêu xây dựng kho công thức quy mô lớn.
+\end{itemize}
+
+\unnumberedsection{4. Phương pháp nghiên cứu}
+
+Đồ án kết hợp bốn phương pháp:
+
+\begin{itemize}
+  \item \textbf{Phương pháp khảo sát:} tìm hiểu các ứng dụng nấu ăn và lập thực
+        đơn hiện có trong và ngoài nước, xác định những chức năng đã được đáp
+        ứng và những khoảng trống còn lại.
+  \item \textbf{Phương pháp phân tích và thiết kế hệ thống:} mô hình hóa yêu cầu
+        bằng sơ đồ use case, thiết kế cơ sở dữ liệu quan hệ, thiết kế lớp và sơ
+        đồ tuần tự.
+  \item \textbf{Phương pháp thực nghiệm:} cài đặt hệ thống, chạy thử trên dữ
+        liệu mẫu và quan sát kết quả đầu ra của các thuật toán.
+  \item \textbf{Phương pháp kiểm thử:} viết kiểm thử đơn vị tự động cho các
+        thuật toán lõi, sử dụng kiểm thử để phát hiện khiếm khuyết và xác nhận
+        hiệu quả sau khi sửa.
+\end{itemize}
+
+\unnumberedsection{5. Bố cục báo cáo}
+
+Ngoài phần Mở đầu và phần Kết luận, báo cáo được tổ chức thành năm chương:
+
+\begin{itemize}
+  \item \textbf{Chương 1. Tổng quan:} trình bày bối cảnh thực tiễn, khảo sát các
+        ứng dụng tương tự và xác định vấn đề mà đồ án tập trung giải quyết.
+  \item \textbf{Chương 2. Nghiên cứu lý thuyết:} trình bày cơ sở lý thuyết về
+        kiến trúc MVC, ASP.NET Core, Entity Framework Core, ASP.NET Core
+        Identity, hệ quản trị cơ sở dữ liệu SQL Server và nền tảng thuật toán
+        được sử dụng.
+  \item \textbf{Chương 3. Hiện thực hóa nghiên cứu:} mô tả bài toán, đặc tả yêu
+        cầu, thiết kế cơ sở dữ liệu, lược đồ use case, kiến trúc hệ thống, thiết
+        kế lớp, thiết kế luồng xử lý và chi tiết cài đặt các thuật toán.
+  \item \textbf{Chương 4. Kết quả nghiên cứu:} giới thiệu giao diện các chức
+        năng, kịch bản demo và kết quả kiểm thử.
+  \item \textbf{Chương 5. Kết luận và hướng phát triển.}
+\end{itemize}

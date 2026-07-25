@@ -1,0 +1,24 @@
+% ============================================================
+%  Khung xem thu MOT so do rieng le (khong thuoc ban in).
+%  Cach dung, chay trong thu muc thesis/latex/figures:
+%     xelatex "\def\figfile{f3-01-mo-ta-bai-toan}\input{_preview}"
+%  Preamble o day mo phong dung thesis.tex de kich thuoc chu khop.
+% ============================================================
+\documentclass[a4paper]{article}
+\usepackage[fontsize=13pt]{fontsize}
+\usepackage{anyfontsize}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\setmonofont{Courier New}[Scale=MatchLowercase]
+\usepackage[vietnamese]{babel}
+\usepackage[top=2cm, bottom=2cm, left=3cm, right=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\captionsetup{font=small, labelfont=bf, justification=centering}
+\usepackage{amsmath}
+\newcommand{\code}[1]{\texttt{#1}}
+\input{tikz-styles}
+\begin{document}
+\input{\figfile}
+\end{document}

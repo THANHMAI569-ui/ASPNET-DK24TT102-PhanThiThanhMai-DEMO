@@ -1,0 +1,236 @@
+% ============================================================
+%  CHUONG 1. TONG QUAN
+% ============================================================
+\chapter{Tổng quan}
+\label{ch:tong-quan}
+
+\section{Bối cảnh và nhu cầu thực tiễn}
+\label{sec:boi-canh}
+
+Nấu ăn tại nhà là hoạt động thường nhật, nhưng khác với nhiều hoạt động thường
+nhật khác, nó đòi hỏi một chuỗi quyết định có ràng buộc lẫn nhau. Quyết định nấu
+món gì phụ thuộc vào nguyên liệu đang có. Nguyên liệu cần mua lại phụ thuộc vào
+các món dự định nấu. Và thực đơn của một ngày nên xét trong tương quan với cả
+tuần để tránh trùng lặp và bảo đảm đa dạng.
+
+Xét theo góc độ tin học, chuỗi quyết định này có thể quy về ba bài toán có cấu
+trúc rõ ràng:
+
+\textbf{Bài toán 1: Truy vấn ngược từ nguyên liệu.} Cho trước tập nguyên liệu
+$A$ mà người dùng đang có và một kho công thức, cần tìm và xếp hạng những món có
+thể nấu được. Điểm đặc biệt của bài toán này là chiều truy vấn ngược với cách tổ
+chức dữ liệu thông thường: các trang công thức thường được tổ chức để tra cứu
+\textit{từ tên món ra nguyên liệu}, trong khi nhu cầu thực tế của người nội trợ
+là tra cứu \textit{từ nguyên liệu ra tên món}.
+
+\textbf{Bài toán 2: Xếp lịch có ràng buộc.} Cần gán món ăn vào 21 ô của một lưới
+7 ngày $\times$ 3 bữa, thỏa mãn đồng thời nhiều ràng buộc: hạn chế lặp món, phù
+hợp với từng bữa trong ngày, tôn trọng lựa chọn về vùng miền và cân đối năng
+lượng theo ngày. Đây là một biến thể của bài toán xếp lịch (scheduling) có ràng
+buộc.
+
+\textbf{Bài toán 3: Gộp nhóm và tổng hợp.} Từ thực đơn đã lập, cần tổng hợp
+nguyên liệu cần mua. Cùng một nguyên liệu có thể xuất hiện ở nhiều món, và cùng
+một món có thể xuất hiện nhiều lần trong tuần, do đó phải gộp nhóm theo nguyên
+liệu và cộng dồn khối lượng.
+
+Cả ba bài toán đều thao tác trên dữ liệu có cấu trúc và đều có lời giải thuật
+toán xác định, không đòi hỏi kỹ thuật trí tuệ nhân tạo phức tạp. Đây là cơ sở để
+khẳng định tính khả thi của đề tài.
+
+\section{Khảo sát các ứng dụng tương tự}
+\label{sec:khao-sat}
+
+Để xác định khoảng trống mà đồ án hướng tới, tác giả đã khảo sát các ứng dụng
+nấu ăn và lập thực đơn tiêu biểu, cả quốc tế lẫn trong nước. Toàn bộ thông tin
+dưới đây được tra cứu trực tiếp từ trang chủ hoặc trang phân phối chính thức của
+từng sản phẩm trong ngày 25/07/2026. Nguyên tắc khảo sát được đặt ra ngay từ đầu
+là chỉ ghi nhận những chức năng có thể kiểm chứng được từ nguồn chính chủ; với
+những chức năng chỉ được nhắc tới trên nguồn thứ cấp, báo cáo ghi rõ là không xác
+minh được thay vì suy đoán.
+
+\subsection{Cookpad}
+
+Cookpad là nền tảng chia sẻ công thức nấu ăn theo mô hình cộng đồng, trong đó nội
+dung do chính người dùng đăng tải thay vì do một đội ngũ biên tập tạo ra [1].
+Cookpad có phiên bản tiếng Việt riêng tại địa chỉ cookpad.com/vn, nằm trong hệ
+thống hơn ba mươi phiên bản theo quốc gia [5].
+
+Về chức năng, mô tả chính thức của ứng dụng cho biết Cookpad hỗ trợ \textbf{tìm
+công thức theo nguyên liệu} với thông điệp ``nấu những bữa ăn ngon từ những gì
+bạn đã có sẵn trong tủ lạnh'', đồng thời có khả năng \textbf{tạo danh sách đi chợ
+tự động từ công thức} và cho phép người dùng \textbf{xây dựng thực đơn theo tuần}
+[1].
+
+\textit{Nhận xét.} Cookpad là sản phẩm gần với đề tài nhất về mặt chức năng. Tuy
+nhiên mô tả chính thức không nêu rõ việc xây dựng thực đơn tuần là \textit{sinh
+tự động} hay chỉ là công cụ để người dùng \textit{tự sắp xếp} công thức vào lịch,
+nên không thể khẳng định Cookpad có thuật toán sinh thực đơn tự động. Hạn chế
+đáng kể hơn nằm ở mô hình nội dung: vì công thức do người dùng tự đăng nên chất
+lượng và độ chính xác về định lượng nguyên liệu không đồng đều, điều này ảnh
+hưởng trực tiếp tới độ tin cậy của danh sách đi chợ được sinh ra.
+
+\subsection{Yummly}
+
+Yummly từng là một dịch vụ gợi ý công thức được nhắc tới nhiều trong các nghiên
+cứu về hệ khuyến nghị ẩm thực. Tuy nhiên, kết quả kiểm tra trực tiếp trong quá
+trình khảo sát cho thấy \textbf{dịch vụ này đã ngừng hoạt động}: truy cập
+\url{https://www.yummly.com/} hiện bị chuyển hướng vĩnh viễn (HTTP 301) sang
+trang công thức của KitchenAid, và tên miền help.yummly.com không còn phân giải
+được [15]. Theo nguồn thứ cấp trích lại thông báo của công ty chủ quản, website
+và ứng dụng di động của Yummly đã đóng cửa từ ngày 20/12/2024 [14].
+
+\textit{Nhận xét.} Trường hợp Yummly có giá trị tham chiếu quan trọng đối với đề
+tài theo hai hướng. Thứ nhất, nó cho thấy người dùng Việt Nam không thể trông cậy
+vào tính sẵn sàng lâu dài của các dịch vụ gợi ý ẩm thực quốc tế, vốn phụ thuộc
+vào quyết định kinh doanh của doanh nghiệp nước ngoài. Thứ hai, do dịch vụ đã
+đóng, mọi mô tả chi tiết về tính năng của Yummly đều không thể kiểm chứng lại ở
+thời điểm hiện tại; báo cáo này vì vậy không đưa ra bất kỳ khẳng định nào về các
+chức năng cụ thể của sản phẩm.
+
+\subsection{Mealime}
+
+Mealime là ứng dụng chuyên biệt cho việc \textbf{lập thực đơn}, không phải nền
+tảng chia sẻ công thức. Trang chủ của sản phẩm nêu khả năng lập kế hoạch bữa ăn
+cho cả tuần dựa trên tùy chọn cá nhân về khẩu phần, chế độ ăn và dị ứng thực
+phẩm, đồng thời \textbf{tự động tổng hợp nguyên liệu thành danh sách đi chợ theo
+danh mục} [9]. Sản phẩm áp dụng mô hình freemium với gói Mealime Pro giá 2,99 USD
+mỗi tháng [2].
+
+\textit{Nhận xét.} Mealime giải quyết tốt bài toán lập thực đơn và danh sách đi
+chợ, nhưng chức năng tìm món \textbf{xuất phát từ nguyên liệu người dùng đang có}
+không được nêu trong mô tả chính thức; trọng tâm của sản phẩm là sinh thực đơn từ
+sở thích và chế độ ăn. Ngoài ra, Mealime không có nội dung tiếng Việt và không có
+món ăn Việt Nam, nên khó áp dụng trực tiếp cho bữa cơm gia đình Việt.
+
+\subsection{Paprika Recipe Manager}
+
+Paprika là ứng dụng quản lý công thức cá nhân đa nền tảng, cho phép lưu công thức
+từ web, lập kế hoạch bữa ăn và tạo danh sách đi chợ với khả năng gộp nguyên liệu
+trùng nhau và sắp xếp theo khu vực gian hàng [13]. Ứng dụng hỗ trợ tìm kiếm theo
+tên và theo nguyên liệu [3].
+
+\textit{Nhận xét.} Điểm khác biệt căn bản so với đề tài là Paprika \textbf{không
+sinh thực đơn tự động}: người dùng phải tự kéo thả từng công thức vào lịch [13].
+Nói cách khác, Paprika số hóa thao tác lập thực đơn thủ công chứ không thay người
+dùng đưa ra quyết định.
+
+\subsection{Các website nấu ăn trong nước}
+
+Ở trong nước, Esheep Kitchen là một blog công thức nấu ăn tiếng Việt có lượng
+người theo dõi lớn, với nội dung xoay quanh món Việt, bánh và đồ uống [7]. Kiểm
+tra trực tiếp cho thấy đây thuần túy là nền tảng đăng tải nội dung: trang không
+có chức năng tìm món theo nguyên liệu sẵn có, không sinh thực đơn tuần và không
+xuất danh sách đi chợ [7].
+
+Một trường hợp đáng chú ý khác là Cooky.vn. Trang này khởi đầu năm 2015 như một
+website công thức nấu ăn, sau đó từ năm 2020 chuyển hướng sang mô hình đi chợ hộ
+và giao thực phẩm tươi. Đến tháng 11/2023, doanh nghiệp đã thu hẹp hoạt động, rút
+khỏi thị trường Hà Nội và chỉ còn vận hành tại Thành phố Hồ Chí Minh [4]. Tại
+thời điểm khảo sát, tác giả \textbf{không truy cập được} trang cooky.vn do chứng
+chỉ bảo mật TLS của trang đã hết hạn, vì vậy báo cáo này không đưa ra kết luận nào
+về các chức năng hiện có của sản phẩm.
+
+\subsection{Bảng tổng hợp kết quả khảo sát}
+
+Bảng~\ref{tab:khao-sat} tổng hợp kết quả khảo sát. Các ô ghi ``Không xác minh
+được'' phản ánh việc tác giả không tìm được nguồn chính thức để khẳng định, chứ
+không đồng nghĩa với việc chức năng đó chắc chắn không tồn tại.
+
+\begin{table}[H]
+\centering
+\caption{So sánh chức năng giữa các ứng dụng khảo sát và đề tài}
+\label{tab:khao-sat}
+\begin{tabularx}{\textwidth}{p{1.9cm} Y Y Y p{1.5cm} Y}
+\toprule
+\bfseries Ứng dụng & \bfseries Gợi ý theo nguyên liệu sẵn có &
+\bfseries Sinh thực đơn tuần tự động & \bfseries Xuất danh sách đi chợ &
+\bfseries Nội dung tiếng Việt & \bfseries Mô hình giá \\
+\midrule
+Cookpad & Có [1] & Có, chưa rõ mức độ tự động [1] & Có [1] & Có [5] &
+  Miễn phí kèm gói Premium [1] \\
+\rowhl Yummly & Đã ngừng hoạt động từ 20/12/2024 [14][15] & Đã ngừng hoạt động &
+  Đã ngừng hoạt động & Đã ngừng hoạt động & Đã ngừng hoạt động \\
+Mealime & Không nêu trong mô tả chính thức [9][2] & Có [9] & Có [9] &
+  Không xác minh được & Freemium, Pro 2,99 USD/tháng [2] \\
+\rowhl Paprika & Có [3] & Không, lập kế hoạch thủ công [13] & Có [13] &
+  Không xác minh được & Trả phí một lần [13] \\
+Esheep Kitchen & Không [7] & Không [7] & Không [7] & Có [7] & Miễn phí [7] \\
+\rowhl Cooky.vn & Không xác minh được & Không xác minh được &
+  Không xác minh được & Có [4] & Không xác minh được \\
+\midrule
+\bfseries Cooking\-Advisor & \bfseries Có & \bfseries Có & \bfseries Có &
+  \bfseries Có & \bfseries Miễn phí \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Nhận xét chung và khoảng trống nghiên cứu}
+\label{sec:khoang-trong}
+
+Từ kết quả khảo sát, có thể rút ra bốn nhận xét.
+
+\textbf{Một là, ba chức năng cốt lõi hiếm khi xuất hiện đồng thời trong một sản
+phẩm.} Các sản phẩm khảo sát có xu hướng mạnh ở một khâu và yếu ở khâu còn lại:
+Mealime mạnh về lập thực đơn nhưng không hỗ trợ truy vấn ngược từ nguyên liệu;
+Paprika mạnh về quản lý công thức và danh sách đi chợ nhưng không tự động hóa
+việc lập thực đơn; các blog trong nước chỉ dừng ở việc cung cấp nội dung.
+
+\textbf{Hai là, các sản phẩm quốc tế không phù hợp với bối cảnh ẩm thực Việt
+Nam.} Mealime và Paprika không có nội dung tiếng Việt và không có dữ liệu món ăn
+Việt. Ngay cả khi giao diện được dịch, cơ sở dữ liệu nguyên liệu và công thức vẫn
+xây dựng theo khẩu vị Âu - Mỹ, khiến kết quả gợi ý không sát với thực tế bữa cơm
+gia đình Việt.
+
+\textbf{Ba là, tính sẵn sàng lâu dài của dịch vụ nước ngoài là một rủi ro thực
+tế.} Việc Yummly ngừng hoạt động hoàn toàn vào cuối năm 2024 là minh chứng cụ thể
+cho rủi ro này [14][15].
+
+\textbf{Bốn là, mô hình nội dung do cộng đồng đóng góp ảnh hưởng tới chất lượng
+dữ liệu định lượng.} Với các nền tảng như Cookpad, công thức do người dùng tự
+đăng nên định lượng nguyên liệu không được chuẩn hóa. Điều này không gây trở ngại
+khi người dùng chỉ đọc công thức, nhưng trở thành vấn đề khi hệ thống cần
+\textit{tính toán} trên dữ liệu đó, ví dụ khi cộng dồn khối lượng để sinh danh
+sách đi chợ.
+
+Khoảng trống mà đồ án hướng tới, vì vậy, là một hệ thống \textbf{tích hợp cả ba
+chức năng trong một luồng công việc liền mạch}, xây dựng trên \textbf{dữ liệu món
+ăn Việt Nam được chuẩn hóa về định lượng}, với thuật toán xử lý minh bạch và có
+thể kiểm chứng được.
+
+\section{Vấn đề tập trung giải quyết và đóng góp của đồ án}
+\label{sec:van-de}
+
+Trên cơ sở phân tích trên, đồ án tập trung giải quyết bài toán sau:
+
+\begin{quote}
+\textit{Cho một kho dữ liệu món ăn Việt Nam được chuẩn hóa, hãy xây dựng một hệ
+thống web cho phép:}
+
+\textit{(a) xếp hạng các món có thể nấu từ một tập nguyên liệu cho trước;}
+
+\textit{(b) sinh tự động thực đơn cho bảy ngày với các ràng buộc về tính đa dạng
+và cân đối năng lượng;}
+
+\textit{(c) tổng hợp danh sách nguyên liệu cần mua từ thực đơn đó.}
+\end{quote}
+
+Đóng góp của đồ án gồm bốn điểm:
+
+\begin{enumerate}[label=\arabic*.]
+  \item \textbf{Về mô hình dữ liệu:} thiết kế lược đồ quan hệ chuẩn hóa cho bài
+        toán, trong đó bảng trung gian giữa món ăn và nguyên liệu mang thêm
+        thuộc tính định lượng và đơn vị. Đây là điều kiện tiên quyết để danh sách
+        đi chợ có thể cộng dồn khối lượng một cách chính xác.
+  \item \textbf{Về thuật toán gợi ý:} đề xuất sử dụng \textbf{độ phủ} thay cho
+        hệ số Jaccard thông dụng, kèm lập luận về lý do lựa chọn (trình bày ở mục
+        \ref{sec:do-do}), cùng cơ chế xếp hạng nhiều tiêu chí giúp kết quả ổn
+        định.
+  \item \textbf{Về thuật toán lập thực đơn:} xây dựng thuật toán tham lam có ràng
+        buộc theo thứ tự nới lỏng xác định, trong đó ràng buộc vùng miền được giữ
+        cứng còn ràng buộc về bữa ăn chỉ được nới sau khi đã cạn nguồn món chưa
+        dùng.
+  \item \textbf{Về kiểm chứng:} xây dựng bộ kiểm thử đơn vị tự động cho cả ba
+        thuật toán, qua đó phát hiện được một khiếm khuyết thực tế về tính đa
+        dạng của thực đơn mà quan sát bằng mắt thường khó nhận ra.
+\end{enumerate}

@@ -1,0 +1,70 @@
+\begin{figure}[H]
+\centering
+\resizebox{!}{0.82\textheight}{%
+\begin{tikzpicture}[x=3.4cm, y=1.15cm]
+
+  % --- Doi tuong tren dau ------------------------------------------
+  \node[seqpart] (ND) at (0,0) {Người dùng};
+  \node[seqpart] (VW) at (1,0) {View\\Menu/Details};
+  \node[seqpart] (CT) at (2,0) {ShoppingList\\Controller};
+  \node[seqpart] (SV) at (3,0) {ShoppingList\\Service};
+  \node[seqpart] (DB) at (4,0) {AppDbContext /\\SQL Server};
+
+  \foreach \x in {0,1,2,3,4} \draw[seqlife] (\x,-0.5) -- (\x,-22.95);
+
+  % --- Cac thong diep dau ---------------------------------------------
+  \draw[seqmsg] (0,-1.4) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{1. Bấm ``Tạo danh sách''} (1,-1.4);
+  \draw[seqmsg] (1,-2.3) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{2. POST /ShoppingList/Generate (menuPlanId)} (2,-2.3);
+  \draw[seqmsg] (2,-3.2) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{3. GenerateFromMenuPlanAsync(...)} (3,-3.2);
+  \draw[seqmsg] (3,-4.5) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize, text width=3.4cm, align=center]{4. Nạp MenuPlan kèm Items, Recipe, RecipeIngredients, lọc theo đúng UserId} (4,-4.5);
+  \draw[seqret] (4,-5.4) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{5. MenuPlan hoặc null} (3,-5.4);
+
+  % --- Khung alt ngoai --------------------------------------------------
+  \draw[seqframe] (0.55,-5.9) rectangle (4.55,-21.15);
+  \node[seqlab, anchor=north west] at (0.55,-5.9) {alt};
+  \node[font=\scriptsize\itshape, anchor=north west] at (0.7,-6.25) {Không tìm thấy hoặc không thuộc người dùng};
+
+  \draw[seqret] (3,-7.2) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{6. Ném InvalidOperationException} (2,-7.2);
+  \draw[seqret] (2,-8.0) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{7. Trả về lỗi truy cập} (1,-8.0);
+
+  \draw[seqframe, dashed] (0.55,-8.5) -- (4.55,-8.5);
+  \node[font=\scriptsize\itshape, anchor=north west] at (0.7,-8.85) {Hợp lệ};
+
+  \draw[seqmsg] (3,-9.8) -- (3.35,-9.8) -- (3.35,-10.15) -- (3,-10.15);
+  \node[fill=white, inner sep=2pt, font=\scriptsize, align=left, anchor=west] at (3.4,-9.975) {8. Duyệt mọi suất ăn,\\lấy toàn bộ RecipeIngredient};
+
+  \draw[seqmsg] (3,-10.8) -- (3.35,-10.8) -- (3.35,-11.15) -- (3,-11.15);
+  \node[fill=white, inner sep=2pt, font=\scriptsize, align=left, anchor=west] at (3.4,-10.975) {9. Gộp nhóm theo cặp\\(IngredientId, Unit)};
+
+  \draw[seqmsg] (3,-11.8) -- (3.35,-11.8) -- (3.35,-12.15) -- (3,-12.15);
+  \node[fill=white, inner sep=2pt, font=\scriptsize, align=left, anchor=west] at (3.4,-11.975) {10. Cộng dồn Quantity\\trong từng nhóm};
+
+  \draw[seqmsg] (3,-12.8) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{11. Tìm ShoppingList đã có của thực đơn này} (4,-12.8);
+  \draw[seqret] (4,-13.7) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{12. Kết quả} (3,-13.7);
+
+  % --- Khung alt long (ben trong nhanh Hop le) ----------------------------
+  \draw[seqframe] (2.55,-14.2) rectangle (4.5,-17.5);
+  \node[seqlab, anchor=north west] at (2.55,-14.2) {alt};
+  \node[font=\scriptsize\itshape, anchor=north west] at (2.7,-14.55) {Đã tồn tại};
+
+  \draw[seqmsg] (3,-15.4) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{13. Xóa toàn bộ dòng cũ} (4,-15.4);
+
+  \draw[seqframe, dashed] (2.55,-15.9) -- (4.5,-15.9);
+  \node[font=\scriptsize\itshape, anchor=north west] at (2.7,-16.25) {Chưa có};
+
+  \draw[seqmsg] (3,-17.1) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{14. Tạo ShoppingList mới} (4,-17.1);
+
+  % --- Sau khung alt long, van trong nhanh Hop le -------------------------
+  \draw[seqmsg] (3,-18.3) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{15. Ghi các ShoppingListItem đã gộp} (4,-18.3);
+  \draw[seqret] (4,-19.1) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{16. Đã lưu} (3,-19.1);
+  \draw[seqret] (3,-19.9) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{17. ShoppingList} (2,-19.9);
+  \draw[seqret] (2,-20.7) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{18. Chuyển hướng tới ShoppingList/Details} (1,-20.7);
+
+  % --- Ket thuc alt, tra ve cho nguoi dung --------------------------------
+  \draw[seqret] (1,-22.45) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize, text width=3.4cm, align=center]{19. Danh sách nguyên liệu theo nhóm kèm thanh tiến độ đã mua} (0,-22.45);
+
+\end{tikzpicture}%
+}
+\caption{Sơ đồ tuần tự chức năng sinh danh sách đi chợ}
+\label{fig:seq-di-cho}
+\end{figure}

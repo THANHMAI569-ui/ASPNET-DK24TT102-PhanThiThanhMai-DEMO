@@ -1,0 +1,56 @@
+\begin{figure}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[node distance=1.2cm and 1.2cm]
+
+  % --- Cot trai: nguoi dung ---------------------------------
+  \node[erdent] (USER) at (0,17) {\textbf{ApplicationUser}
+    \nodepart{two} Id PK\\UserName\\Email\\PasswordHash\\FullName\\FamilyName};
+  \node[erdent] (PLAN) at (0,11) {\textbf{MenuPlan}
+    \nodepart{two} Id PK\\UserId FK\\Name\\WeekStartDate\\CreatedAt};
+  \node[erdent] (SLIST) at (0,5) {\textbf{ShoppingList}
+    \nodepart{two} Id PK\\MenuPlanId FK UK\\UserId FK\\CreatedAt};
+
+  % --- Cot giua: thuc the giao ------------------------------
+  \node[erdent] (FAV) at (6.5,14.5) {\textbf{Favorite}
+    \nodepart{two} UserId PK FK\\RecipeId PK FK};
+  \node[erdent] (PITEM) at (6.5,9) {\textbf{MenuPlanItem}
+    \nodepart{two} Id PK\\MenuPlanId FK\\DayOfWeek\\MealType\\RecipeId FK};
+  \node[erdent] (SITEM) at (6.5,3) {\textbf{ShoppingListItem}
+    \nodepart{two} Id PK\\ShoppingListId FK\\IngredientId FK\\Quantity\\Unit\\IsPurchased};
+
+  % --- Cot Recipe --------------------------------------------
+  \node[erdent] (CAT) at (13,17) {\textbf{Category}
+    \nodepart{two} Id PK\\Name};
+  \node[erdent] (RECIPE) at (13,10) {\textbf{Recipe}
+    \nodepart{two} Id PK\\Name\\Description\\Instructions\\Servings\\PrepMinutes\\CookMinutes\\Difficulty\\Region\\CaloriesPerServing\\ImageUrl\\SuitableMealTypes\\CategoryId FK};
+
+  % --- Cot phai: nguyen lieu -----------------------------------
+  \node[erdent] (RI) at (19.5,13.5) {\textbf{RecipeIngredient}
+    \nodepart{two} RecipeId PK FK\\IngredientId PK FK\\Quantity\\Unit};
+  \node[erdent] (ING) at (19.5,7.5) {\textbf{Ingredient}
+    \nodepart{two} Id PK\\Name\\Unit\\Group};
+
+  % --- Quan he: nguoi dung -------------------------------------
+  \draw[arr] (USER) -- (PLAN) node[lbl, pos=0.5] {lập};
+  \draw[arr] (USER.west) -- ++(-1.8,0) |- (SLIST.west) node[lbl, pos=0.62] {sở hữu};
+  \draw[arr] (USER.east) -| (FAV.north) node[lbl, pos=0.75] {đánh dấu};
+
+  % --- Quan he: menu / cho -------------------------------------
+  \draw[arr] (PLAN) -- (SLIST) node[lbl, pos=0.5] {sinh ra (1-1)};
+  \draw[arr] (PLAN.east) -| (PITEM.north) node[lbl, pos=0.7] {chứa};
+  \draw[arr] (SLIST.east) -| (SITEM.north);
+
+  % --- Quan he: recipe / category / ingredient -----------------
+  \draw[arr] (CAT) -- (RECIPE) node[lbl, pos=0.5] {phân loại};
+  \draw[arr] (RECIPE.west) -| (PITEM.east);
+  \draw[arr] (RECIPE.north) -| (FAV.east);
+  \draw[arr] (RECIPE.east) -| (RI.west) node[lbl, pos=0.7] {gồm};
+  \draw[arr] (ING.north) -- (RI.south) node[lbl, pos=0.5] {được dùng trong};
+  \draw[arr] (ING.south) |- ++(0,-4) -| (SITEM.east);
+
+\end{tikzpicture}%
+}
+\caption{Sơ đồ quan hệ thực thể của cơ sở dữ liệu}
+\label{fig:erd}
+\end{figure}

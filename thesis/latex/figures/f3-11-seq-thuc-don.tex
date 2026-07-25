@@ -1,0 +1,73 @@
+\begin{figure}[H]
+\centering
+\resizebox{!}{0.82\textheight}{%
+\begin{tikzpicture}[x=3.4cm, y=1.15cm]
+
+  % --- Doi tuong tren dau ------------------------------------------
+  \node[seqpart] (ND) at (0,0) {Người dùng};
+  \node[seqpart] (VW) at (1,0) {View\\Menu/Index};
+  \node[seqpart] (CT) at (2,0) {Menu\\Controller};
+  \node[seqpart] (SV) at (3,0) {MenuPlanner\\Service};
+  \node[seqpart] (DB) at (4,0) {AppDbContext /\\SQL Server};
+
+  \foreach \x in {0,1,2,3,4} \draw[seqlife] (\x,-0.5) -- (\x,-22.9);
+
+  % --- Cac thong diep dau ---------------------------------------------
+  \draw[seqmsg] (0,-1.4) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{1. Nhập tên thực đơn, tuần bắt đầu, vùng miền} (1,-1.4);
+  \draw[seqmsg] (1,-2.3) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{2. POST /Menu/Generate} (2,-2.3);
+
+  \draw[seqmsg] (2,-3.2) -- (2.35,-3.2) -- (2.35,-3.55) -- (2,-3.55);
+  \node[fill=white, inner sep=2pt, font=\scriptsize, align=left, anchor=west] at (2.4,-3.375) {3. Kiểm tra ModelState\\và danh tính người dùng};
+
+  \draw[seqmsg] (2,-4.5) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{4. GenerateWeeklyPlanAsync(...)} (3,-4.5);
+  \draw[seqmsg] (3,-5.4) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{5. Lấy danh sách món ứng viên, lọc vùng miền} (4,-5.4);
+  \draw[seqret] (4,-6.3) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{6. candidates} (3,-6.3);
+
+  % --- Khung alt --------------------------------------------------------
+  \draw[seqframe] (0.55,-6.8) rectangle (4.55,-21.6);
+  \node[seqlab, anchor=north west] at (0.55,-6.8) {alt};
+  \node[font=\scriptsize\itshape, anchor=north west] at (0.7,-7.15) {candidates rỗng};
+
+  \draw[seqret] (3,-8.1) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{7. Ném InvalidOperationException} (2,-8.1);
+  \draw[seqret] (2,-8.9) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{8. Thông báo lỗi} (1,-8.9);
+
+  \draw[seqframe, dashed] (0.55,-9.4) -- (4.55,-9.4);
+  \node[font=\scriptsize\itshape, anchor=north west] at (0.7,-9.75) {candidates khác rỗng};
+
+  \draw[seqmsg] (3,-10.7) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{9. Lấy danh sách món yêu thích của người dùng} (4,-10.7);
+  \draw[seqret] (4,-11.6) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{10. favoriteIds} (3,-11.6);
+
+  % --- Khung loop long ben trong alt --------------------------------------
+  \draw[seqframe] (2.55,-12.1) rectangle (3.85,-17.95);
+  \node[seqlab, anchor=north west] at (2.55,-12.1) {loop};
+  \node[font=\scriptsize\itshape, anchor=north west] at (2.85,-12.4) {7 ngày $\times$ 3 bữa};
+
+  \draw[seqmsg] (3,-13.0) -- (3.35,-13.0) -- (3.35,-13.35) -- (3,-13.35);
+  \node[fill=white, inner sep=2pt, font=\scriptsize, align=left, anchor=west] at (3.4,-13.175) {11. Lọc món hợp bữa\\và chưa dùng};
+
+  \draw[seqmsg] (3,-14.2) -- (3.35,-14.2) -- (3.35,-14.55) -- (3,-14.55);
+  \node[fill=white, inner sep=2pt, font=\scriptsize, align=left, anchor=west] at (3.4,-14.375) {12. Hết món chưa dùng:\\lặp lại, ưu tiên\\món ít dùng nhất};
+
+  \draw[seqmsg] (3,-15.2) -- (3.35,-15.2) -- (3.35,-15.55) -- (3,-15.55);
+  \node[fill=white, inner sep=2pt, font=\scriptsize, align=left, anchor=west] at (3.4,-15.375) {13. Ưu tiên\\món yêu thích};
+
+  \draw[seqmsg] (3,-16.2) -- (3.35,-16.2) -- (3.35,-16.55) -- (3,-16.55);
+  \node[fill=white, inner sep=2pt, font=\scriptsize, align=left, anchor=west] at (3.4,-16.375) {14. Chọn món có tổng\\calo gần mốc nhất};
+
+  \draw[seqmsg] (3,-17.2) -- (3.35,-17.2) -- (3.35,-17.55) -- (3,-17.55);
+  \node[fill=white, inner sep=2pt, font=\scriptsize, align=left, anchor=west] at (3.4,-17.375) {15. Ghi nhận vào\\used, useCounts};
+
+  % --- Sau loop, van trong nhanh candidates khac rong ---------------------
+  \draw[seqmsg] (3,-18.75) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{16. Lưu MenuPlan kèm 21 MenuPlanItem} (4,-18.75);
+  \draw[seqret] (4,-19.55) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{17. Đã lưu} (3,-19.55);
+  \draw[seqret] (3,-20.35) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{18. MenuPlan} (2,-20.35);
+  \draw[seqret] (2,-21.15) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize]{19. Chuyển hướng tới Menu/Details} (1,-21.15);
+
+  % --- Ket thuc alt, tra ve cho nguoi dung --------------------------------
+  \draw[seqret] (1,-22.4) -- node[above=2pt, fill=white, inner sep=2pt, font=\scriptsize, text width=3.4cm, align=center]{20. Lịch 7 ngày $\times$ 3 bữa kèm tổng calo mỗi ngày} (0,-22.4);
+
+\end{tikzpicture}%
+}
+\caption{Sơ đồ tuần tự chức năng sinh thực đơn tuần}
+\label{fig:seq-thuc-don}
+\end{figure}

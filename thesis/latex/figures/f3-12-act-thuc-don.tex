@@ -1,0 +1,57 @@
+\begin{figure}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}
+
+  % --- Lan boi (swimlane) ---------------------------------------
+  \draw[thin] (-4.2,0.9) rectangle (4.5,-26.3);
+  \draw[thin] (4.5,0.9) rectangle (17.2,-26.3);
+  \node[font=\bfseries\small] at (0.15,0.55) {Người dùng};
+  \node[font=\bfseries\small] at (10.85,0.55) {Hệ thống};
+
+  % --- Cac nut --------------------------------------------------
+  \node[term]  (B0)  at (0,0)      {Bắt đầu};
+  \node[proc]  (B1)  at (0,-1.8)   {Mở mục Thực đơn tuần};
+  \node[dec]   (B2)  at (9,-4.0)   {Đã đăng nhập?};
+  \node[procs] (B3)  at (15.2,-4.0){Chuyển hướng tới trang\\đăng nhập};
+  \node[procs] (B4)  at (-1.3,-6.4){Đăng nhập};
+  \node[proc]  (B5)  at (0,-8.4)   {Nhập tên thực đơn, chọn tuần\\bắt đầu và vùng miền (tùy chọn)};
+  \node[proc]  (B6)  at (0,-10.0)  {Bấm nút Tạo thực đơn};
+  \node[dec]   (B7)  at (9,-12.2)  {Dữ liệu hợp lệ?};
+  \node[procs] (B8)  at (15.2,-12.2){Hiển thị thông báo lỗi\\kiểm tra hợp lệ};
+  \node[dec]   (B9)  at (9,-14.6)  {Có món ứng viên\\theo vùng miền?};
+  \node[procs] (B10) at (15.2,-14.6){Báo lỗi không sinh\\được thực đơn};
+  \node[term]  (B11) at (15.2,-16.6){Kết thúc};
+  \node[proc]  (B12) at (9,-16.8)  {Sinh 21 suất ăn cho\\7 ngày $\times$ 3 bữa};
+  \node[proc]  (B13) at (9,-18.4)  {Lưu thực đơn và 21 suất ăn};
+  \node[proc]  (B14) at (9,-20.0)  {Hiển thị lịch tuần kèm tổng\\năng lượng theo ngày};
+  \node[proc]  (B15) at (0,-22.0)  {Chỉnh tay từng ô nếu\\chưa vừa ý (tùy chọn)};
+  \node[proc]  (B16) at (9,-24.0)  {Tính lại tổng năng lượng\\của ngày tương ứng};
+  \node[term]  (B17) at (9,-25.6)  {Kết thúc};
+
+  % --- Cac mui ten ------------------------------------------------
+  \draw[fl] (B0.south) -- (B1.north);
+  \draw[fl] (B1.east)  -- (B2.west);
+  \draw[fl] (B2.east)  -- node[lbl, above]{Chưa} (B3.west);
+  \draw[fl] (B3.south) -- (B4.north);
+  \draw[fl] (B4.north) -- (-1.3,-4.0) -- (B2.west);
+  \draw[fl] (B2.south) -- node[lbl, right]{Rồi} (B5.north);
+  \draw[fl] (B5.south) -- (B6.north);
+  \draw[fl] (B6.east)  -- (B7.west);
+  \draw[fl] (B7.east)  -- node[lbl, above]{Không} (B8.west);
+  \draw[fl] (B8.north) -- (15.2,-8.4) -- (B5.east);
+  \draw[fl] (B7.south) -- node[lbl, right]{Có} (B9.north);
+  \draw[fl] (B9.east)  -- node[lbl, above]{Không} (B10.west);
+  \draw[fl] (B10.south)-- (B11.north);
+  \draw[fl] (B9.south) -- node[lbl, right]{Có} (B12.north);
+  \draw[fl] (B12.south)-- (B13.north);
+  \draw[fl] (B13.south)-- (B14.north);
+  \draw[fl] (B14.west) -- (B15.east);
+  \draw[fl] (B15.east) -- (B16.west);
+  \draw[fl] (B16.south)-- (B17.north);
+
+\end{tikzpicture}%
+}
+\caption{Sơ đồ hoạt động của chức năng lập thực đơn tuần}
+\label{fig:act-thuc-don}
+\end{figure}

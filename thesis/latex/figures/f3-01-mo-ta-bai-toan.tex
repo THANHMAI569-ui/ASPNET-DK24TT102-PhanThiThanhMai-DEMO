@@ -1,0 +1,26 @@
+\begin{figure}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[node distance=1.2cm and 1.2cm]
+
+  \stickman{ND}{0}{0.6}{Người nội trợ}
+
+  \node[procs] (GY) at (4.2,1.2) {(1) Gợi ý món ăn\\theo nguyên liệu sẵn có};
+  \node[procs, right=1.0cm of GY] (TD) {(2) Sinh thực đơn tuần\\7 ngày $\times$ 3 bữa,\\chỉnh tay được};
+  \node[procs, right=1.0cm of TD] (DC) {(3) Tổng hợp danh sách\\đi chợ, gộp và cộng dồn};
+
+  \node[devgroup, fit=(GY)(TD)(DC), label={[font=\small]above:Hệ thống CookingAdvisor}] (HT) {};
+
+  \node[store, below=1.6cm of TD] (KHO) {Kho dữ liệu:\\món ăn, nguyên liệu,\\định lượng};
+
+  \draw[fl] (GY) -- (TD);
+  \draw[fl] (TD) -- (DC);
+
+  \draw[flb] (ND) -- (HT.west);
+  \draw[flb] (HT.south) -- (KHO.north);
+
+\end{tikzpicture}%
+}
+\caption{Sơ đồ mô tả bài toán ở mức tổng quát}
+\label{fig:mo-ta-bai-toan}
+\end{figure}
