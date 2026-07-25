@@ -23,8 +23,10 @@ CookingAdvisor/
 │  ├─ CookingAdvisor.sln
 │  └─ CookingAdvisor/
 ├─ thesis/    Tài liệu đồ án
-│  ├─ doc/    (.docx)
-│  └─ pdf/    (.pdf)
+│  ├─ doc/       Bản .docx và mã nguồn .md của báo cáo
+│  ├─ pdf/       Bản .pdf để nộp
+│  ├─ images/    Ảnh chụp giao diện dùng trong Chương 4
+│  └─ diagrams/  Sơ đồ (mã nguồn Mermaid + ảnh đã render)
 └─ README.md
 ```
 
@@ -45,11 +47,26 @@ dotnet run --project src/CookingAdvisor
 
 Chi tiết cài đặt cho từng hệ điều hành xem trong thư mục [`setup/`](./setup).
 
+Tài khoản quản trị mặc định sau khi seed: `admin@cookingadvisor.local` /
+`Admin@2026!Cook` (chỉ dùng cho môi trường demo).
+
+## Kiểm thử
+
+```bash
+dotnet test src/CookingAdvisor.sln
+```
+
+29 unit test cho `SuggestionService`, `MenuPlannerService`, `ShoppingListService`
+và phần sắp xếp của `RecipeService`. Test dùng EF Core In-Memory nên chạy được mà
+không cần SQL Server.
+
 ## Chức năng chính
 
-- Gợi ý món ăn theo nguyên liệu có sẵn (xếp hạng theo độ khớp).
+- Gợi ý món ăn theo nguyên liệu có sẵn (xếp hạng theo độ phủ).
 - Lập thực đơn tuần (7 ngày × 3 bữa): tự sinh + chỉnh tay.
-- Tự sinh danh sách đi chợ từ thực đơn.
-- Thông tin dinh dưỡng / calo theo món và theo ngày.
+- Tự sinh danh sách đi chợ từ thực đơn (gộp nhóm, cộng dồn khối lượng).
+- Thông tin calo theo món và tổng theo ngày.
 - Tìm kiếm & lọc nâng cao (loại món, vùng miền, độ khó, thời gian nấu).
+- Sắp xếp danh sách món theo tên, thời gian nấu hoặc calo.
 - Tài khoản, món yêu thích, trang quản trị (Admin).
+- Giao diện đáp ứng từ 375px, có chế độ tối, tương phản đạt WCAG 2.1 AA.
