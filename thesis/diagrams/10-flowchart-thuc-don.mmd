@@ -1,0 +1,25 @@
+flowchart TD
+    ST(["Bắt đầu"]) --> IN["Nhận userId, tên thực đơn,<br/>tuần bắt đầu, vùng miền (tuỳ chọn)"]
+    IN --> CAND["candidates = món thoả bộ lọc vùng miền"]
+    CAND --> CHK{"candidates rỗng?"}
+    CHK -- "Có" --> ERR["Ném ngoại lệ:<br/>không có món để sinh thực đơn"] --> EN(["Kết thúc"])
+    CHK -- "Không" --> FAV["favoriteIds = món yêu thích của người dùng"]
+    FAV --> INIT["used = rỗng; useCounts = rỗng<br/>d = 0"]
+    INIT --> DLOOP{"d < 7?"}
+    DLOOP -- "Không" --> SAVE
+    DLOOP -- "Có" --> DINIT["dayCalories = 0; m = 0"]
+    DINIT --> MLOOP{"m < 3?"}
+    MLOOP -- "Không" --> DNEXT["d = d + 1"] --> DLOOP
+    MLOOP -- "Có" --> SUIT["suitable = candidates hợp bữa m"]
+    SUIT --> POOL["pool = suitable \ used"]
+    POOL --> PCHK{"pool rỗng?"}
+    PCHK -- "Không" --> ORD1["repeating = false<br/>Sắp: ưu tiên món yêu thích"]
+    PCHK -- "Có" --> REL1["repeating = true<br/>pool = suitable"]
+    REL1 --> PCHK2{"pool vẫn rỗng?"}
+    PCHK2 -- "Có" --> REL2["Nới ràng buộc bữa:<br/>pool = candidates"] --> ORD2
+    PCHK2 -- "Không" --> ORD2["Sắp: ít lần dùng nhất trước,<br/>rồi tới món yêu thích"]
+    ORD1 --> PICK
+    ORD2 --> PICK["Tiêu chí phụ: |dayCalories + calo món - mốc bữa| nhỏ nhất<br/>Tiêu chí cuối: Id tăng dần"]
+    PICK --> ASSIGN["Gán món vào ô (d, m)<br/>Cập nhật dayCalories, used, useCounts"]
+    ASSIGN --> MNEXT["m = m + 1"] --> MLOOP
+    SAVE["Lưu MenuPlan kèm 21 MenuPlanItem"] --> EN

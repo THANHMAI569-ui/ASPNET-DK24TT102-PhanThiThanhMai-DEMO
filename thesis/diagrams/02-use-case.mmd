@@ -1,0 +1,43 @@
+flowchart LR
+    K(("Khách"))
+    U(("Người dùng"))
+    A(("Quản trị viên"))
+
+    subgraph HT["Hệ thống CookingAdvisor"]
+        direction TB
+        UC1(["Duyệt và tìm kiếm món ăn"])
+        UC2(["Lọc theo danh mục, vùng miền,<br/>độ khó, thời gian nấu"])
+        UC3(["Sắp xếp danh sách món"])
+        UC4(["Xem chi tiết món ăn"])
+        UC5(["Gợi ý món theo nguyên liệu sẵn có"])
+        UC6(["Đăng ký tài khoản"])
+        UC7(["Đăng nhập và đăng xuất"])
+        UC8(["Sinh thực đơn tuần tự động"])
+        UC9(["Chỉnh sửa thủ công từng bữa"])
+        UC10(["Tạo danh sách đi chợ"])
+        UC11(["Đánh dấu đã mua"])
+        UC12(["Quản lý món yêu thích"])
+        UC13(["Quản lý món ăn"])
+        UC14(["Quản lý nguyên liệu"])
+        UC15(["Quản lý danh mục"])
+        UC16(["Xem thống kê tổng quan"])
+    end
+
+    K --- UC1
+    K --- UC2
+    K --- UC3
+    K --- UC4
+    K --- UC5
+    K --- UC6
+    K --- UC7
+
+    U --- UC8
+    U --- UC9
+    U --- UC10
+    U --- UC11
+    U --- UC12
+
+    A --- UC13
+    A --- UC14
+    A --- UC15
+    A --- UC16

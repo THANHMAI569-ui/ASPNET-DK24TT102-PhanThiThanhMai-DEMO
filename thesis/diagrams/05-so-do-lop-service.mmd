@@ -1,0 +1,58 @@
+classDiagram
+    direction TB
+
+    class AppDbContext {
+        +DbSet~Recipe~ Recipes
+        +DbSet~Ingredient~ Ingredients
+        +DbSet~Category~ Categories
+        +DbSet~RecipeIngredient~ RecipeIngredients
+        +DbSet~MenuPlan~ MenuPlans
+        +DbSet~MenuPlanItem~ MenuPlanItems
+        +DbSet~Favorite~ Favorites
+        +DbSet~ShoppingList~ ShoppingLists
+        +DbSet~ShoppingListItem~ ShoppingListItems
+        #OnModelCreating(ModelBuilder)
+    }
+
+    class RecipeService {
+        +PageSize int
+        +SearchRecipesAsync(RecipeFilterViewModel) RecipeListViewModel
+        +GetHomeAsync(int) HomeViewModel
+        +GetRecipeDetailAsync(int) RecipeDetailViewModel
+    }
+    class SuggestionService {
+        +GetIngredientOptionsAsync() List
+        +SuggestAsync(IReadOnlyCollection) List
+    }
+    class MenuPlannerService {
+        -DailyCalorieTarget int
+        -Meals array
+        +GenerateWeeklyPlanAsync(userId, planName, weekStartDate, region) MenuPlan
+    }
+    class ShoppingListService {
+        +GenerateFromMenuPlanAsync(userId, menuPlanId) ShoppingList
+    }
+    class FavoriteService {
+        +GetFavoritesAsync(userId) IReadOnlyList
+        +IsFavoriteAsync(userId, recipeId) bool
+        +ToggleFavoriteAsync(userId, recipeId) bool
+    }
+
+    class RecipeController
+    class SuggestionController
+    class MenuController
+    class ShoppingListController
+    class FavoriteController
+
+    RecipeController ..> RecipeService : sử dụng
+    RecipeController ..> FavoriteService : sử dụng
+    SuggestionController ..> SuggestionService : sử dụng
+    MenuController ..> MenuPlannerService : sử dụng
+    ShoppingListController ..> ShoppingListService : sử dụng
+    FavoriteController ..> FavoriteService : sử dụng
+
+    RecipeService ..> AppDbContext
+    SuggestionService ..> AppDbContext
+    MenuPlannerService ..> AppDbContext
+    ShoppingListService ..> AppDbContext
+    FavoriteService ..> AppDbContext

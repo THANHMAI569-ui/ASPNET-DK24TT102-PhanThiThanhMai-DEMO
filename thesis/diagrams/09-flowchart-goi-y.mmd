@@ -1,0 +1,16 @@
+flowchart TD
+    ST(["Bắt đầu"]) --> IN["Nhận tập nguyên liệu A<br/>người dùng đang có"]
+    IN --> CHK{"A rỗng?"}
+    CHK -- "Có" --> EMPTY["Trả về danh sách rỗng"] --> EN(["Kết thúc"])
+    CHK -- "Không" --> Q["Truy vấn các món R có<br/>ít nhất một nguyên liệu thuộc A"]
+    Q --> LOOP{"Còn món chưa xét?"}
+    LOOP -- "Không" --> SORT
+    LOOP -- "Có" --> M1["missing = I_R \ A"]
+    M1 --> M2["matched = |I_R| - |missing|"]
+    M2 --> M3["coverage = matched / |I_R|"]
+    M3 --> M4["canCookNow = (missing rỗng)"]
+    M4 --> LOOP
+
+    SORT["Xếp hạng theo thứ tự từ điển:<br/>1. canCookNow giảm dần<br/>2. coverage giảm dần<br/>3. |missing| tăng dần<br/>4. tên món A-Z"]
+    SORT --> OUT["Trả về danh sách đã xếp hạng<br/>kèm nhãn và nguyên liệu còn thiếu"]
+    OUT --> EN

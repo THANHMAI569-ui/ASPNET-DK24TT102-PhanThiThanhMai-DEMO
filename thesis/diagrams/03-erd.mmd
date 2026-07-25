@@ -1,0 +1,85 @@
+erDiagram
+    ApplicationUser ||--o{ MenuPlan : "lập"
+    ApplicationUser ||--o{ Favorite : "đánh dấu"
+    ApplicationUser ||--o{ ShoppingList : "sở hữu"
+    Category ||--o{ Recipe : "phân loại"
+    Recipe ||--o{ RecipeIngredient : "gồm"
+    Ingredient ||--o{ RecipeIngredient : "được dùng trong"
+    Recipe ||--o{ Favorite : "được yêu thích"
+    MenuPlan ||--o{ MenuPlanItem : "chứa"
+    Recipe ||--o{ MenuPlanItem : "được gán vào"
+    MenuPlan ||--|| ShoppingList : "sinh ra"
+    ShoppingList ||--o{ ShoppingListItem : "gồm"
+    Ingredient ||--o{ ShoppingListItem : "được mua"
+
+    ApplicationUser {
+        string Id PK
+        string UserName
+        string Email
+        string PasswordHash
+        string FullName
+        string FamilyName
+    }
+    Category {
+        int Id PK
+        string Name
+    }
+    Ingredient {
+        int Id PK
+        string Name
+        string Unit
+        string Group
+    }
+    Recipe {
+        int Id PK
+        string Name
+        string Description
+        string Instructions
+        int Servings
+        int PrepMinutes
+        int CookMinutes
+        int Difficulty
+        int Region
+        int CaloriesPerServing
+        string ImageUrl
+        int SuitableMealTypes
+        int CategoryId FK
+    }
+    RecipeIngredient {
+        int RecipeId PK, FK
+        int IngredientId PK, FK
+        decimal Quantity
+        string Unit
+    }
+    MenuPlan {
+        int Id PK
+        string UserId FK
+        string Name
+        date WeekStartDate
+        datetime CreatedAt
+    }
+    MenuPlanItem {
+        int Id PK
+        int MenuPlanId FK
+        int DayOfWeek
+        int MealType
+        int RecipeId FK
+    }
+    Favorite {
+        string UserId PK, FK
+        int RecipeId PK, FK
+    }
+    ShoppingList {
+        int Id PK
+        int MenuPlanId FK, UK
+        string UserId FK
+        datetime CreatedAt
+    }
+    ShoppingListItem {
+        int Id PK
+        int ShoppingListId FK
+        int IngredientId FK
+        decimal Quantity
+        string Unit
+        bool IsPurchased
+    }

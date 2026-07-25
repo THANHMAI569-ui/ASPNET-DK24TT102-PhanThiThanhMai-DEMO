@@ -1,0 +1,18 @@
+flowchart TD
+    B["Trình duyệt<br/>(Razor View + Bootstrap)"]
+    C["Tầng Controllers<br/>Home, Recipe, Suggestion, Menu,<br/>ShoppingList, Favorite, Account, Admin"]
+    S["Tầng Services<br/>RecipeService, SuggestionService,<br/>MenuPlannerService, ShoppingListService,<br/>FavoriteService"]
+    D["AppDbContext<br/>(Entity Framework Core)"]
+    DB[("SQL Server")]
+    I["ASP.NET Core Identity<br/>xác thực và phân quyền"]
+
+    B -- "HTTP request" --> C
+    C -- "gọi nghiệp vụ" --> S
+    S -- "LINQ" --> D
+    D -- "SQL" --> DB
+    DB -- "bản ghi" --> D
+    D -- "thực thể" --> S
+    S -- "ViewModel" --> C
+    C -- "HTML" --> B
+    I -. "lọc [Authorize]" .-> C
+    I -. "bảng AspNet*" .-> D

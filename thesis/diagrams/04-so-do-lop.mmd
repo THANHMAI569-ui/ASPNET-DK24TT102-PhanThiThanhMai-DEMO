@@ -1,0 +1,81 @@
+classDiagram
+    direction LR
+
+    class Recipe {
+        +int Id
+        +string Name
+        +string Description
+        +string Instructions
+        +int Servings
+        +int PrepMinutes
+        +int CookMinutes
+        +Difficulty Difficulty
+        +Region Region
+        +int CaloriesPerServing
+        +MealTypeFlags SuitableMealTypes
+        +int CategoryId
+    }
+    class Ingredient {
+        +int Id
+        +string Name
+        +string Unit
+        +string Group
+    }
+    class RecipeIngredient {
+        +int RecipeId
+        +int IngredientId
+        +decimal Quantity
+        +string Unit
+    }
+    class Category {
+        +int Id
+        +string Name
+    }
+    class MenuPlan {
+        +int Id
+        +string UserId
+        +string Name
+        +DateOnly WeekStartDate
+        +DateTime CreatedAt
+    }
+    class MenuPlanItem {
+        +int Id
+        +int MenuPlanId
+        +int DayOfWeek
+        +MealType MealType
+        +int RecipeId
+    }
+    class ShoppingList {
+        +int Id
+        +int MenuPlanId
+        +string UserId
+        +DateTime CreatedAt
+    }
+    class ShoppingListItem {
+        +int Id
+        +int IngredientId
+        +decimal Quantity
+        +string Unit
+        +bool IsPurchased
+    }
+    class Favorite {
+        +string UserId
+        +int RecipeId
+    }
+    class ApplicationUser {
+        +string Id
+        +string FullName
+        +string FamilyName
+    }
+
+    Category "1" --> "*" Recipe
+    Recipe "1" --> "*" RecipeIngredient
+    Ingredient "1" --> "*" RecipeIngredient
+    MenuPlan "1" --> "*" MenuPlanItem
+    Recipe "1" --> "*" MenuPlanItem
+    MenuPlan "1" --> "1" ShoppingList
+    ShoppingList "1" --> "*" ShoppingListItem
+    Ingredient "1" --> "*" ShoppingListItem
+    ApplicationUser "1" --> "*" MenuPlan
+    ApplicationUser "1" --> "*" Favorite
+    Recipe "1" --> "*" Favorite

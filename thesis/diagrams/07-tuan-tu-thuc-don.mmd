@@ -1,0 +1,40 @@
+sequenceDiagram
+    autonumber
+    actor ND as Người dùng
+    participant V as View<br/>Menu/Index
+    participant C as MenuController
+    participant S as MenuPlannerService
+    participant DB as AppDbContext / SQL Server
+
+    ND->>V: Nhập tên thực đơn, tuần bắt đầu, vùng miền
+    V->>C: POST /Menu/Generate
+    C->>C: Kiểm tra ModelState và danh tính người dùng
+    C->>S: GenerateWeeklyPlanAsync(userId, name, weekStart, region)
+
+    S->>DB: Lấy danh sách món ứng viên (lọc vùng miền)
+    DB-->>S: candidates
+    alt candidates rỗng
+        S-->>C: Ném InvalidOperationException
+        C-->>V: Thông báo lỗi
+    else
+        S->>DB: Lấy danh sách món yêu thích của người dùng
+        DB-->>S: favoriteIds
+
+        loop 7 ngày
+            loop 3 bữa
+                S->>S: Lọc món hợp bữa và chưa dùng
+                opt Hết món chưa dùng
+                    S->>S: Cho phép lặp, ưu tiên món ít dùng nhất
+                end
+                S->>S: Ưu tiên món yêu thích
+                S->>S: Chọn món đưa tổng calo gần mốc nhất
+                S->>S: Ghi nhận vào used và useCounts
+            end
+        end
+
+        S->>DB: Lưu MenuPlan kèm 21 MenuPlanItem
+        DB-->>S: Đã lưu
+        S-->>C: MenuPlan
+        C-->>V: Chuyển hướng tới Menu/Details
+        V-->>ND: Lịch 7 ngày x 3 bữa kèm tổng calo mỗi ngày
+    end

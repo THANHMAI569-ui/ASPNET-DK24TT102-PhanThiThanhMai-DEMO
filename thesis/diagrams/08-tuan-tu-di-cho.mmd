@@ -1,0 +1,37 @@
+sequenceDiagram
+    autonumber
+    actor ND as Người dùng
+    participant V as View<br/>Menu/Details
+    participant C as ShoppingListController
+    participant S as ShoppingListService
+    participant DB as AppDbContext / SQL Server
+
+    ND->>V: Bấm "Tạo danh sách"
+    V->>C: POST /ShoppingList/Generate (menuPlanId)
+    C->>S: GenerateFromMenuPlanAsync(userId, menuPlanId)
+
+    S->>DB: Nạp MenuPlan kèm Items, Recipe, RecipeIngredients<br/>lọc theo đúng UserId
+    DB-->>S: MenuPlan hoặc null
+
+    alt Không tìm thấy hoặc không thuộc người dùng
+        S-->>C: Ném InvalidOperationException
+        C-->>V: Trả về lỗi truy cập
+    else Hợp lệ
+        S->>S: Duyệt mọi suất ăn, lấy toàn bộ RecipeIngredient
+        S->>S: Gộp nhóm theo cặp (IngredientId, Unit)
+        S->>S: Cộng dồn Quantity trong từng nhóm
+        S->>DB: Tìm ShoppingList đã có của thực đơn này
+        DB-->>S: Kết quả
+
+        alt Đã tồn tại
+            S->>DB: Xoá toàn bộ dòng cũ
+        else Chưa có
+            S->>DB: Tạo ShoppingList mới
+        end
+
+        S->>DB: Ghi các ShoppingListItem đã gộp
+        DB-->>S: Đã lưu
+        S-->>C: ShoppingList
+        C-->>V: Chuyển hướng tới ShoppingList/Details
+        V-->>ND: Danh sách nguyên liệu theo nhóm,<br/>kèm thanh tiến độ đã mua
+    end

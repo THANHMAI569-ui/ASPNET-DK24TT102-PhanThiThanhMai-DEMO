@@ -1,0 +1,33 @@
+sequenceDiagram
+    autonumber
+    actor ND as Người dùng
+    participant V as View<br/>Suggestion/Index
+    participant C as SuggestionController
+    participant S as SuggestionService
+    participant DB as AppDbContext / SQL Server
+
+    ND->>V: Tick các nguyên liệu đang có
+    ND->>V: Bấm "Gợi ý món"
+    V->>C: GET /Suggestion?ingredientIds=...
+    C->>S: GetIngredientOptionsAsync()
+    S->>DB: Truy vấn Ingredients, sắp theo tên
+    DB-->>S: Danh sách nguyên liệu
+    S-->>C: List IngredientOptionViewModel
+    C->>S: SuggestAsync(ownedIngredientIds)
+
+    alt Tập nguyên liệu rỗng
+        S-->>C: Danh sách rỗng
+    else Có ít nhất một nguyên liệu
+        S->>DB: Lấy các món có giao với tập đã chọn
+        DB-->>S: Món kèm danh sách nguyên liệu
+        loop Với mỗi món R
+            S->>S: missing = I_R \ A
+            S->>S: matched = |I_R| - |missing|
+            S->>S: coverage = matched / |I_R|
+        end
+        S->>S: Xếp hạng: nấu được ngay → coverage giảm dần<br/>→ ít thiếu nhất → tên A-Z
+        S-->>C: Danh sách đã xếp hạng
+    end
+
+    C-->>V: SuggestionViewModel
+    V-->>ND: Lưới món kèm nhãn "Đủ nguyên liệu"<br/>hoặc "Thiếu N nguyên liệu"
