@@ -84,8 +84,9 @@ setup/sql/InitialCreate.sql
 Mở file này bằng **SQL Server Management Studio** (hoặc `sqlcmd`), kết nối tới
 instance SQL Server, chọn/tạo database `CookingAdvisor`, rồi **Execute**. Script là
 **idempotent** (tự kiểm tra `__EFMigrationsHistory`, chạy lại nhiều lần không lỗi),
-sinh ra từ đúng migration `InitialCreate` nên schema giống hệt bản chạy qua EF Core,
-không lệch pha giữa 2 hệ điều hành.
+sinh ra từ **toàn bộ chuỗi migrations** hiện có (InitialCreate,
+AddRecipeSuitableMealTypes, AddShoppingList) nên schema giống hệt bản chạy qua
+EF Core, không lệch pha giữa 2 hệ điều hành.
 
 Nếu sau này có thêm migration mới, chạy lại lệnh sau để cập nhật file script:
 

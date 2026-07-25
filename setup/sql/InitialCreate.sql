@@ -352,3 +352,103 @@ END;
 COMMIT;
 GO
 
+BEGIN TRANSACTION;
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260722073052_AddRecipeSuitableMealTypes'
+)
+BEGIN
+    ALTER TABLE [Recipes] ADD [SuitableMealTypes] int NOT NULL DEFAULT 0;
+END;
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260722073052_AddRecipeSuitableMealTypes'
+)
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20260722073052_AddRecipeSuitableMealTypes', N'10.0.9');
+END;
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260724114444_AddShoppingList'
+)
+BEGIN
+    CREATE TABLE [ShoppingLists] (
+        [Id] int NOT NULL IDENTITY,
+        [MenuPlanId] int NOT NULL,
+        [UserId] nvarchar(450) NOT NULL,
+        [CreatedAt] datetime2 NOT NULL,
+        CONSTRAINT [PK_ShoppingLists] PRIMARY KEY ([Id]),
+        CONSTRAINT [FK_ShoppingLists_AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [AspNetUsers] ([Id]) ON DELETE NO ACTION,
+        CONSTRAINT [FK_ShoppingLists_MenuPlans_MenuPlanId] FOREIGN KEY ([MenuPlanId]) REFERENCES [MenuPlans] ([Id]) ON DELETE CASCADE
+    );
+END;
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260724114444_AddShoppingList'
+)
+BEGIN
+    CREATE TABLE [ShoppingListItems] (
+        [Id] int NOT NULL IDENTITY,
+        [ShoppingListId] int NOT NULL,
+        [IngredientId] int NOT NULL,
+        [Quantity] decimal(10,2) NOT NULL,
+        [Unit] nvarchar(max) NOT NULL,
+        [IsPurchased] bit NOT NULL,
+        CONSTRAINT [PK_ShoppingListItems] PRIMARY KEY ([Id]),
+        CONSTRAINT [FK_ShoppingListItems_Ingredients_IngredientId] FOREIGN KEY ([IngredientId]) REFERENCES [Ingredients] ([Id]) ON DELETE NO ACTION,
+        CONSTRAINT [FK_ShoppingListItems_ShoppingLists_ShoppingListId] FOREIGN KEY ([ShoppingListId]) REFERENCES [ShoppingLists] ([Id]) ON DELETE CASCADE
+    );
+END;
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260724114444_AddShoppingList'
+)
+BEGIN
+    CREATE INDEX [IX_ShoppingListItems_IngredientId] ON [ShoppingListItems] ([IngredientId]);
+END;
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260724114444_AddShoppingList'
+)
+BEGIN
+    CREATE INDEX [IX_ShoppingListItems_ShoppingListId] ON [ShoppingListItems] ([ShoppingListId]);
+END;
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260724114444_AddShoppingList'
+)
+BEGIN
+    CREATE UNIQUE INDEX [IX_ShoppingLists_MenuPlanId] ON [ShoppingLists] ([MenuPlanId]);
+END;
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260724114444_AddShoppingList'
+)
+BEGIN
+    CREATE INDEX [IX_ShoppingLists_UserId] ON [ShoppingLists] ([UserId]);
+END;
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260724114444_AddShoppingList'
+)
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20260724114444_AddShoppingList', N'10.0.9');
+END;
+
+COMMIT;
+GO
+
