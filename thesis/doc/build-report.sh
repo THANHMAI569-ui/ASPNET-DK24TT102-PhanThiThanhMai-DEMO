@@ -21,6 +21,7 @@ python3 fit-images.py "$OUT_MD"
 
 pandoc "$OUT_MD" -o "$OUT_DOCX" \
     --toc --toc-depth=2 \
+    --metadata toc-title="MỤC LỤC" \
     --resource-path=.:..:../images:../diagrams
 
 soffice --headless --convert-to pdf --outdir ../pdf "$OUT_DOCX" >/dev/null 2>&1
