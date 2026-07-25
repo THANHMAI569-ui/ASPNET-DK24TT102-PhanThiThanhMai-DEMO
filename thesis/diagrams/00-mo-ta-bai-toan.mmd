@@ -1,0 +1,15 @@
+flowchart TB
+    ND(["Người nội trợ"])
+
+    subgraph HT["Hệ thống CookingAdvisor"]
+        direction LR
+        GY["(1) Gợi ý món ăn<br/>theo nguyên liệu sẵn có"]
+        TD["(2) Sinh thực đơn tuần<br/>7 ngày x 3 bữa,<br/>chỉnh tay được"]
+        DC["(3) Tổng hợp<br/>danh sách đi chợ,<br/>gộp và cộng dồn"]
+        GY --> TD --> DC
+    end
+
+    KHO[("Kho dữ liệu:<br/>món ăn, nguyên liệu,<br/>định lượng")]
+
+    ND <--> HT
+    HT <--> KHO

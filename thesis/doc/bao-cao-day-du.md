@@ -1,8 +1,157 @@
----
-title: "Xây dựng website gợi ý nấu ăn và lập thực đơn cho gia đình"
-subtitle: "Báo cáo đồ án tốt nghiệp"
-lang: vi
----
+```{=openxml}
+<w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="120" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="28"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="28"/></w:rPr><w:t xml:space="preserve">ĐẠI HỌC TRÀ VINH</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="120" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="28"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="28"/></w:rPr><w:t xml:space="preserve">TRƯỜNG KỸ THUẬT VÀ CÔNG NGHỆ</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="120" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="28"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="28"/></w:rPr><w:t xml:space="preserve">KHOA CÔNG NGHỆ THÔNG TIN</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:sz w:val="26"/></w:rPr></w:pPr></w:p><w:p><w:pPr><w:rPr><w:sz w:val="26"/></w:rPr></w:pPr></w:p><w:p><w:pPr><w:rPr><w:sz w:val="26"/></w:rPr></w:pPr></w:p><w:p><w:pPr><w:rPr><w:sz w:val="26"/></w:rPr></w:pPr></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="120" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="30"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="30"/></w:rPr><w:t xml:space="preserve">ĐỒ ÁN MÔN HỌC: CHUYÊN ĐỀ ASP.NET</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="120" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">HỌC KỲ HÈ, NĂM HỌC 2025-2026</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:sz w:val="26"/></w:rPr></w:pPr></w:p><w:p><w:pPr><w:rPr><w:sz w:val="26"/></w:rPr></w:pPr></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="120" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="32"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="32"/></w:rPr><w:t xml:space="preserve">XÂY DỰNG WEBSITE GỢI Ý NẤU ĂN</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="120" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="32"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="32"/></w:rPr><w:t xml:space="preserve">VÀ LẬP THỰC ĐƠN CHO GIA ĐÌNH</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:sz w:val="26"/></w:rPr></w:pPr></w:p><w:p><w:pPr><w:rPr><w:sz w:val="26"/></w:rPr></w:pPr></w:p><w:p><w:pPr><w:rPr><w:sz w:val="26"/></w:rPr></w:pPr></w:p><w:p><w:pPr><w:rPr><w:sz w:val="26"/></w:rPr></w:pPr></w:p><w:p><w:pPr><w:spacing w:before="60" w:after="60" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">Giảng viên hướng dẫn: [ThS./TS. ..............................]</w:t></w:r></w:p><w:p><w:pPr><w:spacing w:before="60" w:after="60" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">Sinh viên thực hiện:</w:t></w:r></w:p><w:p><w:pPr><w:spacing w:before="60" w:after="60" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">Họ tên: Phan Thị Thanh Mai</w:t></w:r></w:p><w:p><w:pPr><w:spacing w:before="60" w:after="60" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">MSSV: [....................]</w:t></w:r></w:p><w:p><w:pPr><w:spacing w:before="60" w:after="60" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">Lớp: DK24TT102</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:sz w:val="26"/></w:rPr></w:pPr></w:p><w:p><w:pPr><w:rPr><w:sz w:val="26"/></w:rPr></w:pPr></w:p><w:p><w:pPr><w:rPr><w:sz w:val="26"/></w:rPr></w:pPr></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="120" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">Vĩnh Long, tháng 7 năm 2026</w:t></w:r></w:p>
+<w:p><w:r><w:br w:type="page"/></w:r></w:p>
+<w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="120" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="28"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="28"/></w:rPr><w:t xml:space="preserve">TRƯỜNG KỸ THUẬT VÀ CÔNG NGHỆ</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="120" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="28"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="28"/></w:rPr><w:t xml:space="preserve">KHOA CÔNG NGHỆ THÔNG TIN</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:sz w:val="26"/></w:rPr></w:pPr></w:p><w:p><w:pPr><w:rPr><w:sz w:val="26"/></w:rPr></w:pPr></w:p><w:p><w:pPr><w:rPr><w:sz w:val="26"/></w:rPr></w:pPr></w:p><w:p><w:pPr><w:rPr><w:sz w:val="26"/></w:rPr></w:pPr></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="120" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="30"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="30"/></w:rPr><w:t xml:space="preserve">ĐỒ ÁN MÔN HỌC: CHUYÊN ĐỀ ASP.NET</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="120" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">HỌC KỲ HÈ, NĂM HỌC 2025-2026</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:sz w:val="26"/></w:rPr></w:pPr></w:p><w:p><w:pPr><w:rPr><w:sz w:val="26"/></w:rPr></w:pPr></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="120" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="32"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="32"/></w:rPr><w:t xml:space="preserve">XÂY DỰNG WEBSITE GỢI Ý NẤU ĂN</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="120" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="32"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="32"/></w:rPr><w:t xml:space="preserve">VÀ LẬP THỰC ĐƠN CHO GIA ĐÌNH</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:sz w:val="26"/></w:rPr></w:pPr></w:p><w:p><w:pPr><w:rPr><w:sz w:val="26"/></w:rPr></w:pPr></w:p><w:p><w:pPr><w:rPr><w:sz w:val="26"/></w:rPr></w:pPr></w:p><w:p><w:pPr><w:rPr><w:sz w:val="26"/></w:rPr></w:pPr></w:p><w:p><w:pPr><w:spacing w:before="60" w:after="60" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">Giảng viên hướng dẫn: [ThS./TS. ..............................]</w:t></w:r></w:p><w:p><w:pPr><w:spacing w:before="60" w:after="60" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">Sinh viên thực hiện:</w:t></w:r></w:p><w:p><w:pPr><w:spacing w:before="60" w:after="60" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">Họ tên: Phan Thị Thanh Mai</w:t></w:r></w:p><w:p><w:pPr><w:spacing w:before="60" w:after="60" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">MSSV: [....................]</w:t></w:r></w:p><w:p><w:pPr><w:spacing w:before="60" w:after="60" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">Lớp: DK24TT102</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:sz w:val="26"/></w:rPr></w:pPr></w:p><w:p><w:pPr><w:rPr><w:sz w:val="26"/></w:rPr></w:pPr></w:p><w:p><w:pPr><w:rPr><w:sz w:val="26"/></w:rPr></w:pPr></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="120" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">Vĩnh Long, tháng 7 năm 2026</w:t></w:r></w:p>
+<w:p><w:r><w:br w:type="page"/></w:r></w:p>
+<w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="120" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="28"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="28"/></w:rPr><w:t xml:space="preserve">NHẬN XÉT CỦA GIẢNG VIÊN HƯỚNG DẪN</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:sz w:val="26"/></w:rPr></w:pPr></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">................................................................................................</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">................................................................................................</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">................................................................................................</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">................................................................................................</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">................................................................................................</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">................................................................................................</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">................................................................................................</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">................................................................................................</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">................................................................................................</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">................................................................................................</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">................................................................................................</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">................................................................................................</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">................................................................................................</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">................................................................................................</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:sz w:val="26"/></w:rPr></w:pPr></w:p><w:p><w:pPr><w:rPr><w:sz w:val="26"/></w:rPr></w:pPr></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="120" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">…………, ngày … tháng … năm ……</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="120" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">Giảng viên hướng dẫn</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="120" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/></w:rPr><w:t xml:space="preserve">(Ký tên và ghi rõ họ tên)</w:t></w:r></w:p>
+<w:p><w:r><w:br w:type="page"/></w:r></w:p>
+<w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="120" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="28"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="28"/></w:rPr><w:t xml:space="preserve">NHẬN XÉT CỦA THÀNH VIÊN HỘI ĐỒNG</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:sz w:val="26"/></w:rPr></w:pPr></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">................................................................................................</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">................................................................................................</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">................................................................................................</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">................................................................................................</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">................................................................................................</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">................................................................................................</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">................................................................................................</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">................................................................................................</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">................................................................................................</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">................................................................................................</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">................................................................................................</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">................................................................................................</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">................................................................................................</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">................................................................................................</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:sz w:val="26"/></w:rPr></w:pPr></w:p><w:p><w:pPr><w:rPr><w:sz w:val="26"/></w:rPr></w:pPr></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="120" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">…………, ngày … tháng … năm ……</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="120" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t xml:space="preserve">Thành viên hội đồng</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="120" w:line="360" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/></w:rPr><w:t xml:space="preserve">(Ký tên và ghi rõ họ tên)</w:t></w:r></w:p>
+```
+
+```{=openxml}
+<w:p><w:r><w:br w:type="page"/></w:r></w:p>
+```
+# LỜI CẢM ƠN
+
+Trước hết, em xin gửi lời cảm ơn chân thành tới giảng viên hướng dẫn đã tận
+tình chỉ bảo, góp ý về định hướng đề tài, phương pháp phân tích thiết kế và
+cách trình bày báo cáo trong suốt quá trình thực hiện đồ án.
+
+Em xin cảm ơn quý thầy cô Khoa Công nghệ thông tin, Trường Kỹ thuật và Công
+nghệ, Đại học Trà Vinh đã trang bị những kiến thức nền tảng về lập trình web,
+cơ sở dữ liệu và phân tích thiết kế hệ thống, là cơ sở trực tiếp để em hoàn
+thành đồ án này.
+
+Mặc dù đã cố gắng, đồ án chắc chắn không tránh khỏi thiếu sót. Em rất mong
+nhận được ý kiến đóng góp của quý thầy cô để đồ án được hoàn thiện hơn.
+
+Em xin chân thành cảm ơn.
+
+
+```{=openxml}
+<w:p><w:r><w:br w:type="page"/></w:r></w:p>
+```
+# MỤC LỤC
+
+TÓM TẮT ĐỒ ÁN .......................................................................... 1\
+MỞ ĐẦU ................................................................................. 3\
+\ \ \ \ 1. Lý do chọn đề tài ........................................................... 3\
+\ \ \ \ 2. Mục tiêu của đề tài ......................................................... 3\
+\ \ \ \ 3. Đối tượng và phạm vi nghiên cứu ............................................. 4\
+\ \ \ \ 4. Phương pháp nghiên cứu ...................................................... 4\
+\ \ \ \ 5. Bố cục báo cáo .............................................................. 5\
+CHƯƠNG 1. TỔNG QUAN .................................................................... 6\
+\ \ \ \ 1.1. Bối cảnh và nhu cầu thực tiễn ............................................. 6\
+\ \ \ \ 1.2. Khảo sát các ứng dụng tương tự ............................................ 6\
+\ \ \ \ 1.3. Nhận xét chung và khoảng trống nghiên cứu ................................. 9\
+\ \ \ \ 1.4. Vấn đề tập trung giải quyết và đóng góp của đồ án ........................ 10\
+CHƯƠNG 2. NGHIÊN CỨU LÝ THUYẾT ........................................................ 12\
+\ \ \ \ 2.1. Kiến trúc MVC và nền tảng ASP.NET Core ................................... 12\
+\ \ \ \ 2.2. Entity Framework Core và tiếp cận Code-First ............................. 13\
+\ \ \ \ 2.3. ASP.NET Core Identity .................................................... 14\
+\ \ \ \ 2.4. Hệ quản trị cơ sở dữ liệu SQL Server và triển khai đa nền tảng ........... 15\
+\ \ \ \ 2.5. Cơ sở thuật toán ......................................................... 15\
+\ \ \ \ 2.6. Kết luận chương .......................................................... 18\
+CHƯƠNG 3. HIỆN THỰC HÓA NGHIÊN CỨU .................................................... 20\
+\ \ \ \ 3.1. Mô tả bài toán ........................................................... 20\
+\ \ \ \ 3.2. Đặc tả yêu cầu ........................................................... 21\
+\ \ \ \ 3.3. Mô hình cơ sở dữ liệu .................................................... 23\
+\ \ \ \ 3.4. Lược đồ use case ......................................................... 26\
+\ \ \ \ 3.5. Kiến trúc hệ thống ....................................................... 26\
+\ \ \ \ 3.6. Thiết kế lớp ............................................................. 28\
+\ \ \ \ 3.7. Thiết kế luồng xử lý ..................................................... 29\
+\ \ \ \ 3.8. Cài đặt các thuật toán lõi ............................................... 30\
+\ \ \ \ 3.9. Một số điểm cài đặt khác ................................................. 35\
+CHƯƠNG 4. KẾT QUẢ NGHIÊN CỨU .......................................................... 36\
+\ \ \ \ 4.1. Môi trường triển khai và dữ liệu thử nghiệm .............................. 36\
+\ \ \ \ 4.2. Giao diện các chức năng .................................................. 36\
+\ \ \ \ 4.3. Kịch bản demo ............................................................ 47\
+\ \ \ \ 4.4. Kết quả kiểm thử ......................................................... 48\
+\ \ \ \ 4.5. Kiểm thử giao diện ....................................................... 52\
+\ \ \ \ 4.6. Đánh giá ................................................................. 53\
+CHƯƠNG 5. KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN ................................................ 54\
+\ \ \ \ 5.1. Kết luận ................................................................. 54\
+\ \ \ \ 5.2. Hướng phát triển ......................................................... 55\
+DANH MỤC TÀI LIỆU THAM KHẢO ........................................................... 57\
+PHỤ LỤC ............................................................................... 59\
+\ \ \ \ Phụ lục A. Hướng dẫn cài đặt và chạy hệ thống ................................. 59\
+SQL Server lắng nghe ở localhost:1433, tài khoản sa / CookAdvisor@2026 ................ 59\
+từ thư mục gốc của repository ......................................................... 60\
+\ \ \ \ Phụ lục B. Cấu trúc mã nguồn .................................................. 61\
+\ \ \ \ Phụ lục C. Nguồn ảnh minh họa món ăn .......................................... 61\
+\ \ \ \ Phụ lục D. Mã nguồn tiêu biểu ................................................. 62
+
+
+```{=openxml}
+<w:p><w:r><w:br w:type="page"/></w:r></w:p>
+```
+# DANH MỤC HÌNH ẢNH
+
+Hình 3.1. Sơ đồ mô tả bài toán ở mức tổng quát ........................................ 20\
+Hình 3.2. Sơ đồ ERD ................................................................... 23\
+Hình 3.3. Sơ đồ use-case tổng quát .................................................... 26\
+Hình 3.4. Kiến trúc phân tầng và luồng xử lý một yêu cầu .............................. 27\
+Hình 3.5. Sơ đồ lớp tầng thực thể ..................................................... 28\
+Hình 3.6. Sơ đồ lớp tầng dịch vụ và quan hệ với tầng điều khiển ....................... 28\
+Hình 3.7. Sơ đồ tuần tự chức năng gợi ý theo nguyên liệu .............................. 29\
+Hình 3.8. Sơ đồ tuần tự chức năng sinh thực đơn tuần .................................. 29\
+Hình 3.9. Sơ đồ tuần tự chức năng sinh danh sách đi chợ ............................... 30\
+Hình 3.10. Lưu đồ thuật toán gợi ý theo nguyên liệu ................................... 30\
+Hình 3.11. Lưu đồ thuật toán sinh thực đơn tuần ....................................... 32\
+Hình 4.1. Trang chủ ................................................................... 36\
+Hình 4.2. Trang danh sách món ăn với bộ lọc bên trái và lưới kết quả .................. 37\
+Hình 4.3. Trang chi tiết món ăn ....................................................... 37\
+Hình 4.5. Trạng thái ban đầu khi người dùng chưa chọn nguyên liệu nào ................. 38\
+Hình 4.6. Kết quả gợi ý với 8 nguyên liệu đầu vào ..................................... 39\
+Hình 4.7. Biểu mẫu sinh thực đơn và danh sách thực đơn đã lưu ......................... 39\
+Hình 4.8. Lịch thực đơn 7 ngày × 3 bữa ................................................ 40\
+Hình 4.9. Danh sách đi chợ sinh từ thực đơn ở Hình 4.8 ................................ 40\
+Hình 4.10. Màn hình đăng nhập ......................................................... 41\
+Hình 4.11. Màn hình đăng ký tài khoản ................................................. 41\
+Hình 4.12. Thông báo lỗi khi nhập dữ liệu không hợp lệ ................................ 42\
+Hình 4.13. Kết quả khi tài khoản không phải quản trị viên truy cập khu vực quản trị ... 42\
+Hình 4.14. Danh sách món yêu thích .................................................... 43\
+Hình 4.15. Bảng điều khiển quản trị ................................................... 43\
+Hình 4.16. Danh sách quản lý món ăn ................................................... 44\
+Hình 4.17. Biểu mẫu sửa món ăn với phần gán nguyên liệu ............................... 44\
+Hình 4.18. Danh sách quản lý nguyên liệu .............................................. 45\
+Hình 4.19. Trang chủ trên màn hình rộng 390 px ........................................ 45\
+Hình 4.20. Bộ lọc chuyển thành ngăn kéo trượt trên màn hình hẹp ....................... 46\
+Hình 4.21. Giao diện ở chế độ tối ..................................................... 46\
+Hình 4.22. Ví dụ trạng thái khi chưa có dữ liệu ....................................... 47
+
+
+```{=openxml}
+<w:p><w:r><w:br w:type="page"/></w:r></w:p>
+```
+# DANH MỤC BẢNG BIỂU
+
+Bảng 1.1. So sánh chức năng giữa các ứng dụng khảo sát và đề tài ....................... 9\
+Bảng 3.1. Các tác nhân của hệ thống ................................................... 21\
+Bảng 3.2. Yêu cầu chức năng dành cho Khách ............................................ 21\
+Bảng 3.3. Yêu cầu chức năng dành cho Người dùng ....................................... 22\
+Bảng 3.4. Yêu cầu chức năng dành cho Quản trị viên .................................... 22\
+Bảng 3.5. Yêu cầu phi chức năng ....................................................... 22\
+Bảng 3.6. Cấu trúc bảng Recipe ........................................................ 23\
+Bảng 3.7. Cấu trúc bảng RecipeIngredient .............................................. 24\
+Bảng 3.8. Hành vi xóa của các quan hệ trong cơ sở dữ liệu ............................. 25\
+Bảng 3.9. Trách nhiệm của các lớp dịch vụ ............................................. 28\
+Bảng 3.10. Nguy cơ bảo mật và biện pháp áp dụng ....................................... 35\
+Bảng 4.1. Môi trường thử nghiệm ....................................................... 36\
+Bảng 4.2. Dữ liệu thử nghiệm .......................................................... 36\
+Bảng 4.3. Ca kiểm thử thuật toán gợi ý theo nguyên liệu ............................... 49\
+Bảng 4.4. Ca kiểm thử thuật toán sinh thực đơn tuần ................................... 49\
+Bảng 4.5. Ca kiểm thử thuật toán sinh danh sách đi chợ ................................ 50\
+Bảng 4.6. Ca kiểm thử chức năng tìm kiếm và sắp xếp ................................... 51\
+Bảng 4.7. Tổng hợp kết quả kiểm thử theo nhóm ......................................... 51\
+Bảng 4.8. Kết quả kiểm tra giao diện theo tiêu chí phi chức năng ...................... 52\
+Bảng 4.9. Đối chiếu kết quả đạt được với mục tiêu đề ra ............................... 53\
+Bảng 5.1. Các hướng mở rộng chức năng ................................................. 56
+
+
+```{=openxml}
+<w:p><w:pPr><w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1134" w:right="1134" w:bottom="1134" w:left="1701" w:header="720" w:footer="720" w:gutter="0"/></w:sectPr></w:pPr></w:p>
+```
 
 # TÓM TẮT ĐỒ ÁN
 
@@ -44,8 +193,10 @@ hình từ 375 px đến 1440 px và đạt chuẩn tương phản WCAG 2.1 mứ
 **Từ khóa:** gợi ý món ăn, lập thực đơn, độ phủ tập hợp, thuật toán tham lam,
 ASP.NET Core MVC, Entity Framework Core.
 
-\newpage
 
+```{=openxml}
+<w:p><w:r><w:br w:type="page"/></w:r></w:p>
+```
 # MỞ ĐẦU
 
 ## 1. Lý do chọn đề tài
@@ -148,8 +299,10 @@ Ngoài phần Mở đầu và Kết luận, báo cáo được tổ chức thàn
   demo và kết quả kiểm thử.
 - **Chương 5. Kết luận và hướng phát triển.**
 
-\newpage
 
+```{=openxml}
+<w:p><w:r><w:br w:type="page"/></w:r></w:p>
+```
 # CHƯƠNG 1. TỔNG QUAN
 
 ## 1.1. Bối cảnh và nhu cầu thực tiễn
@@ -194,14 +347,14 @@ từng sản phẩm trong ngày 25/07/2026.
 ### 1.2.1. Cookpad
 
 Cookpad là nền tảng chia sẻ công thức nấu ăn theo mô hình cộng đồng, trong đó nội
-dung do chính người dùng đăng tải thay vì do một đội ngũ biên tập tạo ra [4].
+dung do chính người dùng đăng tải thay vì do một đội ngũ biên tập tạo ra [1].
 Cookpad có phiên bản tiếng Việt riêng tại địa chỉ cookpad.com/vn, nằm trong hệ
 thống hơn ba mươi phiên bản theo quốc gia [5].
 
 Về chức năng, mô tả chính thức của ứng dụng cho biết Cookpad hỗ trợ **tìm công
 thức theo nguyên liệu** với thông điệp "nấu những bữa ăn ngon từ những gì bạn đã
 có sẵn trong tủ lạnh", đồng thời có khả năng **tạo danh sách đi chợ tự động từ
-công thức** và cho phép người dùng **xây dựng thực đơn theo tuần** [4].
+công thức** và cho phép người dùng **xây dựng thực đơn theo tuần** [1].
 
 *Nhận xét.* Cookpad là sản phẩm gần với đề tài nhất về mặt chức năng. Tuy nhiên
 mô tả chính thức không nêu rõ việc xây dựng thực đơn tuần là *sinh tự động* hay
@@ -218,8 +371,8 @@ cứu về hệ khuyến nghị ẩm thực. Tuy nhiên, kết quả kiểm tra 
 trình khảo sát cho thấy **dịch vụ này đã ngừng hoạt động**: truy cập
 https://www.yummly.com/ hiện bị chuyển hướng vĩnh viễn (HTTP 301) sang trang công
 thức của KitchenAid, và tên miền hỗ trợ help.yummly.com không còn phân giải được
-[7]. Theo nguồn thứ cấp trích lại thông báo của công ty chủ quản, website và ứng
-dụng di động của Yummly đã đóng cửa từ ngày 20/12/2024 [6].
+[15]. Theo nguồn thứ cấp trích lại thông báo của công ty chủ quản, website và ứng
+dụng di động của Yummly đã đóng cửa từ ngày 20/12/2024 [14].
 
 *Nhận xét.* Trường hợp Yummly có giá trị tham chiếu quan trọng đối với đề tài
 theo hai hướng. Thứ nhất, nó cho thấy người dùng Việt Nam không thể trông cậy vào
@@ -234,9 +387,9 @@ năng cụ thể của sản phẩm.
 Mealime là ứng dụng chuyên biệt cho việc **lập thực đơn**, không phải nền tảng
 chia sẻ công thức. Trang chủ của sản phẩm nêu khả năng lập kế hoạch bữa ăn cho cả
 tuần dựa trên tùy chọn cá nhân về khẩu phần, chế độ ăn và dị ứng thực phẩm, đồng
-thời **tự động tổng hợp nguyên liệu thành danh sách đi chợ theo danh mục** [10].
+thời **tự động tổng hợp nguyên liệu thành danh sách đi chợ theo danh mục** [9].
 Sản phẩm áp dụng mô hình freemium với gói Mealime Pro giá 2,99 USD mỗi tháng
-[11].
+[2].
 
 *Nhận xét.* Mealime giải quyết tốt bài toán lập thực đơn và danh sách đi chợ,
 nhưng chức năng tìm món **xuất phát từ nguyên liệu người dùng đang có** không
@@ -248,26 +401,26 @@ món ăn Việt Nam, nên khó áp dụng trực tiếp cho bữa cơm gia đìn
 
 Paprika là ứng dụng quản lý công thức cá nhân đa nền tảng, cho phép lưu công thức
 từ web, lập kế hoạch bữa ăn và tạo danh sách đi chợ với khả năng gộp nguyên liệu
-trùng nhau và sắp xếp theo khu vực gian hàng [12]. Ứng dụng hỗ trợ tìm kiếm theo
-tên và theo nguyên liệu [13].
+trùng nhau và sắp xếp theo khu vực gian hàng [13]. Ứng dụng hỗ trợ tìm kiếm theo
+tên và theo nguyên liệu [3].
 
 *Nhận xét.* Điểm khác biệt căn bản so với đề tài là Paprika **không sinh thực đơn
-tự động**: người dùng phải tự kéo thả từng công thức vào lịch [12]. Nói cách
+tự động**: người dùng phải tự kéo thả từng công thức vào lịch [13]. Nói cách
 khác, Paprika số hóa thao tác lập thực đơn thủ công chứ không thay người dùng
 đưa ra quyết định.
 
 ### 1.2.5. Các website nấu ăn trong nước
 
 Ở trong nước, Esheep Kitchen là một blog công thức nấu ăn tiếng Việt có lượng
-người theo dõi lớn, với nội dung xoay quanh món Việt, bánh và đồ uống [9]. Kiểm
+người theo dõi lớn, với nội dung xoay quanh món Việt, bánh và đồ uống [7]. Kiểm
 tra trực tiếp cho thấy đây thuần túy là nền tảng đăng tải nội dung: trang không
 có chức năng tìm món theo nguyên liệu sẵn có, không sinh thực đơn tuần và không
-xuất danh sách đi chợ [9].
+xuất danh sách đi chợ [7].
 
 Một trường hợp đáng chú ý khác là Cooky.vn. Trang này khởi đầu năm 2015 như một
 website công thức nấu ăn, sau đó từ năm 2020 chuyển hướng sang mô hình đi chợ hộ
 và giao thực phẩm tươi. Đến tháng 11/2023, doanh nghiệp đã thu hẹp hoạt động, rút
-khỏi thị trường Hà Nội và chỉ còn vận hành tại Thành phố Hồ Chí Minh [8]. Tại
+khỏi thị trường Hà Nội và chỉ còn vận hành tại Thành phố Hồ Chí Minh [4]. Tại
 thời điểm khảo sát, tác giả **không truy cập được** trang cooky.vn do chứng chỉ
 bảo mật TLS của trang đã hết hạn, vì vậy báo cáo này không đưa ra kết luận nào về
 các chức năng hiện có của sản phẩm.
@@ -280,12 +433,12 @@ việc chức năng đó chắc chắn không tồn tại.
 
 | Ứng dụng | Gợi ý theo nguyên liệu sẵn có | Sinh thực đơn tuần tự động | Xuất danh sách đi chợ | Nội dung tiếng Việt | Mô hình giá |
 |---|---|---|---|---|---|
-| Cookpad | Có [4] | Có, chưa rõ mức độ tự động [4] | Có [4] | Có [5] | Miễn phí kèm gói Premium [4] |
-| Yummly | Đã ngừng hoạt động từ 20/12/2024 [6][7] | Đã ngừng hoạt động | Đã ngừng hoạt động | Đã ngừng hoạt động | Đã ngừng hoạt động |
-| Mealime | Không nêu trong mô tả chính thức [10][11] | Có [10] | Có [10] | Không xác minh được | Freemium, Pro 2,99 USD/tháng [11] |
-| Paprika | Có [13] | Không, lập kế hoạch thủ công [12] | Có [12] | Không xác minh được | Trả phí một lần [12] |
-| Esheep Kitchen | Không [9] | Không [9] | Không [9] | Có [9] | Miễn phí [9] |
-| Cooky.vn | Không xác minh được | Không xác minh được | Không xác minh được | Có [8] | Không xác minh được |
+| Cookpad | Có [1] | Có, chưa rõ mức độ tự động [1] | Có [1] | Có [5] | Miễn phí kèm gói Premium [1] |
+| Yummly | Đã ngừng hoạt động từ 20/12/2024 [14][15] | Đã ngừng hoạt động | Đã ngừng hoạt động | Đã ngừng hoạt động | Đã ngừng hoạt động |
+| Mealime | Không nêu trong mô tả chính thức [9][2] | Có [9] | Có [9] | Không xác minh được | Freemium, Pro 2,99 USD/tháng [2] |
+| Paprika | Có [3] | Không, lập kế hoạch thủ công [13] | Có [13] | Không xác minh được | Trả phí một lần [13] |
+| Esheep Kitchen | Không [7] | Không [7] | Không [7] | Có [7] | Miễn phí [7] |
+| Cooky.vn | Không xác minh được | Không xác minh được | Không xác minh được | Có [4] | Không xác minh được |
 | **CookingAdvisor** | **Có** | **Có** | **Có** | **Có** | **Miễn phí** |
 
 *Bảng 1.1. So sánh chức năng giữa các ứng dụng khảo sát và đề tài*
@@ -308,7 +461,7 @@ dựng theo khẩu vị Âu - Mỹ, khiến kết quả gợi ý không sát v�
 
 **Ba là, tính sẵn sàng lâu dài của dịch vụ nước ngoài là một rủi ro thực tế.**
 Việc Yummly ngừng hoạt động hoàn toàn vào cuối năm 2024 là minh chứng cụ thể cho
-rủi ro này [6][7].
+rủi ro này [14][15].
 
 **Bốn là, mô hình nội dung do cộng đồng đóng góp ảnh hưởng tới chất lượng dữ liệu
 định lượng.** Với các nền tảng như Cookpad, công thức do người dùng tự đăng nên
@@ -351,8 +504,10 @@ Trên cơ sở phân tích trên, đồ án tập trung giải quyết bài toá
    qua đó phát hiện được một khiếm khuyết thực tế về tính đa dạng của thực đơn mà
    quan sát bằng mắt thường khó nhận ra.
 
-\newpage
 
+```{=openxml}
+<w:p><w:r><w:br w:type="page"/></w:r></w:p>
+```
 # CHƯƠNG 2. NGHIÊN CỨU LÝ THUYẾT
 
 Chương này trình bày cơ sở lý thuyết của hai nhóm nội dung: nhóm công nghệ nền
@@ -365,12 +520,12 @@ giải các bài toán nghiệp vụ (mục 2.5).
 
 Model - View - Controller (MVC) là mẫu kiến trúc phân chia ứng dụng thành ba
 nhóm thành phần chính là Model, View và Controller, nhằm đạt được sự **phân tách
-mối quan tâm** (separation of concerns) [1]. Theo mô tả của Microsoft, yêu cầu từ
+mối quan tâm** (separation of concerns) [12]. Theo mô tả của Microsoft, yêu cầu từ
 người dùng được định tuyến tới Controller; Controller có nhiệm vụ làm việc với
 Model để thực hiện hành động hoặc lấy kết quả truy vấn, sau đó chọn View để hiển
-thị và cung cấp cho View dữ liệu cần thiết [1].
+thị và cung cấp cho View dữ liệu cần thiết [12].
 
-Vai trò của từng thành phần được xác định như sau [1]:
+Vai trò của từng thành phần được xác định như sau [12]:
 
 - **Model** biểu diễn trạng thái của ứng dụng cùng các logic nghiệp vụ tác động
   lên trạng thái đó.
@@ -382,41 +537,41 @@ Vai trò của từng thành phần được xác định như sau [1]:
 
 Một đặc điểm quan trọng của mẫu này là **chiều phụ thuộc một chiều**: View và
 Controller đều phụ thuộc vào Model, nhưng Model không phụ thuộc ngược lại vào
-View hay Controller [1]. Nhờ đó Model có thể được xây dựng và kiểm thử độc lập
+View hay Controller [12]. Nhờ đó Model có thể được xây dựng và kiểm thử độc lập
 với phần trình bày, đây chính là tính chất mà đồ án khai thác để kiểm thử các
 thuật toán lõi bằng kiểm thử đơn vị (trình bày ở Chương 4).
 
 Tài liệu của Microsoft cũng khuyến nghị rằng Controller không nên gánh quá nhiều
 trách nhiệm, và để tránh điều đó thì nên đẩy logic nghiệp vụ ra khỏi Controller
-[1]. Khuyến nghị này là căn cứ trực tiếp cho quyết định thiết kế của đồ án: tách
+[12]. Khuyến nghị này là căn cứ trực tiếp cho quyết định thiết kế của đồ án: tách
 riêng một tầng **Service** để chứa ba thuật toán lõi, còn Controller chỉ đóng vai
 trò tiếp nhận yêu cầu, gọi Service và trả về View.
 
 ### 2.1.2. Các thành phần của ASP.NET Core MVC được sử dụng
 
 ASP.NET Core MVC là khung làm việc mã nguồn mở, nhẹ và có tính kiểm thử cao dành
-cho tầng trình bày [1]. Đồ án sử dụng trực tiếp các cơ chế sau của khung này:
+cho tầng trình bày [12]. Đồ án sử dụng trực tiếp các cơ chế sau của khung này:
 
 - **Định tuyến (routing):** ánh xạ URL tới hành động của Controller. Đồ án sử
-  dụng định tuyến theo quy ước với khuôn dạng `{controller}/{action}/{id?}` [1].
+  dụng định tuyến theo quy ước với khuôn dạng `{controller}/{action}/{id?}` [12].
 - **Model binding:** tự động chuyển dữ liệu từ yêu cầu HTTP (giá trị biểu mẫu, dữ
   liệu tuyến, tham số chuỗi truy vấn) thành đối tượng mà Controller xử lý được
-  [1]. Cơ chế này được đồ án sử dụng để ánh xạ toàn bộ tham số lọc và sắp xếp của
+  [12]. Cơ chế này được đồ án sử dụng để ánh xạ toàn bộ tham số lọc và sắp xếp của
   trang danh sách món ăn vào một lớp ViewModel duy nhất.
 - **Kiểm tra hợp lệ (model validation):** thực hiện thông qua các thuộc tính chú
   giải dữ liệu, được kiểm tra ở cả phía máy khách trước khi gửi và phía máy chủ
-  trước khi hành động của Controller được gọi [1].
+  trước khi hành động của Controller được gọi [12].
 - **Tiêm phụ thuộc (dependency injection):** Controller yêu cầu các dịch vụ cần
-  thiết thông qua hàm khởi tạo [1]. Đồ án dùng cơ chế này để đưa các lớp Service
+  thiết thông qua hàm khởi tạo [12]. Đồ án dùng cơ chế này để đưa các lớp Service
   vào Controller.
 - **Bộ lọc (filters):** đóng gói các mối quan tâm cắt ngang như xử lý ngoại lệ
   hay phân quyền; thuộc tính `[Authorize]` chính là bộ lọc phân quyền có sẵn của
-  khung [1].
-- **Areas:** cơ chế phân hoạch ứng dụng lớn thành các nhóm chức năng nhỏ hơn [1].
+  khung [12].
+- **Areas:** cơ chế phân hoạch ứng dụng lớn thành các nhóm chức năng nhỏ hơn [12].
   Đồ án dùng Area để tách riêng toàn bộ khu vực quản trị.
 - **Razor và Tag Helpers:** Razor là ngôn ngữ đánh dấu mẫu cho phép nhúng mã C#
   vào HTML để sinh nội dung phía máy chủ; Tag Helpers cho phép mã phía máy chủ
-  tham gia vào việc tạo và kết xuất phần tử HTML [1].
+  tham gia vào việc tạo và kết xuất phần tử HTML [12].
 
 ## 2.2. Entity Framework Core và tiếp cận Code-First
 
@@ -430,9 +585,9 @@ cơ sở dữ liệu là **migrations**. Tài liệu của Microsoft mô tả: t
 thực tế, mô hình dữ liệu thay đổi khi các tính năng được hiện thực hóa, và lược
 đồ cơ sở dữ liệu cần thay đổi tương ứng để đồng bộ với ứng dụng; tính năng
 migrations của EF Core cung cấp cách cập nhật lược đồ một cách tăng dần nhằm giữ
-đồng bộ với mô hình dữ liệu trong khi vẫn bảo toàn dữ liệu hiện có [2].
+đồng bộ với mô hình dữ liệu trong khi vẫn bảo toàn dữ liệu hiện có [11].
 
-Cơ chế hoạt động của migrations gồm hai bước [2]:
+Cơ chế hoạt động của migrations gồm hai bước [11]:
 
 1. Khi mô hình thay đổi, lập trình viên dùng công cụ dòng lệnh của EF Core để tạo
    một migration mô tả các cập nhật cần thiết. EF Core so sánh mô hình hiện tại
@@ -444,7 +599,7 @@ Cơ chế hoạt động của migrations gồm hai bước [2]:
    được migration nào đã và chưa được áp dụng.
 
 Hai lệnh chính được sử dụng là `dotnet ef migrations add <Tên>` để tạo migration
-và `dotnet ef database update` để áp dụng vào cơ sở dữ liệu [2].
+và `dotnet ef database update` để áp dụng vào cơ sở dữ liệu [11].
 
 Lựa chọn Code-First mang lại một lợi ích thực tiễn quan trọng cho đồ án: hội đồng
 đánh giá có thể dựng lại toàn bộ cơ sở dữ liệu trên máy của mình chỉ bằng một
@@ -455,7 +610,7 @@ của công cụ quản trị.
 
 ASP.NET Core Identity là hệ thống quản lý thành viên của nền tảng, cung cấp sẵn
 các chức năng đăng ký, đăng nhập, lưu trữ thông tin người dùng và quản lý vai trò
-[3]. Việc sử dụng Identity thay vì tự cài đặt cơ chế xác thực mang lại ba lợi ích
+[10]. Việc sử dụng Identity thay vì tự cài đặt cơ chế xác thực mang lại ba lợi ích
 mà đồ án khai thác.
 
 **Thứ nhất, về lưu trữ mật khẩu.** Identity không lưu mật khẩu dạng nguyên bản mà
@@ -464,12 +619,12 @@ yêu cầu bắt buộc về an toàn thông tin: nếu cơ sở dữ liệu b�
 thu được mật khẩu gốc của người dùng.
 
 **Thứ hai, về chính sách mật khẩu.** Identity cho phép cấu hình các ràng buộc như
-độ dài tối thiểu, yêu cầu chữ số, chữ hoa hay ký tự đặc biệt [3]. Đồ án cấu hình
+độ dài tối thiểu, yêu cầu chữ số, chữ hoa hay ký tự đặc biệt [10]. Đồ án cấu hình
 độ dài tối thiểu là 8 ký tự.
 
 **Thứ ba, về phân quyền theo vai trò.** Identity hỗ trợ mô hình vai trò
 (role-based authorization), cho phép gán người dùng vào các vai trò và giới hạn
-truy cập theo vai trò. Kết hợp với bộ lọc `[Authorize]` của MVC [1], hệ thống có
+truy cập theo vai trò. Kết hợp với bộ lọc `[Authorize]` của MVC [12], hệ thống có
 thể khai báo phân quyền ngay tại lớp Controller. Đồ án định nghĩa hai vai trò là
 `Admin` và `User`; toàn bộ khu vực quản trị được bảo vệ bằng
 `[Authorize(Roles = "Admin")]`.
@@ -520,7 +675,7 @@ liệu mà người dùng đang có, $I_R$ là tập nguyên liệu cần thiế
 
 **Hệ số Jaccard.** Độ đo tương đồng tập hợp được sử dụng phổ biến nhất là hệ số
 Jaccard, định nghĩa bằng tỉ số giữa lực lượng phần giao và lực lượng phần hợp của
-hai tập hợp [15]:
+hai tập hợp [8]:
 
 $$J(A, I_R) = \frac{|A \cap I_R|}{|A \cup I_R|}$$
 
@@ -584,7 +739,7 @@ và luôn có thể chỉnh sửa thủ công.
 
 **Lựa chọn chiến lược tham lam.** Thuật toán tham lam là chiến lược tại mỗi bước
 chọn phương án có vẻ tốt nhất ở thời điểm hiện tại, không quay lui để xét lại các
-lựa chọn đã thực hiện [14]. Chiến lược này không bảo đảm nghiệm tối ưu toàn cục
+lựa chọn đã thực hiện [6]. Chiến lược này không bảo đảm nghiệm tối ưu toàn cục
 trong trường hợp tổng quát, nhưng cho lời giải chấp nhận được với chi phí tính
 toán thấp, phù hợp với yêu cầu phản hồi tức thời của ứng dụng web.
 
@@ -667,18 +822,45 @@ dồn khối lượng.
 Các cơ sở lý thuyết này sẽ được vận dụng trực tiếp vào phần thiết kế và cài đặt ở
 Chương 3.
 
-\newpage
 
 
+```{=openxml}
+<w:p><w:r><w:br w:type="page"/></w:r></w:p>
+```
 # CHƯƠNG 3. HIỆN THỰC HÓA NGHIÊN CỨU
 
 Chương này trình bày quá trình hiện thực hóa hệ thống, đi từ đặc tả yêu cầu tới
 thiết kế cơ sở dữ liệu, thiết kế lớp, thiết kế luồng xử lý và cuối cùng là chi
 tiết cài đặt ba thuật toán lõi.
 
-## 3.1. Đặc tả yêu cầu
+## 3.1. Mô tả bài toán
 
-### 3.1.1. Xác định tác nhân
+Bài toán của đồ án xoay quanh chuỗi công việc hằng ngày của người nội trợ:
+quyết định nấu món gì từ nguyên liệu đang có, sắp xếp các bữa ăn cho cả tuần,
+và tổng hợp danh sách cần mua. Hình 3.1 mô tả bài toán ở mức tổng quát: người
+nội trợ tương tác với hệ thống qua ba chức năng nối tiếp nhau, cả ba cùng khai
+thác một kho dữ liệu món ăn đã chuẩn hóa về định lượng nguyên liệu.
+
+![Sơ đồ mô tả bài toán](../diagrams/00-mo-ta-bai-toan.png){width=12.0cm}
+
+*Hình 3.1. Sơ đồ mô tả bài toán ở mức tổng quát*
+
+Luồng nghiệp vụ chính diễn ra như sau. Người dùng khai báo các nguyên liệu
+đang có; hệ thống đối chiếu với kho công thức và trả về danh sách món được xếp
+hạng theo mức độ phù hợp, ghi rõ món nào nấu được ngay và món nào còn thiếu
+nguyên liệu gì. Khi cần lên kế hoạch cho cả tuần, hệ thống sinh tự động lịch
+7 ngày với 3 bữa mỗi ngày, người dùng chỉnh tay từng ô nếu muốn. Cuối cùng, từ
+thực đơn đã chốt, hệ thống gộp toàn bộ nguyên liệu của 21 suất ăn thành danh
+sách đi chợ, cộng dồn khối lượng theo từng nguyên liệu và đơn vị.
+
+Ba chức năng này tương ứng với ba bài toán con đã phân tích ở mục 1.1: truy
+vấn ngược từ nguyên liệu, xếp lịch có ràng buộc, và gộp nhóm - tổng hợp. Phần
+còn lại của chương trình bày yêu cầu, thiết kế dữ liệu và cách cài đặt từng
+bài toán con đó.
+
+## 3.2. Đặc tả yêu cầu
+
+### 3.2.1. Xác định tác nhân
 
 Hệ thống có ba tác nhân, phân biệt theo mức quyền truy cập tăng dần:
 
@@ -693,7 +875,7 @@ Hệ thống có ba tác nhân, phân biệt theo mức quyền truy cập tăng
 Quan hệ giữa ba tác nhân là quan hệ kế thừa quyền: Người dùng có toàn bộ quyền
 của Khách, Quản trị viên có toàn bộ quyền của Người dùng.
 
-### 3.1.2. Yêu cầu chức năng
+### 3.2.2. Yêu cầu chức năng
 
 **Nhóm A - Chức năng dành cho Khách (không cần đăng nhập)**
 
@@ -736,7 +918,7 @@ của Khách, Quản trị viên có toàn bộ quyền của Người dùng.
 
 *Bảng 3.4. Yêu cầu chức năng dành cho Quản trị viên*
 
-### 3.1.3. Yêu cầu phi chức năng
+### 3.2.3. Yêu cầu phi chức năng
 
 | Mã | Yêu cầu | Tiêu chí nghiệm thu |
 |---|---|---|
@@ -750,50 +932,13 @@ của Khách, Quản trị viên có toàn bộ quyền của Người dùng.
 
 *Bảng 3.5. Yêu cầu phi chức năng*
 
-### 3.1.4. Sơ đồ use-case
-
-![Sơ đồ use-case tổng quát của hệ thống](../diagrams/02-use-case.png){width=12.5cm}
-
-*Hình 3.1. Sơ đồ use-case tổng quát*
-
-## 3.2. Thiết kế kiến trúc hệ thống
-
-Hệ thống được tổ chức theo mô hình phân tầng, cụ thể hóa mẫu MVC đã trình bày ở
-mục 2.1. Điểm khác biệt so với mẫu MVC cơ bản là việc bổ sung **tầng Service**
-nằm giữa Controller và tầng truy cập dữ liệu.
-
-![Kiến trúc phân tầng của hệ thống](../diagrams/01-kien-truc.png){width=5.3cm}
-
-*Hình 3.2. Kiến trúc phân tầng và luồng xử lý một yêu cầu*
-
-Lý do tách tầng Service, như đã lập luận ở mục 2.1.1, là để logic nghiệp vụ không
-phụ thuộc vào hạ tầng web. Nhờ đó ba thuật toán lõi có thể được kiểm thử bằng
-kiểm thử đơn vị mà không cần khởi động máy chủ web hay mô phỏng đối tượng
-`HttpContext`. Kết quả cụ thể của lựa chọn này được trình bày ở mục 4.4.
-
-Cấu trúc thư mục của ứng dụng web như sau:
-
-```
-CookingAdvisor/
-├── Controllers/      Tiếp nhận yêu cầu, gọi Service, trả View
-├── Areas/Admin/      Khu vực quản trị, tách riêng bằng cơ chế Area
-├── Services/         Logic nghiệp vụ, nơi đặt ba thuật toán lõi
-├── Models/           Thực thể EF Core và các kiểu liệt kê
-├── ViewModels/       Dữ liệu truyền giữa Controller và View
-├── Data/             AppDbContext và DbInitializer
-├── Views/            Giao diện Razor
-├── TagHelpers/       Tag helper tự viết cho hệ thống biểu tượng
-├── Migrations/       Lịch sử thay đổi lược đồ cơ sở dữ liệu
-└── wwwroot/          Tài nguyên tĩnh: CSS, JavaScript, phông chữ, ảnh
-```
-
-## 3.3. Thiết kế cơ sở dữ liệu
+## 3.3. Mô hình cơ sở dữ liệu
 
 ### 3.3.1. Sơ đồ quan hệ thực thể
 
-![Sơ đồ quan hệ thực thể của hệ thống](../diagrams/03-erd.png){width=7.4cm}
+![Sơ đồ quan hệ thực thể của hệ thống](../diagrams/03-erd.png){width=6.2cm}
 
-*Hình 3.3. Sơ đồ ERD*
+*Hình 3.2. Sơ đồ ERD*
 
 ### 3.3.2. Mô tả các bảng
 
@@ -902,19 +1047,58 @@ mặc định, và nạp dữ liệu mẫu nếu bảng `Recipes` còn rỗng. D
 Điều kiện "chỉ nạp khi bảng còn rỗng" bảo đảm thao tác khởi động là **lũy đẳng**:
 chạy lại ứng dụng nhiều lần không tạo ra dữ liệu trùng lặp.
 
-## 3.4. Thiết kế lớp
+## 3.4. Lược đồ use case
 
-### 3.4.1. Lớp thực thể
+Hình 3.3 tổng hợp các ca sử dụng của ba tác nhân đã xác định ở mục 3.5.1; quan hệ kế thừa quyền giữa các tác nhân được thể hiện bằng việc tác nhân cấp cao dùng được mọi ca của cấp thấp hơn.
 
-![Sơ đồ lớp các thực thể](../diagrams/04-so-do-lop.png){width=8.0cm}
+![Sơ đồ use-case tổng quát của hệ thống](../diagrams/02-use-case.png){width=12.0cm}
 
-*Hình 3.4. Sơ đồ lớp tầng thực thể*
+*Hình 3.3. Sơ đồ use-case tổng quát*
 
-### 3.4.2. Lớp dịch vụ và lớp điều khiển
+## 3.5. Kiến trúc hệ thống
 
-![Sơ đồ lớp tầng dịch vụ](../diagrams/05-so-do-lop-service.png){width=12.5cm}
+Hệ thống được tổ chức theo mô hình phân tầng, cụ thể hóa mẫu MVC đã trình bày ở
+mục 2.1. Điểm khác biệt so với mẫu MVC cơ bản là việc bổ sung **tầng Service**
+nằm giữa Controller và tầng truy cập dữ liệu.
 
-*Hình 3.5. Sơ đồ lớp tầng dịch vụ và quan hệ với tầng điều khiển*
+![Kiến trúc phân tầng của hệ thống](../diagrams/01-kien-truc.png){width=4.4cm}
+
+*Hình 3.4. Kiến trúc phân tầng và luồng xử lý một yêu cầu*
+
+Lý do tách tầng Service, như đã lập luận ở mục 2.1.1, là để logic nghiệp vụ không
+phụ thuộc vào hạ tầng web. Nhờ đó ba thuật toán lõi có thể được kiểm thử bằng
+kiểm thử đơn vị mà không cần khởi động máy chủ web hay mô phỏng đối tượng
+`HttpContext`. Kết quả cụ thể của lựa chọn này được trình bày ở mục 4.4.
+
+Cấu trúc thư mục của ứng dụng web như sau:
+
+```
+CookingAdvisor/
+├── Controllers/      Tiếp nhận yêu cầu, gọi Service, trả View
+├── Areas/Admin/      Khu vực quản trị, tách riêng bằng cơ chế Area
+├── Services/         Logic nghiệp vụ, nơi đặt ba thuật toán lõi
+├── Models/           Thực thể EF Core và các kiểu liệt kê
+├── ViewModels/       Dữ liệu truyền giữa Controller và View
+├── Data/             AppDbContext và DbInitializer
+├── Views/            Giao diện Razor
+├── TagHelpers/       Tag helper tự viết cho hệ thống biểu tượng
+├── Migrations/       Lịch sử thay đổi lược đồ cơ sở dữ liệu
+└── wwwroot/          Tài nguyên tĩnh: CSS, JavaScript, phông chữ, ảnh
+```
+
+## 3.6. Thiết kế lớp
+
+### 3.6.1. Lớp thực thể
+
+![Sơ đồ lớp các thực thể](../diagrams/04-so-do-lop.png){width=6.8cm}
+
+*Hình 3.5. Sơ đồ lớp tầng thực thể*
+
+### 3.6.2. Lớp dịch vụ và lớp điều khiển
+
+![Sơ đồ lớp tầng dịch vụ](../diagrams/05-so-do-lop-service.png){width=12.0cm}
+
+*Hình 3.6. Sơ đồ lớp tầng dịch vụ và quan hệ với tầng điều khiển*
 
 Bảng sau tóm tắt trách nhiệm của từng lớp dịch vụ:
 
@@ -931,39 +1115,39 @@ Bảng sau tóm tắt trách nhiệm của từng lớp dịch vụ:
 Các lớp dịch vụ được đăng ký vào bộ chứa tiêm phụ thuộc với vòng đời `Scoped`,
 tương ứng với vòng đời của `AppDbContext`.
 
-## 3.5. Thiết kế luồng xử lý
+## 3.7. Thiết kế luồng xử lý
 
-### 3.5.1. Luồng gợi ý theo nguyên liệu
+### 3.7.1. Luồng gợi ý theo nguyên liệu
 
-![Sơ đồ tuần tự chức năng gợi ý theo nguyên liệu](../diagrams/06-tuan-tu-goi-y.png){width=9.5cm}
+![Sơ đồ tuần tự chức năng gợi ý theo nguyên liệu](../diagrams/06-tuan-tu-goi-y.png){width=7.8cm}
 
-*Hình 3.6. Sơ đồ tuần tự chức năng gợi ý theo nguyên liệu*
+*Hình 3.7. Sơ đồ tuần tự chức năng gợi ý theo nguyên liệu*
 
-### 3.5.2. Luồng sinh thực đơn tuần
+### 3.7.2. Luồng sinh thực đơn tuần
 
-![Sơ đồ tuần tự chức năng sinh thực đơn tuần](../diagrams/07-tuan-tu-thuc-don.png){width=9.4cm}
+![Sơ đồ tuần tự chức năng sinh thực đơn tuần](../diagrams/07-tuan-tu-thuc-don.png){width=7.7cm}
 
-*Hình 3.7. Sơ đồ tuần tự chức năng sinh thực đơn tuần*
+*Hình 3.8. Sơ đồ tuần tự chức năng sinh thực đơn tuần*
 
-### 3.5.3. Luồng sinh danh sách đi chợ
+### 3.7.3. Luồng sinh danh sách đi chợ
 
-![Sơ đồ tuần tự chức năng sinh danh sách đi chợ](../diagrams/08-tuan-tu-di-cho.png){width=10.7cm}
+![Sơ đồ tuần tự chức năng sinh danh sách đi chợ](../diagrams/08-tuan-tu-di-cho.png){width=8.8cm}
 
-*Hình 3.8. Sơ đồ tuần tự chức năng sinh danh sách đi chợ*
+*Hình 3.9. Sơ đồ tuần tự chức năng sinh danh sách đi chợ*
 
 Điểm đáng chú ý ở luồng này là bước nạp dữ liệu có kèm điều kiện lọc theo
 `UserId`. Nhờ đó, nếu người dùng cố tình gửi mã thực đơn của người khác, truy vấn
 trả về rỗng và hệ thống ném ngoại lệ, thay vì sinh danh sách đi chợ từ dữ liệu
 không thuộc quyền của họ. Đây là cách hiện thực yêu cầu phi chức năng N3 đã nêu ở
-mục 3.1.3.
+mục 3.2.3.
 
-## 3.6. Cài đặt các thuật toán lõi
+## 3.8. Cài đặt các thuật toán lõi
 
-### 3.6.1. Thuật toán gợi ý theo nguyên liệu
+### 3.8.1. Thuật toán gợi ý theo nguyên liệu
 
-![Lưu đồ thuật toán gợi ý theo nguyên liệu](../diagrams/09-flowchart-goi-y.png){width=5.6cm}
+![Lưu đồ thuật toán gợi ý theo nguyên liệu](../diagrams/09-flowchart-goi-y.png){width=4.6cm}
 
-*Hình 3.9. Lưu đồ thuật toán gợi ý theo nguyên liệu*
+*Hình 3.10. Lưu đồ thuật toán gợi ý theo nguyên liệu*
 
 **Mã giả**
 
@@ -1021,11 +1205,11 @@ kết quả có thứ tự tất định.
 **Độ phức tạp:** $O(nk + n\log n)$ với $n$ là số món thỏa điều kiện lọc và $k$ là
 số nguyên liệu trung bình mỗi món.
 
-### 3.6.2. Thuật toán sinh thực đơn tuần
+### 3.8.2. Thuật toán sinh thực đơn tuần
 
-![Lưu đồ thuật toán sinh thực đơn tuần](../diagrams/10-flowchart-thuc-don.png){width=3.4cm}
+![Lưu đồ thuật toán sinh thực đơn tuần](../diagrams/10-flowchart-thuc-don.png){width=2.8cm}
 
-*Hình 3.10. Lưu đồ thuật toán sinh thực đơn tuần*
+*Hình 3.11. Lưu đồ thuật toán sinh thực đơn tuần*
 
 **Mã giả**
 
@@ -1111,7 +1295,7 @@ kiện cần để viết kiểm thử tự động.
 
 **Độ phức tạp:** $O(S \cdot n \log n)$ với $S = 21$ suất và $n$ số món ứng viên.
 
-### 3.6.3. Thuật toán sinh danh sách đi chợ
+### 3.8.3. Thuật toán sinh danh sách đi chợ
 
 **Mã giả**
 
@@ -1166,9 +1350,9 @@ thực đơn rồi tạo lại danh sách, hệ thống xóa các dòng cũ và 
 **Độ phức tạp:** $O(S \cdot k)$ với $S$ là số suất ăn và $k$ là số nguyên liệu
 trung bình mỗi món.
 
-## 3.7. Một số điểm cài đặt khác
+## 3.9. Một số điểm cài đặt khác
 
-### 3.7.1. Tìm kiếm, lọc và sắp xếp
+### 3.9.1. Tìm kiếm, lọc và sắp xếp
 
 Toàn bộ tham số tìm kiếm được gom vào một lớp `RecipeFilterViewModel` và ánh xạ
 tự động nhờ cơ chế model binding. Các điều kiện lọc được ghép dần vào đối tượng
@@ -1185,7 +1369,7 @@ Mọi phương án sắp xếp đều kết thúc bằng khóa phụ là tên m�
 món có cùng giá trị sắp xếp sẽ không có thứ tự tất định và một món có thể xuất
 hiện ở hai trang khác nhau khi phân trang.
 
-### 3.7.2. Bảo mật
+### 3.9.2. Bảo mật
 
 | Nguy cơ | Biện pháp trong hệ thống |
 |---|---|
@@ -1198,8 +1382,10 @@ hiện ở hai trang khác nhau khi phân trang.
 
 *Bảng 3.10. Nguy cơ bảo mật và biện pháp áp dụng*
 
-\newpage
 
+```{=openxml}
+<w:p><w:r><w:br w:type="page"/></w:r></w:p>
+```
 # CHƯƠNG 4. KẾT QUẢ NGHIÊN CỨU
 
 ## 4.1. Môi trường triển khai và dữ liệu thử nghiệm
@@ -1230,21 +1416,21 @@ Dữ liệu thử nghiệm do `DbInitializer` nạp tự động:
 
 ### 4.2.1. Trang chủ và duyệt món ăn
 
-![Trang chủ](../images/h4-01-trang-chu.jpg){width=7.3cm}
+![Trang chủ](../images/h4-01-trang-chu.jpg){width=6.0cm}
 
 *Hình 4.1. Trang chủ*
 
-![Danh sách món ăn](../images/h4-02-danh-sach-mon.jpg){width=10.0cm}
+![Danh sách món ăn](../images/h4-02-danh-sach-mon.jpg){width=8.2cm}
 
 *Hình 4.2. Trang danh sách món ăn với bộ lọc bên trái và lưới kết quả*
 
-![Chi tiết món ăn](../images/h4-04-chi-tiet-mon.jpg){width=10.1cm}
+![Chi tiết món ăn](../images/h4-04-chi-tiet-mon.jpg){width=8.3cm}
 
 *Hình 4.3. Trang chi tiết món ăn*
 
 ### 4.2.2. Tìm kiếm, lọc và sắp xếp
 
-![Kết quả lọc và sắp xếp](../images/h4-03-loc-va-sap-xep.jpg){width=10.0cm}
+![Kết quả lọc và sắp xếp](../images/h4-03-loc-va-sap-xep.jpg){width=8.2cm}
 
 *Hình 4.4. Kết quả khi lọc theo vùng miền Nam, độ khó Dễ và sắp xếp theo năng
 lượng tăng dần*
@@ -1256,11 +1442,11 @@ thái lọc hiện tại.
 
 ### 4.2.3. Gợi ý theo nguyên liệu
 
-![Màn hình gợi ý khi chưa chọn nguyên liệu](../images/h4-05-goi-y-chua-chon.jpg){width=12.5cm}
+![Màn hình gợi ý khi chưa chọn nguyên liệu](../images/h4-05-goi-y-chua-chon.jpg){width=11.2cm}
 
 *Hình 4.5. Trạng thái ban đầu khi người dùng chưa chọn nguyên liệu nào*
 
-![Kết quả gợi ý](../images/h4-06-goi-y-ket-qua.jpg){width=12.5cm}
+![Kết quả gợi ý](../images/h4-06-goi-y-ket-qua.jpg){width=11.2cm}
 
 *Hình 4.6. Kết quả gợi ý với 8 nguyên liệu đầu vào*
 
@@ -1269,15 +1455,15 @@ muống, tỏi), hệ thống trả về **24 món phù hợp**, trong đó **2 
 và 22 món còn thiếu nguyên liệu. Hai món nấu được ngay được xếp lên đầu danh sách
 và mang nhãn màu xanh "Đủ nguyên liệu"; các món còn lại mang nhãn màu hổ phách
 ghi rõ số nguyên liệu còn thiếu, kèm danh sách tên nguyên liệu đó ngay dưới tên
-món. Kết quả này thể hiện đúng thứ tự ưu tiên đã thiết kế ở mục 3.6.1.
+món. Kết quả này thể hiện đúng thứ tự ưu tiên đã thiết kế ở mục 3.8.1.
 
 ### 4.2.4. Thực đơn tuần
 
-![Màn hình sinh thực đơn](../images/h4-07-thuc-don-danh-sach.jpg){width=12.5cm}
+![Màn hình sinh thực đơn](../images/h4-07-thuc-don-danh-sach.jpg){width=11.2cm}
 
 *Hình 4.7. Biểu mẫu sinh thực đơn và danh sách thực đơn đã lưu*
 
-![Lịch thực đơn tuần](../images/h4-08-thuc-don-tuan.jpg){width=12.5cm}
+![Lịch thực đơn tuần](../images/h4-08-thuc-don-tuan.jpg){width=11.2cm}
 
 *Hình 4.8. Lịch thực đơn 7 ngày × 3 bữa*
 
@@ -1287,7 +1473,7 @@ lượng theo từng ngày, lần lượt là 1580, 1270, 1130, 1270, 1110, 1030
 
 ### 4.2.5. Danh sách đi chợ
 
-![Danh sách đi chợ](../images/h4-09-di-cho.jpg){width=5.0cm}
+![Danh sách đi chợ](../images/h4-09-di-cho.jpg){width=4.1cm}
 
 *Hình 4.9. Danh sách đi chợ sinh từ thực đơn ở Hình 4.8*
 
@@ -1298,15 +1484,15 @@ Thịt và Trứng/Sữa. Thanh tiến độ ở đầu trang cập nhật theo 
 
 ### 4.2.6. Tài khoản và phân quyền
 
-![Màn hình đăng nhập](../images/h4-15-dang-nhap.jpg){width=12.5cm}
+![Màn hình đăng nhập](../images/h4-15-dang-nhap.jpg){width=11.2cm}
 
 *Hình 4.10. Màn hình đăng nhập*
 
-![Màn hình đăng ký](../images/h4-20-dang-ky.jpg){width=12.5cm}
+![Màn hình đăng ký](../images/h4-20-dang-ky.jpg){width=11.2cm}
 
 *Hình 4.11. Màn hình đăng ký tài khoản*
 
-![Thông báo lỗi kiểm tra hợp lệ](../images/h4-21-loi-kiem-tra-hop-le.jpg){width=12.5cm}
+![Thông báo lỗi kiểm tra hợp lệ](../images/h4-21-loi-kiem-tra-hop-le.jpg){width=11.2cm}
 
 *Hình 4.12. Thông báo lỗi khi nhập dữ liệu không hợp lệ*
 
@@ -1315,7 +1501,7 @@ Hình 4.12 minh họa cơ chế kiểm tra hợp lệ hoạt động đồng th�
 báo lỗi hiển thị bằng tiếng Việt ngay dưới ô nhập tương ứng, viền ô nhập chuyển
 sang màu đỏ.
 
-![Màn hình chặn quyền truy cập](../images/h4-22-chan-quyen.jpg){width=12.5cm}
+![Màn hình chặn quyền truy cập](../images/h4-22-chan-quyen.jpg){width=11.2cm}
 
 *Hình 4.13. Kết quả khi tài khoản không phải quản trị viên truy cập khu vực quản trị*
 
@@ -1323,43 +1509,43 @@ Hình 4.13 xác nhận yêu cầu phi chức năng N2: một tài khoản vừa 
 trò `User` khi truy cập đường dẫn `/Admin/Recipes` bị chuyển hướng sang trang
 thông báo không đủ quyền, kèm tham số `ReturnUrl` ghi nhận trang đã bị chặn.
 
-![Danh sách món yêu thích](../images/h4-10-yeu-thich.jpg){width=12.5cm}
+![Danh sách món yêu thích](../images/h4-10-yeu-thich.jpg){width=11.2cm}
 
 *Hình 4.14. Danh sách món yêu thích*
 
 ### 4.2.7. Khu vực quản trị
 
-![Bảng điều khiển quản trị](../images/h4-11-admin-tong-quan.jpg){width=12.5cm}
+![Bảng điều khiển quản trị](../images/h4-11-admin-tong-quan.jpg){width=11.2cm}
 
 *Hình 4.15. Bảng điều khiển quản trị*
 
-![Danh sách quản lý món ăn](../images/h4-12-admin-mon-an.jpg){width=12.5cm}
+![Danh sách quản lý món ăn](../images/h4-12-admin-mon-an.jpg){width=11.2cm}
 
 *Hình 4.16. Danh sách quản lý món ăn*
 
-![Biểu mẫu sửa món ăn](../images/h4-13-admin-form-mon.jpg){width=7.3cm}
+![Biểu mẫu sửa món ăn](../images/h4-13-admin-form-mon.jpg){width=6.0cm}
 
 *Hình 4.17. Biểu mẫu sửa món ăn với phần gán nguyên liệu*
 
-![Danh sách quản lý nguyên liệu](../images/h4-14-admin-nguyen-lieu.jpg){width=12.5cm}
+![Danh sách quản lý nguyên liệu](../images/h4-14-admin-nguyen-lieu.jpg){width=11.2cm}
 
 *Hình 4.18. Danh sách quản lý nguyên liệu*
 
 ### 4.2.8. Giao diện đáp ứng và chế độ tối
 
-![Trang chủ trên màn hình di động](../images/h4-18-mobile-trang-chu.jpg){width=3.9cm}
+![Trang chủ trên màn hình di động](../images/h4-18-mobile-trang-chu.jpg){width=3.2cm}
 
 *Hình 4.19. Trang chủ trên màn hình rộng 390 px*
 
-![Bộ lọc dạng ngăn kéo](../images/h4-19-mobile-bo-loc.jpg){width=3.9cm}
+![Bộ lọc dạng ngăn kéo](../images/h4-19-mobile-bo-loc.jpg){width=3.2cm}
 
 *Hình 4.20. Bộ lọc chuyển thành ngăn kéo trượt trên màn hình hẹp*
 
-![Giao diện chế độ tối](../images/h4-17-che-do-toi.jpg){width=12.5cm}
+![Giao diện chế độ tối](../images/h4-17-che-do-toi.jpg){width=11.2cm}
 
 *Hình 4.21. Giao diện ở chế độ tối*
 
-![Trạng thái rỗng](../images/h4-16-trang-thai-rong.jpg){width=12.5cm}
+![Trạng thái rỗng](../images/h4-16-trang-thai-rong.jpg){width=11.2cm}
 
 *Hình 4.22. Ví dụ trạng thái khi chưa có dữ liệu*
 
@@ -1399,7 +1585,7 @@ Mỗi ca kiểm thử tạo một cơ sở dữ liệu riêng mang tên ngẫu n
 không ảnh hưởng lẫn nhau.
 
 Việc kiểm thử được ở mức này là kết quả trực tiếp của quyết định kiến trúc đã nêu
-ở mục 3.2: vì logic nghiệp vụ nằm ở tầng Service chứ không nằm trong Controller,
+ở mục 3.5: vì logic nghiệp vụ nằm ở tầng Service chứ không nằm trong Controller,
 nên có thể khởi tạo và kiểm thử trực tiếp mà không cần hạ tầng web.
 
 Cần lưu ý một giới hạn của cách tiếp cận này: nhà cung cấp In-Memory **không
@@ -1505,7 +1691,7 @@ lại đúng một món cho hầu hết các suất còn trống.
 *Đo lường.* Trên bộ dữ liệu thử, một món xuất hiện 12 lần trong khi nhiều món
 khác dùng được lại không được chọn lần nào.
 
-*Nguyên nhân.* Như đã phân tích ở mục 3.6.2, trong nhánh phải lặp, tiêu chí quyết
+*Nguyên nhân.* Như đã phân tích ở mục 3.8.2, trong nhánh phải lặp, tiêu chí quyết
 định lùi về khoảng cách năng lượng. Do trạng thái năng lượng tích lũy lặp lại
 theo chu kỳ, cùng một món luôn cho khoảng cách nhỏ nhất.
 
@@ -1537,7 +1723,7 @@ phục, ca kiểm thử đạt trở lại.
 ## 4.5. Kiểm thử giao diện
 
 Ngoài kiểm thử tự động ở mức đơn vị, giao diện được kiểm tra thủ công trên trình
-duyệt theo các tiêu chí phi chức năng đã nêu ở mục 3.1.3.
+duyệt theo các tiêu chí phi chức năng đã nêu ở mục 3.5.3.
 
 | Tiêu chí | Cách kiểm tra | Kết quả |
 |---|---|---|
@@ -1587,9 +1773,11 @@ triển ở Chương 5:
 8. **Chưa kiểm thử tích hợp và kiểm thử giao diện tự động.** Phần giao diện mới
    được kiểm tra thủ công.
 
-\newpage
 
 
+```{=openxml}
+<w:p><w:r><w:br w:type="page"/></w:r></w:p>
+```
 # CHƯƠNG 5. KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN
 
 ## 5.1. Kết luận
@@ -1629,7 +1817,7 @@ khuyết mà việc quan sát bằng mắt thường khó nhận ra:
 
 Việc phát hiện được hai khiếm khuyết này là minh chứng cho giá trị thực tế của
 kiểm thử tự động, đồng thời cho thấy quyết định kiến trúc tách tầng Service khỏi
-tầng Controller (mục 3.2) đã phát huy tác dụng: nếu logic nằm trong Controller,
+tầng Controller (mục 3.5) đã phát huy tác dụng: nếu logic nằm trong Controller,
 việc viết các ca kiểm thử này sẽ khó khăn hơn nhiều.
 
 **Về mặt giao diện,** hệ thống hiển thị đúng trên dải màn hình từ 375 px tới
@@ -1715,73 +1903,78 @@ Controller và kiểm thử giao diện tự động cho các kịch bản chín
 khi người dùng đang ở chợ hoặc siêu thị. Một ứng dụng di động có khả năng hoạt
 động ngoại tuyến sẽ phù hợp hơn giao diện web.
 
-\newpage
 
+```{=openxml}
+<w:p><w:r><w:br w:type="page"/></w:r></w:p>
+```
 # DANH MỤC TÀI LIỆU THAM KHẢO
 
-## Tài liệu kỹ thuật
+Danh mục xếp theo thứ tự từ điển và trình bày theo định dạng IEEE, thống nhất
+cho toàn bộ báo cáo.
 
-[1] Microsoft Learn. "Overview of ASP.NET Core MVC".
-https://learn.microsoft.com/en-us/aspnet/core/mvc/overview. Truy cập ngày
-25/07/2026.
+[1] Apple App Store, "Cookpad Recipes". [Online]. Địa chỉ:
+https://apps.apple.com/us/app/cookpad-recipes/id340368403. [Truy cập ngày
+25/07/2026].
 
-[2] Microsoft Learn. "Migrations Overview - EF Core".
-https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/. Truy cập
-ngày 25/07/2026.
+[2] Apple App Store, "Mealime Meal Plans & Recipes". [Online]. Địa chỉ:
+https://apps.apple.com/us/app/mealime-meal-plans-recipes/id1079999103. [Truy
+cập ngày 25/07/2026].
 
-[3] Microsoft Learn. "Introduction to Identity on ASP.NET Core".
-https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity.
-Truy cập ngày 25/07/2026.
+[3] Apple App Store, "Paprika Recipe Manager 3". [Online]. Địa chỉ:
+https://apps.apple.com/us/app/paprika-recipe-manager-3/id1303222628. [Truy cập
+ngày 25/07/2026].
 
-## Ứng dụng khảo sát
-
-[4] Apple App Store. "Cookpad Recipes".
-https://apps.apple.com/us/app/cookpad-recipes/id340368403. Truy cập ngày
-25/07/2026.
-
-[5] Cookpad. "Cookpad Việt Nam". https://cookpad.com/vn. Truy cập ngày
-25/07/2026.
-
-[6] Plan to Eat. "Yummly is Closing: Discover the Best Meal Planning
-Alternative".
-https://www.plantoeat.com/blog/2024/12/yummly-is-closing-discover-the-best-meal-planning-alternative/.
-Truy cập ngày 25/07/2026.
-
-[7] Kiểm tra trực tiếp trong quá trình khảo sát: truy vấn https://www.yummly.com/
-trả về mã chuyển hướng HTTP 301 tới https://www.kitchenaid.com/recipes; tên miền
-help.yummly.com không phân giải được. Ngày kiểm tra 25/07/2026.
-
-[8] CafeF. "Thị trường quá khốc liệt, Cooky - startup đi chợ online của Founder
-ShopeeFood rời thị trường Hà Nội, chỉ còn hoạt động tại TPHCM".
+[4] CafeF, "Thị trường quá khốc liệt, Cooky - startup đi chợ online của
+Founder ShopeeFood rời thị trường Hà Nội, chỉ còn hoạt động tại TPHCM".
+[Online]. Địa chỉ:
 https://cafef.vn/thi-truong-qua-khoc-liet-cooky-startup-di-cho-online-cua-founder-shopeefood-roi-thi-truong-ha-noi-chi-con-hoat-dong-tai-tphcm-188231205162148255.chn.
-Truy cập ngày 25/07/2026.
+[Truy cập ngày 25/07/2026].
 
-[9] Esheep Kitchen. Trang chủ. https://www.esheepkitchen.com/. Truy cập ngày
-25/07/2026.
+[5] Cookpad, "Cookpad Việt Nam". [Online]. Địa chỉ: https://cookpad.com/vn.
+[Truy cập ngày 25/07/2026].
 
-[10] Mealime. Trang chủ. https://www.mealime.com/. Truy cập ngày 25/07/2026.
+[6] T. H. Cormen, C. E. Leiserson, R. L. Rivest, C. Stein, Introduction to
+Algorithms, 4th ed., MIT Press, Cambridge, MA, 2022.
 
-[11] Apple App Store. "Mealime Meal Plans & Recipes".
-https://apps.apple.com/us/app/mealime-meal-plans-recipes/id1079999103. Truy cập
-ngày 25/07/2026.
+[7] Esheep Kitchen, Trang chủ. [Online]. Địa chỉ:
+https://www.esheepkitchen.com/. [Truy cập ngày 25/07/2026].
 
-[12] Paprika App. Trang chủ. https://www.paprikaapp.com/. Truy cập ngày
-25/07/2026.
+[8] C. D. Manning, P. Raghavan, H. Schütze, Introduction to Information
+Retrieval, Cambridge University Press, Cambridge, 2008.
 
-[13] Apple App Store. "Paprika Recipe Manager 3".
-https://apps.apple.com/us/app/paprika-recipe-manager-3/id1303222628. Truy cập
-ngày 25/07/2026.
+[9] Mealime, Trang chủ. [Online]. Địa chỉ: https://www.mealime.com/. [Truy cập
+ngày 25/07/2026].
 
-## Sách
+[10] Microsoft Learn, "Introduction to Identity on ASP.NET Core". [Online].
+Địa chỉ:
+https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity.
+[Truy cập ngày 25/07/2026].
 
-[14] T. H. Cormen, C. E. Leiserson, R. L. Rivest, C. Stein. *Introduction to
-Algorithms*, 4th ed. MIT Press, 2022.
+[11] Microsoft Learn, "Migrations Overview - EF Core". [Online]. Địa chỉ:
+https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/. [Truy
+cập ngày 25/07/2026].
 
-[15] C. D. Manning, P. Raghavan, H. Schütze. *Introduction to Information
-Retrieval*. Cambridge University Press, 2008.
+[12] Microsoft Learn, "Overview of ASP.NET Core MVC". [Online]. Địa chỉ:
+https://learn.microsoft.com/en-us/aspnet/core/mvc/overview. [Truy cập ngày
+25/07/2026].
 
-\newpage
+[13] Paprika App, Trang chủ. [Online]. Địa chỉ: https://www.paprikaapp.com/.
+[Truy cập ngày 25/07/2026].
 
+[14] Plan to Eat, "Yummly is Closing: Discover the Best Meal Planning
+Alternative". [Online]. Địa chỉ:
+https://www.plantoeat.com/blog/2024/12/yummly-is-closing-discover-the-best-meal-planning-alternative/.
+[Truy cập ngày 25/07/2026].
+
+[15] Yummly, kiểm tra trực tiếp trong quá trình khảo sát: truy vấn
+https://www.yummly.com/ trả về mã chuyển hướng HTTP 301 tới
+https://www.kitchenaid.com/recipes; tên miền help.yummly.com không phân giải
+được. [Ngày kiểm tra 25/07/2026].
+
+
+```{=openxml}
+<w:p><w:r><w:br w:type="page"/></w:r></w:p>
+```
 # PHỤ LỤC
 
 ## Phụ lục A. Hướng dẫn cài đặt và chạy hệ thống

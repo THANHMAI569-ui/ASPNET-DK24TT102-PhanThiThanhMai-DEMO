@@ -10,9 +10,34 @@ Chương này trình bày quá trình hiện thực hóa hệ thống, đi từ 
 thiết kế cơ sở dữ liệu, thiết kế lớp, thiết kế luồng xử lý và cuối cùng là chi
 tiết cài đặt ba thuật toán lõi.
 
-## 3.1. Đặc tả yêu cầu
+## 3.1. Mô tả bài toán
 
-### 3.1.1. Xác định tác nhân
+Bài toán của đồ án xoay quanh chuỗi công việc hằng ngày của người nội trợ:
+quyết định nấu món gì từ nguyên liệu đang có, sắp xếp các bữa ăn cho cả tuần,
+và tổng hợp danh sách cần mua. Hình 3.1 mô tả bài toán ở mức tổng quát: người
+nội trợ tương tác với hệ thống qua ba chức năng nối tiếp nhau, cả ba cùng khai
+thác một kho dữ liệu món ăn đã chuẩn hóa về định lượng nguyên liệu.
+
+![Sơ đồ mô tả bài toán](../diagrams/00-mo-ta-bai-toan.png)
+
+*Hình 3.1. Sơ đồ mô tả bài toán ở mức tổng quát*
+
+Luồng nghiệp vụ chính diễn ra như sau. Người dùng khai báo các nguyên liệu
+đang có; hệ thống đối chiếu với kho công thức và trả về danh sách món được xếp
+hạng theo mức độ phù hợp, ghi rõ món nào nấu được ngay và món nào còn thiếu
+nguyên liệu gì. Khi cần lên kế hoạch cho cả tuần, hệ thống sinh tự động lịch
+7 ngày với 3 bữa mỗi ngày, người dùng chỉnh tay từng ô nếu muốn. Cuối cùng, từ
+thực đơn đã chốt, hệ thống gộp toàn bộ nguyên liệu của 21 suất ăn thành danh
+sách đi chợ, cộng dồn khối lượng theo từng nguyên liệu và đơn vị.
+
+Ba chức năng này tương ứng với ba bài toán con đã phân tích ở mục 1.1: truy
+vấn ngược từ nguyên liệu, xếp lịch có ràng buộc, và gộp nhóm - tổng hợp. Phần
+còn lại của chương trình bày yêu cầu, thiết kế dữ liệu và cách cài đặt từng
+bài toán con đó.
+
+## 3.2. Đặc tả yêu cầu
+
+### 3.2.1. Xác định tác nhân
 
 Hệ thống có ba tác nhân, phân biệt theo mức quyền truy cập tăng dần:
 
@@ -27,7 +52,7 @@ Hệ thống có ba tác nhân, phân biệt theo mức quyền truy cập tăng
 Quan hệ giữa ba tác nhân là quan hệ kế thừa quyền: Người dùng có toàn bộ quyền
 của Khách, Quản trị viên có toàn bộ quyền của Người dùng.
 
-### 3.1.2. Yêu cầu chức năng
+### 3.2.2. Yêu cầu chức năng
 
 **Nhóm A - Chức năng dành cho Khách (không cần đăng nhập)**
 
@@ -70,7 +95,7 @@ của Khách, Quản trị viên có toàn bộ quyền của Người dùng.
 
 *Bảng 3.4. Yêu cầu chức năng dành cho Quản trị viên*
 
-### 3.1.3. Yêu cầu phi chức năng
+### 3.2.3. Yêu cầu phi chức năng
 
 | Mã | Yêu cầu | Tiêu chí nghiệm thu |
 |---|---|---|
@@ -84,50 +109,13 @@ của Khách, Quản trị viên có toàn bộ quyền của Người dùng.
 
 *Bảng 3.5. Yêu cầu phi chức năng*
 
-### 3.1.4. Sơ đồ use-case
-
-![Sơ đồ use-case tổng quát của hệ thống](../diagrams/02-use-case.png)
-
-*Hình 3.1. Sơ đồ use-case tổng quát*
-
-## 3.2. Thiết kế kiến trúc hệ thống
-
-Hệ thống được tổ chức theo mô hình phân tầng, cụ thể hóa mẫu MVC đã trình bày ở
-mục 2.1. Điểm khác biệt so với mẫu MVC cơ bản là việc bổ sung **tầng Service**
-nằm giữa Controller và tầng truy cập dữ liệu.
-
-![Kiến trúc phân tầng của hệ thống](../diagrams/01-kien-truc.png)
-
-*Hình 3.2. Kiến trúc phân tầng và luồng xử lý một yêu cầu*
-
-Lý do tách tầng Service, như đã lập luận ở mục 2.1.1, là để logic nghiệp vụ không
-phụ thuộc vào hạ tầng web. Nhờ đó ba thuật toán lõi có thể được kiểm thử bằng
-kiểm thử đơn vị mà không cần khởi động máy chủ web hay mô phỏng đối tượng
-`HttpContext`. Kết quả cụ thể của lựa chọn này được trình bày ở mục 4.4.
-
-Cấu trúc thư mục của ứng dụng web như sau:
-
-```
-CookingAdvisor/
-├── Controllers/      Tiếp nhận yêu cầu, gọi Service, trả View
-├── Areas/Admin/      Khu vực quản trị, tách riêng bằng cơ chế Area
-├── Services/         Logic nghiệp vụ, nơi đặt ba thuật toán lõi
-├── Models/           Thực thể EF Core và các kiểu liệt kê
-├── ViewModels/       Dữ liệu truyền giữa Controller và View
-├── Data/             AppDbContext và DbInitializer
-├── Views/            Giao diện Razor
-├── TagHelpers/       Tag helper tự viết cho hệ thống biểu tượng
-├── Migrations/       Lịch sử thay đổi lược đồ cơ sở dữ liệu
-└── wwwroot/          Tài nguyên tĩnh: CSS, JavaScript, phông chữ, ảnh
-```
-
-## 3.3. Thiết kế cơ sở dữ liệu
+## 3.3. Mô hình cơ sở dữ liệu
 
 ### 3.3.1. Sơ đồ quan hệ thực thể
 
 ![Sơ đồ quan hệ thực thể của hệ thống](../diagrams/03-erd.png)
 
-*Hình 3.3. Sơ đồ ERD*
+*Hình 3.2. Sơ đồ ERD*
 
 ### 3.3.2. Mô tả các bảng
 
@@ -236,19 +224,58 @@ mặc định, và nạp dữ liệu mẫu nếu bảng `Recipes` còn rỗng. D
 Điều kiện "chỉ nạp khi bảng còn rỗng" bảo đảm thao tác khởi động là **lũy đẳng**:
 chạy lại ứng dụng nhiều lần không tạo ra dữ liệu trùng lặp.
 
-## 3.4. Thiết kế lớp
+## 3.4. Lược đồ use case
 
-### 3.4.1. Lớp thực thể
+Hình 3.3 tổng hợp các ca sử dụng của ba tác nhân đã xác định ở mục 3.5.1; quan hệ kế thừa quyền giữa các tác nhân được thể hiện bằng việc tác nhân cấp cao dùng được mọi ca của cấp thấp hơn.
+
+![Sơ đồ use-case tổng quát của hệ thống](../diagrams/02-use-case.png)
+
+*Hình 3.3. Sơ đồ use-case tổng quát*
+
+## 3.5. Kiến trúc hệ thống
+
+Hệ thống được tổ chức theo mô hình phân tầng, cụ thể hóa mẫu MVC đã trình bày ở
+mục 2.1. Điểm khác biệt so với mẫu MVC cơ bản là việc bổ sung **tầng Service**
+nằm giữa Controller và tầng truy cập dữ liệu.
+
+![Kiến trúc phân tầng của hệ thống](../diagrams/01-kien-truc.png)
+
+*Hình 3.4. Kiến trúc phân tầng và luồng xử lý một yêu cầu*
+
+Lý do tách tầng Service, như đã lập luận ở mục 2.1.1, là để logic nghiệp vụ không
+phụ thuộc vào hạ tầng web. Nhờ đó ba thuật toán lõi có thể được kiểm thử bằng
+kiểm thử đơn vị mà không cần khởi động máy chủ web hay mô phỏng đối tượng
+`HttpContext`. Kết quả cụ thể của lựa chọn này được trình bày ở mục 4.4.
+
+Cấu trúc thư mục của ứng dụng web như sau:
+
+```
+CookingAdvisor/
+├── Controllers/      Tiếp nhận yêu cầu, gọi Service, trả View
+├── Areas/Admin/      Khu vực quản trị, tách riêng bằng cơ chế Area
+├── Services/         Logic nghiệp vụ, nơi đặt ba thuật toán lõi
+├── Models/           Thực thể EF Core và các kiểu liệt kê
+├── ViewModels/       Dữ liệu truyền giữa Controller và View
+├── Data/             AppDbContext và DbInitializer
+├── Views/            Giao diện Razor
+├── TagHelpers/       Tag helper tự viết cho hệ thống biểu tượng
+├── Migrations/       Lịch sử thay đổi lược đồ cơ sở dữ liệu
+└── wwwroot/          Tài nguyên tĩnh: CSS, JavaScript, phông chữ, ảnh
+```
+
+## 3.6. Thiết kế lớp
+
+### 3.6.1. Lớp thực thể
 
 ![Sơ đồ lớp các thực thể](../diagrams/04-so-do-lop.png)
 
-*Hình 3.4. Sơ đồ lớp tầng thực thể*
+*Hình 3.5. Sơ đồ lớp tầng thực thể*
 
-### 3.4.2. Lớp dịch vụ và lớp điều khiển
+### 3.6.2. Lớp dịch vụ và lớp điều khiển
 
 ![Sơ đồ lớp tầng dịch vụ](../diagrams/05-so-do-lop-service.png)
 
-*Hình 3.5. Sơ đồ lớp tầng dịch vụ và quan hệ với tầng điều khiển*
+*Hình 3.6. Sơ đồ lớp tầng dịch vụ và quan hệ với tầng điều khiển*
 
 Bảng sau tóm tắt trách nhiệm của từng lớp dịch vụ:
 
@@ -265,39 +292,39 @@ Bảng sau tóm tắt trách nhiệm của từng lớp dịch vụ:
 Các lớp dịch vụ được đăng ký vào bộ chứa tiêm phụ thuộc với vòng đời `Scoped`,
 tương ứng với vòng đời của `AppDbContext`.
 
-## 3.5. Thiết kế luồng xử lý
+## 3.7. Thiết kế luồng xử lý
 
-### 3.5.1. Luồng gợi ý theo nguyên liệu
+### 3.7.1. Luồng gợi ý theo nguyên liệu
 
 ![Sơ đồ tuần tự chức năng gợi ý theo nguyên liệu](../diagrams/06-tuan-tu-goi-y.png)
 
-*Hình 3.6. Sơ đồ tuần tự chức năng gợi ý theo nguyên liệu*
+*Hình 3.7. Sơ đồ tuần tự chức năng gợi ý theo nguyên liệu*
 
-### 3.5.2. Luồng sinh thực đơn tuần
+### 3.7.2. Luồng sinh thực đơn tuần
 
 ![Sơ đồ tuần tự chức năng sinh thực đơn tuần](../diagrams/07-tuan-tu-thuc-don.png)
 
-*Hình 3.7. Sơ đồ tuần tự chức năng sinh thực đơn tuần*
+*Hình 3.8. Sơ đồ tuần tự chức năng sinh thực đơn tuần*
 
-### 3.5.3. Luồng sinh danh sách đi chợ
+### 3.7.3. Luồng sinh danh sách đi chợ
 
 ![Sơ đồ tuần tự chức năng sinh danh sách đi chợ](../diagrams/08-tuan-tu-di-cho.png)
 
-*Hình 3.8. Sơ đồ tuần tự chức năng sinh danh sách đi chợ*
+*Hình 3.9. Sơ đồ tuần tự chức năng sinh danh sách đi chợ*
 
 Điểm đáng chú ý ở luồng này là bước nạp dữ liệu có kèm điều kiện lọc theo
 `UserId`. Nhờ đó, nếu người dùng cố tình gửi mã thực đơn của người khác, truy vấn
 trả về rỗng và hệ thống ném ngoại lệ, thay vì sinh danh sách đi chợ từ dữ liệu
 không thuộc quyền của họ. Đây là cách hiện thực yêu cầu phi chức năng N3 đã nêu ở
-mục 3.1.3.
+mục 3.2.3.
 
-## 3.6. Cài đặt các thuật toán lõi
+## 3.8. Cài đặt các thuật toán lõi
 
-### 3.6.1. Thuật toán gợi ý theo nguyên liệu
+### 3.8.1. Thuật toán gợi ý theo nguyên liệu
 
 ![Lưu đồ thuật toán gợi ý theo nguyên liệu](../diagrams/09-flowchart-goi-y.png)
 
-*Hình 3.9. Lưu đồ thuật toán gợi ý theo nguyên liệu*
+*Hình 3.10. Lưu đồ thuật toán gợi ý theo nguyên liệu*
 
 **Mã giả**
 
@@ -355,11 +382,11 @@ kết quả có thứ tự tất định.
 **Độ phức tạp:** $O(nk + n\log n)$ với $n$ là số món thỏa điều kiện lọc và $k$ là
 số nguyên liệu trung bình mỗi món.
 
-### 3.6.2. Thuật toán sinh thực đơn tuần
+### 3.8.2. Thuật toán sinh thực đơn tuần
 
 ![Lưu đồ thuật toán sinh thực đơn tuần](../diagrams/10-flowchart-thuc-don.png)
 
-*Hình 3.10. Lưu đồ thuật toán sinh thực đơn tuần*
+*Hình 3.11. Lưu đồ thuật toán sinh thực đơn tuần*
 
 **Mã giả**
 
@@ -445,7 +472,7 @@ kiện cần để viết kiểm thử tự động.
 
 **Độ phức tạp:** $O(S \cdot n \log n)$ với $S = 21$ suất và $n$ số món ứng viên.
 
-### 3.6.3. Thuật toán sinh danh sách đi chợ
+### 3.8.3. Thuật toán sinh danh sách đi chợ
 
 **Mã giả**
 
@@ -500,9 +527,9 @@ thực đơn rồi tạo lại danh sách, hệ thống xóa các dòng cũ và 
 **Độ phức tạp:** $O(S \cdot k)$ với $S$ là số suất ăn và $k$ là số nguyên liệu
 trung bình mỗi món.
 
-## 3.7. Một số điểm cài đặt khác
+## 3.9. Một số điểm cài đặt khác
 
-### 3.7.1. Tìm kiếm, lọc và sắp xếp
+### 3.9.1. Tìm kiếm, lọc và sắp xếp
 
 Toàn bộ tham số tìm kiếm được gom vào một lớp `RecipeFilterViewModel` và ánh xạ
 tự động nhờ cơ chế model binding. Các điều kiện lọc được ghép dần vào đối tượng
@@ -519,7 +546,7 @@ Mọi phương án sắp xếp đều kết thúc bằng khóa phụ là tên m�
 món có cùng giá trị sắp xếp sẽ không có thứ tự tất định và một món có thể xuất
 hiện ở hai trang khác nhau khi phân trang.
 
-### 3.7.2. Bảo mật
+### 3.9.2. Bảo mật
 
 | Nguy cơ | Biện pháp trong hệ thống |
 |---|---|
@@ -603,7 +630,7 @@ muống, tỏi), hệ thống trả về **24 món phù hợp**, trong đó **2 
 và 22 món còn thiếu nguyên liệu. Hai món nấu được ngay được xếp lên đầu danh sách
 và mang nhãn màu xanh "Đủ nguyên liệu"; các món còn lại mang nhãn màu hổ phách
 ghi rõ số nguyên liệu còn thiếu, kèm danh sách tên nguyên liệu đó ngay dưới tên
-món. Kết quả này thể hiện đúng thứ tự ưu tiên đã thiết kế ở mục 3.6.1.
+món. Kết quả này thể hiện đúng thứ tự ưu tiên đã thiết kế ở mục 3.8.1.
 
 ### 4.2.4. Thực đơn tuần
 
@@ -733,7 +760,7 @@ Mỗi ca kiểm thử tạo một cơ sở dữ liệu riêng mang tên ngẫu n
 không ảnh hưởng lẫn nhau.
 
 Việc kiểm thử được ở mức này là kết quả trực tiếp của quyết định kiến trúc đã nêu
-ở mục 3.2: vì logic nghiệp vụ nằm ở tầng Service chứ không nằm trong Controller,
+ở mục 3.5: vì logic nghiệp vụ nằm ở tầng Service chứ không nằm trong Controller,
 nên có thể khởi tạo và kiểm thử trực tiếp mà không cần hạ tầng web.
 
 Cần lưu ý một giới hạn của cách tiếp cận này: nhà cung cấp In-Memory **không
@@ -839,7 +866,7 @@ lại đúng một món cho hầu hết các suất còn trống.
 *Đo lường.* Trên bộ dữ liệu thử, một món xuất hiện 12 lần trong khi nhiều món
 khác dùng được lại không được chọn lần nào.
 
-*Nguyên nhân.* Như đã phân tích ở mục 3.6.2, trong nhánh phải lặp, tiêu chí quyết
+*Nguyên nhân.* Như đã phân tích ở mục 3.8.2, trong nhánh phải lặp, tiêu chí quyết
 định lùi về khoảng cách năng lượng. Do trạng thái năng lượng tích lũy lặp lại
 theo chu kỳ, cùng một món luôn cho khoảng cách nhỏ nhất.
 
@@ -871,7 +898,7 @@ phục, ca kiểm thử đạt trở lại.
 ## 4.5. Kiểm thử giao diện
 
 Ngoài kiểm thử tự động ở mức đơn vị, giao diện được kiểm tra thủ công trên trình
-duyệt theo các tiêu chí phi chức năng đã nêu ở mục 3.1.3.
+duyệt theo các tiêu chí phi chức năng đã nêu ở mục 3.5.3.
 
 | Tiêu chí | Cách kiểm tra | Kết quả |
 |---|---|---|

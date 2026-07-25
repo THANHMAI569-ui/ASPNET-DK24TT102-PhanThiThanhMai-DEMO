@@ -12,8 +12,8 @@ import struct
 import sys
 from pathlib import Path
 
-MAX_W_CM = 12.5   # be ngang khung chu A4 le 2,5cm la 16cm; chua lai cho thoang
-MAX_H_CM = 8.5    # cao hon muc nay thi anh chiem gan tron mot trang
+MAX_W_CM = 12.0   # be ngang khung chu
+MAX_H_CM = 7.0    # tran muc nay thi anh chiem qua nua trang
 
 
 def png_size(data: bytes):

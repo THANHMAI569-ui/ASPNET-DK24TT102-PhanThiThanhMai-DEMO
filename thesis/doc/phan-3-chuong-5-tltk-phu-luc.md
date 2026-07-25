@@ -43,7 +43,7 @@ khuyết mà việc quan sát bằng mắt thường khó nhận ra:
 
 Việc phát hiện được hai khiếm khuyết này là minh chứng cho giá trị thực tế của
 kiểm thử tự động, đồng thời cho thấy quyết định kiến trúc tách tầng Service khỏi
-tầng Controller (mục 3.2) đã phát huy tác dụng: nếu logic nằm trong Controller,
+tầng Controller (mục 3.5) đã phát huy tác dụng: nếu logic nằm trong Controller,
 việc viết các ca kiểm thử này sẽ khó khăn hơn nhiều.
 
 **Về mặt giao diện,** hệ thống hiển thị đúng trên dải màn hình từ 375 px tới
@@ -133,66 +133,67 @@ khi người dùng đang ở chợ hoặc siêu thị. Một ứng dụng di đ�
 
 # DANH MỤC TÀI LIỆU THAM KHẢO
 
-## Tài liệu kỹ thuật
+Danh mục xếp theo thứ tự từ điển và trình bày theo định dạng IEEE, thống nhất
+cho toàn bộ báo cáo.
 
-[1] Microsoft Learn. "Overview of ASP.NET Core MVC".
-https://learn.microsoft.com/en-us/aspnet/core/mvc/overview. Truy cập ngày
-25/07/2026.
+[1] Apple App Store, "Cookpad Recipes". [Online]. Địa chỉ:
+https://apps.apple.com/us/app/cookpad-recipes/id340368403. [Truy cập ngày
+25/07/2026].
 
-[2] Microsoft Learn. "Migrations Overview - EF Core".
-https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/. Truy cập
-ngày 25/07/2026.
+[2] Apple App Store, "Mealime Meal Plans & Recipes". [Online]. Địa chỉ:
+https://apps.apple.com/us/app/mealime-meal-plans-recipes/id1079999103. [Truy
+cập ngày 25/07/2026].
 
-[3] Microsoft Learn. "Introduction to Identity on ASP.NET Core".
-https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity.
-Truy cập ngày 25/07/2026.
+[3] Apple App Store, "Paprika Recipe Manager 3". [Online]. Địa chỉ:
+https://apps.apple.com/us/app/paprika-recipe-manager-3/id1303222628. [Truy cập
+ngày 25/07/2026].
 
-## Ứng dụng khảo sát
-
-[4] Apple App Store. "Cookpad Recipes".
-https://apps.apple.com/us/app/cookpad-recipes/id340368403. Truy cập ngày
-25/07/2026.
-
-[5] Cookpad. "Cookpad Việt Nam". https://cookpad.com/vn. Truy cập ngày
-25/07/2026.
-
-[6] Plan to Eat. "Yummly is Closing: Discover the Best Meal Planning
-Alternative".
-https://www.plantoeat.com/blog/2024/12/yummly-is-closing-discover-the-best-meal-planning-alternative/.
-Truy cập ngày 25/07/2026.
-
-[7] Kiểm tra trực tiếp trong quá trình khảo sát: truy vấn https://www.yummly.com/
-trả về mã chuyển hướng HTTP 301 tới https://www.kitchenaid.com/recipes; tên miền
-help.yummly.com không phân giải được. Ngày kiểm tra 25/07/2026.
-
-[8] CafeF. "Thị trường quá khốc liệt, Cooky - startup đi chợ online của Founder
-ShopeeFood rời thị trường Hà Nội, chỉ còn hoạt động tại TPHCM".
+[4] CafeF, "Thị trường quá khốc liệt, Cooky - startup đi chợ online của
+Founder ShopeeFood rời thị trường Hà Nội, chỉ còn hoạt động tại TPHCM".
+[Online]. Địa chỉ:
 https://cafef.vn/thi-truong-qua-khoc-liet-cooky-startup-di-cho-online-cua-founder-shopeefood-roi-thi-truong-ha-noi-chi-con-hoat-dong-tai-tphcm-188231205162148255.chn.
-Truy cập ngày 25/07/2026.
+[Truy cập ngày 25/07/2026].
 
-[9] Esheep Kitchen. Trang chủ. https://www.esheepkitchen.com/. Truy cập ngày
-25/07/2026.
+[5] Cookpad, "Cookpad Việt Nam". [Online]. Địa chỉ: https://cookpad.com/vn.
+[Truy cập ngày 25/07/2026].
 
-[10] Mealime. Trang chủ. https://www.mealime.com/. Truy cập ngày 25/07/2026.
+[6] T. H. Cormen, C. E. Leiserson, R. L. Rivest, C. Stein, Introduction to
+Algorithms, 4th ed., MIT Press, Cambridge, MA, 2022.
 
-[11] Apple App Store. "Mealime Meal Plans & Recipes".
-https://apps.apple.com/us/app/mealime-meal-plans-recipes/id1079999103. Truy cập
-ngày 25/07/2026.
+[7] Esheep Kitchen, Trang chủ. [Online]. Địa chỉ:
+https://www.esheepkitchen.com/. [Truy cập ngày 25/07/2026].
 
-[12] Paprika App. Trang chủ. https://www.paprikaapp.com/. Truy cập ngày
-25/07/2026.
+[8] C. D. Manning, P. Raghavan, H. Schütze, Introduction to Information
+Retrieval, Cambridge University Press, Cambridge, 2008.
 
-[13] Apple App Store. "Paprika Recipe Manager 3".
-https://apps.apple.com/us/app/paprika-recipe-manager-3/id1303222628. Truy cập
-ngày 25/07/2026.
+[9] Mealime, Trang chủ. [Online]. Địa chỉ: https://www.mealime.com/. [Truy cập
+ngày 25/07/2026].
 
-## Sách
+[10] Microsoft Learn, "Introduction to Identity on ASP.NET Core". [Online].
+Địa chỉ:
+https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity.
+[Truy cập ngày 25/07/2026].
 
-[14] T. H. Cormen, C. E. Leiserson, R. L. Rivest, C. Stein. *Introduction to
-Algorithms*, 4th ed. MIT Press, 2022.
+[11] Microsoft Learn, "Migrations Overview - EF Core". [Online]. Địa chỉ:
+https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/. [Truy
+cập ngày 25/07/2026].
 
-[15] C. D. Manning, P. Raghavan, H. Schütze. *Introduction to Information
-Retrieval*. Cambridge University Press, 2008.
+[12] Microsoft Learn, "Overview of ASP.NET Core MVC". [Online]. Địa chỉ:
+https://learn.microsoft.com/en-us/aspnet/core/mvc/overview. [Truy cập ngày
+25/07/2026].
+
+[13] Paprika App, Trang chủ. [Online]. Địa chỉ: https://www.paprikaapp.com/.
+[Truy cập ngày 25/07/2026].
+
+[14] Plan to Eat, "Yummly is Closing: Discover the Best Meal Planning
+Alternative". [Online]. Địa chỉ:
+https://www.plantoeat.com/blog/2024/12/yummly-is-closing-discover-the-best-meal-planning-alternative/.
+[Truy cập ngày 25/07/2026].
+
+[15] Yummly, kiểm tra trực tiếp trong quá trình khảo sát: truy vấn
+https://www.yummly.com/ trả về mã chuyển hướng HTTP 301 tới
+https://www.kitchenaid.com/recipes; tên miền help.yummly.com không phân giải
+được. [Ngày kiểm tra 25/07/2026].
 
 \newpage
 

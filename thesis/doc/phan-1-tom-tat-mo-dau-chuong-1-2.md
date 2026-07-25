@@ -194,14 +194,14 @@ từng sản phẩm trong ngày 25/07/2026.
 ### 1.2.1. Cookpad
 
 Cookpad là nền tảng chia sẻ công thức nấu ăn theo mô hình cộng đồng, trong đó nội
-dung do chính người dùng đăng tải thay vì do một đội ngũ biên tập tạo ra [4].
+dung do chính người dùng đăng tải thay vì do một đội ngũ biên tập tạo ra [1].
 Cookpad có phiên bản tiếng Việt riêng tại địa chỉ cookpad.com/vn, nằm trong hệ
 thống hơn ba mươi phiên bản theo quốc gia [5].
 
 Về chức năng, mô tả chính thức của ứng dụng cho biết Cookpad hỗ trợ **tìm công
 thức theo nguyên liệu** với thông điệp "nấu những bữa ăn ngon từ những gì bạn đã
 có sẵn trong tủ lạnh", đồng thời có khả năng **tạo danh sách đi chợ tự động từ
-công thức** và cho phép người dùng **xây dựng thực đơn theo tuần** [4].
+công thức** và cho phép người dùng **xây dựng thực đơn theo tuần** [1].
 
 *Nhận xét.* Cookpad là sản phẩm gần với đề tài nhất về mặt chức năng. Tuy nhiên
 mô tả chính thức không nêu rõ việc xây dựng thực đơn tuần là *sinh tự động* hay
@@ -218,8 +218,8 @@ cứu về hệ khuyến nghị ẩm thực. Tuy nhiên, kết quả kiểm tra 
 trình khảo sát cho thấy **dịch vụ này đã ngừng hoạt động**: truy cập
 https://www.yummly.com/ hiện bị chuyển hướng vĩnh viễn (HTTP 301) sang trang công
 thức của KitchenAid, và tên miền hỗ trợ help.yummly.com không còn phân giải được
-[7]. Theo nguồn thứ cấp trích lại thông báo của công ty chủ quản, website và ứng
-dụng di động của Yummly đã đóng cửa từ ngày 20/12/2024 [6].
+[15]. Theo nguồn thứ cấp trích lại thông báo của công ty chủ quản, website và ứng
+dụng di động của Yummly đã đóng cửa từ ngày 20/12/2024 [14].
 
 *Nhận xét.* Trường hợp Yummly có giá trị tham chiếu quan trọng đối với đề tài
 theo hai hướng. Thứ nhất, nó cho thấy người dùng Việt Nam không thể trông cậy vào
@@ -234,9 +234,9 @@ năng cụ thể của sản phẩm.
 Mealime là ứng dụng chuyên biệt cho việc **lập thực đơn**, không phải nền tảng
 chia sẻ công thức. Trang chủ của sản phẩm nêu khả năng lập kế hoạch bữa ăn cho cả
 tuần dựa trên tùy chọn cá nhân về khẩu phần, chế độ ăn và dị ứng thực phẩm, đồng
-thời **tự động tổng hợp nguyên liệu thành danh sách đi chợ theo danh mục** [10].
+thời **tự động tổng hợp nguyên liệu thành danh sách đi chợ theo danh mục** [9].
 Sản phẩm áp dụng mô hình freemium với gói Mealime Pro giá 2,99 USD mỗi tháng
-[11].
+[2].
 
 *Nhận xét.* Mealime giải quyết tốt bài toán lập thực đơn và danh sách đi chợ,
 nhưng chức năng tìm món **xuất phát từ nguyên liệu người dùng đang có** không
@@ -248,26 +248,26 @@ món ăn Việt Nam, nên khó áp dụng trực tiếp cho bữa cơm gia đìn
 
 Paprika là ứng dụng quản lý công thức cá nhân đa nền tảng, cho phép lưu công thức
 từ web, lập kế hoạch bữa ăn và tạo danh sách đi chợ với khả năng gộp nguyên liệu
-trùng nhau và sắp xếp theo khu vực gian hàng [12]. Ứng dụng hỗ trợ tìm kiếm theo
-tên và theo nguyên liệu [13].
+trùng nhau và sắp xếp theo khu vực gian hàng [13]. Ứng dụng hỗ trợ tìm kiếm theo
+tên và theo nguyên liệu [3].
 
 *Nhận xét.* Điểm khác biệt căn bản so với đề tài là Paprika **không sinh thực đơn
-tự động**: người dùng phải tự kéo thả từng công thức vào lịch [12]. Nói cách
+tự động**: người dùng phải tự kéo thả từng công thức vào lịch [13]. Nói cách
 khác, Paprika số hóa thao tác lập thực đơn thủ công chứ không thay người dùng
 đưa ra quyết định.
 
 ### 1.2.5. Các website nấu ăn trong nước
 
 Ở trong nước, Esheep Kitchen là một blog công thức nấu ăn tiếng Việt có lượng
-người theo dõi lớn, với nội dung xoay quanh món Việt, bánh và đồ uống [9]. Kiểm
+người theo dõi lớn, với nội dung xoay quanh món Việt, bánh và đồ uống [7]. Kiểm
 tra trực tiếp cho thấy đây thuần túy là nền tảng đăng tải nội dung: trang không
 có chức năng tìm món theo nguyên liệu sẵn có, không sinh thực đơn tuần và không
-xuất danh sách đi chợ [9].
+xuất danh sách đi chợ [7].
 
 Một trường hợp đáng chú ý khác là Cooky.vn. Trang này khởi đầu năm 2015 như một
 website công thức nấu ăn, sau đó từ năm 2020 chuyển hướng sang mô hình đi chợ hộ
 và giao thực phẩm tươi. Đến tháng 11/2023, doanh nghiệp đã thu hẹp hoạt động, rút
-khỏi thị trường Hà Nội và chỉ còn vận hành tại Thành phố Hồ Chí Minh [8]. Tại
+khỏi thị trường Hà Nội và chỉ còn vận hành tại Thành phố Hồ Chí Minh [4]. Tại
 thời điểm khảo sát, tác giả **không truy cập được** trang cooky.vn do chứng chỉ
 bảo mật TLS của trang đã hết hạn, vì vậy báo cáo này không đưa ra kết luận nào về
 các chức năng hiện có của sản phẩm.
@@ -280,12 +280,12 @@ việc chức năng đó chắc chắn không tồn tại.
 
 | Ứng dụng | Gợi ý theo nguyên liệu sẵn có | Sinh thực đơn tuần tự động | Xuất danh sách đi chợ | Nội dung tiếng Việt | Mô hình giá |
 |---|---|---|---|---|---|
-| Cookpad | Có [4] | Có, chưa rõ mức độ tự động [4] | Có [4] | Có [5] | Miễn phí kèm gói Premium [4] |
-| Yummly | Đã ngừng hoạt động từ 20/12/2024 [6][7] | Đã ngừng hoạt động | Đã ngừng hoạt động | Đã ngừng hoạt động | Đã ngừng hoạt động |
-| Mealime | Không nêu trong mô tả chính thức [10][11] | Có [10] | Có [10] | Không xác minh được | Freemium, Pro 2,99 USD/tháng [11] |
-| Paprika | Có [13] | Không, lập kế hoạch thủ công [12] | Có [12] | Không xác minh được | Trả phí một lần [12] |
-| Esheep Kitchen | Không [9] | Không [9] | Không [9] | Có [9] | Miễn phí [9] |
-| Cooky.vn | Không xác minh được | Không xác minh được | Không xác minh được | Có [8] | Không xác minh được |
+| Cookpad | Có [1] | Có, chưa rõ mức độ tự động [1] | Có [1] | Có [5] | Miễn phí kèm gói Premium [1] |
+| Yummly | Đã ngừng hoạt động từ 20/12/2024 [14][15] | Đã ngừng hoạt động | Đã ngừng hoạt động | Đã ngừng hoạt động | Đã ngừng hoạt động |
+| Mealime | Không nêu trong mô tả chính thức [9][2] | Có [9] | Có [9] | Không xác minh được | Freemium, Pro 2,99 USD/tháng [2] |
+| Paprika | Có [3] | Không, lập kế hoạch thủ công [13] | Có [13] | Không xác minh được | Trả phí một lần [13] |
+| Esheep Kitchen | Không [7] | Không [7] | Không [7] | Có [7] | Miễn phí [7] |
+| Cooky.vn | Không xác minh được | Không xác minh được | Không xác minh được | Có [4] | Không xác minh được |
 | **CookingAdvisor** | **Có** | **Có** | **Có** | **Có** | **Miễn phí** |
 
 *Bảng 1.1. So sánh chức năng giữa các ứng dụng khảo sát và đề tài*
@@ -308,7 +308,7 @@ dựng theo khẩu vị Âu - Mỹ, khiến kết quả gợi ý không sát v�
 
 **Ba là, tính sẵn sàng lâu dài của dịch vụ nước ngoài là một rủi ro thực tế.**
 Việc Yummly ngừng hoạt động hoàn toàn vào cuối năm 2024 là minh chứng cụ thể cho
-rủi ro này [6][7].
+rủi ro này [14][15].
 
 **Bốn là, mô hình nội dung do cộng đồng đóng góp ảnh hưởng tới chất lượng dữ liệu
 định lượng.** Với các nền tảng như Cookpad, công thức do người dùng tự đăng nên
@@ -365,12 +365,12 @@ giải các bài toán nghiệp vụ (mục 2.5).
 
 Model - View - Controller (MVC) là mẫu kiến trúc phân chia ứng dụng thành ba
 nhóm thành phần chính là Model, View và Controller, nhằm đạt được sự **phân tách
-mối quan tâm** (separation of concerns) [1]. Theo mô tả của Microsoft, yêu cầu từ
+mối quan tâm** (separation of concerns) [12]. Theo mô tả của Microsoft, yêu cầu từ
 người dùng được định tuyến tới Controller; Controller có nhiệm vụ làm việc với
 Model để thực hiện hành động hoặc lấy kết quả truy vấn, sau đó chọn View để hiển
-thị và cung cấp cho View dữ liệu cần thiết [1].
+thị và cung cấp cho View dữ liệu cần thiết [12].
 
-Vai trò của từng thành phần được xác định như sau [1]:
+Vai trò của từng thành phần được xác định như sau [12]:
 
 - **Model** biểu diễn trạng thái của ứng dụng cùng các logic nghiệp vụ tác động
   lên trạng thái đó.
@@ -382,41 +382,41 @@ Vai trò của từng thành phần được xác định như sau [1]:
 
 Một đặc điểm quan trọng của mẫu này là **chiều phụ thuộc một chiều**: View và
 Controller đều phụ thuộc vào Model, nhưng Model không phụ thuộc ngược lại vào
-View hay Controller [1]. Nhờ đó Model có thể được xây dựng và kiểm thử độc lập
+View hay Controller [12]. Nhờ đó Model có thể được xây dựng và kiểm thử độc lập
 với phần trình bày, đây chính là tính chất mà đồ án khai thác để kiểm thử các
 thuật toán lõi bằng kiểm thử đơn vị (trình bày ở Chương 4).
 
 Tài liệu của Microsoft cũng khuyến nghị rằng Controller không nên gánh quá nhiều
 trách nhiệm, và để tránh điều đó thì nên đẩy logic nghiệp vụ ra khỏi Controller
-[1]. Khuyến nghị này là căn cứ trực tiếp cho quyết định thiết kế của đồ án: tách
+[12]. Khuyến nghị này là căn cứ trực tiếp cho quyết định thiết kế của đồ án: tách
 riêng một tầng **Service** để chứa ba thuật toán lõi, còn Controller chỉ đóng vai
 trò tiếp nhận yêu cầu, gọi Service và trả về View.
 
 ### 2.1.2. Các thành phần của ASP.NET Core MVC được sử dụng
 
 ASP.NET Core MVC là khung làm việc mã nguồn mở, nhẹ và có tính kiểm thử cao dành
-cho tầng trình bày [1]. Đồ án sử dụng trực tiếp các cơ chế sau của khung này:
+cho tầng trình bày [12]. Đồ án sử dụng trực tiếp các cơ chế sau của khung này:
 
 - **Định tuyến (routing):** ánh xạ URL tới hành động của Controller. Đồ án sử
-  dụng định tuyến theo quy ước với khuôn dạng `{controller}/{action}/{id?}` [1].
+  dụng định tuyến theo quy ước với khuôn dạng `{controller}/{action}/{id?}` [12].
 - **Model binding:** tự động chuyển dữ liệu từ yêu cầu HTTP (giá trị biểu mẫu, dữ
   liệu tuyến, tham số chuỗi truy vấn) thành đối tượng mà Controller xử lý được
-  [1]. Cơ chế này được đồ án sử dụng để ánh xạ toàn bộ tham số lọc và sắp xếp của
+  [12]. Cơ chế này được đồ án sử dụng để ánh xạ toàn bộ tham số lọc và sắp xếp của
   trang danh sách món ăn vào một lớp ViewModel duy nhất.
 - **Kiểm tra hợp lệ (model validation):** thực hiện thông qua các thuộc tính chú
   giải dữ liệu, được kiểm tra ở cả phía máy khách trước khi gửi và phía máy chủ
-  trước khi hành động của Controller được gọi [1].
+  trước khi hành động của Controller được gọi [12].
 - **Tiêm phụ thuộc (dependency injection):** Controller yêu cầu các dịch vụ cần
-  thiết thông qua hàm khởi tạo [1]. Đồ án dùng cơ chế này để đưa các lớp Service
+  thiết thông qua hàm khởi tạo [12]. Đồ án dùng cơ chế này để đưa các lớp Service
   vào Controller.
 - **Bộ lọc (filters):** đóng gói các mối quan tâm cắt ngang như xử lý ngoại lệ
   hay phân quyền; thuộc tính `[Authorize]` chính là bộ lọc phân quyền có sẵn của
-  khung [1].
-- **Areas:** cơ chế phân hoạch ứng dụng lớn thành các nhóm chức năng nhỏ hơn [1].
+  khung [12].
+- **Areas:** cơ chế phân hoạch ứng dụng lớn thành các nhóm chức năng nhỏ hơn [12].
   Đồ án dùng Area để tách riêng toàn bộ khu vực quản trị.
 - **Razor và Tag Helpers:** Razor là ngôn ngữ đánh dấu mẫu cho phép nhúng mã C#
   vào HTML để sinh nội dung phía máy chủ; Tag Helpers cho phép mã phía máy chủ
-  tham gia vào việc tạo và kết xuất phần tử HTML [1].
+  tham gia vào việc tạo và kết xuất phần tử HTML [12].
 
 ## 2.2. Entity Framework Core và tiếp cận Code-First
 
@@ -430,9 +430,9 @@ cơ sở dữ liệu là **migrations**. Tài liệu của Microsoft mô tả: t
 thực tế, mô hình dữ liệu thay đổi khi các tính năng được hiện thực hóa, và lược
 đồ cơ sở dữ liệu cần thay đổi tương ứng để đồng bộ với ứng dụng; tính năng
 migrations của EF Core cung cấp cách cập nhật lược đồ một cách tăng dần nhằm giữ
-đồng bộ với mô hình dữ liệu trong khi vẫn bảo toàn dữ liệu hiện có [2].
+đồng bộ với mô hình dữ liệu trong khi vẫn bảo toàn dữ liệu hiện có [11].
 
-Cơ chế hoạt động của migrations gồm hai bước [2]:
+Cơ chế hoạt động của migrations gồm hai bước [11]:
 
 1. Khi mô hình thay đổi, lập trình viên dùng công cụ dòng lệnh của EF Core để tạo
    một migration mô tả các cập nhật cần thiết. EF Core so sánh mô hình hiện tại
@@ -444,7 +444,7 @@ Cơ chế hoạt động của migrations gồm hai bước [2]:
    được migration nào đã và chưa được áp dụng.
 
 Hai lệnh chính được sử dụng là `dotnet ef migrations add <Tên>` để tạo migration
-và `dotnet ef database update` để áp dụng vào cơ sở dữ liệu [2].
+và `dotnet ef database update` để áp dụng vào cơ sở dữ liệu [11].
 
 Lựa chọn Code-First mang lại một lợi ích thực tiễn quan trọng cho đồ án: hội đồng
 đánh giá có thể dựng lại toàn bộ cơ sở dữ liệu trên máy của mình chỉ bằng một
@@ -455,7 +455,7 @@ của công cụ quản trị.
 
 ASP.NET Core Identity là hệ thống quản lý thành viên của nền tảng, cung cấp sẵn
 các chức năng đăng ký, đăng nhập, lưu trữ thông tin người dùng và quản lý vai trò
-[3]. Việc sử dụng Identity thay vì tự cài đặt cơ chế xác thực mang lại ba lợi ích
+[10]. Việc sử dụng Identity thay vì tự cài đặt cơ chế xác thực mang lại ba lợi ích
 mà đồ án khai thác.
 
 **Thứ nhất, về lưu trữ mật khẩu.** Identity không lưu mật khẩu dạng nguyên bản mà
@@ -464,12 +464,12 @@ yêu cầu bắt buộc về an toàn thông tin: nếu cơ sở dữ liệu b�
 thu được mật khẩu gốc của người dùng.
 
 **Thứ hai, về chính sách mật khẩu.** Identity cho phép cấu hình các ràng buộc như
-độ dài tối thiểu, yêu cầu chữ số, chữ hoa hay ký tự đặc biệt [3]. Đồ án cấu hình
+độ dài tối thiểu, yêu cầu chữ số, chữ hoa hay ký tự đặc biệt [10]. Đồ án cấu hình
 độ dài tối thiểu là 8 ký tự.
 
 **Thứ ba, về phân quyền theo vai trò.** Identity hỗ trợ mô hình vai trò
 (role-based authorization), cho phép gán người dùng vào các vai trò và giới hạn
-truy cập theo vai trò. Kết hợp với bộ lọc `[Authorize]` của MVC [1], hệ thống có
+truy cập theo vai trò. Kết hợp với bộ lọc `[Authorize]` của MVC [12], hệ thống có
 thể khai báo phân quyền ngay tại lớp Controller. Đồ án định nghĩa hai vai trò là
 `Admin` và `User`; toàn bộ khu vực quản trị được bảo vệ bằng
 `[Authorize(Roles = "Admin")]`.
@@ -520,7 +520,7 @@ liệu mà người dùng đang có, $I_R$ là tập nguyên liệu cần thiế
 
 **Hệ số Jaccard.** Độ đo tương đồng tập hợp được sử dụng phổ biến nhất là hệ số
 Jaccard, định nghĩa bằng tỉ số giữa lực lượng phần giao và lực lượng phần hợp của
-hai tập hợp [15]:
+hai tập hợp [8]:
 
 $$J(A, I_R) = \frac{|A \cap I_R|}{|A \cup I_R|}$$
 
@@ -584,7 +584,7 @@ và luôn có thể chỉnh sửa thủ công.
 
 **Lựa chọn chiến lược tham lam.** Thuật toán tham lam là chiến lược tại mỗi bước
 chọn phương án có vẻ tốt nhất ở thời điểm hiện tại, không quay lui để xét lại các
-lựa chọn đã thực hiện [14]. Chiến lược này không bảo đảm nghiệm tối ưu toàn cục
+lựa chọn đã thực hiện [6]. Chiến lược này không bảo đảm nghiệm tối ưu toàn cục
 trong trường hợp tổng quát, nhưng cho lời giải chấp nhận được với chi phí tính
 toán thấp, phù hợp với yêu cầu phản hồi tức thời của ứng dụng web.
 
@@ -671,59 +671,65 @@ Chương 3.
 
 # TÀI LIỆU THAM KHẢO (phần 1)
 
-[1] Microsoft Learn. "Overview of ASP.NET Core MVC".
-https://learn.microsoft.com/en-us/aspnet/core/mvc/overview. Truy cập ngày
-25/07/2026.
+Danh mục xếp theo thứ tự từ điển và trình bày theo định dạng IEEE, thống nhất
+cho toàn bộ báo cáo.
 
-[2] Microsoft Learn. "Migrations Overview - EF Core".
-https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/. Truy cập
-ngày 25/07/2026.
+[1] Apple App Store, "Cookpad Recipes". [Online]. Địa chỉ:
+https://apps.apple.com/us/app/cookpad-recipes/id340368403. [Truy cập ngày
+25/07/2026].
 
-[3] Microsoft Learn. "Introduction to Identity on ASP.NET Core".
-https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity.
-Truy cập ngày 25/07/2026.
+[2] Apple App Store, "Mealime Meal Plans & Recipes". [Online]. Địa chỉ:
+https://apps.apple.com/us/app/mealime-meal-plans-recipes/id1079999103. [Truy
+cập ngày 25/07/2026].
 
-[4] Apple App Store. "Cookpad Recipes".
-https://apps.apple.com/us/app/cookpad-recipes/id340368403. Truy cập ngày
-25/07/2026.
+[3] Apple App Store, "Paprika Recipe Manager 3". [Online]. Địa chỉ:
+https://apps.apple.com/us/app/paprika-recipe-manager-3/id1303222628. [Truy cập
+ngày 25/07/2026].
 
-[5] Cookpad. "Cookpad Việt Nam". https://cookpad.com/vn. Truy cập ngày
-25/07/2026.
-
-[6] Plan to Eat. "Yummly is Closing: Discover the Best Meal Planning
-Alternative".
-https://www.plantoeat.com/blog/2024/12/yummly-is-closing-discover-the-best-meal-planning-alternative/.
-Truy cập ngày 25/07/2026.
-
-[7] Kiểm tra trực tiếp trong quá trình khảo sát: truy vấn https://www.yummly.com/
-trả về mã chuyển hướng HTTP 301 tới https://www.kitchenaid.com/recipes; tên miền
-help.yummly.com không phân giải được. Ngày kiểm tra 25/07/2026.
-
-[8] CafeF. "Thị trường quá khốc liệt, Cooky - startup đi chợ online của Founder
-ShopeeFood rời thị trường Hà Nội, chỉ còn hoạt động tại TPHCM".
+[4] CafeF, "Thị trường quá khốc liệt, Cooky - startup đi chợ online của
+Founder ShopeeFood rời thị trường Hà Nội, chỉ còn hoạt động tại TPHCM".
+[Online]. Địa chỉ:
 https://cafef.vn/thi-truong-qua-khoc-liet-cooky-startup-di-cho-online-cua-founder-shopeefood-roi-thi-truong-ha-noi-chi-con-hoat-dong-tai-tphcm-188231205162148255.chn.
-Truy cập ngày 25/07/2026.
+[Truy cập ngày 25/07/2026].
 
-[9] Esheep Kitchen. Trang chủ. https://www.esheepkitchen.com/. Truy cập ngày
-25/07/2026.
+[5] Cookpad, "Cookpad Việt Nam". [Online]. Địa chỉ: https://cookpad.com/vn.
+[Truy cập ngày 25/07/2026].
 
-[10] Mealime. Trang chủ. https://www.mealime.com/. Truy cập ngày 25/07/2026.
+[6] T. H. Cormen, C. E. Leiserson, R. L. Rivest, C. Stein, Introduction to
+Algorithms, 4th ed., MIT Press, Cambridge, MA, 2022.
 
-[11] Apple App Store. "Mealime Meal Plans & Recipes".
-https://apps.apple.com/us/app/mealime-meal-plans-recipes/id1079999103. Truy cập
-ngày 25/07/2026.
+[7] Esheep Kitchen, Trang chủ. [Online]. Địa chỉ:
+https://www.esheepkitchen.com/. [Truy cập ngày 25/07/2026].
 
-[12] Paprika App. Trang chủ. https://www.paprikaapp.com/. Truy cập ngày
-25/07/2026.
+[8] C. D. Manning, P. Raghavan, H. Schütze, Introduction to Information
+Retrieval, Cambridge University Press, Cambridge, 2008.
 
-[13] Apple App Store. "Paprika Recipe Manager 3".
-https://apps.apple.com/us/app/paprika-recipe-manager-3/id1303222628. Truy cập
-ngày 25/07/2026.
+[9] Mealime, Trang chủ. [Online]. Địa chỉ: https://www.mealime.com/. [Truy cập
+ngày 25/07/2026].
 
-[14] T. H. Cormen, C. E. Leiserson, R. L. Rivest, C. Stein. *Introduction to
-Algorithms*, 4th ed. MIT Press, 2022. (Chương về thuật toán tham lam - Greedy
-Algorithms.)
+[10] Microsoft Learn, "Introduction to Identity on ASP.NET Core". [Online].
+Địa chỉ:
+https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity.
+[Truy cập ngày 25/07/2026].
 
-[15] C. D. Manning, P. Raghavan, H. Schütze. *Introduction to Information
-Retrieval*. Cambridge University Press, 2008. (Chương về độ đo tương đồng tập
-hợp.)
+[11] Microsoft Learn, "Migrations Overview - EF Core". [Online]. Địa chỉ:
+https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/. [Truy
+cập ngày 25/07/2026].
+
+[12] Microsoft Learn, "Overview of ASP.NET Core MVC". [Online]. Địa chỉ:
+https://learn.microsoft.com/en-us/aspnet/core/mvc/overview. [Truy cập ngày
+25/07/2026].
+
+[13] Paprika App, Trang chủ. [Online]. Địa chỉ: https://www.paprikaapp.com/.
+[Truy cập ngày 25/07/2026].
+
+[14] Plan to Eat, "Yummly is Closing: Discover the Best Meal Planning
+Alternative". [Online]. Địa chỉ:
+https://www.plantoeat.com/blog/2024/12/yummly-is-closing-discover-the-best-meal-planning-alternative/.
+[Truy cập ngày 25/07/2026].
+
+[15] Yummly, kiểm tra trực tiếp trong quá trình khảo sát: truy vấn
+https://www.yummly.com/ trả về mã chuyển hướng HTTP 301 tới
+https://www.kitchenaid.com/recipes; tên miền help.yummly.com không phân giải
+được. [Ngày kiểm tra 25/07/2026].
+
