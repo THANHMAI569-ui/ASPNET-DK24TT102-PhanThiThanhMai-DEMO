@@ -26,7 +26,7 @@ public class AccountController(
             return View(model);
 
         var result = await signInManager.PasswordSignInAsync(
-            model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+            model.Email, model.Password, model.RememberMe, lockoutOnFailure: true);
 
         if (!result.Succeeded)
         {

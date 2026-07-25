@@ -195,19 +195,42 @@ public class RecipesController(AppDbContext db) : Controller
         recipe.ImageUrl = string.IsNullOrWhiteSpace(model.ImageUrl) ? null : model.ImageUrl.Trim();
         recipe.CategoryId = model.CategoryId;
 
-        recipe.RecipeIngredients.Clear();
+        // Update in place instead of Clear()-then-Add: RecipeIngredient's key is
+        // the composite (RecipeId, IngredientId), and re-adding a row EF is still
+        // tracking as Deleted under the same key throws at SaveChanges. Rows that
+        // survive the edit are mutated, removed ones deleted, new ones added.
         var seen = new HashSet<int>();
+        var wanted = new List<(int IngredientId, decimal Quantity, string Unit)>();
         foreach (var item in model.Ingredients)
         {
             if (item.IngredientId <= 0 || !seen.Add(item.IngredientId))
                 continue;
 
-            recipe.RecipeIngredients.Add(new RecipeIngredient
+            wanted.Add((item.IngredientId, item.Quantity,
+                string.IsNullOrWhiteSpace(item.Unit) ? string.Empty : item.Unit.Trim()));
+        }
+
+        foreach (var stale in recipe.RecipeIngredients
+                     .Where(ri => !seen.Contains(ri.IngredientId)).ToList())
+            recipe.RecipeIngredients.Remove(stale);
+
+        foreach (var (ingredientId, quantity, unit) in wanted)
+        {
+            var existing = recipe.RecipeIngredients
+                .FirstOrDefault(ri => ri.IngredientId == ingredientId);
+
+            if (existing is null)
+                recipe.RecipeIngredients.Add(new RecipeIngredient
+                {
+                    IngredientId = ingredientId,
+                    Quantity = quantity,
+                    Unit = unit
+                });
+            else
             {
-                IngredientId = item.IngredientId,
-                Quantity = item.Quantity,
-                Unit = string.IsNullOrWhiteSpace(item.Unit) ? string.Empty : item.Unit.Trim()
-            });
+                existing.Quantity = quantity;
+                existing.Unit = unit;
+            }
         }
     }
 

@@ -58,13 +58,17 @@ public class MenuController(MenuPlannerService plannerService, AppDbContext db) 
             Id = plan.Id,
             Name = plan.Name,
             WeekStartDate = plan.WeekStartDate,
-            Days = plan.Items
-                .GroupBy(i => i.DayOfWeek)
-                .OrderBy(g => g.Key)
-                .Select(g => new MenuDayViewModel
+            // Built from the fixed 0..6 range, NOT by grouping the items: a day whose
+            // three meals were all deleted has no items, and a GroupBy-based list
+            // would drop that day's column entirely, breaking the 8-column grid and
+            // leaving the user no form to add a dish back.
+            Days = Enumerable.Range(0, 7)
+                .Select(d => new MenuDayViewModel
                 {
-                    DayOfWeek = g.Key,
-                    Meals = g.OrderBy(i => i.MealType)
+                    DayOfWeek = d,
+                    Meals = plan.Items
+                        .Where(i => i.DayOfWeek == d)
+                        .OrderBy(i => i.MealType)
                         .Select(i => new MenuMealViewModel
                         {
                             MealType = i.MealType,
@@ -94,9 +98,20 @@ public class MenuController(MenuPlannerService plannerService, AppDbContext db) 
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> UpdateItem(int planId, int dayOfWeek, MealType mealType, int recipeId)
     {
+        // Out-of-range values would create phantom items that never render in the
+        // 7-day grid yet still inflate the shopping list. mealType outside the
+        // enum lands in ModelState as a binding error.
+        if (dayOfWeek is < 0 or > 6 || !ModelState.IsValid)
+            return BadRequest();
+
         var plan = await db.MenuPlans.FirstOrDefaultAsync(p => p.Id == planId && p.UserId == CurrentUserId);
         if (plan is null)
             return NotFound();
+
+        // Re-selecting the "Đổi món" placeholder posts recipeId 0; treat it as a
+        // no-op instead of bouncing the user to a 404 page.
+        if (recipeId <= 0)
+            return RedirectToAction(nameof(Details), new { id = planId });
 
         if (!await db.Recipes.AnyAsync(r => r.Id == recipeId))
             return NotFound();

@@ -11,6 +11,9 @@
         <p class="page-head__lede">Tuần bắt đầu @Model.WeekStartDate.ToString("dd/MM/yyyy")</p>
     </div>
     <div class="page-head__actions">
+        @* The generate form stays visible even when a list already exists: editing
+           the menu afterwards would otherwise leave the shopping list stale with
+           no way to refresh it, even though the service already regenerates. *@
         @if (Model.ShoppingListId is null)
         {
             <form asp-controller="ShoppingList" asp-action="Generate" method="post">
@@ -20,7 +23,11 @@
         }
         else
         {
-            <a class="btn btn--outline" asp-controller="ShoppingList" asp-action="Details" asp-route-id="@Model.ShoppingListId">
+            <form asp-controller="ShoppingList" asp-action="Generate" method="post">
+                <input type="hidden" name="menuPlanId" value="@Model.Id"/>
+                <button type="submit" class="btn btn--outline"><icon name="refresh"/> Tạo lại</button>
+            </form>
+            <a class="btn btn--accent" asp-controller="ShoppingList" asp-action="Details" asp-route-id="@Model.ShoppingListId">
                 <icon name="shopping-cart"/> Xem danh sách
             </a>
         }

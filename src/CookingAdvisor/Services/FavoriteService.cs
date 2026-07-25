@@ -25,8 +25,10 @@ public class FavoriteService(AppDbContext db)
     public Task<bool> IsFavoriteAsync(string userId, int recipeId) =>
         db.Favorites.AnyAsync(f => f.UserId == userId && f.RecipeId == recipeId);
 
-    // Returns the new favorite state (true = added, false = removed).
-    public async Task<bool> ToggleFavoriteAsync(string userId, int recipeId)
+    // Returns the new favorite state (true = added, false = removed), or null
+    // when the recipe does not exist. Without that check a tampered recipeId
+    // would only fail at SaveChanges with an FK violation, i.e. a 500 page.
+    public async Task<bool?> ToggleFavoriteAsync(string userId, int recipeId)
     {
         var existing = await db.Favorites.FirstOrDefaultAsync(f => f.UserId == userId && f.RecipeId == recipeId);
         if (existing is not null)
@@ -35,6 +37,9 @@ public class FavoriteService(AppDbContext db)
             await db.SaveChangesAsync();
             return false;
         }
+
+        if (!await db.Recipes.AnyAsync(r => r.Id == recipeId))
+            return null;
 
         db.Favorites.Add(new Favorite { UserId = userId, RecipeId = recipeId });
         await db.SaveChangesAsync();

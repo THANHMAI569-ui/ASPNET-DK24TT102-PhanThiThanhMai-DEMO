@@ -19,8 +19,19 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services
     .AddIdentity<ApplicationUser, IdentityRole>(options =>
     {
+        // The policy must match what the register form promises ("Ít nhất 8 ký
+        // tự"): with Identity's extra defaults left on, a password like
+        // "matkhau123" passes client validation and then fails server-side with
+        // an untranslated English message. Length is the one rule we keep.
         options.Password.RequiredLength = 8;
+        options.Password.RequireDigit = false;
+        options.Password.RequireUppercase = false;
+        options.Password.RequireLowercase = false;
+        options.Password.RequireNonAlphanumeric = false;
         options.User.RequireUniqueEmail = true;
+        // Slows down online password guessing; Identity's defaults are 5
+        // attempts, then a 5-minute lockout.
+        options.Lockout.AllowedForNewUsers = true;
     })
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();

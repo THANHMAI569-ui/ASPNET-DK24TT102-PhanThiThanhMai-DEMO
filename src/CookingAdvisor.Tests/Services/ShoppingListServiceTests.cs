@@ -133,6 +133,10 @@ public class ShoppingListServiceTests
 
         Assert.Equal(1, await db.ShoppingLists.CountAsync());
         Assert.Equal(2, second.Items.Count);
+        // Counted in the DATABASE, not on the returned object: if the service
+        // stopped removing the old rows, second.Items would still look right
+        // while stale rows pile up in the table.
+        Assert.Equal(2, await db.ShoppingListItems.CountAsync());
         Assert.Contains(second.Items, i => i.IngredientId == 10 && i.Quantity == 0.3m);
         Assert.Contains(second.Items, i => i.IngredientId == 20 && i.Quantity == 0.1m);
     }

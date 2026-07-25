@@ -69,7 +69,7 @@
                     @* A monogram, not an icon: the sprite has no glyph that honestly
                        stands for "Do uong" or "Trang mieng", and repeating one generic
                        icon nine times reads as filler. *@
-                    <span class="cat-tile__icon" aria-hidden="true">@category.Name.Substring(0, 1)</span>
+                    <span class="cat-tile__icon" aria-hidden="true">@(category.Name.Length > 0 ? category.Name[..1] : "?")</span>
                     <span class="cat-tile__name">@category.Name</span>
                     <span class="cat-tile__count">@category.RecipeCount món</span>
                 </a>

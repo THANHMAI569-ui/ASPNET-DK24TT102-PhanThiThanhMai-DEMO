@@ -60,9 +60,14 @@ public static class DbInitializer
             return;
         }
 
+        // One transaction across all three steps: if the first run dies between
+        // categories and recipes, the Recipes.Any() guard above would let the
+        // next run re-insert categories and ingredients as silent duplicates.
+        await using var transaction = await db.Database.BeginTransactionAsync();
         var categories = await SeedCategoriesAsync(db);
         var ingredients = await SeedIngredientsAsync(db);
         await SeedRecipesAsync(db, categories, ingredients);
+        await transaction.CommitAsync();
     }
 
     private static async Task SeedRolesAsync(RoleManager<IdentityRole> roleManager)

@@ -101,18 +101,21 @@ public class SuggestionServiceTests
     {
         await using var db = CreateDb();
         await SeedAsync(db,
-            // Owned set below is {1, 2, 3}.
+            // Owned set below is {1, 2, 3}. The two coverage-0.5 recipes are
+            // named so that alphabetical order OPPOSES the missing-count order:
+            // if the |missing| tie-break were removed, the name tie-break would
+            // put "A ..." first and this test would fail, not silently pass.
             BuildRecipe(1, "Coverage 0.75, missing 1", 1, 2, 3, 4),
             BuildRecipe(2, "Cookable", 1, 2),
-            BuildRecipe(3, "Coverage 0.5, missing 2", 1, 2, 4, 5),
-            BuildRecipe(4, "Coverage 0.5, missing 1", 1, 4),
+            BuildRecipe(3, "A coverage 0.5, missing 2", 1, 2, 4, 5),
+            BuildRecipe(4, "Z coverage 0.5, missing 1", 1, 4),
             BuildRecipe(5, "Coverage 0.25, missing 3", 1, 4, 5, 6));
         var service = new SuggestionService(db);
 
         var results = await service.SuggestAsync([1, 2, 3]);
 
         Assert.Equal(
-            ["Cookable", "Coverage 0.75, missing 1", "Coverage 0.5, missing 1", "Coverage 0.5, missing 2", "Coverage 0.25, missing 3"],
+            ["Cookable", "Coverage 0.75, missing 1", "Z coverage 0.5, missing 1", "A coverage 0.5, missing 2", "Coverage 0.25, missing 3"],
             results.Select(r => r.Name).ToList());
     }
 

@@ -24,6 +24,20 @@ public class ShoppingListController(ShoppingListService shoppingListService, App
         {
             return NotFound();
         }
+        catch (DbUpdateException)
+        {
+            // Two overlapping submits (a double-click) can both pass the
+            // check-then-insert in the service; the unique index on MenuPlanId
+            // rejects the loser. The winner's list already exists, so just show it.
+            var existingId = await db.ShoppingLists
+                .Where(l => l.MenuPlanId == menuPlanId && l.UserId == CurrentUserId)
+                .Select(l => (int?)l.Id)
+                .FirstOrDefaultAsync();
+
+            return existingId is { } id
+                ? RedirectToAction(nameof(Details), new { id })
+                : NotFound();
+        }
     }
 
     public async Task<IActionResult> Details(int id)

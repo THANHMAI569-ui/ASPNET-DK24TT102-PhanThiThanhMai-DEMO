@@ -19,7 +19,10 @@ public class FavoriteController(FavoriteService favoriteService) : Controller
     public async Task<IActionResult> Toggle(int recipeId, string? returnUrl)
     {
         var isFavorite = await favoriteService.ToggleFavoriteAsync(CurrentUserId, recipeId);
-        TempData["Success"] = isFavorite ? "Đã thêm vào món yêu thích." : "Đã bỏ khỏi món yêu thích.";
+        if (isFavorite is null)
+            return NotFound();
+
+        TempData["Success"] = isFavorite.Value ? "Đã thêm vào món yêu thích." : "Đã bỏ khỏi món yêu thích.";
 
         if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
             return Redirect(returnUrl);

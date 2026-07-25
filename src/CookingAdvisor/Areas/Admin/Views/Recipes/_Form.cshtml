@@ -105,7 +105,12 @@
                             <option value="@opt.Id" data-unit="@opt.Unit" selected="@(opt.Id == item.IngredientId)">@opt.Name</option>
                         }
                     </select>
-                    <input name="Ingredients[@i].Quantity" value="@item.Quantity" type="number" step="0.01" min="0" class="input"/>
+                    @* Invariant formatting on purpose: on a vi-VN Windows machine the
+                       default culture renders 0.3 as "0,3", which input[type=number]
+                       rejects, so the quantity field would open blank. *@
+                    <input name="Ingredients[@i].Quantity"
+                           value="@item.Quantity.ToString(System.Globalization.CultureInfo.InvariantCulture)"
+                           type="number" step="0.01" min="0" class="input"/>
                     <input name="Ingredients[@i].Unit" value="@item.Unit" class="input"/>
                     <button type="button" class="icon-btn remove-ingredient" aria-label="Xóa dòng nguyên liệu">
                         <icon name="trash"/>
