@@ -3,46 +3,72 @@
     ViewData["Title"] = "Thực đơn tuần";
 }
 
-<h1 class="mb-4">Thực đơn tuần</h1>
-
-<form asp-action="Generate" method="post" class="card card-body bg-light mb-4">
-    <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
-    <div class="row g-3">
-        <div class="col-md-4">
-            <label asp-for="Form.Name" class="form-label">Tên thực đơn</label>
-            <input asp-for="Form.Name" class="form-control"/>
-            <span asp-validation-for="Form.Name" class="text-danger"></span>
-        </div>
-        <div class="col-md-3">
-            <label asp-for="Form.WeekStartDate" class="form-label">Bắt đầu tuần</label>
-            <input asp-for="Form.WeekStartDate" type="date" class="form-control"/>
-        </div>
-        <div class="col-md-3">
-            <label asp-for="Form.Region" class="form-label">Vùng miền</label>
-            <select asp-for="Form.Region" class="form-select" asp-items="Html.GetEnumSelectList<Region>()">
-                <option value="">Tất cả</option>
-            </select>
-        </div>
-        <div class="col-md-2 d-flex align-items-end">
-            <button type="submit" class="btn btn-success w-100">Tạo thực đơn</button>
-        </div>
+<div class="page-head">
+    <div class="page-head__text">
+        <h1>Thực đơn tuần</h1>
+        <p class="page-head__lede">Tạo thực đơn mới hoặc mở lại một thực đơn đã lưu.</p>
     </div>
-</form>
+</div>
 
-<h3 class="mb-3">Thực đơn đã tạo</h3>
-@if (Model.Plans.Count == 0)
-{
-    <div class="alert alert-info">Chưa có thực đơn nào. Tạo thực đơn đầu tiên ở trên.</div>
-}
-else
-{
-    <ul class="list-group">
-        @foreach (var plan in Model.Plans)
-        {
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <a asp-action="Details" asp-route-id="@plan.Id">@plan.Name</a>
-                <span class="text-muted">Tuần @plan.WeekStartDate.ToString("dd/MM/yyyy")</span>
-            </li>
-        }
-    </ul>
-}
+<div class="stack">
+    <div class="surface">
+        <form asp-action="Generate" method="post" class="stack">
+            <div asp-validation-summary="ModelOnly"></div>
+            <div class="form-grid">
+                <div class="field">
+                    <label class="field__label" asp-for="Form.Name">Tên thực đơn</label>
+                    <input class="input" asp-for="Form.Name"/>
+                    <span class="field__error" asp-validation-for="Form.Name"></span>
+                </div>
+                <div class="field">
+                    <label class="field__label" asp-for="Form.WeekStartDate">Tuần bắt đầu</label>
+                    <input class="input" asp-for="Form.WeekStartDate" type="date"/>
+                    <span class="field__error" asp-validation-for="Form.WeekStartDate"></span>
+                </div>
+                <div class="field">
+                    <label class="field__label" asp-for="Form.Region">Vùng miền</label>
+                    <select class="select" asp-for="Form.Region" asp-items="Html.GetEnumSelectList<Region>()">
+                        <option value="">Tất cả</option>
+                    </select>
+                    <span class="field__error" asp-validation-for="Form.Region"></span>
+                </div>
+            </div>
+            <button type="submit" class="btn btn--accent">Tạo thực đơn</button>
+        </form>
+    </div>
+
+    <div class="section-head">
+        <h2>Thực đơn đã tạo</h2>
+    </div>
+
+    @if (Model.Plans.Count == 0)
+    {
+        <div class="empty">
+            <span class="empty__icon"><icon name="calendar-month" class="ico--lg"/></span>
+            <p class="empty__title">Chưa có thực đơn nào</p>
+            <p class="empty__text">Tạo thực đơn đầu tiên bằng biểu mẫu ở trên.</p>
+        </div>
+    }
+    else
+    {
+        <div class="table-wrap">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Tên thực đơn</th>
+                        <th scope="col" class="data-table__num">Tuần bắt đầu</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var plan in Model.Plans)
+                    {
+                        <tr>
+                            <td><a asp-action="Details" asp-route-id="@plan.Id">@plan.Name</a></td>
+                            <td class="data-table__num">@plan.WeekStartDate.ToString("dd/MM/yyyy")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

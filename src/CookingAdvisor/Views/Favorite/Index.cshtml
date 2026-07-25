@@ -1,42 +1,60 @@
 @model IReadOnlyList<FavoriteItemViewModel>
 @{
     ViewData["Title"] = "Món yêu thích";
+
+    var placeholder = Url.Content("~/images/recipe-placeholder.svg");
 }
 
-<h1 class="mb-4">Món yêu thích</h1>
+<div class="page-head">
+    <div class="page-head__text">
+        <h1>Món yêu thích</h1>
+        <p class="page-head__lede">Danh sách món bạn đã lưu để nấu lại bất cứ lúc nào.</p>
+    </div>
+</div>
 
 @if (Model.Count == 0)
 {
-    <div class="alert alert-info">Bạn chưa có món yêu thích nào. Vào trang chi tiết món và bấm "Thêm yêu thích".</div>
+    <div class="empty">
+        <span class="empty__icon"><icon name="heart" class="ico--lg"/></span>
+        <p class="empty__title">Chưa có món yêu thích nào</p>
+        <p class="empty__text">Vào trang chi tiết món ăn và bấm nút yêu thích để lưu lại.</p>
+        <a class="btn btn--outline" asp-controller="Recipe" asp-action="Index">Xem món ăn</a>
+    </div>
 }
 else
 {
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
+    <div class="grid-cards">
         @foreach (var recipe in Model)
         {
-            <div class="col">
-                <div class="card h-100 shadow-sm">
-                    <img src="@(string.IsNullOrEmpty(recipe.ImageUrl) ? Url.Content("~/images/recipe-placeholder.svg") : recipe.ImageUrl)"
-                         class="card-img-top" alt="@recipe.Name" style="height: 180px; object-fit: cover;"/>
-                    <div class="card-body d-flex flex-column">
-                        <span class="badge bg-secondary align-self-start mb-2">@recipe.CategoryName</span>
-                        <h5 class="card-title">@recipe.Name</h5>
-                        <p class="card-text text-muted mt-auto">
-                            @recipe.Region.ToDisplayName() &middot; @recipe.Difficulty.ToDisplayName()
-                        </p>
-                        <div class="d-flex gap-2">
-                            <a asp-controller="Recipe" asp-action="Details" asp-route-id="@recipe.Id" class="btn btn-outline-primary btn-sm flex-fill">
-                                Xem chi tiết
-                            </a>
+            <article class="dish-card">
+                <div class="dish-card__media">
+                    <img class="dish-card__img"
+                         src="@(string.IsNullOrEmpty(recipe.ImageUrl) ? placeholder : recipe.ImageUrl)"
+                         alt="@recipe.Name" data-fallback="@placeholder"
+                         width="900" height="675" loading="lazy"/>
+                    <span class="pill pill--accent media-tag">@recipe.CategoryName</span>
+                </div>
+                <div class="dish-card__body">
+                    <h3 class="dish-card__title">
+                        <a asp-controller="Recipe" asp-action="Details" asp-route-id="@recipe.Id">@recipe.Name</a>
+                    </h3>
+                    <ul class="meta-list meta-list--tight">
+                        <li><icon name="map-pin"/> @recipe.Region.ToDisplayName()</li>
+                        <li><icon name="chart-bar"/> @recipe.Difficulty.ToDisplayName()</li>
+                    </ul>
+                    <div class="dish-card__foot">
+                        <div class="dish-card__aside">
                             <form asp-controller="Favorite" asp-action="Toggle" method="post">
                                 <input type="hidden" name="recipeId" value="@recipe.Id"/>
                                 <input type="hidden" name="returnUrl" value="@Context.Request.Path"/>
-                                <button type="submit" class="btn btn-outline-danger btn-sm">Bỏ</button>
+                                <button type="submit" class="icon-btn" aria-label="Bỏ yêu thích @recipe.Name">
+                                    <icon name="heart"/>
+                                </button>
                             </form>
                         </div>
                     </div>
                 </div>
-            </div>
+            </article>
         }
     </div>
 }

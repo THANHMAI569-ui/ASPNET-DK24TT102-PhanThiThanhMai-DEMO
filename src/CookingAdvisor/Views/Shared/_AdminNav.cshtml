@@ -1,0 +1,27 @@
+@{
+    var current = ViewContext.RouteData.Values["controller"] as string ?? string.Empty;
+
+    string State(string target) =>
+        string.Equals(current, target, StringComparison.OrdinalIgnoreCase)
+            ? "admin-nav__link is-active"
+            : "admin-nav__link";
+}
+
+<nav class="admin-nav" aria-label="Điều hướng quản trị">
+    <span class="admin-nav__label">Quản trị</span>
+    <a class="@State("Dashboard")" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
+        <icon name="layout-dashboard"/> Tổng quan
+    </a>
+    <a class="@State("Recipes")" asp-area="Admin" asp-controller="Recipes" asp-action="Index">
+        <icon name="tools-kitchen-2"/> Món ăn
+    </a>
+    <a class="@State("Ingredients")" asp-area="Admin" asp-controller="Ingredients" asp-action="Index">
+        <icon name="carrot"/> Nguyên liệu
+    </a>
+    <a class="@State("Categories")" asp-area="Admin" asp-controller="Categories" asp-action="Index">
+        <icon name="category"/> Danh mục
+    </a>
+    <a class="admin-nav__link" asp-area="" asp-controller="Home" asp-action="Index">
+        <icon name="arrow-left"/> Về trang chính
+    </a>
+</nav>

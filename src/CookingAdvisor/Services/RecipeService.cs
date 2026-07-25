@@ -47,6 +47,7 @@ public class RecipeService(AppDbContext db)
                 ImageUrl = r.ImageUrl,
                 PrepMinutes = r.PrepMinutes,
                 CookMinutes = r.CookMinutes,
+                CaloriesPerServing = r.CaloriesPerServing,
                 Difficulty = r.Difficulty,
                 Region = r.Region
             })
@@ -73,6 +74,56 @@ public class RecipeService(AppDbContext db)
             Page = page,
             PageSize = PageSize,
             TotalCount = totalCount
+        };
+    }
+
+    /// <summary>Counts, a handful of dishes and the category rail for the landing page.</summary>
+    public async Task<HomeViewModel> GetHomeAsync(int featuredCount = 6)
+    {
+        var featured = await db.Recipes
+            .OrderBy(r => r.Id)
+            .Select(r => new RecipeListItemViewModel
+            {
+                Id = r.Id,
+                Name = r.Name,
+                CategoryName = r.Category.Name,
+                ImageUrl = r.ImageUrl,
+                PrepMinutes = r.PrepMinutes,
+                CookMinutes = r.CookMinutes,
+                CaloriesPerServing = r.CaloriesPerServing,
+                Difficulty = r.Difficulty,
+                Region = r.Region
+            })
+            .Take(featuredCount)
+            .ToListAsync();
+
+        var categories = await db.Categories
+            .Where(c => c.Recipes.Any())
+            .OrderByDescending(c => c.Recipes.Count)
+            .Select(c => new HomeCategoryViewModel
+            {
+                Id = c.Id,
+                Name = c.Name,
+                RecipeCount = c.Recipes.Count
+            })
+            .ToListAsync();
+
+        // Two for the hero collage plus one distinct photo for the bento cell,
+        // so the same dish is not shown three times on the landing page.
+        var heroImages = await db.Recipes
+            .Where(r => r.ImageUrl != null && r.ImageUrl != "")
+            .OrderBy(r => r.Id)
+            .Select(r => r.ImageUrl!)
+            .Take(3)
+            .ToListAsync();
+
+        return new HomeViewModel
+        {
+            RecipeCount = await db.Recipes.CountAsync(),
+            IngredientCount = await db.Ingredients.CountAsync(),
+            FeaturedRecipes = featured,
+            Categories = categories,
+            HeroImageUrls = heroImages
         };
     }
 

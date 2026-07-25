@@ -1,133 +1,141 @@
 @model RecipeFormViewModel
 
-<div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
+<div asp-validation-summary="ModelOnly" class="validation-summary-errors"></div>
 
-<div class="row g-3">
-    <div class="col-12 col-md-8">
-        <label asp-for="Name" class="form-label"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
+<div class="form-grid">
+    <div class="field form-grid__full">
+        <label class="field__label" asp-for="Name">Tên món</label>
+        <input class="input" asp-for="Name"/>
+        <span class="field__error" asp-validation-for="Name"></span>
     </div>
-    <div class="col-12 col-md-4">
-        <label asp-for="CategoryId" class="form-label"></label>
-        <select asp-for="CategoryId" class="form-select">
-            <option value="0">— Chọn danh mục —</option>
+
+    <div class="field">
+        <label class="field__label" asp-for="CategoryId">Danh mục</label>
+        <select class="select" asp-for="CategoryId">
+            <option value="0">Chọn danh mục</option>
             @foreach (var c in Model.CategoryOptions)
             {
                 <option value="@c.Id">@c.Name</option>
             }
         </select>
-        <span asp-validation-for="CategoryId" class="text-danger"></span>
+        <span class="field__error" asp-validation-for="CategoryId"></span>
     </div>
 
-    <div class="col-6 col-md-3">
-        <label asp-for="Region" class="form-label"></label>
-        <select asp-for="Region" class="form-select">
+    <div class="field">
+        <label class="field__label" asp-for="Region">Vùng miền</label>
+        <select class="select" asp-for="Region">
             @foreach (var region in Enum.GetValues<Region>())
             {
                 <option value="@region" selected="@(Model.Region == region)">@region.ToDisplayName()</option>
             }
         </select>
-        <span asp-validation-for="Region" class="text-danger"></span>
+        <span class="field__error" asp-validation-for="Region"></span>
     </div>
-    <div class="col-6 col-md-3">
-        <label asp-for="Difficulty" class="form-label"></label>
-        <select asp-for="Difficulty" class="form-select">
+
+    <div class="field">
+        <label class="field__label" asp-for="Difficulty">Độ khó</label>
+        <select class="select" asp-for="Difficulty">
             @foreach (var difficulty in Enum.GetValues<Difficulty>())
             {
                 <option value="@difficulty" selected="@(Model.Difficulty == difficulty)">@difficulty.ToDisplayName()</option>
             }
         </select>
-        <span asp-validation-for="Difficulty" class="text-danger"></span>
-    </div>
-    <div class="col-6 col-md-2">
-        <label asp-for="Servings" class="form-label"></label>
-        <input asp-for="Servings" type="number" min="1" class="form-control" />
-        <span asp-validation-for="Servings" class="text-danger"></span>
-    </div>
-    <div class="col-6 col-md-2">
-        <label asp-for="PrepMinutes" class="form-label"></label>
-        <input asp-for="PrepMinutes" type="number" min="0" class="form-control" />
-        <span asp-validation-for="PrepMinutes" class="text-danger"></span>
-    </div>
-    <div class="col-6 col-md-2">
-        <label asp-for="CookMinutes" class="form-label"></label>
-        <input asp-for="CookMinutes" type="number" min="0" class="form-control" />
-        <span asp-validation-for="CookMinutes" class="text-danger"></span>
+        <span class="field__error" asp-validation-for="Difficulty"></span>
     </div>
 
-    <div class="col-6 col-md-3">
-        <label asp-for="CaloriesPerServing" class="form-label"></label>
-        <input asp-for="CaloriesPerServing" type="number" min="0" class="form-control" />
-        <span asp-validation-for="CaloriesPerServing" class="text-danger"></span>
-    </div>
-    <div class="col-12 col-md-9">
-        <label asp-for="ImageUrl" class="form-label"></label>
-        <input asp-for="ImageUrl" class="form-control" placeholder="https://..." />
-        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+    <div class="field">
+        <label class="field__label" asp-for="Servings">Khẩu phần</label>
+        <input class="input" asp-for="Servings" type="number" min="1"/>
+        <span class="field__error" asp-validation-for="Servings"></span>
     </div>
 
-    <div class="col-12">
-        <label asp-for="Description" class="form-label"></label>
-        <textarea asp-for="Description" class="form-control" rows="2"></textarea>
+    <div class="field">
+        <label class="field__label" asp-for="PrepMinutes">Thời gian sơ chế (phút)</label>
+        <input class="input" asp-for="PrepMinutes" type="number" min="0"/>
+        <span class="field__error" asp-validation-for="PrepMinutes"></span>
     </div>
-    <div class="col-12">
-        <label asp-for="Instructions" class="form-label"></label>
-        <textarea asp-for="Instructions" class="form-control" rows="4"></textarea>
-    </div>
-</div>
 
-<hr class="my-4" />
-<h5>Nguyên liệu</h5>
-<table class="table align-middle">
-    <thead>
-        <tr>
-            <th>Nguyên liệu</th>
-            <th style="width: 140px;">Số lượng</th>
-            <th style="width: 120px;">Đơn vị</th>
-            <th style="width: 60px;"></th>
-        </tr>
-    </thead>
-    <tbody id="ingredients-body">
-        @for (var i = 0; i < Model.Ingredients.Count; i++)
-        {
-            var item = Model.Ingredients[i];
-            <tr class="ingredient-row">
-                <td>
-                    <input type="hidden" name="Ingredients.Index" value="@i" />
-                    <select name="Ingredients[@i].IngredientId" class="form-select">
-                        <option value="0">— Chọn nguyên liệu —</option>
+    <div class="field">
+        <label class="field__label" asp-for="CookMinutes">Thời gian nấu (phút)</label>
+        <input class="input" asp-for="CookMinutes" type="number" min="0"/>
+        <span class="field__error" asp-validation-for="CookMinutes"></span>
+    </div>
+
+    <div class="field">
+        <label class="field__label" asp-for="CaloriesPerServing">Calo / khẩu phần</label>
+        <input class="input" asp-for="CaloriesPerServing" type="number" min="0"/>
+        <span class="field__error" asp-validation-for="CaloriesPerServing"></span>
+    </div>
+
+    <div class="field">
+        <label class="field__label" asp-for="ImageUrl">Ảnh</label>
+        <p class="field__hint">
+            Đường dẫn ảnh trong wwwroot, ví dụ /images/recipes/pho-bo.jpg. Để trống thì dùng ảnh mặc định.
+        </p>
+        <input class="input" asp-for="ImageUrl" placeholder="/images/recipes/ten-mon.jpg"/>
+        <span class="field__error" asp-validation-for="ImageUrl"></span>
+    </div>
+
+    <div class="field form-grid__full">
+        <label class="field__label" asp-for="Description">Mô tả</label>
+        <textarea class="textarea" asp-for="Description" rows="2"></textarea>
+        <span class="field__error" asp-validation-for="Description"></span>
+    </div>
+
+    <div class="field form-grid__full">
+        <label class="field__label" asp-for="Instructions">Cách làm</label>
+        <textarea class="textarea" asp-for="Instructions" rows="6"></textarea>
+        <span class="field__error" asp-validation-for="Instructions"></span>
+    </div>
+
+    <div class="field form-grid__full">
+        <label class="field__label">Nguyên liệu</label>
+        <p class="field__hint">Chọn nguyên liệu, nhập số lượng và đơn vị cho từng dòng.</p>
+
+        <div id="ingredients-body" class="stack-sm">
+            @for (var i = 0; i < Model.Ingredients.Count; i++)
+            {
+                var item = Model.Ingredients[i];
+                <div class="repeater__row ingredient-row">
+                    <input type="hidden" name="Ingredients.Index" value="@i"/>
+                    <select name="Ingredients[@i].IngredientId" class="select">
+                        <option value="0">Chọn nguyên liệu</option>
                         @foreach (var opt in Model.IngredientOptions)
                         {
                             <option value="@opt.Id" data-unit="@opt.Unit" selected="@(opt.Id == item.IngredientId)">@opt.Name</option>
                         }
                     </select>
-                </td>
-                <td><input name="Ingredients[@i].Quantity" value="@item.Quantity" type="number" step="0.01" min="0" class="form-control" /></td>
-                <td><input name="Ingredients[@i].Unit" value="@item.Unit" class="form-control" /></td>
-                <td><button type="button" class="btn btn-outline-danger btn-sm remove-ingredient">&times;</button></td>
-            </tr>
-        }
-    </tbody>
-</table>
-<button type="button" id="add-ingredient" class="btn btn-outline-secondary btn-sm">+ Thêm nguyên liệu</button>
+                    <input name="Ingredients[@i].Quantity" value="@item.Quantity" type="number" step="0.01" min="0" class="input"/>
+                    <input name="Ingredients[@i].Unit" value="@item.Unit" class="input"/>
+                    <button type="button" class="icon-btn remove-ingredient" aria-label="Xóa dòng nguyên liệu">
+                        <icon name="trash"/>
+                    </button>
+                </div>
+            }
+        </div>
+
+        <button type="button" id="add-ingredient" class="btn btn--outline btn--sm">
+            <icon name="plus"/> Thêm dòng
+        </button>
+    </div>
+</div>
 
 <template id="ingredient-row-template">
-    <tr class="ingredient-row">
-        <td>
-            <input type="hidden" name="Ingredients.Index" value="__i__" />
-            <select name="Ingredients[__i__].IngredientId" class="form-select">
-                <option value="0">— Chọn nguyên liệu —</option>
-                @foreach (var opt in Model.IngredientOptions)
-                {
-                    <option value="@opt.Id" data-unit="@opt.Unit">@opt.Name</option>
-                }
-            </select>
-        </td>
-        <td><input name="Ingredients[__i__].Quantity" type="number" step="0.01" min="0" class="form-control" /></td>
-        <td><input name="Ingredients[__i__].Unit" class="form-control" /></td>
-        <td><button type="button" class="btn btn-outline-danger btn-sm remove-ingredient">&times;</button></td>
-    </tr>
+    <div class="repeater__row ingredient-row">
+        <input type="hidden" name="Ingredients.Index" value="__i__"/>
+        <select name="Ingredients[__i__].IngredientId" class="select">
+            <option value="0">Chọn nguyên liệu</option>
+            @foreach (var opt in Model.IngredientOptions)
+            {
+                <option value="@opt.Id" data-unit="@opt.Unit">@opt.Name</option>
+            }
+        </select>
+        <input name="Ingredients[__i__].Quantity" type="number" step="0.01" min="0" class="input"/>
+        <input name="Ingredients[__i__].Unit" class="input"/>
+        <button type="button" class="icon-btn remove-ingredient" aria-label="Xóa dòng nguyên liệu">
+            <icon name="trash"/>
+        </button>
+    </div>
 </template>
 
 <script>
@@ -138,14 +146,15 @@
 
         document.getElementById('add-ingredient').addEventListener('click', function () {
             var html = template.replace(/__i__/g, counter++);
-            var holder = document.createElement('tbody');
+            var holder = document.createElement('div');
             holder.innerHTML = html.trim();
-            body.appendChild(holder.firstChild);
+            body.appendChild(holder.firstElementChild);
         });
 
         body.addEventListener('click', function (e) {
-            if (e.target.classList.contains('remove-ingredient')) {
-                var row = e.target.closest('tr');
+            var button = e.target.closest('.remove-ingredient');
+            if (button) {
+                var row = button.closest('.ingredient-row');
                 row.parentNode.removeChild(row);
             }
         });
@@ -154,7 +163,7 @@
             if (e.target.tagName === 'SELECT') {
                 var option = e.target.options[e.target.selectedIndex];
                 var unit = option.getAttribute('data-unit');
-                var unitInput = e.target.closest('tr').querySelector('input[name$=".Unit"]');
+                var unitInput = e.target.closest('.ingredient-row').querySelector('input[name$=".Unit"]');
                 if (unit && unitInput && !unitInput.value) {
                     unitInput.value = unit;
                 }

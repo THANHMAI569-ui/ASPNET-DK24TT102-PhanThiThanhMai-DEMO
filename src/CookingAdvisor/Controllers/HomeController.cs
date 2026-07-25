@@ -1,14 +1,15 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using CookingAdvisor.Models;
+using CookingAdvisor.Services;
 
 namespace CookingAdvisor.Controllers;
 
-public class HomeController : Controller
+public class HomeController(RecipeService recipeService) : Controller
 {
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        return View(await recipeService.GetHomeAsync());
     }
 
     public IActionResult Privacy()

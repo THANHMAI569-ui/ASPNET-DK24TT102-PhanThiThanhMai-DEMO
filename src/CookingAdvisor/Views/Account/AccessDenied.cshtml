@@ -2,8 +2,11 @@
     ViewData["Title"] = "Không có quyền truy cập";
 }
 
-<div class="text-center py-5">
-    <h1 class="display-6 mb-3">Không có quyền truy cập</h1>
-    <p class="text-muted">Bạn không có quyền vào trang này. Khu quản trị chỉ dành cho tài khoản Admin.</p>
-    <a asp-controller="Home" asp-action="Index" class="btn btn-primary mt-2">Về trang chủ</a>
+<div class="empty">
+    <span class="empty__icon"><icon name="shield-lock" class="ico--lg"/></span>
+    <p class="empty__title">Bạn không có quyền vào trang này</p>
+    <p class="empty__text">
+        Trang này chỉ dành cho tài khoản quản trị. Vui lòng đăng nhập bằng tài khoản Admin để tiếp tục.
+    </p>
+    <a class="btn btn--outline" asp-controller="Home" asp-action="Index">Về trang chủ</a>
 </div>

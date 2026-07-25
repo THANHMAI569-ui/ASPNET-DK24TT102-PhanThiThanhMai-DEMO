@@ -3,23 +3,35 @@
     ViewData["Title"] = "Thêm danh mục";
 }
 
-<h1 class="mb-4">Thêm danh mục</h1>
+<div class="page-head">
+    <div class="page-head__text">
+        <h1>Thêm danh mục</h1>
+        <p class="page-head__lede">Thêm danh mục mới để phân loại món ăn.</p>
+    </div>
+    <div class="page-head__actions">
+        <a class="btn btn--quiet" asp-action="Index"><icon name="arrow-left"/> Quay lại</a>
+    </div>
+</div>
 
-<div class="col-12 col-md-6">
-    <form asp-action="Create" method="post" class="card card-body">
-        <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
-        <div class="mb-3">
-            <label asp-for="Name" class="form-label"></label>
-            <input asp-for="Name" class="form-control" />
-            <span asp-validation-for="Name" class="text-danger"></span>
+<div class="surface">
+    <form asp-action="Create" method="post" class="stack">
+        <div asp-validation-summary="ModelOnly" class="validation-summary-errors"></div>
+
+        <div class="form-grid">
+            <div class="field">
+                <label class="field__label" asp-for="Name">Tên danh mục</label>
+                <input class="input" asp-for="Name"/>
+                <span class="field__error" asp-validation-for="Name"></span>
+            </div>
         </div>
-        <div class="d-flex gap-2">
-            <button type="submit" class="btn btn-primary">Lưu</button>
-            <a asp-action="Index" class="btn btn-outline-secondary">Hủy</a>
+
+        <div class="row-inline">
+            <button type="submit" class="btn btn--accent">Lưu</button>
+            <a class="btn btn--quiet" asp-action="Index">Hủy</a>
         </div>
     </form>
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial"/>
 }

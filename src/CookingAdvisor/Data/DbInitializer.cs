@@ -12,6 +12,38 @@ public static class DbInitializer
     public const string AdminEmail = "admin@cookingadvisor.local";
     public const string AdminPassword = "Admin@2026!Cook";
 
+    // Dish photos ship with the app under wwwroot/images/recipes.
+    // Sources and licences: wwwroot/images/recipes/CREDITS.md.
+    private static readonly Dictionary<string, string> ImageSlugs = new()
+    {
+        ["Phở bò"] = "pho-bo",
+        ["Bún chả"] = "bun-cha",
+        ["Bún bò Huế"] = "bun-bo-hue",
+        ["Cơm tấm thịt nướng"] = "com-tam",
+        ["Gỏi cuốn"] = "goi-cuon",
+        ["Chả giò"] = "cha-gio",
+        ["Canh chua cá"] = "canh-chua-ca",
+        ["Canh cải thìa nấu tôm"] = "canh-cai-thia",
+        ["Thịt kho trứng"] = "thit-kho-trung",
+        ["Cá kho tộ"] = "ca-kho-to",
+        ["Gà kho gừng"] = "ga-kho-gung",
+        ["Rau muống xào tỏi"] = "rau-muong-xao-toi",
+        ["Đậu hũ xào cà chua"] = "dau-hu-xao-ca-chua",
+        ["Bò xào cải thìa"] = "bo-xao-cai-thia",
+        ["Tôm rang thịt"] = "tom-rang-thit",
+        ["Gà chiên nước mắm"] = "ga-chien-nuoc-mam",
+        ["Chả cá"] = "cha-ca",
+        ["Bánh xèo"] = "banh-xeo",
+        ["Bún riêu cua"] = "bun-rieu-cua",
+        ["Miến xào gà"] = "mien-xao-ga",
+        ["Súp cua"] = "sup-cua",
+        ["Nộm đu đủ"] = "nom-du-du",
+        ["Chè đậu xanh"] = "che-dau-xanh",
+        ["Chuối chiên"] = "chuoi-chien",
+        ["Chanh muối đường"] = "chanh-muoi-duong",
+        ["Cá hấp gừng hành"] = "ca-hap-gung"
+    };
+
     public static async Task SeedAsync(IServiceProvider services)
     {
         var db = services.GetRequiredService<AppDbContext>();
@@ -22,7 +54,11 @@ public static class DbInitializer
         await SeedAdminAsync(userManager);
 
         if (await db.Recipes.AnyAsync())
+        {
+            // Databases seeded before the photos shipped still have no ImageUrl.
+            await BackfillRecipeImagesAsync(db);
             return;
+        }
 
         var categories = await SeedCategoriesAsync(db);
         var ingredients = await SeedIngredientsAsync(db);
@@ -59,6 +95,26 @@ public static class DbInitializer
         }
 
         await userManager.AddToRoleAsync(admin, "Admin");
+    }
+
+    private static async Task BackfillRecipeImagesAsync(AppDbContext db)
+    {
+        var missing = await db.Recipes
+            .Where(r => r.ImageUrl == null || r.ImageUrl == "")
+            .ToListAsync();
+
+        var changed = false;
+        foreach (var recipe in missing)
+        {
+            if (!ImageSlugs.TryGetValue(recipe.Name, out var slug))
+                continue;
+
+            recipe.ImageUrl = $"/images/recipes/{slug}.jpg";
+            changed = true;
+        }
+
+        if (changed)
+            await db.SaveChangesAsync();
     }
 
     private static async Task<Dictionary<string, Category>> SeedCategoriesAsync(AppDbContext db)
@@ -384,6 +440,12 @@ public static class DbInitializer
                 ("Cá basa", 0.6m, "kg"), ("Gừng", 1m, "củ"), ("Hành lá", 1m, "bó"),
                 ("Hành tím", 2m, "củ"), ("Nước mắm", 30m, "ml"))
         ];
+
+        foreach (var recipe in recipes)
+        {
+            if (ImageSlugs.TryGetValue(recipe.Name, out var slug))
+                recipe.ImageUrl = $"/images/recipes/{slug}.jpg";
+        }
 
         db.Recipes.AddRange(recipes);
         await db.SaveChangesAsync();

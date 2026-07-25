@@ -8,6 +8,10 @@ namespace CookingAdvisor.Services;
 // avoiding repeats while unused candidates remain, relaxing meal-type suitability
 // (never the region filter) when the pool runs dry, and preferring favorites, then
 // calorie balance against the daily target.
+//
+// When the recipe library is too small to fill 21 slots without repeating, repeats
+// are spread evenly (least-used dish first) instead of following the preference
+// order, so a thin library still yields a varied week.
 public class MenuPlannerService(AppDbContext db)
 {
     private const int DailyCalorieTarget = 2000;
@@ -40,6 +44,7 @@ public class MenuPlannerService(AppDbContext db)
             .ToHashSet();
 
         var used = new HashSet<int>();
+        var useCounts = new Dictionary<int, int>();
         var items = new List<MenuPlanItem>();
 
         for (var day = 0; day < 7; day++)
@@ -53,17 +58,29 @@ public class MenuPlannerService(AppDbContext db)
 
                 var suitable = candidates.Where(c => c.SuitableMealTypes.HasFlag(flag)).ToList();
                 var pool = suitable.Where(c => !used.Contains(c.Id)).ToList();
-                if (pool.Count == 0) pool = suitable;
+
+                // Repeats only become necessary once every suitable dish has been
+                // used; meal-type suitability is relaxed only after that.
+                var repeating = pool.Count == 0;
+                if (repeating) pool = suitable;
                 if (pool.Count == 0) pool = candidates;
 
-                var chosen = pool
-                    .OrderByDescending(c => favoriteIds.Contains(c.Id))
+                var ordered = repeating
+                    // Variety beats preference once repeats are unavoidable: without
+                    // this key the calorie tie-break returns the same dish for every
+                    // remaining slot, so one dish fills the week and the rest go unused.
+                    ? pool.OrderBy(c => useCounts.GetValueOrDefault(c.Id))
+                        .ThenByDescending(c => favoriteIds.Contains(c.Id))
+                    : pool.OrderByDescending(c => favoriteIds.Contains(c.Id));
+
+                var chosen = ordered
                     .ThenBy(c => Math.Abs(dayCalories + c.CaloriesPerServing - mealTarget))
                     .ThenBy(c => c.Id)
                     .First();
 
                 dayCalories += chosen.CaloriesPerServing;
                 used.Add(chosen.Id);
+                useCounts[chosen.Id] = useCounts.GetValueOrDefault(chosen.Id) + 1;
                 items.Add(new MenuPlanItem { DayOfWeek = day, MealType = meal, RecipeId = chosen.Id });
             }
         }

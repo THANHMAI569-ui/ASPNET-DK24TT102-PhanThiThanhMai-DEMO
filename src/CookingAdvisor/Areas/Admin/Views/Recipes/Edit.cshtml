@@ -3,17 +3,27 @@
     ViewData["Title"] = "Sửa món ăn";
 }
 
-<h1 class="mb-4">Sửa món ăn</h1>
-
-<form asp-action="Edit" method="post" class="card card-body">
-    <input type="hidden" asp-for="Id" />
-    <partial name="_Form" model="Model" />
-    <div class="d-flex gap-2 mt-4">
-        <button type="submit" class="btn btn-primary">Lưu</button>
-        <a asp-action="Index" class="btn btn-outline-secondary">Hủy</a>
+<div class="page-head">
+    <div class="page-head__text">
+        <h1>Sửa món ăn</h1>
+        <p class="page-head__lede">Cập nhật thông tin món ăn và danh sách nguyên liệu.</p>
     </div>
-</form>
+    <div class="page-head__actions">
+        <a class="btn btn--quiet" asp-action="Index"><icon name="arrow-left"/> Quay lại</a>
+    </div>
+</div>
+
+<div class="surface">
+    <form asp-action="Edit" method="post" class="stack">
+        <input type="hidden" asp-for="Id"/>
+        <partial name="_Form" model="Model"/>
+        <div class="row-inline">
+            <button type="submit" class="btn btn--accent">Lưu</button>
+            <a class="btn btn--quiet" asp-action="Index">Hủy</a>
+        </div>
+    </form>
+</div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial"/>
 }

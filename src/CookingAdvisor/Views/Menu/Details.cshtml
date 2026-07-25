@@ -5,95 +5,92 @@
     string[] weekdayLabels = ["Chủ nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"];
 }
 
-<h1 class="mb-1">@Model.Name</h1>
-<p class="text-muted mb-2">Tuần bắt đầu @Model.WeekStartDate.ToString("dd/MM/yyyy")</p>
-
-<div class="mb-4">
-    @if (Model.ShoppingListId is null)
-    {
-        <form asp-controller="ShoppingList" asp-action="Generate" method="post">
-            <input type="hidden" name="menuPlanId" value="@Model.Id"/>
-            <button type="submit" class="btn btn-success btn-sm">Tạo danh sách đi chợ</button>
-        </form>
-    }
-    else
-    {
-        <a asp-controller="ShoppingList" asp-action="Details" asp-route-id="@Model.ShoppingListId" class="btn btn-outline-success btn-sm">
-            Xem danh sách đi chợ
-        </a>
-    }
+<div class="page-head">
+    <div class="page-head__text">
+        <h1>@Model.Name</h1>
+        <p class="page-head__lede">Tuần bắt đầu @Model.WeekStartDate.ToString("dd/MM/yyyy")</p>
+    </div>
+    <div class="page-head__actions">
+        @if (Model.ShoppingListId is null)
+        {
+            <form asp-controller="ShoppingList" asp-action="Generate" method="post">
+                <input type="hidden" name="menuPlanId" value="@Model.Id"/>
+                <button type="submit" class="btn btn--accent">Tạo danh sách đi chợ</button>
+            </form>
+        }
+        else
+        {
+            <a class="btn btn--outline" asp-controller="ShoppingList" asp-action="Details" asp-route-id="@Model.ShoppingListId">
+                <icon name="shopping-cart"/> Xem danh sách đi chợ
+            </a>
+        }
+    </div>
 </div>
 
-<div class="table-responsive">
-    <table class="table table-bordered align-middle text-center">
-        <thead class="table-light">
-            <tr>
-                <th>Bữa</th>
-                @foreach (var day in Model.Days)
-                {
-                    var date = Model.WeekStartDate.AddDays(day.DayOfWeek);
-                    <th>
-                        @weekdayLabels[(int)date.DayOfWeek]<br/>
-                        <small class="text-muted">@date.ToString("dd/MM")</small>
-                    </th>
-                }
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var mealType in new[] { MealType.Breakfast, MealType.Lunch, MealType.Dinner })
+<div class="table-wrap">
+    <div class="menu-grid">
+        <div class="menu-grid__head"></div>
+        @foreach (var day in Model.Days)
+        {
+            var date = Model.WeekStartDate.AddDays(day.DayOfWeek);
+            <div class="menu-grid__head">
+                @weekdayLabels[(int)date.DayOfWeek]
+                <small>@date.ToString("dd/MM")</small>
+            </div>
+        }
+
+        @foreach (var mealType in new[] { MealType.Breakfast, MealType.Lunch, MealType.Dinner })
+        {
+            <div class="menu-grid__rowhead"><icon name="soup"/> @mealLabels[(int)mealType]</div>
+            @foreach (var day in Model.Days)
             {
-                <tr>
-                    <th class="table-light">@mealLabels[(int)mealType]</th>
-                    @foreach (var day in Model.Days)
+                var date = Model.WeekStartDate.AddDays(day.DayOfWeek);
+                var meal = day.Meals.FirstOrDefault(m => m.MealType == mealType);
+                <div class="menu-grid__cell menu-cell">
+                    @if (meal is not null)
                     {
-                        var meal = day.Meals.FirstOrDefault(m => m.MealType == mealType);
-                        <td style="min-width: 180px;">
-                            @if (meal is not null)
-                            {
-                                <a asp-controller="Recipe" asp-action="Details" asp-route-id="@meal.RecipeId" class="d-block">@meal.RecipeName</a>
-                                <span class="text-muted small">@meal.CaloriesPerServing kcal</span>
-                            }
-                            else
-                            {
-                                <span class="text-muted small fst-italic">Chưa có món</span>
-                            }
-                            <form asp-action="UpdateItem" method="post" class="mt-1">
+                        <a class="menu-cell__dish" asp-controller="Recipe" asp-action="Details" asp-route-id="@meal.RecipeId">@meal.RecipeName</a>
+                        <span class="menu-cell__kcal">@meal.CaloriesPerServing kcal</span>
+                    }
+                    else
+                    {
+                        <span class="menu-cell__empty">Chưa có món</span>
+                    }
+                    <div class="menu-cell__tools">
+                        <form asp-action="UpdateItem" method="post">
+                            <input type="hidden" name="planId" value="@Model.Id"/>
+                            <input type="hidden" name="dayOfWeek" value="@day.DayOfWeek"/>
+                            <input type="hidden" name="mealType" value="@mealType"/>
+                            <select name="recipeId" class="select" onchange="this.form.submit()">
+                                <option value="">Đổi món</option>
+                                @foreach (var opt in Model.RecipeOptions)
+                                {
+                                    <option value="@opt.Id" selected="@(meal is not null && meal.RecipeId == opt.Id)">@opt.Name</option>
+                                }
+                            </select>
+                        </form>
+                        @if (meal is not null)
+                        {
+                            <form asp-action="DeleteItem" method="post" onsubmit="return confirm('Xóa món này khỏi thực đơn?')">
                                 <input type="hidden" name="planId" value="@Model.Id"/>
                                 <input type="hidden" name="dayOfWeek" value="@day.DayOfWeek"/>
                                 <input type="hidden" name="mealType" value="@mealType"/>
-                                <select name="recipeId" class="form-select form-select-sm" onchange="this.form.submit()">
-                                    <option value="">— Đổi món —</option>
-                                    @foreach (var opt in Model.RecipeOptions)
-                                    {
-                                        <option value="@opt.Id" selected="@(meal is not null && meal.RecipeId == opt.Id)">@opt.Name</option>
-                                    }
-                                </select>
+                                <button type="submit" class="icon-btn" aria-label="Xóa món @mealLabels[(int)mealType] @weekdayLabels[(int)date.DayOfWeek]">
+                                    <icon name="trash"/>
+                                </button>
                             </form>
-                            @if (meal is not null)
-                            {
-                                <form asp-action="DeleteItem" method="post" class="mt-1"
-                                      onsubmit="return confirm('Xóa món này khỏi thực đơn?')">
-                                    <input type="hidden" name="planId" value="@Model.Id"/>
-                                    <input type="hidden" name="dayOfWeek" value="@day.DayOfWeek"/>
-                                    <input type="hidden" name="mealType" value="@mealType"/>
-                                    <button type="submit" class="btn btn-sm btn-outline-danger w-100">Xóa</button>
-                                </form>
-                            }
-                        </td>
-                    }
-                </tr>
+                        }
+                    </div>
+                </div>
             }
-        </tbody>
-        <tfoot class="table-light">
-            <tr>
-                <th>Tổng calo</th>
-                @foreach (var day in Model.Days)
-                {
-                    <th>@day.TotalCalories kcal</th>
-                }
-            </tr>
-        </tfoot>
-    </table>
+        }
+
+        <div class="menu-grid__foot">Tổng calo</div>
+        @foreach (var day in Model.Days)
+        {
+            <div class="menu-grid__foot menu-grid__foot--total">@day.TotalCalories kcal</div>
+        }
+    </div>
 </div>
 
-<a asp-action="Index" class="btn btn-outline-secondary">&larr; Quay lại</a>
+<a class="btn btn--quiet" asp-action="Index"><icon name="arrow-left"/> Quay lại</a>

@@ -1,47 +1,73 @@
 @model IReadOnlyList<RecipeAdminListItemViewModel>
 @{
     ViewData["Title"] = "Quản lý món ăn";
+    var placeholder = Url.Content("~/images/recipe-placeholder.svg");
 }
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h1>Món ăn</h1>
-    <a asp-action="Create" class="btn btn-primary">+ Thêm món ăn</a>
+<div class="page-head">
+    <div class="page-head__text">
+        <h1>Món ăn</h1>
+        <p class="page-head__lede">Quản lý danh sách món ăn trong thư viện.</p>
+    </div>
+    <div class="page-head__actions">
+        <a class="btn btn--accent" asp-action="Create"><icon name="plus"/> Thêm món ăn</a>
+    </div>
 </div>
 
 @if (Model.Count == 0)
 {
-    <div class="alert alert-info">Chưa có món ăn nào.</div>
+    <div class="empty">
+        <span class="empty__icon"><icon name="soup" class="ico--lg"/></span>
+        <p class="empty__title">Chưa có món ăn nào</p>
+        <p class="empty__text">Thêm món đầu tiên để bắt đầu xây dựng thư viện.</p>
+        <a class="btn btn--outline" asp-action="Create">Thêm món ăn</a>
+    </div>
 }
 else
 {
-    <table class="table table-striped align-middle">
-        <thead>
-            <tr>
-                <th>Tên món</th>
-                <th>Danh mục</th>
-                <th>Vùng miền</th>
-                <th>Độ khó</th>
-                <th class="text-center">Nguyên liệu</th>
-                <th class="text-end">Thao tác</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var recipe in Model)
-            {
+    <div class="table-wrap">
+        <table class="data-table">
+            <thead>
                 <tr>
-                    <td>@recipe.Name</td>
-                    <td>@recipe.CategoryName</td>
-                    <td>@recipe.Region.ToDisplayName()</td>
-                    <td>@recipe.Difficulty.ToDisplayName()</td>
-                    <td class="text-center">@recipe.IngredientCount</td>
-                    <td class="text-end">
-                        <a asp-action="Edit" asp-route-id="@recipe.Id" class="btn btn-sm btn-outline-secondary">Sửa</a>
-                        <a asp-action="Delete" asp-route-id="@recipe.Id" class="btn btn-sm btn-outline-danger">Xóa</a>
-                    </td>
+                    <th scope="col"><span class="visually-hidden-focusable">Ảnh</span></th>
+                    <th scope="col">Tên món</th>
+                    <th scope="col">Danh mục</th>
+                    <th scope="col">Vùng miền</th>
+                    <th scope="col">Độ khó</th>
+                    <th scope="col" class="data-table__num">Phút</th>
+                    <th scope="col" class="data-table__num">Nguyên liệu</th>
+                    <th scope="col">Thao tác</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var recipe in Model)
+                {
+                    <tr>
+                        <td>
+                            <img class="thumb"
+                                 src="@(string.IsNullOrEmpty(recipe.ImageUrl) ? placeholder : recipe.ImageUrl)"
+                                 alt="@recipe.Name" data-fallback="@placeholder"
+                                 width="900" height="675" loading="lazy"/>
+                        </td>
+                        <td class="fw-600">@recipe.Name</td>
+                        <td>@recipe.CategoryName</td>
+                        <td>@recipe.Region.ToDisplayName()</td>
+                        <td>@recipe.Difficulty.ToDisplayName()</td>
+                        <td class="data-table__num tnum">@recipe.TotalMinutes</td>
+                        <td class="data-table__num tnum">@recipe.IngredientCount</td>
+                        <td>
+                            <div class="data-table__actions">
+                                <a class="icon-btn" asp-action="Edit" asp-route-id="@recipe.Id" aria-label="Sửa @recipe.Name">
+                                    <icon name="pencil"/>
+                                </a>
+                                <a class="icon-btn" asp-action="Delete" asp-route-id="@recipe.Id" aria-label="Xóa @recipe.Name">
+                                    <icon name="trash"/>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 }
-
-<a asp-controller="Dashboard" asp-action="Index" class="btn btn-link">&larr; Về khu quản trị</a>

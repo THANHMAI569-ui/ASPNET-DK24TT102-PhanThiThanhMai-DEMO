@@ -3,19 +3,35 @@
     ViewData["Title"] = "Xóa nguyên liệu";
 }
 
-<h1 class="mb-4">Xóa nguyên liệu</h1>
+<div class="surface stack">
+    <h1>Xóa nguyên liệu</h1>
+    <p>Bạn sắp xóa nguyên liệu <strong>@Model.Name</strong> (@Model.Unit).</p>
 
-<div class="card card-body col-12 col-md-6">
-    <p>Bạn có chắc muốn xóa nguyên liệu <strong>@Model.Name</strong> (@Model.Unit)?</p>
+    <div class="spec-grid">
+        <div class="spec">
+            <span class="spec__label">Nhóm</span>
+            <span class="spec__value">@Model.Group</span>
+        </div>
+        <div class="spec">
+            <span class="spec__label">Dùng trong</span>
+            <span class="spec__value tnum">@Model.UsageCount món</span>
+        </div>
+    </div>
+
     @if (Model.UsageCount > 0)
     {
-        <div class="alert alert-warning">
-            Nguyên liệu đang được dùng trong <strong>@Model.UsageCount</strong> món nên không thể xóa.
+        <div class="notice">
+            Nguyên liệu đang được dùng trong <strong>@Model.UsageCount</strong> món nên chưa thể xóa.
         </div>
     }
-    <form asp-action="Delete" method="post" class="d-flex gap-2">
-        <input type="hidden" name="id" value="@Model.Id" />
-        <button type="submit" class="btn btn-danger" disabled="@(Model.UsageCount > 0)">Xóa</button>
-        <a asp-action="Index" class="btn btn-outline-secondary">Hủy</a>
+    else
+    {
+        <div class="notice">Thao tác này không thể hoàn tác.</div>
+    }
+
+    <form asp-action="Delete" method="post" class="row-inline">
+        <input type="hidden" name="id" value="@Model.Id"/>
+        <button type="submit" class="btn btn--solid-danger" disabled="@(Model.UsageCount > 0)">Xóa</button>
+        <a class="btn btn--quiet" asp-action="Index">Hủy</a>
     </form>
 </div>

@@ -1,55 +1,85 @@
 @model RecipeDetailViewModel
 @{
     ViewData["Title"] = Model.Name;
+    var placeholder = Url.Content("~/images/recipe-placeholder.svg");
 }
 
-<div class="row g-4">
-    <div class="col-md-5">
-        <img src="@(string.IsNullOrEmpty(Model.ImageUrl) ? Url.Content("~/images/recipe-placeholder.svg") : Model.ImageUrl)"
-             class="img-fluid rounded" alt="@Model.Name"/>
+<div class="recipe-hero">
+    <div class="recipe-hero__media">
+        <img src="@(string.IsNullOrEmpty(Model.ImageUrl) ? placeholder : Model.ImageUrl)"
+             alt="@Model.Name" data-fallback="@placeholder"
+             width="900" height="675" loading="lazy"/>
     </div>
-    <div class="col-md-7">
-        <span class="badge bg-secondary mb-2">@Model.CategoryName</span>
+    <div class="recipe-hero__copy">
+        <span class="pill pill--accent">@Model.CategoryName</span>
         <h1>@Model.Name</h1>
         @if (!string.IsNullOrEmpty(Model.Description))
         {
-            <p class="text-muted">@Model.Description</p>
+            <p class="text-muted-2">@Model.Description</p>
         }
-        <ul class="list-inline">
-            <li class="list-inline-item">Khẩu phần: @Model.Servings người</li>
-            <li class="list-inline-item">Chuẩn bị: @Model.PrepMinutes phút</li>
-            <li class="list-inline-item">Nấu: @Model.CookMinutes phút</li>
-            <li class="list-inline-item">Độ khó: @Model.Difficulty.ToDisplayName()</li>
-            <li class="list-inline-item">Vùng miền: @Model.Region.ToDisplayName()</li>
-            <li class="list-inline-item">Calo/khẩu phần: @Model.CaloriesPerServing kcal</li>
-        </ul>
         @if (User.Identity?.IsAuthenticated == true)
         {
             <form asp-controller="Favorite" asp-action="Toggle" method="post">
                 <input type="hidden" name="recipeId" value="@Model.Id"/>
                 <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString"/>
-                <button type="submit" class="btn btn-sm @(Model.IsFavorite ? "btn-danger" : "btn-outline-danger")">
-                    @(Model.IsFavorite ? "♥ Bỏ yêu thích" : "♡ Thêm yêu thích")
+                <button type="submit" class="btn @(Model.IsFavorite ? "btn--accent" : "btn--outline")">
+                    <icon name="heart"/> @(Model.IsFavorite ? "Bỏ yêu thích" : "Thêm yêu thích")
                 </button>
             </form>
+        }
+        <div class="spec-grid">
+            <div class="spec">
+                <span class="spec__label">Khẩu phần</span>
+                <span class="spec__value">@Model.Servings người</span>
+            </div>
+            <div class="spec">
+                <span class="spec__label">Chuẩn bị</span>
+                <span class="spec__value">@Model.PrepMinutes phút</span>
+            </div>
+            <div class="spec">
+                <span class="spec__label">Nấu</span>
+                <span class="spec__value">@Model.CookMinutes phút</span>
+            </div>
+            <div class="spec">
+                <span class="spec__label">Độ khó</span>
+                <span class="spec__value">@Model.Difficulty.ToDisplayName()</span>
+            </div>
+            <div class="spec">
+                <span class="spec__label">Vùng miền</span>
+                <span class="spec__value">@Model.Region.ToDisplayName()</span>
+            </div>
+            <div class="spec">
+                <span class="spec__label">Calo/khẩu phần</span>
+                <span class="spec__value">@Model.CaloriesPerServing kcal</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="recipe-body">
+    <div class="stack">
+        <h2>Nguyên liệu</h2>
+        <ul class="ing-list">
+            @foreach (var ingredient in Model.Ingredients)
+            {
+                <li class="ing-list__item">
+                    <span>@ingredient.Name</span>
+                    <span class="ing-list__qty">@ingredient.Quantity.ToString("0.##") @ingredient.Unit</span>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="stack">
+        <h2>Cách làm</h2>
+        @if (string.IsNullOrEmpty(Model.Instructions))
+        {
+            <p class="text-muted-3">Chưa có hướng dẫn cho món này.</p>
+        }
+        else
+        {
+            <p class="steps">@Model.Instructions</p>
         }
     </div>
 </div>
 
-<div class="row mt-4">
-    <div class="col-md-5">
-        <h4>Nguyên liệu</h4>
-        <ul class="list-group list-group-flush">
-            @foreach (var ingredient in Model.Ingredients)
-            {
-                <li class="list-group-item">@ingredient.Name — @ingredient.Quantity.ToString("0.##") @ingredient.Unit</li>
-            }
-        </ul>
-    </div>
-    <div class="col-md-7">
-        <h4>Cách làm</h4>
-        <p style="white-space: pre-line;">@Model.Instructions</p>
-    </div>
-</div>
-
-<a asp-controller="Recipe" asp-action="Index" class="btn btn-outline-secondary mt-4">&larr; Quay lại danh sách</a>
+<a class="btn btn--quiet" asp-action="Index"><icon name="arrow-left"/> Quay lại</a>

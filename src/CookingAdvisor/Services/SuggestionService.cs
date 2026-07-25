@@ -31,6 +31,10 @@ public class SuggestionService(AppDbContext db)
                 r.Id,
                 r.Name,
                 r.ImageUrl,
+                CategoryName = r.Category.Name,
+                r.PrepMinutes,
+                r.CookMinutes,
+                r.CaloriesPerServing,
                 Ingredients = r.RecipeIngredients
                     .Select(ri => new { ri.IngredientId, ri.Ingredient.Name })
                     .ToList()
@@ -51,6 +55,10 @@ public class SuggestionService(AppDbContext db)
                     RecipeId = r.Id,
                     Name = r.Name,
                     ImageUrl = r.ImageUrl,
+                    CategoryName = r.CategoryName,
+                    PrepMinutes = r.PrepMinutes,
+                    CookMinutes = r.CookMinutes,
+                    CaloriesPerServing = r.CaloriesPerServing,
                     TotalIngredientCount = r.Ingredients.Count,
                     MatchedCount = r.Ingredients.Count - missing.Count,
                     MissingIngredients = missing

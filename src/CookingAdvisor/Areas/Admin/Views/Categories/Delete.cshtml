@@ -3,19 +3,31 @@
     ViewData["Title"] = "Xóa danh mục";
 }
 
-<h1 class="mb-4">Xóa danh mục</h1>
+<div class="surface stack">
+    <h1>Xóa danh mục</h1>
+    <p>Bạn sắp xóa danh mục <strong>@Model.Name</strong>.</p>
 
-<div class="card card-body col-12 col-md-6">
-    <p>Bạn có chắc muốn xóa danh mục <strong>@Model.Name</strong>?</p>
+    <div class="spec-grid">
+        <div class="spec">
+            <span class="spec__label">Số món trong danh mục</span>
+            <span class="spec__value tnum">@Model.RecipeCount</span>
+        </div>
+    </div>
+
     @if (Model.RecipeCount > 0)
     {
-        <div class="alert alert-warning">
-            Danh mục đang có <strong>@Model.RecipeCount</strong> món ăn nên không thể xóa. Hãy chuyển hoặc xóa các món trước.
+        <div class="notice">
+            Danh mục đang có <strong>@Model.RecipeCount</strong> món ăn nên chưa thể xóa. Hãy chuyển hoặc xóa các món trước.
         </div>
     }
-    <form asp-action="Delete" method="post" class="d-flex gap-2">
-        <input type="hidden" name="id" value="@Model.Id" />
-        <button type="submit" class="btn btn-danger" disabled="@(Model.RecipeCount > 0)">Xóa</button>
-        <a asp-action="Index" class="btn btn-outline-secondary">Hủy</a>
+    else
+    {
+        <div class="notice">Thao tác này không thể hoàn tác.</div>
+    }
+
+    <form asp-action="Delete" method="post" class="row-inline">
+        <input type="hidden" name="id" value="@Model.Id"/>
+        <button type="submit" class="btn btn--solid-danger" disabled="@(Model.RecipeCount > 0)">Xóa</button>
+        <a class="btn btn--quiet" asp-action="Index">Hủy</a>
     </form>
 </div>

@@ -1,37 +1,64 @@
 @model ShoppingListDetailsViewModel
 @{
     ViewData["Title"] = "Danh sách đi chợ";
+    var total = Model.Items.Count;
+    var purchased = Model.Items.Count(i => i.IsPurchased);
+    var percent = total == 0 ? 0 : (int)Math.Round(purchased * 100m / total);
 }
 
-<h1 class="mb-1">Danh sách đi chợ</h1>
-<p class="text-muted mb-4">Thực đơn: @Model.MenuPlanName</p>
+<div class="page-head">
+    <div class="page-head__text">
+        <h1>Danh sách đi chợ</h1>
+        <p class="page-head__lede">Từ thực đơn @Model.MenuPlanName.</p>
+    </div>
+</div>
 
 @if (Model.Items.Count == 0)
 {
-    <div class="alert alert-info">Thực đơn chưa có món nào nên danh sách đi chợ đang trống.</div>
+    <div class="empty">
+        <span class="empty__icon"><icon name="basket" class="ico--lg"/></span>
+        <p class="empty__title">Danh sách đang trống</p>
+        <p class="empty__text">Thực đơn chưa có món nào nên chưa có nguyên liệu cần mua.</p>
+        <a class="btn btn--outline" asp-controller="Menu" asp-action="Details" asp-route-id="@Model.MenuPlanId">Về thực đơn</a>
+    </div>
 }
 else
 {
-    <div class="list-group mb-4">
+    <div class="stack">
+        <div class="stack-sm">
+            <p class="text-sm text-muted-2">
+                Đã mua <span class="tnum">@purchased</span>/<span class="tnum">@total</span> nguyên liệu
+            </p>
+            <div class="progress-line" role="progressbar" aria-valuenow="@percent" aria-valuemin="0" aria-valuemax="100" aria-label="Tiến độ mua sắm">
+                @* Fill width is derived from purchased/total counts at render time; the one inline style this contract allows. *@
+                <div class="progress-line__fill" style="width: @(percent)%"></div>
+            </div>
+        </div>
+
         @foreach (var group in Model.Items.GroupBy(i => i.Group))
         {
-            <div class="list-group-item bg-light fw-semibold">@group.Key</div>
-            @foreach (var item in group)
-            {
-                <div class="list-group-item d-flex align-items-center gap-3">
-                    <form asp-action="TogglePurchased" method="post" class="d-flex align-items-center gap-2 flex-fill mb-0">
-                        <input type="hidden" name="id" value="@Model.Id"/>
-                        <input type="hidden" name="itemId" value="@item.Id"/>
-                        <input type="checkbox" class="form-check-input" onchange="this.form.submit()"
-                               checked="@item.IsPurchased"/>
-                        <span class="@(item.IsPurchased ? "text-decoration-line-through text-muted" : "")">
-                            @item.IngredientName — @item.Quantity.ToString("0.##") @item.Unit
-                        </span>
-                    </form>
+            <div class="shop-group">
+                <div class="shop-group__title">
+                    <span>@group.Key</span>
+                    <span class="tnum">@group.Count(i => i.IsPurchased)/@group.Count()</span>
                 </div>
-            }
+                @foreach (var item in group)
+                {
+                    <label class="shop-item @(item.IsPurchased ? "is-done" : "")">
+                        <form asp-action="TogglePurchased" method="post">
+                            <input type="hidden" name="id" value="@Model.Id"/>
+                            <input type="hidden" name="itemId" value="@item.Id"/>
+                            <input type="checkbox" class="check" onchange="this.form.submit()" checked="@item.IsPurchased"/>
+                        </form>
+                        <span class="shop-item__name">@item.IngredientName</span>
+                        <span class="shop-item__qty">@item.Quantity.ToString("0.##") @item.Unit</span>
+                    </label>
+                }
+            </div>
         }
     </div>
 }
 
-<a asp-controller="Menu" asp-action="Details" asp-route-id="@Model.MenuPlanId" class="btn btn-outline-secondary">&larr; Quay lại thực đơn</a>
+<a class="btn btn--quiet" asp-controller="Menu" asp-action="Details" asp-route-id="@Model.MenuPlanId">
+    <icon name="arrow-left"/> Quay lại thực đơn
+</a>

@@ -3,43 +3,59 @@
     ViewData["Title"] = "Quản lý nguyên liệu";
 }
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h1>Nguyên liệu</h1>
-    <a asp-action="Create" class="btn btn-primary">+ Thêm nguyên liệu</a>
+<div class="page-head">
+    <div class="page-head__text">
+        <h1>Nguyên liệu</h1>
+        <p class="page-head__lede">Quản lý danh sách nguyên liệu dùng trong các món ăn.</p>
+    </div>
+    <div class="page-head__actions">
+        <a class="btn btn--accent" asp-action="Create"><icon name="plus"/> Thêm nguyên liệu</a>
+    </div>
 </div>
 
 @if (Model.Count == 0)
 {
-    <div class="alert alert-info">Chưa có nguyên liệu nào.</div>
+    <div class="empty">
+        <span class="empty__icon"><icon name="carrot" class="ico--lg"/></span>
+        <p class="empty__title">Chưa có nguyên liệu nào</p>
+        <p class="empty__text">Thêm nguyên liệu đầu tiên để dùng trong công thức món ăn.</p>
+        <a class="btn btn--outline" asp-action="Create">Thêm nguyên liệu</a>
+    </div>
 }
 else
 {
-    <table class="table table-striped align-middle">
-        <thead>
-            <tr>
-                <th>Tên</th>
-                <th>Đơn vị</th>
-                <th>Nhóm</th>
-                <th class="text-center">Dùng trong</th>
-                <th class="text-end">Thao tác</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var ingredient in Model)
-            {
+    <div class="table-wrap">
+        <table class="data-table">
+            <thead>
                 <tr>
-                    <td>@ingredient.Name</td>
-                    <td>@ingredient.Unit</td>
-                    <td>@ingredient.Group</td>
-                    <td class="text-center">@ingredient.UsageCount món</td>
-                    <td class="text-end">
-                        <a asp-action="Edit" asp-route-id="@ingredient.Id" class="btn btn-sm btn-outline-secondary">Sửa</a>
-                        <a asp-action="Delete" asp-route-id="@ingredient.Id" class="btn btn-sm btn-outline-danger">Xóa</a>
-                    </td>
+                    <th scope="col">Tên</th>
+                    <th scope="col">Đơn vị</th>
+                    <th scope="col">Nhóm</th>
+                    <th scope="col" class="data-table__num">Dùng trong</th>
+                    <th scope="col">Thao tác</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var ingredient in Model)
+                {
+                    <tr>
+                        <td class="fw-600">@ingredient.Name</td>
+                        <td>@ingredient.Unit</td>
+                        <td>@ingredient.Group</td>
+                        <td class="data-table__num tnum">@ingredient.UsageCount món</td>
+                        <td>
+                            <div class="data-table__actions">
+                                <a class="icon-btn" asp-action="Edit" asp-route-id="@ingredient.Id" aria-label="Sửa @ingredient.Name">
+                                    <icon name="pencil"/>
+                                </a>
+                                <a class="icon-btn" asp-action="Delete" asp-route-id="@ingredient.Id" aria-label="Xóa @ingredient.Name">
+                                    <icon name="trash"/>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 }
-
-<a asp-controller="Dashboard" asp-action="Index" class="btn btn-link">&larr; Về khu quản trị</a>

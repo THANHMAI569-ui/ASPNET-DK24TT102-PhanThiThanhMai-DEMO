@@ -1,69 +1,158 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+@{
+    var route = ViewContext.RouteData.Values;
+    var area = route["area"] as string ?? string.Empty;
+    var controller = route["controller"] as string ?? string.Empty;
+
+    // Marks the nav item matching the current controller (public area only).
+    string NavState(string target) =>
+        area.Length == 0 && string.Equals(controller, target, StringComparison.OrdinalIgnoreCase)
+            ? "site-nav__link is-active"
+            : "site-nav__link";
+
+    var isAdminArea = string.Equals(area, "Admin", StringComparison.OrdinalIgnoreCase);
+}
+<!DOCTYPE html>
+<html lang="vi">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>@ViewData["Title"] - CookingAdvisor</title>
+    <title>@ViewData["Title"] · CookingAdvisor</title>
+    <meta name="description" content="Gợi ý món ăn theo nguyên liệu có sẵn và lập thực đơn tuần cho gia đình."/>
+    <meta name="color-scheme" content="light dark"/>
+
+    @* Applies the saved theme before first paint so there is no flash of the
+       wrong mode. Kept inline and tiny on purpose. *@
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem("cookingadvisor.theme");
+                if (t === "light" || t === "dark") {
+                    document.documentElement.setAttribute("data-bs-theme", t);
+                }
+            } catch (e) { /* storage blocked; fall back to system preference */ }
+        })();
+    </script>
+
+    <link rel="preload" href="~/fonts/be-vietnam-pro-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin/>
+    <link rel="preload" href="~/fonts/be-vietnam-pro-vietnamese-400-normal.woff2" as="font" type="font/woff2" crossorigin/>
+    <link rel="preload" href="~/fonts/be-vietnam-pro-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin/>
+    <link rel="preload" href="~/fonts/be-vietnam-pro-vietnamese-600-normal.woff2" as="font" type="font/woff2" crossorigin/>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
-    <link rel="stylesheet" href="~/CookingAdvisor.styles.css" asp-append-version="true"/>
+    <link rel="icon" href="~/favicon.ico"/>
 </head>
 <body>
-<header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container-fluid">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CookingAdvisor</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+<a class="visually-hidden-focusable btn btn--accent" href="#main">Tới nội dung chính</a>
+
+<header class="site-header">
+    <div class="site-header__inner">
+        <button class="icon-btn nav-toggle" type="button" data-nav-toggle
+                aria-expanded="false" aria-controls="site-nav" aria-label="Mở menu">
+            <icon name="menu-2"/>
+        </button>
+
+        <a class="brand" asp-area="" asp-controller="Home" asp-action="Index">
+            <span class="brand__mark"><icon name="chef-hat"/></span>
+            CookingAdvisor
+        </a>
+
+        <nav class="site-nav" id="site-nav" aria-label="Điều hướng chính">
+            <a class="@NavState("Recipe")" asp-area="" asp-controller="Recipe" asp-action="Index">
+                <icon name="tools-kitchen-2"/> Món ăn
+            </a>
+            <a class="@NavState("Suggestion")" asp-area="" asp-controller="Suggestion" asp-action="Index">
+                <icon name="bulb"/> Gợi ý nguyên liệu
+            </a>
+            <a class="@NavState("Menu")" asp-area="" asp-controller="Menu" asp-action="Index">
+                <icon name="calendar-month"/> Thực đơn tuần
+            </a>
+            @if (User.Identity?.IsAuthenticated == true)
+            {
+                <a class="@NavState("Favorite")" asp-area="" asp-controller="Favorite" asp-action="Index">
+                    <icon name="heart"/> Yêu thích
+                </a>
+            }
+            @if (User.IsInRole("Admin"))
+            {
+                <a class="site-nav__link @(isAdminArea ? "is-active" : "")"
+                   asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
+                    <icon name="shield-lock"/> Quản trị
+                </a>
+            }
+        </nav>
+
+        <div class="site-actions">
+            <button class="icon-btn" type="button" data-theme-toggle aria-label="Đổi chế độ sáng/tối">
+                <icon name="moon" class="theme-toggle__light"/>
+                <icon name="sun" class="theme-toggle__dark"/>
             </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Recipe" asp-action="Index">Món ăn</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Suggestion" asp-action="Index">Gợi ý nguyên liệu</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Menu" asp-action="Index">Thực đơn tuần</a>
-                    </li>
-                    @if (User.Identity?.IsAuthenticated == true)
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Favorite" asp-action="Index">Món yêu thích</a>
-                        </li>
-                    }
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Quản trị</a>
-                        </li>
-                    }
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                    </li>
-                </ul>
-                <partial name="_LoginPartial" />
-            </div>
+            <partial name="_LoginPartial"/>
         </div>
-    </nav>
+    </div>
 </header>
-<div class="container">
-    <main role="main" class="pb-3">
-        <partial name="_FlashMessages" />
+
+@if (isAdminArea)
+{
+    <div class="admin-shell">
+        <partial name="_AdminNav"/>
+        <main id="main">
+            <partial name="_FlashMessages"/>
+            @RenderBody()
+        </main>
+    </div>
+}
+else if (ViewData["FullBleed"] is true)
+{
+    <main id="main" class="page page--flush">
         @RenderBody()
     </main>
-</div>
+}
+else
+{
+    <main id="main" class="page">
+        <partial name="_FlashMessages"/>
+        @RenderBody()
+    </main>
+}
 
-<footer class="border-top footer text-muted">
-    <div class="container">
-        &copy; 2026 - CookingAdvisor - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+<footer class="site-footer">
+    <div class="site-footer__inner">
+        <div>
+            <a class="brand" asp-area="" asp-controller="Home" asp-action="Index">
+                <span class="brand__mark"><icon name="chef-hat"/></span>
+                CookingAdvisor
+            </a>
+            <p class="site-footer__note">
+                Gợi ý món ăn theo nguyên liệu có sẵn và lập thực đơn tuần cho gia đình.
+                Đồ án tốt nghiệp, ASP.NET Core MVC.
+            </p>
+        </div>
+        <div>
+            <h4>Tính năng</h4>
+            <div class="site-footer__links">
+                <a asp-area="" asp-controller="Recipe" asp-action="Index">Danh sách món ăn</a>
+                <a asp-area="" asp-controller="Suggestion" asp-action="Index">Gợi ý theo nguyên liệu</a>
+                <a asp-area="" asp-controller="Menu" asp-action="Index">Thực đơn tuần</a>
+            </div>
+        </div>
+        <div>
+            <h4>Tài khoản</h4>
+            <div class="site-footer__links">
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <a asp-area="" asp-controller="Favorite" asp-action="Index">Món yêu thích</a>
+                }
+                else
+                {
+                    <a asp-area="" asp-controller="Account" asp-action="Login">Đăng nhập</a>
+                    <a asp-area="" asp-controller="Account" asp-action="Register">Đăng ký</a>
+                }
+            </div>
+        </div>
     </div>
 </footer>
+
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>

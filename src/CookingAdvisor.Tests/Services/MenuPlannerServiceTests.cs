@@ -92,6 +92,58 @@ public class MenuPlannerServiceTests
         Assert.True(plan.Items.Select(i => i.RecipeId).Distinct().Count() < 21);
     }
 
+    // Regression: once the unused pool ran dry the calorie tie-break used to pick
+    // the same dish for every remaining slot, so a week could show one dish four
+    // times while three equally suitable dishes went unused.
+    [Fact]
+    public async Task GenerateWeeklyPlanAsync_FewRecipes_SpreadsRepeatsEvenly()
+    {
+        await using var db = CreateDb();
+        await SeedAsync(db,
+            BuildRecipe(1, "Món A", 300, AllMeals),
+            BuildRecipe(2, "Món B", 500, AllMeals),
+            BuildRecipe(3, "Món C", 700, AllMeals),
+            BuildRecipe(4, "Món D", 900, AllMeals));
+        var service = new MenuPlannerService(db);
+
+        var plan = await service.GenerateWeeklyPlanAsync(UserId, "Thực đơn tuần", WeekStart);
+
+        var counts = plan.Items
+            .GroupBy(i => i.RecipeId)
+            .Select(g => g.Count())
+            .ToList();
+
+        Assert.Equal(4, counts.Count);
+        // 21 slots over 4 dishes is 5, 5, 5, 6: no dish may be used more than one
+        // extra time compared with the least-used dish.
+        Assert.True(counts.Max() - counts.Min() <= 1,
+            $"Uneven spread: [{string.Join(", ", counts.OrderBy(c => c))}]");
+    }
+
+    [Fact]
+    public async Task GenerateWeeklyPlanAsync_ScarceBreakfastRecipes_VariesBreakfastAcrossWeek()
+    {
+        await using var db = CreateDb();
+        await SeedAsync(db,
+            BuildRecipe(1, "Sáng A", 300, MealTypeFlags.Breakfast),
+            BuildRecipe(2, "Sáng B", 450, MealTypeFlags.Breakfast),
+            BuildRecipe(3, "Sáng C", 600, MealTypeFlags.Breakfast),
+            BuildRecipe(4, "Trưa/Tối A", 500, MealTypeFlags.Lunch | MealTypeFlags.Dinner),
+            BuildRecipe(5, "Trưa/Tối B", 550, MealTypeFlags.Lunch | MealTypeFlags.Dinner),
+            BuildRecipe(6, "Trưa/Tối C", 600, MealTypeFlags.Lunch | MealTypeFlags.Dinner));
+        var service = new MenuPlannerService(db);
+
+        var plan = await service.GenerateWeeklyPlanAsync(UserId, "Thực đơn tuần", WeekStart);
+
+        var breakfasts = plan.Items
+            .Where(i => i.MealType == MealType.Breakfast)
+            .Select(i => i.RecipeId)
+            .ToList();
+
+        Assert.Equal(7, breakfasts.Count);
+        Assert.Equal(3, breakfasts.Distinct().Count());
+    }
+
     [Fact]
     public async Task GenerateWeeklyPlanAsync_RespectsRegionFilter()
     {

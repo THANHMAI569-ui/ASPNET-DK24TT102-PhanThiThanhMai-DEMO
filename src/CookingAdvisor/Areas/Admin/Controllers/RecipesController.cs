@@ -20,8 +20,11 @@ public class RecipesController(AppDbContext db) : Controller
                 Id = r.Id,
                 Name = r.Name,
                 CategoryName = r.Category.Name,
+                ImageUrl = r.ImageUrl,
                 Region = r.Region,
                 Difficulty = r.Difficulty,
+                PrepMinutes = r.PrepMinutes,
+                CookMinutes = r.CookMinutes,
                 IngredientCount = r.RecipeIngredients.Count
             })
             .ToListAsync();

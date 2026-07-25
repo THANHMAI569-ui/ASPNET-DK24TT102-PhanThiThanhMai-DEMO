@@ -10,6 +10,7 @@ public class RecipeListItemViewModel
     public string? ImageUrl { get; set; }
     public int PrepMinutes { get; set; }
     public int CookMinutes { get; set; }
+    public int CaloriesPerServing { get; set; }
     public Difficulty Difficulty { get; set; }
     public Region Region { get; set; }
 

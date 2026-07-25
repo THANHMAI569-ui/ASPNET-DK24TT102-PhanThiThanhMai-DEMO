@@ -3,22 +3,41 @@
     ViewData["Title"] = "Xóa món ăn";
 }
 
-<h1 class="mb-4">Xóa món ăn</h1>
+<div class="surface stack">
+    <h1>Xóa món ăn</h1>
+    <p>Bạn sắp xóa món <strong>@Model.Name</strong> thuộc danh mục <strong>@Model.CategoryName</strong>.</p>
 
-<div class="card card-body col-12 col-md-6">
-    <p>Bạn có chắc muốn xóa món <strong>@Model.Name</strong> (@Model.CategoryName)?</p>
-    <div class="alert alert-warning">
-        Thao tác này sẽ xóa món cùng @Model.IngredientCount dòng nguyên liệu của nó và không thể hoàn tác.
+    <div class="spec-grid">
+        <div class="spec">
+            <span class="spec__label">Vùng miền</span>
+            <span class="spec__value">@Model.Region.ToDisplayName()</span>
+        </div>
+        <div class="spec">
+            <span class="spec__label">Độ khó</span>
+            <span class="spec__value">@Model.Difficulty.ToDisplayName()</span>
+        </div>
+        <div class="spec">
+            <span class="spec__label">Nguyên liệu</span>
+            <span class="spec__value tnum">@Model.IngredientCount</span>
+        </div>
     </div>
+
     @if (Model.MenuPlanUsageCount > 0)
     {
-        <div class="alert alert-warning">
-            Món đang được dùng trong <strong>@Model.MenuPlanUsageCount</strong> thực đơn nên không thể xóa.
+        <div class="notice">
+            Món đang được dùng trong <strong>@Model.MenuPlanUsageCount</strong> thực đơn nên chưa thể xóa. Hãy gỡ khỏi thực đơn trước.
         </div>
     }
-    <form asp-action="Delete" method="post" class="d-flex gap-2">
-        <input type="hidden" name="id" value="@Model.Id" />
-        <button type="submit" class="btn btn-danger" disabled="@(Model.MenuPlanUsageCount > 0)">Xóa</button>
-        <a asp-action="Index" class="btn btn-outline-secondary">Hủy</a>
+    else
+    {
+        <div class="notice">
+            Món sẽ bị xóa cùng @Model.IngredientCount dòng nguyên liệu của nó. Không thể hoàn tác.
+        </div>
+    }
+
+    <form asp-action="Delete" method="post" class="row-inline">
+        <input type="hidden" name="id" value="@Model.Id"/>
+        <button type="submit" class="btn btn--solid-danger" disabled="@(Model.MenuPlanUsageCount > 0)">Xóa</button>
+        <a class="btn btn--quiet" asp-action="Index">Hủy</a>
     </form>
 </div>

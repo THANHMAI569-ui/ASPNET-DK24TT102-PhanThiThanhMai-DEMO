@@ -3,39 +3,55 @@
     ViewData["Title"] = "Quản lý danh mục";
 }
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h1>Danh mục</h1>
-    <a asp-action="Create" class="btn btn-primary">+ Thêm danh mục</a>
+<div class="page-head">
+    <div class="page-head__text">
+        <h1>Danh mục</h1>
+        <p class="page-head__lede">Quản lý danh mục dùng để phân loại món ăn.</p>
+    </div>
+    <div class="page-head__actions">
+        <a class="btn btn--accent" asp-action="Create"><icon name="plus"/> Thêm danh mục</a>
+    </div>
 </div>
 
 @if (Model.Count == 0)
 {
-    <div class="alert alert-info">Chưa có danh mục nào.</div>
+    <div class="empty">
+        <span class="empty__icon"><icon name="category" class="ico--lg"/></span>
+        <p class="empty__title">Chưa có danh mục nào</p>
+        <p class="empty__text">Thêm danh mục đầu tiên để bắt đầu phân loại món ăn.</p>
+        <a class="btn btn--outline" asp-action="Create">Thêm danh mục</a>
+    </div>
 }
 else
 {
-    <table class="table table-striped align-middle">
-        <thead>
-            <tr>
-                <th>Tên danh mục</th>
-                <th class="text-center">Số món</th>
-                <th class="text-end">Thao tác</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var category in Model)
-            {
+    <div class="table-wrap">
+        <table class="data-table">
+            <thead>
                 <tr>
-                    <td>@category.Name</td>
-                    <td class="text-center">@category.RecipeCount</td>
-                    <td class="text-end">
-                        <a asp-action="Edit" asp-route-id="@category.Id" class="btn btn-sm btn-outline-secondary">Sửa</a>
-                        <a asp-action="Delete" asp-route-id="@category.Id" class="btn btn-sm btn-outline-danger">Xóa</a>
-                    </td>
+                    <th scope="col">Tên danh mục</th>
+                    <th scope="col" class="data-table__num">Số món</th>
+                    <th scope="col">Thao tác</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var category in Model)
+                {
+                    <tr>
+                        <td class="fw-600">@category.Name</td>
+                        <td class="data-table__num tnum">@category.RecipeCount</td>
+                        <td>
+                            <div class="data-table__actions">
+                                <a class="icon-btn" asp-action="Edit" asp-route-id="@category.Id" aria-label="Sửa @category.Name">
+                                    <icon name="pencil"/>
+                                </a>
+                                <a class="icon-btn" asp-action="Delete" asp-route-id="@category.Id" aria-label="Xóa @category.Name">
+                                    <icon name="trash"/>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 }
-
-<a asp-controller="Dashboard" asp-action="Index" class="btn btn-link">&larr; Về khu quản trị</a>
