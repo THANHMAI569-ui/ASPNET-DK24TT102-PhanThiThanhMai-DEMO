@@ -7,7 +7,7 @@ lang: vi
 # TÓM TẮT ĐỒ ÁN
 
 Việc quyết định "hôm nay ăn gì" là một công việc lặp lại hằng ngày của mỗi gia
-đình. Công việc này tưởng nhỏ nhưng gây tốn thời gian và dễ dẫn tới hai hệ quả:
+đình. Công việc này có quy mô nhỏ nhưng tốn thời gian và dễ dẫn tới hai hệ quả:
 thực đơn lặp đi lặp lại quanh vài món quen thuộc, và nguyên liệu đã mua bị bỏ phí
 do không được sử dụng kịp thời. Người nội trợ thường phải tự ghi nhớ mình đang có
 những nguyên liệu gì, tự nghĩ ra món phù hợp, rồi tự lập danh sách đi chợ cho cả
@@ -31,12 +31,12 @@ ngày. Thứ ba, **thuật toán sinh danh sách đi chợ** gộp toàn bộ ng
 thực đơn theo cặp (nguyên liệu, đơn vị) và cộng dồn khối lượng.
 
 Kết quả đạt được là một hệ thống hoàn chỉnh, chạy được đầu-cuối với cơ sở dữ liệu
-mẫu gồm 25 món ăn Việt Nam, 40 nguyên liệu và 10 danh mục. Hệ thống cung cấp 47
-chức năng phân theo ba mức quyền truy cập. Phần kiểm thử gồm **29 ca kiểm thử đơn
+mẫu gồm 26 món ăn Việt Nam, 40 nguyên liệu và 10 danh mục. Hệ thống cung cấp 20
+chức năng, phân thành ba nhóm theo mức quyền truy cập. Phần kiểm thử gồm **29 ca kiểm thử đơn
 vị** viết bằng xUnit, tập trung vào ba thuật toán lõi, toàn bộ đạt. Quá trình
 kiểm thử đã phát hiện và khắc phục một khiếm khuyết thực tế của thuật toán sinh
-thực đơn: khi thư viện món không đủ lớn, tiêu chí phụ theo năng lượng khiến hệ
-thống chọn lặp lại đúng một món cho mọi suất còn trống. Sau khi bổ sung tiêu chí
+thực đơn. Cụ thể, khi thư viện món không đủ lớn, tiêu chí phụ theo năng lượng
+khiến hệ thống chọn lặp lại đúng một món cho mọi suất còn trống. Sau khi bổ sung tiêu chí
 rải đều theo số lần đã sử dụng, thực đơn sinh ra đạt 17 món khác nhau trên 21
 suất. Giao diện được thiết kế theo hướng thương mại điện tử, đáp ứng trên dải màn
 hình từ 375 px đến 1440 px và đạt chuẩn tương phản WCAG 2.1 mức AA.
@@ -116,7 +116,7 @@ và các thuật toán tham lam có ràng buộc phục vụ bài toán xếp l�
   toán tối ưu toàn cục.
 - Thông tin dinh dưỡng giới hạn ở mức **năng lượng (kcal) theo khẩu phần**, chưa
   bóc tách các thành phần đạm, béo, tinh bột hay vi chất.
-- Dữ liệu mẫu gồm 25 món ăn Việt Nam phổ biến, đủ để minh họa và kiểm chứng thuật
+- Dữ liệu mẫu gồm 26 món ăn Việt Nam phổ biến, đủ để minh họa và kiểm chứng thuật
   toán, không nhằm mục tiêu xây dựng kho công thức quy mô lớn.
 
 ## 4. Phương pháp nghiên cứu
@@ -156,8 +156,8 @@ Ngoài phần Mở đầu và Kết luận, báo cáo được tổ chức thàn
 
 Nấu ăn tại nhà là hoạt động thường nhật, nhưng khác với nhiều hoạt động thường
 nhật khác, nó đòi hỏi một chuỗi quyết định có ràng buộc lẫn nhau. Quyết định nấu
-món gì phụ thuộc vào nguyên liệu đang có; nguyên liệu cần mua lại phụ thuộc vào
-các món dự định nấu; và thực đơn của một ngày nên xét trong tương quan với cả
+món gì phụ thuộc vào nguyên liệu đang có. Nguyên liệu cần mua lại phụ thuộc vào
+các món dự định nấu. Và thực đơn của một ngày nên xét trong tương quan với cả
 tuần để tránh trùng lặp và bảo đảm đa dạng.
 
 Xét theo góc độ tin học, chuỗi quyết định này có thể quy về ba bài toán có cấu
@@ -266,7 +266,7 @@ xuất danh sách đi chợ [9].
 
 Một trường hợp đáng chú ý khác là Cooky.vn. Trang này khởi đầu năm 2015 như một
 website công thức nấu ăn, sau đó từ năm 2020 chuyển hướng sang mô hình đi chợ hộ
-và giao thực phẩm tươi; đến tháng 11/2023 doanh nghiệp đã thu hẹp hoạt động, rút
+và giao thực phẩm tươi. Đến tháng 11/2023, doanh nghiệp đã thu hẹp hoạt động, rút
 khỏi thị trường Hà Nội và chỉ còn vận hành tại Thành phố Hồ Chí Minh [8]. Tại
 thời điểm khảo sát, tác giả **không truy cập được** trang cooky.vn do chứng chỉ
 bảo mật TLS của trang đã hết hạn, vì vậy báo cáo này không đưa ra kết luận nào về
@@ -326,9 +326,14 @@ chứng được.
 Trên cơ sở phân tích trên, đồ án tập trung giải quyết bài toán sau:
 
 > *Cho một kho dữ liệu món ăn Việt Nam được chuẩn hóa, hãy xây dựng một hệ thống
-> web cho phép: (a) xếp hạng các món có thể nấu từ một tập nguyên liệu cho trước,
-> (b) sinh tự động thực đơn cho bảy ngày với các ràng buộc về tính đa dạng và cân
-> đối năng lượng, và (c) tổng hợp danh sách nguyên liệu cần mua từ thực đơn đó.*
+> web cho phép:*
+>
+> *(a) xếp hạng các món có thể nấu từ một tập nguyên liệu cho trước;*
+>
+> *(b) sinh tự động thực đơn cho bảy ngày với các ràng buộc về tính đa dạng và
+> cân đối năng lượng;*
+>
+> *(c) tổng hợp danh sách nguyên liệu cần mua từ thực đơn đó.*
 
 Đóng góp của đồ án gồm bốn điểm:
 
@@ -515,7 +520,7 @@ liệu mà người dùng đang có, $I_R$ là tập nguyên liệu cần thiế
 
 **Hệ số Jaccard.** Độ đo tương đồng tập hợp được sử dụng phổ biến nhất là hệ số
 Jaccard, định nghĩa bằng tỉ số giữa lực lượng phần giao và lực lượng phần hợp của
-hai tập hợp [14]:
+hai tập hợp [15]:
 
 $$J(A, I_R) = \frac{|A \cap I_R|}{|A \cup I_R|}$$
 
@@ -551,7 +556,7 @@ cùng độ phủ nhưng khác nhau về số nguyên liệu còn thiếu sẽ k
 3. Số nguyên liệu còn thiếu $|M|$ tăng dần.
 4. Tên món theo thứ tự bảng chữ cái.
 
-Tiêu chí thứ tư có vai trò kỹ thuật quan trọng: nó bảo đảm **thứ tự xác định**
+Tiêu chí thứ tư có vai trò kỹ thuật quan trọng: nó bảo đảm **thứ tự tất định**
 (deterministic). Nếu thiếu tiêu chí phá vỡ thế cân bằng này, hai lần chạy cùng
 một truy vấn có thể cho ra thứ tự khác nhau, gây khó khăn cho việc kiểm thử tự
 động và tạo trải nghiệm không nhất quán cho người dùng.
@@ -579,7 +584,7 @@ và luôn có thể chỉnh sửa thủ công.
 
 **Lựa chọn chiến lược tham lam.** Thuật toán tham lam là chiến lược tại mỗi bước
 chọn phương án có vẻ tốt nhất ở thời điểm hiện tại, không quay lui để xét lại các
-lựa chọn đã thực hiện [13]. Chiến lược này không bảo đảm nghiệm tối ưu toàn cục
+lựa chọn đã thực hiện [14]. Chiến lược này không bảo đảm nghiệm tối ưu toàn cục
 trong trường hợp tổng quát, nhưng cho lời giải chấp nhận được với chi phí tính
 toán thấp, phù hợp với yêu cầu phản hồi tức thời của ứng dụng web.
 
@@ -711,10 +716,14 @@ ngày 25/07/2026.
 [12] Paprika App. Trang chủ. https://www.paprikaapp.com/. Truy cập ngày
 25/07/2026.
 
-[13] T. H. Cormen, C. E. Leiserson, R. L. Rivest, C. Stein. *Introduction to
+[13] Apple App Store. "Paprika Recipe Manager 3".
+https://apps.apple.com/us/app/paprika-recipe-manager-3/id1303222628. Truy cập
+ngày 25/07/2026.
+
+[14] T. H. Cormen, C. E. Leiserson, R. L. Rivest, C. Stein. *Introduction to
 Algorithms*, 4th ed. MIT Press, 2022. (Chương về thuật toán tham lam - Greedy
 Algorithms.)
 
-[14] C. D. Manning, P. Raghavan, H. Schütze. *Introduction to Information
+[15] C. D. Manning, P. Raghavan, H. Schütze. *Introduction to Information
 Retrieval*. Cambridge University Press, 2008. (Chương về độ đo tương đồng tập
 hợp.)

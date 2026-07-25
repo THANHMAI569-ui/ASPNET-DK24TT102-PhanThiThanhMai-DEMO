@@ -7,7 +7,7 @@ lang: vi
 # TÓM TẮT ĐỒ ÁN
 
 Việc quyết định "hôm nay ăn gì" là một công việc lặp lại hằng ngày của mỗi gia
-đình. Công việc này tưởng nhỏ nhưng gây tốn thời gian và dễ dẫn tới hai hệ quả:
+đình. Công việc này có quy mô nhỏ nhưng tốn thời gian và dễ dẫn tới hai hệ quả:
 thực đơn lặp đi lặp lại quanh vài món quen thuộc, và nguyên liệu đã mua bị bỏ phí
 do không được sử dụng kịp thời. Người nội trợ thường phải tự ghi nhớ mình đang có
 những nguyên liệu gì, tự nghĩ ra món phù hợp, rồi tự lập danh sách đi chợ cho cả
@@ -31,12 +31,12 @@ ngày. Thứ ba, **thuật toán sinh danh sách đi chợ** gộp toàn bộ ng
 thực đơn theo cặp (nguyên liệu, đơn vị) và cộng dồn khối lượng.
 
 Kết quả đạt được là một hệ thống hoàn chỉnh, chạy được đầu-cuối với cơ sở dữ liệu
-mẫu gồm 25 món ăn Việt Nam, 40 nguyên liệu và 10 danh mục. Hệ thống cung cấp 47
-chức năng phân theo ba mức quyền truy cập. Phần kiểm thử gồm **29 ca kiểm thử đơn
+mẫu gồm 26 món ăn Việt Nam, 40 nguyên liệu và 10 danh mục. Hệ thống cung cấp 20
+chức năng, phân thành ba nhóm theo mức quyền truy cập. Phần kiểm thử gồm **29 ca kiểm thử đơn
 vị** viết bằng xUnit, tập trung vào ba thuật toán lõi, toàn bộ đạt. Quá trình
 kiểm thử đã phát hiện và khắc phục một khiếm khuyết thực tế của thuật toán sinh
-thực đơn: khi thư viện món không đủ lớn, tiêu chí phụ theo năng lượng khiến hệ
-thống chọn lặp lại đúng một món cho mọi suất còn trống. Sau khi bổ sung tiêu chí
+thực đơn. Cụ thể, khi thư viện món không đủ lớn, tiêu chí phụ theo năng lượng
+khiến hệ thống chọn lặp lại đúng một món cho mọi suất còn trống. Sau khi bổ sung tiêu chí
 rải đều theo số lần đã sử dụng, thực đơn sinh ra đạt 17 món khác nhau trên 21
 suất. Giao diện được thiết kế theo hướng thương mại điện tử, đáp ứng trên dải màn
 hình từ 375 px đến 1440 px và đạt chuẩn tương phản WCAG 2.1 mức AA.
@@ -116,7 +116,7 @@ và các thuật toán tham lam có ràng buộc phục vụ bài toán xếp l�
   toán tối ưu toàn cục.
 - Thông tin dinh dưỡng giới hạn ở mức **năng lượng (kcal) theo khẩu phần**, chưa
   bóc tách các thành phần đạm, béo, tinh bột hay vi chất.
-- Dữ liệu mẫu gồm 25 món ăn Việt Nam phổ biến, đủ để minh họa và kiểm chứng thuật
+- Dữ liệu mẫu gồm 26 món ăn Việt Nam phổ biến, đủ để minh họa và kiểm chứng thuật
   toán, không nhằm mục tiêu xây dựng kho công thức quy mô lớn.
 
 ## 4. Phương pháp nghiên cứu
@@ -156,8 +156,8 @@ Ngoài phần Mở đầu và Kết luận, báo cáo được tổ chức thàn
 
 Nấu ăn tại nhà là hoạt động thường nhật, nhưng khác với nhiều hoạt động thường
 nhật khác, nó đòi hỏi một chuỗi quyết định có ràng buộc lẫn nhau. Quyết định nấu
-món gì phụ thuộc vào nguyên liệu đang có; nguyên liệu cần mua lại phụ thuộc vào
-các món dự định nấu; và thực đơn của một ngày nên xét trong tương quan với cả
+món gì phụ thuộc vào nguyên liệu đang có. Nguyên liệu cần mua lại phụ thuộc vào
+các món dự định nấu. Và thực đơn của một ngày nên xét trong tương quan với cả
 tuần để tránh trùng lặp và bảo đảm đa dạng.
 
 Xét theo góc độ tin học, chuỗi quyết định này có thể quy về ba bài toán có cấu
@@ -266,7 +266,7 @@ xuất danh sách đi chợ [9].
 
 Một trường hợp đáng chú ý khác là Cooky.vn. Trang này khởi đầu năm 2015 như một
 website công thức nấu ăn, sau đó từ năm 2020 chuyển hướng sang mô hình đi chợ hộ
-và giao thực phẩm tươi; đến tháng 11/2023 doanh nghiệp đã thu hẹp hoạt động, rút
+và giao thực phẩm tươi. Đến tháng 11/2023, doanh nghiệp đã thu hẹp hoạt động, rút
 khỏi thị trường Hà Nội và chỉ còn vận hành tại Thành phố Hồ Chí Minh [8]. Tại
 thời điểm khảo sát, tác giả **không truy cập được** trang cooky.vn do chứng chỉ
 bảo mật TLS của trang đã hết hạn, vì vậy báo cáo này không đưa ra kết luận nào về
@@ -326,9 +326,14 @@ chứng được.
 Trên cơ sở phân tích trên, đồ án tập trung giải quyết bài toán sau:
 
 > *Cho một kho dữ liệu món ăn Việt Nam được chuẩn hóa, hãy xây dựng một hệ thống
-> web cho phép: (a) xếp hạng các món có thể nấu từ một tập nguyên liệu cho trước,
-> (b) sinh tự động thực đơn cho bảy ngày với các ràng buộc về tính đa dạng và cân
-> đối năng lượng, và (c) tổng hợp danh sách nguyên liệu cần mua từ thực đơn đó.*
+> web cho phép:*
+>
+> *(a) xếp hạng các món có thể nấu từ một tập nguyên liệu cho trước;*
+>
+> *(b) sinh tự động thực đơn cho bảy ngày với các ràng buộc về tính đa dạng và
+> cân đối năng lượng;*
+>
+> *(c) tổng hợp danh sách nguyên liệu cần mua từ thực đơn đó.*
 
 Đóng góp của đồ án gồm bốn điểm:
 
@@ -515,7 +520,7 @@ liệu mà người dùng đang có, $I_R$ là tập nguyên liệu cần thiế
 
 **Hệ số Jaccard.** Độ đo tương đồng tập hợp được sử dụng phổ biến nhất là hệ số
 Jaccard, định nghĩa bằng tỉ số giữa lực lượng phần giao và lực lượng phần hợp của
-hai tập hợp [14]:
+hai tập hợp [15]:
 
 $$J(A, I_R) = \frac{|A \cap I_R|}{|A \cup I_R|}$$
 
@@ -551,7 +556,7 @@ cùng độ phủ nhưng khác nhau về số nguyên liệu còn thiếu sẽ k
 3. Số nguyên liệu còn thiếu $|M|$ tăng dần.
 4. Tên món theo thứ tự bảng chữ cái.
 
-Tiêu chí thứ tư có vai trò kỹ thuật quan trọng: nó bảo đảm **thứ tự xác định**
+Tiêu chí thứ tư có vai trò kỹ thuật quan trọng: nó bảo đảm **thứ tự tất định**
 (deterministic). Nếu thiếu tiêu chí phá vỡ thế cân bằng này, hai lần chạy cùng
 một truy vấn có thể cho ra thứ tự khác nhau, gây khó khăn cho việc kiểm thử tự
 động và tạo trải nghiệm không nhất quán cho người dùng.
@@ -579,7 +584,7 @@ và luôn có thể chỉnh sửa thủ công.
 
 **Lựa chọn chiến lược tham lam.** Thuật toán tham lam là chiến lược tại mỗi bước
 chọn phương án có vẻ tốt nhất ở thời điểm hiện tại, không quay lui để xét lại các
-lựa chọn đã thực hiện [13]. Chiến lược này không bảo đảm nghiệm tối ưu toàn cục
+lựa chọn đã thực hiện [14]. Chiến lược này không bảo đảm nghiệm tối ưu toàn cục
 trong trường hợp tổng quát, nhưng cho lời giải chấp nhận được với chi phí tính
 toán thấp, phù hợp với yêu cầu phản hồi tức thời của ứng dụng web.
 
@@ -665,9 +670,6 @@ Chương 3.
 \newpage
 
 
-\newpage
-
-
 # CHƯƠNG 3. HIỆN THỰC HÓA NGHIÊN CỨU
 
 Chương này trình bày quá trình hiện thực hóa hệ thống, đi từ đặc tả yêu cầu tới
@@ -685,6 +687,8 @@ Hệ thống có ba tác nhân, phân biệt theo mức quyền truy cập tăng
 | **Khách** | Người truy cập chưa đăng nhập | Không có phiên đăng nhập |
 | **Người dùng** | Tài khoản đã đăng nhập, vai trò `User` | Thuộc tính `[Authorize]` |
 | **Quản trị viên** | Tài khoản thuộc vai trò `Admin` | `[Authorize(Roles = "Admin")]` |
+
+*Bảng 3.1. Các tác nhân của hệ thống*
 
 Quan hệ giữa ba tác nhân là quan hệ kế thừa quyền: Người dùng có toàn bộ quyền
 của Khách, Quản trị viên có toàn bộ quyền của Người dùng.
@@ -705,6 +709,8 @@ của Khách, Quản trị viên có toàn bộ quyền của Người dùng.
 | A8 | Đăng ký tài khoản | Tạo tài khoản mới, tự động gán vai trò `User` |
 | A9 | Đăng nhập, đăng xuất | Xác thực bằng email và mật khẩu |
 
+*Bảng 3.2. Yêu cầu chức năng dành cho Khách*
+
 **Nhóm B - Chức năng dành cho Người dùng đã đăng nhập**
 
 | Mã | Tên chức năng | Mô tả |
@@ -717,6 +723,8 @@ của Khách, Quản trị viên có toàn bộ quyền của Người dùng.
 | B6 | Đánh dấu đã mua | Tick từng nguyên liệu, hiển thị tiến độ |
 | B7 | Quản lý món yêu thích | Thêm, bỏ và xem danh sách |
 
+*Bảng 3.3. Yêu cầu chức năng dành cho Người dùng*
+
 **Nhóm C - Chức năng dành cho Quản trị viên**
 
 | Mã | Tên chức năng | Mô tả |
@@ -725,6 +733,8 @@ của Khách, Quản trị viên có toàn bộ quyền của Người dùng.
 | C2 | Quản lý món ăn | Thêm, sửa, xóa; gán nguyên liệu kèm định lượng |
 | C3 | Quản lý nguyên liệu | Thêm, sửa, xóa; có kiểm tra ràng buộc tham chiếu |
 | C4 | Quản lý danh mục | Thêm, sửa, xóa; có kiểm tra ràng buộc tham chiếu |
+
+*Bảng 3.4. Yêu cầu chức năng dành cho Quản trị viên*
 
 ### 3.1.3. Yêu cầu phi chức năng
 
@@ -737,6 +747,8 @@ của Khách, Quản trị viên có toàn bộ quyền của Người dùng.
 | N5 | Khả năng tiếp cận | Tương phản màu đạt WCAG 2.1 mức AA |
 | N6 | Tính đúng đắn thuật toán | Có kiểm thử đơn vị tự động cho ba thuật toán lõi |
 | N7 | Khả năng tái lập | Dựng lại cơ sở dữ liệu bằng một lệnh trên máy khác |
+
+*Bảng 3.5. Yêu cầu phi chức năng*
 
 ### 3.1.4. Sơ đồ use-case
 
@@ -759,7 +771,7 @@ phụ thuộc vào hạ tầng web. Nhờ đó ba thuật toán lõi có thể �
 kiểm thử đơn vị mà không cần khởi động máy chủ web hay mô phỏng đối tượng
 `HttpContext`. Kết quả cụ thể của lựa chọn này được trình bày ở mục 4.4.
 
-Cấu trúc thư mục của project web như sau:
+Cấu trúc thư mục của ứng dụng web như sau:
 
 ```
 CookingAdvisor/
@@ -803,6 +815,8 @@ CookingAdvisor/
 | `SuitableMealTypes` | int | Cờ nhị phân các bữa phù hợp |
 | `CategoryId` | int | Khóa ngoại tới `Category` |
 
+*Bảng 3.6. Cấu trúc bảng Recipe*
+
 Trường `SuitableMealTypes` sử dụng kiểu liệt kê dạng cờ (`[Flags]`) với các giá
 trị Breakfast = 1, Lunch = 2, Dinner = 4. Cách biểu diễn này cho phép lưu tổ hợp
 nhiều bữa trong một số nguyên duy nhất, ví dụ giá trị 6 nghĩa là món phù hợp cho
@@ -818,6 +832,8 @@ của cả ba thuật toán.
 | `IngredientId` | int | Khóa chính thành phần, khóa ngoại tới `Ingredient` |
 | `Quantity` | decimal(10,2) | Khối lượng cần dùng |
 | `Unit` | nvarchar | Đơn vị đo |
+
+*Bảng 3.7. Cấu trúc bảng RecipeIngredient*
 
 Bảng này dùng **khóa chính ghép** gồm hai khóa ngoại, bảo đảm một nguyên liệu chỉ
 xuất hiện một lần trong mỗi món. Điểm thiết kế quan trọng là bảng mang thêm hai
@@ -853,20 +869,34 @@ Hành vi xóa được cấu hình có chủ đích cho từng quan hệ, chia l
 | `MenuPlan` → `ShoppingList` | Cascade | Danh sách đi chợ phụ thuộc hoàn toàn vào thực đơn |
 | `ShoppingList` → `ShoppingListItem` | Cascade | Các dòng thuộc về danh sách |
 | `ApplicationUser` → `MenuPlan`, `Favorite` | Cascade | Xóa tài khoản thì dữ liệu cá nhân đi theo |
+| `Recipe` → `Favorite` | Cascade | Món bị xóa thì dấu yêu thích trên món đó không còn ý nghĩa |
 | `Category` → `Recipe` | **Restrict** | Không cho xóa danh mục đang có món sử dụng |
 | `Ingredient` → `RecipeIngredient` | **Restrict** | Không cho xóa nguyên liệu đang được dùng |
+| `Ingredient` → `ShoppingListItem` | **Restrict** | Không cho xóa nguyên liệu đang nằm trong danh sách đi chợ |
+| `ApplicationUser` → `ShoppingList` | **Restrict** | Danh sách đi chợ đã xóa lan truyền theo thực đơn, không cần thêm một đường Cascade thứ hai từ tài khoản |
 | `Recipe` → `MenuPlanItem` | **Restrict** | Không cho xóa món đang nằm trong thực đơn của người dùng |
+
+*Bảng 3.8. Hành vi xóa của các quan hệ trong cơ sở dữ liệu*
 
 Nguyên tắc phân biệt là: dữ liệu **phụ thuộc sự tồn tại** thì xóa lan truyền, còn
 dữ liệu **được tham chiếu** thì chặn xóa để tránh phá vỡ dữ liệu của người dùng
 khác. Nếu để `Recipe` → `MenuPlanItem` là Cascade, quản trị viên xóa một món sẽ
-âm thầm làm thủng thực đơn đã lưu của mọi người dùng.
+âm thầm phá vỡ tính toàn vẹn của thực đơn đã lưu của mọi người dùng.
+
+Hai quan hệ cùng trỏ tới `Recipe` được cấu hình khác nhau một cách có chủ đích:
+`MenuPlanItem` là Restrict còn `Favorite` là Cascade. Lý do nằm ở bản chất dữ
+liệu. Một suất ăn trong thực đơn là **sản phẩm có cấu trúc** mà người dùng đã bỏ
+công lập và chỉnh sửa; mất một suất là thực đơn thủng một ô. Ngược lại, dấu yêu
+thích chỉ là **liên kết đánh dấu** tới món; khi món không còn tồn tại thì dấu đó
+không còn đối tượng để trỏ tới, giữ lại cũng không hiển thị được gì. Nếu cấu hình
+Favorite là Restrict, quản trị viên sẽ không thể xóa một món chỉ vì có người từng
+đánh dấu yêu thích nó, một ràng buộc gây phiền mà không bảo vệ được giá trị nào.
 
 ### 3.3.4. Khởi tạo dữ liệu mẫu
 
 Lớp `DbInitializer` thực hiện ba việc khi ứng dụng khởi động: áp dụng các
 migration còn thiếu, tạo hai vai trò `Admin` và `User` cùng tài khoản quản trị
-mặc định, và nạp dữ liệu mẫu nếu bảng `Recipes` còn rỗng. Dữ liệu mẫu gồm 25 món
+mặc định, và nạp dữ liệu mẫu nếu bảng `Recipes` còn rỗng. Dữ liệu mẫu gồm 26 món
 ăn Việt Nam, 40 nguyên liệu và 10 danh mục.
 
 Điều kiện "chỉ nạp khi bảng còn rỗng" bảo đảm thao tác khởi động là **lũy đẳng**:
@@ -895,6 +925,8 @@ Bảng sau tóm tắt trách nhiệm của từng lớp dịch vụ:
 | `MenuPlannerService` | Thuật toán sinh thực đơn tuần |
 | `ShoppingListService` | Thuật toán gộp nhóm sinh danh sách đi chợ |
 | `FavoriteService` | Thêm, bỏ, kiểm tra và liệt kê món yêu thích |
+
+*Bảng 3.9. Trách nhiệm của các lớp dịch vụ*
 
 Các lớp dịch vụ được đăng ký vào bộ chứa tiêm phụ thuộc với vòng đời `Scoped`,
 tương ứng với vòng đời của `AppDbContext`.
@@ -962,7 +994,7 @@ THUẬT TOÁN GoiYTheoNguyenLieu
 20      khóa 1: canCook            giảm dần   // nấu được ngay lên trước
 21      khóa 2: coverage           giảm dần
 22      khóa 3: |missing|          tăng dần
-23      khóa 4: tên món            tăng dần   // bảo đảm thứ tự xác định
+23      khóa 4: tên món            tăng dần   // bảo đảm thứ tự tất định
 24
 25  trả về KetQua
 ```
@@ -984,7 +1016,7 @@ làm cho nhãn "Thiếu: X, Y" hiển thị ổn định giữa các lần chạ
 kiểm thử tự động.
 
 *Dòng 23 - khóa sắp xếp cuối cùng.* Như đã lập luận ở mục 2.5.1, khóa này bảo đảm
-kết quả có thứ tự xác định.
+kết quả có thứ tự tất định.
 
 **Độ phức tạp:** $O(nk + n\log n)$ với $n$ là số món thỏa điều kiện lọc và $k$ là
 số nguyên liệu trung bình mỗi món.
@@ -1150,7 +1182,7 @@ kiểu liệt kê thay vì chuỗi ký tự có ý nghĩa về an toàn: **bản
 đi tới biểu thức sắp xếp.
 
 Mọi phương án sắp xếp đều kết thúc bằng khóa phụ là tên món. Thiếu khóa này, các
-món có cùng giá trị sắp xếp sẽ không có thứ tự xác định và một món có thể xuất
+món có cùng giá trị sắp xếp sẽ không có thứ tự tất định và một món có thể xuất
 hiện ở hai trang khác nhau khi phân trang.
 
 ### 3.7.2. Bảo mật
@@ -1163,6 +1195,8 @@ hiện ở hai trang khác nhau khi phân trang.
 | Truy cập vượt quyền chức năng | `[Authorize(Roles = "Admin")]` trên toàn bộ khu quản trị |
 | Truy cập vượt quyền dữ liệu | Lọc theo `UserId` ngay trong truy vấn |
 | Lộ chuỗi kết nối | Lưu trong User Secrets, không đưa vào mã nguồn |
+
+*Bảng 3.10. Nguy cơ bảo mật và biện pháp áp dụng*
 
 \newpage
 
@@ -1179,14 +1213,18 @@ Hệ thống được chạy thử trên môi trường sau:
 | Trình duyệt kiểm thử | Google Chrome |
 | Độ phân giải kiểm thử | 1440 × 900 và 390 × 844 |
 
+*Bảng 4.1. Môi trường thử nghiệm*
+
 Dữ liệu thử nghiệm do `DbInitializer` nạp tự động:
 
 | Loại dữ liệu | Số lượng |
 |---|---|
-| Món ăn | 25 |
+| Món ăn | 26 |
 | Nguyên liệu | 40 |
 | Danh mục | 10 |
 | Tài khoản mặc định | 1 quản trị viên |
+
+*Bảng 4.2. Dữ liệu thử nghiệm*
 
 ## 4.2. Giao diện các chức năng
 
@@ -1227,8 +1265,8 @@ thái lọc hiện tại.
 *Hình 4.6. Kết quả gợi ý với 8 nguyên liệu đầu vào*
 
 Với đầu vào gồm 8 nguyên liệu (chanh, dầu ăn, đường, hành lá, muối, nước mắm, rau
-muống, tỏi), hệ thống trả về **23 món phù hợp**, trong đó **2 món nấu được ngay**
-và 21 món còn thiếu nguyên liệu. Hai món nấu được ngay được xếp lên đầu danh sách
+muống, tỏi), hệ thống trả về **24 món phù hợp**, trong đó **2 món nấu được ngay**
+và 22 món còn thiếu nguyên liệu. Hai món nấu được ngay được xếp lên đầu danh sách
 và mang nhãn màu xanh "Đủ nguyên liệu"; các món còn lại mang nhãn màu hổ phách
 ghi rõ số nguyên liệu còn thiếu, kèm danh sách tên nguyên liệu đó ngay dưới tên
 món. Kết quả này thể hiện đúng thứ tự ưu tiên đã thiết kế ở mục 3.6.1.
@@ -1331,7 +1369,7 @@ Kịch bản sau minh họa luồng sử dụng xuyên suốt ba chức năng l�
 
 **Bước 1 - Tìm món từ nguyên liệu sẵn có.** Người dùng mở mục "Gợi ý nguyên
 liệu", tick 8 nguyên liệu đang có trong bếp rồi bấm "Gợi ý món". Hệ thống trả về
-23 món xếp hạng, trong đó 2 món nấu được ngay nằm ở đầu danh sách (Hình 4.6).
+24 món xếp hạng, trong đó 2 món nấu được ngay nằm ở đầu danh sách (Hình 4.6).
 
 **Bước 2 - Đánh dấu món yêu thích.** Người dùng mở chi tiết một vài món và bấm
 "Thêm yêu thích". Các món này sẽ được ưu tiên khi sinh thực đơn ở bước sau.
@@ -1364,6 +1402,13 @@ Việc kiểm thử được ở mức này là kết quả trực tiếp của 
 ở mục 3.2: vì logic nghiệp vụ nằm ở tầng Service chứ không nằm trong Controller,
 nên có thể khởi tạo và kiểm thử trực tiếp mà không cần hạ tầng web.
 
+Cần lưu ý một giới hạn của cách tiếp cận này: nhà cung cấp In-Memory **không
+thực thi** ràng buộc duy nhất, khóa ngoại hay quy tắc so sánh chuỗi của SQL
+Server. Vì vậy các ca kiểm thử ở đây kiểm chứng logic của thuật toán, còn các
+hành vi phụ thuộc vào cơ sở dữ liệu thật (tranh chấp ghi đồng thời, vi phạm
+khóa ngoại, thứ tự sắp xếp theo bảng mã tiếng Việt) nằm ngoài vùng phủ và được
+kiểm tra thủ công trên môi trường chạy thật.
+
 ### 4.4.2. Bảng ca kiểm thử
 
 **Nhóm 1 - `SuggestionService` (thuật toán gợi ý theo nguyên liệu)**
@@ -1376,6 +1421,8 @@ nên có thể khởi tạo và kiểm thử trực tiếp mà không cần hạ
 | TC-04 | `SuggestAsync_NoMatchedIngredient_RecipeIsExcluded` | Món không chung nguyên liệu nào bị loại khỏi kết quả | Đạt |
 | TC-05 | `SuggestAsync_RanksCookableFirstThenCoverageThenFewerMissing` | Thứ tự xếp hạng đúng theo bốn tiêu chí | Đạt |
 | TC-06 | `GetIngredientOptionsAsync_ReturnsAllIngredientsOrderedByName` | Danh sách nguyên liệu trả về đầy đủ và sắp theo tên | Đạt |
+
+*Bảng 4.3. Ca kiểm thử thuật toán gợi ý theo nguyên liệu*
 
 **Nhóm 2 - `MenuPlannerService` (thuật toán sinh thực đơn tuần)**
 
@@ -1391,6 +1438,8 @@ nên có thể khởi tạo và kiểm thử trực tiếp mà không cần hạ
 | TC-14 | `GenerateWeeklyPlanAsync_NoRecipesAvailable_Throws` | Không có món nào thì ném ngoại lệ | Đạt |
 | TC-15 | `GenerateWeeklyPlanAsync_PersistsMenuPlanAndItems` | Thực đơn và các suất được lưu xuống cơ sở dữ liệu | Đạt |
 
+*Bảng 4.4. Ca kiểm thử thuật toán sinh thực đơn tuần*
+
 **Nhóm 3 - `ShoppingListService` (thuật toán sinh danh sách đi chợ)**
 
 | Mã | Tên ca kiểm thử | Mục tiêu kiểm chứng | Kết quả |
@@ -1404,6 +1453,8 @@ nên có thể khởi tạo và kiểm thử trực tiếp mà không cần hạ
 | TC-22 | `GenerateFromMenuPlanAsync_PlanOwnedByDifferentUser_Throws` | Không truy cập được thực đơn của người dùng khác | Đạt |
 | TC-23 | `GenerateFromMenuPlanAsync_PersistsMenuPlanIdAndUserId` | Lưu đúng liên kết tới thực đơn và người dùng | Đạt |
 
+*Bảng 4.5. Ca kiểm thử thuật toán sinh danh sách đi chợ*
+
 **Nhóm 4 - `RecipeService` (tìm kiếm và sắp xếp)**
 
 | Mã | Tên ca kiểm thử | Mục tiêu kiểm chứng | Kết quả |
@@ -1414,6 +1465,8 @@ nên có thể khởi tạo và kiểm thử trực tiếp mà không cần hạ
 | TC-27 | `Sorts_by_calories_in_both_directions` (calo giảm dần) | Sắp đúng chiều giảm | Đạt |
 | TC-28 | `Breaks_ties_by_name_so_paging_cannot_repeat_a_dish` | Có khóa phá vỡ thế cân bằng, phân trang không lặp món | Đạt |
 | TC-29 | `Sort_survives_alongside_a_filter_and_is_echoed_back` | Sắp xếp hoạt động cùng bộ lọc và được phản hồi lại giao diện | Đạt |
+
+*Bảng 4.6. Ca kiểm thử chức năng tìm kiếm và sắp xếp*
 
 ### 4.4.3. Kết quả chạy kiểm thử
 
@@ -1436,6 +1489,8 @@ Tổng hợp:
 | `ShoppingListService` | 8 | 8 | 0 |
 | `RecipeService` | 6 | 6 | 0 |
 | **Tổng** | **29** | **29** | **0** |
+
+*Bảng 4.7. Tổng hợp kết quả kiểm thử theo nhóm*
 
 ### 4.4.4. Khiếm khuyết phát hiện qua kiểm thử
 
@@ -1464,7 +1519,7 @@ diễn.
 **Khiếm khuyết 2 - Thứ tự không xác định khi phân trang.**
 
 *Hiện tượng.* Khi sắp xếp theo năng lượng, các món có cùng giá trị năng lượng
-không có thứ tự xác định giữa hai lần truy vấn, dẫn tới nguy cơ một món xuất hiện
+không có thứ tự tất định giữa hai lần truy vấn, dẫn tới nguy cơ một món xuất hiện
 ở cả trang trước và trang sau.
 
 *Nguyên nhân.* Câu lệnh sắp xếp chỉ có một khóa duy nhất. Với các bản ghi có khóa
@@ -1492,6 +1547,8 @@ duyệt theo các tiêu chí phi chức năng đã nêu ở mục 3.1.3.
 | Điều hướng bàn phím | Kiểm tra bộ lọc dạng ngăn kéo: mở, giữ tiêu điểm, đóng bằng phím Esc | Đạt |
 | Nhật ký lỗi trình duyệt | Theo dõi bảng điều khiển của trình duyệt khi duyệt các trang | Không có lỗi |
 
+*Bảng 4.8. Kết quả kiểm tra giao diện theo tiêu chí phi chức năng*
+
 ## 4.6. Đánh giá
 
 ### 4.6.1. Kết quả đạt được
@@ -1500,12 +1557,14 @@ duyệt theo các tiêu chí phi chức năng đã nêu ở mục 3.1.3.
 
 | Mục tiêu | Kết quả |
 |---|---|
-| 1. Quản lý kho dữ liệu món ăn | Đạt, 25 món với đầy đủ thuộc tính và định lượng nguyên liệu |
+| 1. Quản lý kho dữ liệu món ăn | Đạt, 26 món với đầy đủ thuộc tính và định lượng nguyên liệu |
 | 2. Thuật toán gợi ý theo nguyên liệu | Đạt, 6 ca kiểm thử đều đạt |
 | 3. Thuật toán sinh thực đơn tuần | Đạt, 9 ca kiểm thử đều đạt |
 | 4. Sinh danh sách đi chợ | Đạt, 8 ca kiểm thử đều đạt |
 | 5. Xác thực và phân quyền | Đạt, kiểm chứng bằng Hình 4.13 |
 | 6. Kiểm chứng bằng kiểm thử tự động | Đạt, 29 ca kiểm thử, phát hiện 2 khiếm khuyết thực tế |
+
+*Bảng 4.9. Đối chiếu kết quả đạt được với mục tiêu đề ra*
 
 ### 4.6.2. Hạn chế
 
@@ -1541,8 +1600,8 @@ người nấu ăn trong gia đình ở ba khâu: tìm món từ nguyên liệu 
 
 ### 5.1.1. Kết quả đạt được
 
-**Về mặt chức năng,** hệ thống cung cấp 47 chức năng phân theo ba mức quyền truy
-cập, chạy hoàn chỉnh đầu-cuối trên cơ sở dữ liệu mẫu gồm 25 món ăn Việt Nam, 40
+**Về mặt chức năng,** hệ thống cung cấp 20 chức năng phân thành ba nhóm theo mức quyền
+truy cập, chạy hoàn chỉnh đầu-cuối trên cơ sở dữ liệu mẫu gồm 26 món ăn Việt Nam, 40
 nguyên liệu và 10 danh mục. Toàn bộ sáu mục tiêu đặt ra ở phần Mở đầu đều đã đạt,
 với kết quả kiểm chứng cụ thể trình bày ở mục 4.6.1.
 
@@ -1582,9 +1641,9 @@ WCAG 2.1 mức AA với cặp màu thấp nhất đo được là 4,69:1.
 So với các ứng dụng đã khảo sát ở mục 1.2, đồ án có ba điểm khác biệt:
 
 **Thứ nhất, tích hợp trọn vẹn ba chức năng trong một luồng công việc liền mạch.**
-Các sản phẩm khảo sát thường mạnh ở một khâu và thiếu ở khâu khác: Mealime lập
-được thực đơn nhưng không hỗ trợ truy vấn ngược từ nguyên liệu; Paprika quản lý
-công thức và danh sách đi chợ tốt nhưng không tự động hóa việc lập thực đơn; các
+Các sản phẩm khảo sát thường mạnh ở một khâu và thiếu ở khâu khác. Mealime lập
+được thực đơn nhưng không hỗ trợ truy vấn ngược từ nguyên liệu. Paprika quản lý
+công thức và danh sách đi chợ tốt nhưng không tự động hóa việc lập thực đơn. Các
 trang trong nước chủ yếu dừng ở việc cung cấp nội dung.
 
 **Thứ hai, dữ liệu món ăn Việt Nam được chuẩn hóa về định lượng.** Bảng trung
@@ -1639,6 +1698,8 @@ khởi đầu nguội trên hệ thống mới.
 | Cộng đồng | Cho phép người dùng đóng góp công thức, đánh giá và bình luận |
 | Chia sẻ thực đơn | Xuất thực đơn tuần ra tệp hoặc chia sẻ qua đường dẫn công khai |
 | In danh sách đi chợ | Xuất bản in hoặc tệp PDF để mang theo khi đi chợ |
+
+*Bảng 5.1. Các hướng mở rộng chức năng*
 
 ### 5.2.3. Cải thiện kỹ thuật
 
@@ -1795,7 +1856,7 @@ dotnet run --project src/CookingAdvisor                  # chạy ứng dụng
 ```
 
 Ở lần chạy đầu tiên, lớp `DbInitializer` nạp dữ liệu mẫu gồm danh mục, nguyên
-liệu, 25 món ăn và tài khoản quản trị.
+liệu, 26 món ăn và tài khoản quản trị.
 
 ### A.5. Cách thay thế cho Windows: dùng script T-SQL
 
@@ -1805,8 +1866,9 @@ Management Studio hoặc `sqlcmd`, kết nối tới máy chủ, chọn hoặc t
 `CookingAdvisor` rồi thực thi.
 
 Script này có tính lũy đẳng: nó tự kiểm tra bảng `__EFMigrationsHistory` nên chạy
-lại nhiều lần không gây lỗi. Script được sinh ra từ đúng migration `InitialCreate`
-nên lược đồ giống hệt bản dựng qua EF Core.
+lại nhiều lần không gây lỗi. Script được sinh ra từ toàn bộ chuỗi migrations hiện có
+nên lược đồ giống hệt bản dựng qua EF Core; khi có migration mới cần sinh lại
+script theo lệnh trong `setup/README.md`.
 
 Lưu ý: script chỉ tạo **lược đồ** (bảng, cột, khóa ngoại), không chứa dữ liệu
 mẫu. Sau khi thực thi xong vẫn cần chạy ứng dụng **một lần** để `DbInitializer`
@@ -1851,7 +1913,7 @@ CookingAdvisor/
 │   │   ├── TagHelpers/          Tag helper cho hệ thống biểu tượng
 │   │   ├── Migrations/          Lịch sử thay đổi lược đồ
 │   │   └── wwwroot/             CSS, JavaScript, phông chữ, ảnh
-│   └── CookingAdvisor.Tests/    Project kiểm thử xUnit
+│   └── CookingAdvisor.Tests/    Dự án kiểm thử xUnit
 └── thesis/                      Tài liệu đồ án
     ├── doc/                     Bản .docx của báo cáo
     ├── pdf/                     Bản .pdf để nộp

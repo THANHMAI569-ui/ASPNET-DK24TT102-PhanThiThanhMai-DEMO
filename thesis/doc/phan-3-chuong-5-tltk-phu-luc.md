@@ -14,8 +14,8 @@ người nấu ăn trong gia đình ở ba khâu: tìm món từ nguyên liệu 
 
 ### 5.1.1. Kết quả đạt được
 
-**Về mặt chức năng,** hệ thống cung cấp 47 chức năng phân theo ba mức quyền truy
-cập, chạy hoàn chỉnh đầu-cuối trên cơ sở dữ liệu mẫu gồm 25 món ăn Việt Nam, 40
+**Về mặt chức năng,** hệ thống cung cấp 20 chức năng phân thành ba nhóm theo mức quyền
+truy cập, chạy hoàn chỉnh đầu-cuối trên cơ sở dữ liệu mẫu gồm 26 món ăn Việt Nam, 40
 nguyên liệu và 10 danh mục. Toàn bộ sáu mục tiêu đặt ra ở phần Mở đầu đều đã đạt,
 với kết quả kiểm chứng cụ thể trình bày ở mục 4.6.1.
 
@@ -55,9 +55,9 @@ WCAG 2.1 mức AA với cặp màu thấp nhất đo được là 4,69:1.
 So với các ứng dụng đã khảo sát ở mục 1.2, đồ án có ba điểm khác biệt:
 
 **Thứ nhất, tích hợp trọn vẹn ba chức năng trong một luồng công việc liền mạch.**
-Các sản phẩm khảo sát thường mạnh ở một khâu và thiếu ở khâu khác: Mealime lập
-được thực đơn nhưng không hỗ trợ truy vấn ngược từ nguyên liệu; Paprika quản lý
-công thức và danh sách đi chợ tốt nhưng không tự động hóa việc lập thực đơn; các
+Các sản phẩm khảo sát thường mạnh ở một khâu và thiếu ở khâu khác. Mealime lập
+được thực đơn nhưng không hỗ trợ truy vấn ngược từ nguyên liệu. Paprika quản lý
+công thức và danh sách đi chợ tốt nhưng không tự động hóa việc lập thực đơn. Các
 trang trong nước chủ yếu dừng ở việc cung cấp nội dung.
 
 **Thứ hai, dữ liệu món ăn Việt Nam được chuẩn hóa về định lượng.** Bảng trung
@@ -112,6 +112,8 @@ khởi đầu nguội trên hệ thống mới.
 | Cộng đồng | Cho phép người dùng đóng góp công thức, đánh giá và bình luận |
 | Chia sẻ thực đơn | Xuất thực đơn tuần ra tệp hoặc chia sẻ qua đường dẫn công khai |
 | In danh sách đi chợ | Xuất bản in hoặc tệp PDF để mang theo khi đi chợ |
+
+*Bảng 5.1. Các hướng mở rộng chức năng*
 
 ### 5.2.3. Cải thiện kỹ thuật
 
@@ -268,7 +270,7 @@ dotnet run --project src/CookingAdvisor                  # chạy ứng dụng
 ```
 
 Ở lần chạy đầu tiên, lớp `DbInitializer` nạp dữ liệu mẫu gồm danh mục, nguyên
-liệu, 25 món ăn và tài khoản quản trị.
+liệu, 26 món ăn và tài khoản quản trị.
 
 ### A.5. Cách thay thế cho Windows: dùng script T-SQL
 
@@ -278,8 +280,9 @@ Management Studio hoặc `sqlcmd`, kết nối tới máy chủ, chọn hoặc t
 `CookingAdvisor` rồi thực thi.
 
 Script này có tính lũy đẳng: nó tự kiểm tra bảng `__EFMigrationsHistory` nên chạy
-lại nhiều lần không gây lỗi. Script được sinh ra từ đúng migration `InitialCreate`
-nên lược đồ giống hệt bản dựng qua EF Core.
+lại nhiều lần không gây lỗi. Script được sinh ra từ toàn bộ chuỗi migrations hiện có
+nên lược đồ giống hệt bản dựng qua EF Core; khi có migration mới cần sinh lại
+script theo lệnh trong `setup/README.md`.
 
 Lưu ý: script chỉ tạo **lược đồ** (bảng, cột, khóa ngoại), không chứa dữ liệu
 mẫu. Sau khi thực thi xong vẫn cần chạy ứng dụng **một lần** để `DbInitializer`
@@ -324,7 +327,7 @@ CookingAdvisor/
 │   │   ├── TagHelpers/          Tag helper cho hệ thống biểu tượng
 │   │   ├── Migrations/          Lịch sử thay đổi lược đồ
 │   │   └── wwwroot/             CSS, JavaScript, phông chữ, ảnh
-│   └── CookingAdvisor.Tests/    Project kiểm thử xUnit
+│   └── CookingAdvisor.Tests/    Dự án kiểm thử xUnit
 └── thesis/                      Tài liệu đồ án
     ├── doc/                     Bản .docx của báo cáo
     ├── pdf/                     Bản .pdf để nộp

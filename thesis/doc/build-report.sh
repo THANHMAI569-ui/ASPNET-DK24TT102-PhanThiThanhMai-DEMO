@@ -8,10 +8,13 @@ OUT_DOCX="bao-cao-day-du.docx"
 OUT_PDF="../pdf/bao-cao-day-du.pdf"
 
 # Phần 1: bỏ danh mục tài liệu tham khảo tạm (đã có bản đầy đủ ở Phần 3).
-head -n 666 phan-1-tom-tat-mo-dau-chuong-1-2.md > "$OUT_MD"
+# Cắt động theo tiêu đề thay vì số dòng cứng, để sửa Phần 1 không làm vỡ bản ghép.
+awk '/^# TÀI LIỆU THAM KHẢO \(phần 1\)/{exit} {print}' \
+    phan-1-tom-tat-mo-dau-chuong-1-2.md > "$OUT_MD"
 
-# Phần 2 và 3: bỏ khối YAML ở đầu tệp (5 dòng đầu).
-{ printf '\n\\newpage\n\n'; tail -n +6 phan-2-chuong-3-4.md; } >> "$OUT_MD"
+# Phần 2 và 3: bỏ khối YAML ở đầu tệp (5 dòng đầu). Phần 1 đã kết thúc bằng
+# \newpage (đứng ngay trước danh mục tạm bị cắt) nên không chèn thêm ở đây.
+{ tail -n +6 phan-2-chuong-3-4.md; } >> "$OUT_MD"
 { printf '\n\\newpage\n\n'; tail -n +6 phan-3-chuong-5-tltk-phu-luc.md; } >> "$OUT_MD"
 
 # Tiêu đề chung cho bản ghép.

@@ -14,7 +14,7 @@ chương thay đổi.
 | `h4-03-loc-va-sap-xep.jpg` | Hình 4.3. Kết quả lọc theo vùng miền Nam, độ khó Dễ, sắp xếp theo calo tăng dần | 4.2 Tìm kiếm và lọc |
 | `h4-04-chi-tiet-mon.jpg` | Hình 4.4. Trang chi tiết món ăn: thông số, nguyên liệu và các bước nấu | 4.1 |
 | `h4-05-goi-y-chua-chon.jpg` | Hình 4.5. Màn hình gợi ý khi người dùng chưa chọn nguyên liệu nào | 4.3 Gợi ý theo nguyên liệu |
-| `h4-06-goi-y-ket-qua.jpg` | Hình 4.6. Kết quả gợi ý với 8 nguyên liệu đầu vào: 2 món đủ nguyên liệu, 21 món còn thiếu | 4.3 |
+| `h4-06-goi-y-ket-qua.jpg` | Hình 4.6. Kết quả gợi ý với 8 nguyên liệu đầu vào: 2 món đủ nguyên liệu, 22 món còn thiếu | 4.3 |
 | `h4-07-thuc-don-danh-sach.jpg` | Hình 4.7. Biểu mẫu sinh thực đơn và danh sách thực đơn đã lưu | 4.4 Thực đơn tuần |
 | `h4-08-thuc-don-tuan.jpg` | Hình 4.8. Lịch thực đơn 7 ngày × 3 bữa kèm tổng calo từng ngày | 4.4 |
 | `h4-09-di-cho.jpg` | Hình 4.9. Danh sách đi chợ sinh từ thực đơn: 35 nguyên liệu gộp theo 8 nhóm | 4.5 Danh sách đi chợ |
@@ -35,17 +35,20 @@ Những con số dưới đây lấy trực tiếp từ hệ thống lúc chụp
 vào Chương 4:
 
 - **Hình 4.6:** đầu vào 8 nguyên liệu (chanh, dầu ăn, đường, hành lá, muối, nước
-  mắm, rau muống, tỏi). Kết quả: 23 món phù hợp, trong đó **2 món đủ nguyên
-  liệu** và 21 món còn thiếu. Món đủ nguyên liệu được xếp lên đầu danh sách.
+  mắm, rau muống, tỏi). Kết quả: 24 món phù hợp, trong đó **2 món đủ nguyên
+  liệu** và 22 món còn thiếu. Món đủ nguyên liệu được xếp lên đầu danh sách.
 - **Hình 4.8:** thực đơn 21 suất, tổng calo theo ngày lần lượt là 1580, 1270,
   1130, 1270, 1110, 1030 và 820 kcal.
 - **Hình 4.9:** danh sách đi chợ gồm **35 dòng nguyên liệu** gộp theo **8 nhóm**
   (Đậu/Đỗ, Gia vị, Hải sản, Nấm, Ngũ cốc/Tinh bột, Rau củ, Thịt, Trứng/Sữa).
-- **Hình 4.11:** 25 món ăn, 40 nguyên liệu, 10 danh mục.
+- **Hình 4.11:** 26 món ăn, 40 nguyên liệu, 10 danh mục.
 
-## Ảnh còn thiếu, cần bổ sung khi viết Chương 4
+## Ảnh bổ sung (đã chụp, đang dùng trong Chương 4)
 
-- Màn hình đăng ký tài khoản.
-- Thông báo lỗi khi nhập sai dữ liệu trong biểu mẫu (minh họa kiểm tra hợp lệ).
-- Trang báo không đủ quyền khi người dùng thường truy cập khu vực quản trị.
-- Ảnh chụp kết quả chạy `dotnet test` để minh họa 29 ca kiểm thử đạt.
+| Tệp | Chú thích |
+|---|---|
+| `h4-20-dang-ky.jpg` | Hình 4.11 trong báo cáo. Màn hình đăng ký tài khoản |
+| `h4-21-loi-kiem-tra-hop-le.jpg` | Hình 4.12. Thông báo lỗi kiểm tra hợp lệ trên 3 trường cùng lúc |
+| `h4-22-chan-quyen.jpg` | Hình 4.13. Người dùng thường bị chặn khỏi khu quản trị |
+
+Kết quả `dotnet test` được trích dạng văn bản ở mục 4.4.3, không cần ảnh chụp.
