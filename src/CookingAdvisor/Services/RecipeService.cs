@@ -1,4 +1,5 @@
 using CookingAdvisor.Data;
+using CookingAdvisor.Models;
 using CookingAdvisor.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
@@ -35,8 +36,21 @@ public class RecipeService(AppDbContext db)
         if (totalPages > 0 && page > totalPages)
             page = totalPages;
 
-        var recipes = await query
-            .OrderBy(r => r.Name)
+        // Every option ends with a name tie-break. Without it, dishes that share
+        // a calorie count or a cook time have no stable order, and the database
+        // is free to hand back the same recipe on two different pages.
+        var ordered = filter.Sort switch
+        {
+            RecipeSortOrder.TimeAsc =>
+                query.OrderBy(r => r.PrepMinutes + r.CookMinutes).ThenBy(r => r.Name),
+            RecipeSortOrder.CaloriesAsc =>
+                query.OrderBy(r => r.CaloriesPerServing).ThenBy(r => r.Name),
+            RecipeSortOrder.CaloriesDesc =>
+                query.OrderByDescending(r => r.CaloriesPerServing).ThenBy(r => r.Name),
+            _ => query.OrderBy(r => r.Name)
+        };
+
+        var recipes = await ordered
             .Skip((page - 1) * PageSize)
             .Take(PageSize)
             .Select(r => new RecipeListItemViewModel
@@ -67,6 +81,7 @@ public class RecipeService(AppDbContext db)
                 Region = filter.Region,
                 Difficulty = filter.Difficulty,
                 MaxCookMinutes = maxCookMinutes,
+                Sort = filter.Sort,
                 Page = page
             },
             Recipes = recipes,

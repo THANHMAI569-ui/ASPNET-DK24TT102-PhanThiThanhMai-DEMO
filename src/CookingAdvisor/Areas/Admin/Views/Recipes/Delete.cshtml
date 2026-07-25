@@ -3,10 +3,14 @@
     ViewData["Title"] = "Xóa món ăn";
 }
 
-<div class="surface stack">
-    <h1>Xóa món ăn</h1>
-    <p>Bạn sắp xóa món <strong>@Model.Name</strong> thuộc danh mục <strong>@Model.CategoryName</strong>.</p>
+<div class="page-head">
+    <div class="page-head__text">
+        <h1>Xóa món ăn</h1>
+        <p class="page-head__lede">Bạn sắp xóa món <strong>@Model.Name</strong> thuộc danh mục <strong>@Model.CategoryName</strong>.</p>
+    </div>
+</div>
 
+<div class="surface stack">
     <div class="spec-grid">
         <div class="spec">
             <span class="spec__label">Vùng miền</span>

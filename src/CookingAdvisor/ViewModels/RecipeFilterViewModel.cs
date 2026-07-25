@@ -12,5 +12,10 @@ public class RecipeFilterViewModel
     public Region? Region { get; set; }
     public Difficulty? Difficulty { get; set; }
     public int? MaxCookMinutes { get; set; }
+
+    // Not nullable: an unrecognised value binds to the default (Name), which is
+    // exactly the fallback we want.
+    public RecipeSortOrder Sort { get; set; } = RecipeSortOrder.Name;
+
     public int Page { get; set; } = 1;
 }

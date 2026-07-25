@@ -12,130 +12,131 @@
     string[] previewMeals = ["Sáng", "Trưa", "Tối"];
 }
 
-<partial name="_FlashMessages"/>
+<div class="wrap">
+    <partial name="_FlashMessages"/>
+</div>
 
 <section class="hero">
-    <div class="hero__copy">
-        <span class="eyebrow">Gợi ý nấu ăn cho gia đình</span>
-        <h1 class="hero__title">Có sẵn nguyên liệu gì,<br/>nấu được <em>món gì</em></h1>
-        <p class="hero__lede">
-            Nhập nguyên liệu bạn đang có. Hệ thống xếp hạng món nấu được ngay
-            và món còn thiếu gì.
-        </p>
-        <div class="hero__actions">
-            <a class="btn btn--accent btn--lg" asp-controller="Suggestion" asp-action="Index">
-                <icon name="bulb"/> Gợi ý món ăn
-            </a>
-            <a class="btn btn--outline btn--lg" asp-controller="Recipe" asp-action="Index">
-                Duyệt món ăn
-            </a>
-        </div>
-    </div>
-
-    <div class="hero__media">
-        <div class="hero__photo hero__photo--tall">
-            <img src="@Photo(0)" alt="Món ăn Việt trong thư viện của CookingAdvisor"
-                 data-fallback="@placeholder" width="900" height="1200" fetchpriority="high"/>
-        </div>
-        <div class="hero__photo hero__photo--short">
-            <img src="@Photo(1)" alt="Một món ăn khác trong thư viện"
-                 data-fallback="@placeholder" width="900" height="1125" loading="lazy"/>
-        </div>
-    </div>
-</section>
-
-<section class="band">
-    <div class="band__inner stack">
-        <h2>Ba việc bạn làm được ở đây</h2>
-
-        <div class="bento">
-            <div class="bento__cell bento__cell--lead">
-                <span class="bento__num"><icon name="bulb"/></span>
-                <h3>Gợi ý theo nguyên liệu</h3>
-                <p>
-                    Chọn từ @Model.IngredientCount nguyên liệu. Món đủ nguyên liệu lên trước,
-                    món thiếu ghi rõ thiếu gì.
-                </p>
-                <a class="btn btn--outline" asp-controller="Suggestion" asp-action="Index">
-                    Thử ngay <icon name="arrow-narrow-right"/>
+    <div class="hero__inner">
+        <div class="hero__copy">
+            <span class="eyebrow">Gợi ý nấu ăn cho gia đình</span>
+            <h1 class="hero__title">Có sẵn nguyên liệu gì,<br/>nấu được <em>món gì</em></h1>
+            <p class="hero__lede">
+                Chọn từ @Model.IngredientCount nguyên liệu đang có, hệ thống xếp hạng món
+                nấu được ngay và món còn thiếu gì.
+            </p>
+            <div class="hero__actions">
+                <a class="btn btn--accent btn--lg" asp-controller="Suggestion" asp-action="Index">
+                    <icon name="bulb"/> Gợi ý món ăn
+                </a>
+                <a class="btn btn--outline btn--lg" asp-controller="Recipe" asp-action="Index">
+                    Duyệt món ăn
                 </a>
             </div>
+        </div>
 
-            <div class="bento__cell bento__cell--photo">
-                <img src="@Photo(2)" alt="Mâm cơm gia đình Việt"
-                     data-fallback="@placeholder" width="900" height="675" loading="lazy"/>
+        <div class="hero__media">
+            <div class="hero__photo">
+                <img src="@Photo(0)" alt="Món ăn Việt trong thư viện của CookingAdvisor"
+                     data-fallback="@placeholder" width="900" height="1200" fetchpriority="high"/>
             </div>
-
-            <div class="bento__cell">
-                <span class="bento__num"><icon name="calendar-month"/></span>
-                <h3>Lập thực đơn tuần</h3>
-                <p>Sinh tự động 7 ngày x 3 bữa, tránh lặp món, xem tổng calo từng ngày.</p>
-            </div>
-
-            <div class="bento__cell">
-                <span class="bento__num"><icon name="shopping-cart"/></span>
-                <h3>Xuất danh sách đi chợ</h3>
-                <p>Gộp nguyên liệu cả tuần theo nhóm, tick dần từng món khi đi mua.</p>
+            <div class="hero__photo hero__photo--short">
+                <img src="@Photo(1)" alt="Một món ăn khác trong thư viện"
+                     data-fallback="@placeholder" width="900" height="900" loading="lazy"/>
             </div>
         </div>
     </div>
 </section>
 
-<section class="page">
+<div class="wrap stack">
     <div class="section-head">
-        <h2>Món trong thư viện</h2>
-        <a class="btn btn--quiet" asp-controller="Recipe" asp-action="Index">
-            Xem cả @Model.RecipeCount món <icon name="arrow-narrow-right"/>
-        </a>
+        <h2>Tìm theo loại món</h2>
     </div>
-
-    @if (Model.FeaturedRecipes.Count == 0)
+    @if (Model.Categories.Count == 0)
     {
         <div class="empty">
-            <span class="empty__icon"><icon name="soup" class="ico--lg"/></span>
-            <p class="empty__title">Thư viện chưa có món nào</p>
-            <p class="empty__text">
-                Đăng nhập bằng tài khoản quản trị và thêm món đầu tiên để bắt đầu.
-            </p>
+            <span class="empty__icon"><icon name="category" class="ico--lg"/></span>
+            <p class="empty__title">Chưa có loại món nào</p>
+            <p class="empty__text">Quản trị viên chưa thêm danh mục món ăn.</p>
         </div>
     }
     else
     {
-        <div class="grid-cards grid-cards--wide">
-            @foreach (var recipe in Model.FeaturedRecipes)
+        <div class="cat-rail">
+            @foreach (var category in Model.Categories)
             {
-                <article class="dish-card">
-                    <div class="dish-card__media">
-                        <img class="dish-card__img"
-                             src="@(string.IsNullOrEmpty(recipe.ImageUrl) ? placeholder : recipe.ImageUrl)"
-                             alt="@recipe.Name" data-fallback="@placeholder"
-                             width="900" height="675" loading="lazy"/>
-                        <span class="pill pill--accent media-tag">@recipe.CategoryName</span>
-                    </div>
-                    <div class="dish-card__body">
-                        <h3 class="dish-card__title">
-                            <a asp-controller="Recipe" asp-action="Details" asp-route-id="@recipe.Id">@recipe.Name</a>
-                        </h3>
-                        <ul class="meta-list meta-list--tight">
-                            <li><icon name="clock"/> <span class="tnum">@recipe.TotalMinutes</span> phút</li>
-                            <li><icon name="flame"/> <span class="tnum">@recipe.CaloriesPerServing</span> kcal</li>
-                        </ul>
-                    </div>
-                </article>
+                <a class="cat-tile" asp-controller="Recipe" asp-action="Index" asp-route-CategoryId="@category.Id">
+                    @* A monogram, not an icon: the sprite has no glyph that honestly
+                       stands for "Do uong" or "Trang mieng", and repeating one generic
+                       icon nine times reads as filler. *@
+                    <span class="cat-tile__icon" aria-hidden="true">@category.Name.Substring(0, 1)</span>
+                    <span class="cat-tile__name">@category.Name</span>
+                    <span class="cat-tile__count">@category.RecipeCount món</span>
+                </a>
             }
         </div>
     }
-</section>
+</div>
 
-<section class="band">
-    <div class="band__inner split">
+<div class="wrap">
+    <div class="flash-strip">
+        <div class="flash-strip__head">
+            <h2 class="flash-strip__title">Món nổi bật</h2>
+            <span class="text-xs text-muted-3">@Model.RecipeCount món trong thư viện</span>
+        </div>
+        <div class="flash-strip__body">
+            @if (Model.FeaturedRecipes.Count == 0)
+            {
+                <div class="empty">
+                    <span class="empty__icon"><icon name="soup" class="ico--lg"/></span>
+                    <p class="empty__title">Thư viện chưa có món nào</p>
+                    <p class="empty__text">
+                        Đăng nhập bằng tài khoản quản trị và thêm món đầu tiên để bắt đầu.
+                    </p>
+                </div>
+            }
+            else
+            {
+                <div class="product-grid">
+                    @foreach (var recipe in Model.FeaturedRecipes)
+                    {
+                        <article class="product-card">
+                            <div class="product-card__media">
+                                <img class="product-card__img"
+                                     src="@(string.IsNullOrEmpty(recipe.ImageUrl) ? placeholder : recipe.ImageUrl)"
+                                     alt="@recipe.Name" data-fallback="@placeholder"
+                                     width="400" height="400" loading="lazy"/>
+                            </div>
+                            <div class="product-card__body">
+                                <h3 class="product-card__title">
+                                    <a asp-controller="Recipe" asp-action="Details" asp-route-id="@recipe.Id">@recipe.Name</a>
+                                </h3>
+                                <div class="product-card__meta">
+                                    <span class="tag">@recipe.CategoryName</span>
+                                    <span class="tag">@recipe.Region.ToDisplayName()</span>
+                                </div>
+                                <div class="product-card__foot">
+                                    <span class="price">@recipe.CaloriesPerServing<span class="price__unit">kcal</span></span>
+                                    <span class="sold">@recipe.TotalMinutes phút</span>
+                                </div>
+                            </div>
+                        </article>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="wrap">
+    <div class="split">
         <div class="split__copy">
             <h2>Cả tuần ăn gì, quyết một lần</h2>
             <p>
                 Thực đơn sinh tự động rồi bạn sửa tay từng bữa. Mỗi ngày có tổng calo
                 để cân đối, và tạo được danh sách đi chợ ngay từ thực đơn đó.
             </p>
-            <a class="btn btn--accent" asp-controller="Menu" asp-action="Index">
+            <a class="btn btn--outline" asp-controller="Menu" asp-action="Index">
                 <icon name="calendar-month"/> Tạo thực đơn
             </a>
         </div>
@@ -173,28 +174,9 @@
             </div>
         }
     </div>
-</section>
+</div>
 
-@if (Model.Categories.Count > 0)
-{
-    <section class="page">
-        <div class="section-head">
-            <h2>Tìm theo loại món</h2>
-        </div>
-        <div class="rail">
-            @foreach (var category in Model.Categories)
-            {
-                <a class="rail-tile" asp-controller="Recipe" asp-action="Index"
-                   asp-route-CategoryId="@category.Id">
-                    <span class="rail-tile__name">@category.Name</span>
-                    <span class="rail-tile__count">@category.RecipeCount món</span>
-                </a>
-            }
-        </div>
-    </section>
-}
-
-<section class="page">
+<div class="wrap">
     <div class="cta-band">
         <div class="stack-sm">
             <h2>Lưu thực đơn và món yêu thích</h2>
@@ -202,15 +184,15 @@
         </div>
         @if (User.Identity?.IsAuthenticated == true)
         {
-            <a class="btn btn--accent btn--lg" asp-controller="Menu" asp-action="Index">
-                Vào thực đơn của tôi
+            <a class="btn btn--outline btn--lg" asp-controller="Menu" asp-action="Index">
+                Vào thực đơn
             </a>
         }
         else
         {
-            <a class="btn btn--accent btn--lg" asp-controller="Account" asp-action="Register">
+            <a class="btn btn--outline btn--lg" asp-controller="Account" asp-action="Register">
                 Tạo tài khoản
             </a>
         }
     </div>
-</section>
+</div>

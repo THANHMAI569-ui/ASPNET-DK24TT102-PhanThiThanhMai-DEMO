@@ -26,7 +26,7 @@ else
 {
     <div class="stack">
         <div class="stack-sm">
-            <p class="text-sm text-muted-2">
+            <p class="text-xs text-muted-3">
                 Đã mua <span class="tnum">@purchased</span>/<span class="tnum">@total</span> nguyên liệu
             </p>
             <div class="progress-line" role="progressbar" aria-valuenow="@percent" aria-valuemin="0" aria-valuemax="100" aria-label="Tiến độ mua sắm">
@@ -48,7 +48,7 @@ else
                         <form asp-action="TogglePurchased" method="post">
                             <input type="hidden" name="id" value="@Model.Id"/>
                             <input type="hidden" name="itemId" value="@item.Id"/>
-                            <input type="checkbox" class="check" onchange="this.form.submit()" checked="@item.IsPurchased"/>
+                            <input type="checkbox" onchange="this.form.submit()" checked="@item.IsPurchased"/>
                         </form>
                         <span class="shop-item__name">@item.IngredientName</span>
                         <span class="shop-item__qty">@item.Quantity.ToString("0.##") @item.Unit</span>
@@ -60,5 +60,5 @@ else
 }
 
 <a class="btn btn--quiet" asp-controller="Menu" asp-action="Details" asp-route-id="@Model.MenuPlanId">
-    <icon name="arrow-left"/> Quay lại thực đơn
+    <icon name="arrow-left"/> Về thực đơn
 </a>

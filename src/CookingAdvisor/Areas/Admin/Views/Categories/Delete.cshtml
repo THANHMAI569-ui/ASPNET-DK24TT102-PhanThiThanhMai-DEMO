@@ -3,8 +3,17 @@
     ViewData["Title"] = "Xóa danh mục";
 }
 
+<div class="page-head">
+    <div class="page-head__text">
+        <h1>Xóa danh mục</h1>
+        <p class="page-head__lede">Xác nhận xóa danh mục khỏi hệ thống.</p>
+    </div>
+    <div class="page-head__actions">
+        <a class="btn btn--quiet" asp-action="Index"><icon name="arrow-left"/> Quay lại</a>
+    </div>
+</div>
+
 <div class="surface stack">
-    <h1>Xóa danh mục</h1>
     <p>Bạn sắp xóa danh mục <strong>@Model.Name</strong>.</p>
 
     <div class="spec-grid">

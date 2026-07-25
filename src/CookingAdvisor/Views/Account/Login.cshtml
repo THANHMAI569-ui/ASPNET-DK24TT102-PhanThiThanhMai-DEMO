@@ -4,48 +4,46 @@
     var returnUrl = ViewData["ReturnUrl"] as string;
 }
 
-<div class="auth">
-    <div class="auth__card">
-        <div class="stack-sm">
-            <h1>Đăng nhập</h1>
-            <p class="text-sm text-muted-3">Đăng nhập để lưu thực đơn tuần và món yêu thích của bạn.</p>
-        </div>
-
-        <form asp-action="Login" asp-route-returnUrl="@returnUrl" method="post" class="stack-sm">
-            <div asp-validation-summary="ModelOnly" class="validation-summary-errors"></div>
-
-            <div class="field">
-                <label class="field__label" asp-for="Email"></label>
-                <input class="input" asp-for="Email" autocomplete="username"/>
-                <span class="field__error" asp-validation-for="Email"></span>
-            </div>
-
-            <div class="field">
-                <label class="field__label" asp-for="Password"></label>
-                <input class="input" asp-for="Password" autocomplete="current-password"/>
-                <span class="field__error" asp-validation-for="Password"></span>
-            </div>
-
-            <label class="checkline">
-                <input type="checkbox" asp-for="RememberMe"/>
-                Ghi nhớ đăng nhập
-            </label>
-
-            <button type="submit" class="btn btn--accent btn--block">
-                <icon name="login"/> Đăng nhập
-            </button>
-        </form>
-
-        <p class="notice">
-            Tài khoản demo cho hội đồng chấm: <strong>@CookingAdvisor.Data.DbInitializer.AdminEmail</strong>,
-            mật khẩu <strong>@CookingAdvisor.Data.DbInitializer.AdminPassword</strong>
-        </p>
+<div class="auth__card">
+    <div class="stack-sm">
+        <h1>Đăng nhập</h1>
+        <p class="text-xs text-muted-3">Đăng nhập để lưu thực đơn tuần và món yêu thích của bạn.</p>
     </div>
 
-    <p class="auth__foot">
-        Chưa có tài khoản? <a asp-action="Register" asp-route-returnUrl="@returnUrl">Đăng ký</a>
+    <form asp-action="Login" asp-route-returnUrl="@returnUrl" method="post" class="stack-sm">
+        <div asp-validation-summary="ModelOnly" class="validation-summary-errors"></div>
+
+        <div class="field">
+            <label class="field__label" asp-for="Email"></label>
+            <input class="input" asp-for="Email" autocomplete="username"/>
+            <span class="field__error" asp-validation-for="Email"></span>
+        </div>
+
+        <div class="field">
+            <label class="field__label" asp-for="Password"></label>
+            <input class="input" asp-for="Password" autocomplete="current-password"/>
+            <span class="field__error" asp-validation-for="Password"></span>
+        </div>
+
+        <label class="checkline">
+            <input type="checkbox" asp-for="RememberMe"/>
+            Ghi nhớ đăng nhập
+        </label>
+
+        <button type="submit" class="btn btn--accent btn--block">
+            <icon name="login"/> Đăng nhập
+        </button>
+    </form>
+
+    <p class="notice">
+        Tài khoản demo cho hội đồng chấm: <strong>@CookingAdvisor.Data.DbInitializer.AdminEmail</strong>,
+        mật khẩu <strong>@CookingAdvisor.Data.DbInitializer.AdminPassword</strong>
     </p>
 </div>
+
+<p class="auth__foot">
+    Chưa có tài khoản? <a asp-action="Register" asp-route-returnUrl="@returnUrl">Đăng ký</a>
+</p>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

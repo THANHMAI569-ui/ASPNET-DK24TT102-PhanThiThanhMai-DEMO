@@ -6,10 +6,12 @@
     // Marks the nav item matching the current controller (public area only).
     string NavState(string target) =>
         area.Length == 0 && string.Equals(controller, target, StringComparison.OrdinalIgnoreCase)
-            ? "site-nav__link is-active"
-            : "site-nav__link";
+            ? "mainnav__link is-active"
+            : "mainnav__link";
 
     var isAdminArea = string.Equals(area, "Admin", StringComparison.OrdinalIgnoreCase);
+    var isAuthPage = area.Length == 0 && string.Equals(controller, "Account", StringComparison.OrdinalIgnoreCase);
+    var keyword = Context.Request.Query["Keyword"].ToString();
 }
 <!DOCTYPE html>
 <html lang="vi">
@@ -19,6 +21,7 @@
     <title>@ViewData["Title"] · CookingAdvisor</title>
     <meta name="description" content="Gợi ý món ăn theo nguyên liệu có sẵn và lập thực đơn tuần cho gia đình."/>
     <meta name="color-scheme" content="light dark"/>
+    <meta name="theme-color" content="#D0421B"/>
 
     @* Applies the saved theme before first paint so there is no flash of the
        wrong mode. Kept inline and tiny on purpose. *@
@@ -45,19 +48,44 @@
 <body>
 <a class="visually-hidden-focusable btn btn--accent" href="#main">Tới nội dung chính</a>
 
-<header class="site-header">
-    <div class="site-header__inner">
-        <button class="icon-btn nav-toggle" type="button" data-nav-toggle
-                aria-expanded="false" aria-controls="site-nav" aria-label="Mở menu">
-            <icon name="menu-2"/>
-        </button>
+<header class="topbar">
+    <div class="topbar__main">
+        <div class="wrap topbar__grid">
+            <a class="brand" asp-area="" asp-controller="Home" asp-action="Index">
+                <span class="brand__mark"><icon name="chef-hat"/></span>
+                CookingAdvisor
+            </a>
 
-        <a class="brand" asp-area="" asp-controller="Home" asp-action="Index">
-            <span class="brand__mark"><icon name="chef-hat"/></span>
-            CookingAdvisor
-        </a>
+            <form class="searchbar" method="get" asp-area="" asp-controller="Recipe" asp-action="Index"
+                  role="search">
+                <div class="searchbar__box">
+                    <label class="visually-hidden" for="topbar-search">Tìm món ăn</label>
+                    <input class="searchbar__input" id="topbar-search" type="search" name="Keyword"
+                           value="@keyword" placeholder="Tìm món ăn, ví dụ: thịt kho" autocomplete="off"/>
+                    <button class="searchbar__btn" type="submit" aria-label="Tìm">
+                        <icon name="search"/>
+                    </button>
+                </div>
+                <div class="searchbar__hints">
+                    <a asp-area="" asp-controller="Recipe" asp-action="Index" asp-route-Keyword="thịt kho">thịt kho</a>
+                    <a asp-area="" asp-controller="Recipe" asp-action="Index" asp-route-Keyword="canh chua">canh chua</a>
+                    <a asp-area="" asp-controller="Recipe" asp-action="Index" asp-route-Keyword="gà">gà</a>
+                    <a asp-area="" asp-controller="Recipe" asp-action="Index" asp-route-Keyword="rau muống">rau muống</a>
+                </div>
+            </form>
 
-        <nav class="site-nav" id="site-nav" aria-label="Điều hướng chính">
+            <div class="topbar__actions">
+                <button class="icon-btn" type="button" data-theme-toggle aria-label="Đổi chế độ sáng tối">
+                    <icon name="moon" class="theme-toggle__light"/>
+                    <icon name="sun" class="theme-toggle__dark"/>
+                </button>
+                <partial name="_LoginPartial"/>
+            </div>
+        </div>
+    </div>
+
+    <nav class="mainnav" aria-label="Điều hướng chính">
+        <div class="wrap mainnav__inner">
             <a class="@NavState("Recipe")" asp-area="" asp-controller="Recipe" asp-action="Index">
                 <icon name="tools-kitchen-2"/> Món ăn
             </a>
@@ -75,21 +103,13 @@
             }
             @if (User.IsInRole("Admin"))
             {
-                <a class="site-nav__link @(isAdminArea ? "is-active" : "")"
+                <a class="mainnav__link @(isAdminArea ? "is-active" : "")"
                    asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
                     <icon name="shield-lock"/> Quản trị
                 </a>
             }
-        </nav>
-
-        <div class="site-actions">
-            <button class="icon-btn" type="button" data-theme-toggle aria-label="Đổi chế độ sáng/tối">
-                <icon name="moon" class="theme-toggle__light"/>
-                <icon name="sun" class="theme-toggle__dark"/>
-            </button>
-            <partial name="_LoginPartial"/>
         </div>
-    </div>
+    </nav>
 </header>
 
 @if (isAdminArea)
@@ -101,6 +121,12 @@
             @RenderBody()
         </main>
     </div>
+}
+else if (isAuthPage)
+{
+    <main id="main" class="auth">
+        @RenderBody()
+    </main>
 }
 else if (ViewData["FullBleed"] is true)
 {

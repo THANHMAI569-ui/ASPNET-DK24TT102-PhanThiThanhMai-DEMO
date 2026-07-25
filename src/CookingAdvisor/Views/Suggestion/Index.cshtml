@@ -9,177 +9,123 @@
     <div class="page-head__text">
         <h1>Gợi ý theo nguyên liệu</h1>
         <p class="page-head__lede">
-            Chọn nguyên liệu bạn đang có, hệ thống xếp hạng món nấu được ngay và món còn thiếu gì.
+            Chọn nguyên liệu đang có, hệ thống xếp hạng món nấu được ngay và món còn thiếu gì.
         </p>
     </div>
 </div>
 
-<div class="stack-lg">
-    <div class="surface">
-        <form asp-action="Index" method="get" id="suggestionForm" class="stack">
-            <div class="field">
-                <label class="field__label" for="ingredientSearch">Thêm nguyên liệu bạn đang có</label>
-                <p class="field__hint">Gõ tên nguyên liệu rồi nhấn Enter hoặc bấm nút Thêm.</p>
-                <div class="input-group-inline">
-                    <input type="text" id="ingredientSearch" class="input" list="ingredientOptions"
-                           placeholder="Ví dụ: thịt heo, cà chua" autocomplete="off"/>
-                    <button type="button" id="addIngredientBtn" class="btn btn--outline">Thêm</button>
-                </div>
-            </div>
+<div class="filter-backdrop" data-filter-backdrop></div>
 
-            <datalist id="ingredientOptions">
+<div class="shell">
+    <aside class="filter-side" id="filter-panel">
+        <div class="filter-side__head">
+            <span>Nguyên liệu</span>
+            <button class="icon-btn" type="button" data-filter-close aria-label="Đóng danh sách nguyên liệu">
+                <icon name="x"/>
+            </button>
+        </div>
+        <form asp-action="Index" method="get" class="stack">
+            <div class="filter-group">
+                <p class="filter-group__title">Nguyên liệu đang có</p>
                 @foreach (var ingredient in Model.Ingredients)
                 {
-                    <option data-id="@ingredient.Id" value="@ingredient.Name"></option>
-                }
-            </datalist>
-
-            <p class="notice" id="noIngredientsNotice" hidden="@(Model.SelectedIngredientIds.Count > 0)">
-                Thêm ít nhất một nguyên liệu để xem gợi ý.
-            </p>
-            <div class="row-inline" id="selectedIngredients">
-                @foreach (var id in Model.SelectedIngredientIds)
-                {
-                    var name = Model.Ingredients.FirstOrDefault(i => i.Id == id)?.Name ?? $"#{id}";
-                    <span class="chip" data-ingredient-chip data-id="@id">
-                        @name
-                        <button type="button" class="chip__remove" aria-label="Xoá @name">
-                            <icon name="x"/>
-                        </button>
-                        <input type="hidden" name="ingredientIds" value="@id"/>
-                    </span>
+                    <label class="checkline">
+                        <input type="checkbox" name="ingredientIds" value="@ingredient.Id"
+                               checked="@Model.SelectedIngredientIds.Contains(ingredient.Id)"/>
+                        @ingredient.Name
+                    </label>
                 }
             </div>
-
-            <button type="submit" id="submitBtn" class="btn btn--accent self-start"
-                    disabled="@(Model.SelectedIngredientIds.Count == 0)">
+            <button type="submit" class="btn btn--accent">
                 <icon name="sparkles"/> Gợi ý món
             </button>
         </form>
-    </div>
+        <a asp-action="Index" class="btn btn--outline btn--block">Xoá tất cả</a>
+    </aside>
 
-    @if (!Model.HasSearched)
-    {
-        <div class="empty">
-            <span class="empty__icon"><icon name="bulb" class="ico--lg"/></span>
-            <p class="empty__title">Chưa có gợi ý nào</p>
-            <p class="empty__text">Thêm nguyên liệu bạn đang có rồi bấm Gợi ý món để xem kết quả.</p>
-        </div>
-    }
-    else if (Model.Results.Count == 0)
-    {
-        <div class="empty">
-            <span class="empty__icon"><icon name="soup" class="ico--lg"/></span>
-            <p class="empty__title">Không tìm thấy món phù hợp</p>
-            <p class="empty__text">Thử thêm nguyên liệu khác, hoặc bỏ bớt nguyên liệu ít phổ biến.</p>
-        </div>
-    }
-    else
-    {
-        <section>
-            <div class="section-head">
-                <h2>Món phù hợp với nguyên liệu đã chọn</h2>
+    <div class="stack">
+        <button class="btn btn--outline filter-toggle self-start" type="button"
+                data-filter-toggle aria-expanded="false" aria-controls="filter-panel">
+            <icon name="adjustments-horizontal"/> Chọn nguyên liệu
+        </button>
+
+        @if (!Model.HasSearched)
+        {
+            <div class="empty">
+                <span class="empty__icon"><icon name="bulb" class="ico--lg"/></span>
+                <p class="empty__title">Chưa chọn nguyên liệu nào</p>
+                <p class="empty__text">Tick vào nguyên liệu bạn đang có ở bên trái rồi bấm Gợi ý món.</p>
             </div>
-            <div class="grid-cards">
-                @foreach (var recipe in Model.Results)
+        }
+        else
+        {
+            <div class="row-inline">
+                @foreach (var id in Model.SelectedIngredientIds)
                 {
-                    <article class="dish-card">
-                        <div class="dish-card__media">
-                            <img class="dish-card__img"
-                                 src="@(string.IsNullOrEmpty(recipe.ImageUrl) ? placeholder : recipe.ImageUrl)"
-                                 alt="@recipe.Name" data-fallback="@placeholder"
-                                 width="900" height="675" loading="lazy"/>
-                            <span class="pill pill--accent media-tag">@recipe.CategoryName</span>
-                        </div>
-                        <div class="dish-card__body">
-                            <h3 class="dish-card__title">
-                                <a asp-controller="Recipe" asp-action="Details" asp-route-id="@recipe.RecipeId">@recipe.Name</a>
-                            </h3>
-                            <ul class="meta-list meta-list--tight">
-                                <li><icon name="list-check"/> <span class="tnum">@recipe.MatchedCount</span>/<span class="tnum">@recipe.TotalIngredientCount</span> nguyên liệu</li>
-                                <li><icon name="clock"/> <span class="tnum">@recipe.TotalMinutes</span> phút</li>
-                                <li><icon name="flame"/> <span class="tnum">@recipe.CaloriesPerServing</span> kcal</li>
-                            </ul>
-                            @if (recipe.CanCookNow)
-                            {
-                                <span class="pill pill--ok"><icon name="circle-check"/> Đủ nguyên liệu</span>
-                            }
-                            else
-                            {
-                                <span class="pill pill--warn"><icon name="alert-triangle"/> Thiếu: @string.Join(", ", recipe.MissingIngredients)</span>
-                            }
-                        </div>
-                    </article>
+                    var name = Model.Ingredients.FirstOrDefault(i => i.Id == id)?.Name ?? $"#{id}";
+                    <span class="chip">@name</span>
                 }
             </div>
-        </section>
-    }
+
+            @if (Model.Results.Count == 0)
+            {
+                <div class="empty">
+                    <span class="empty__icon"><icon name="soup" class="ico--lg"/></span>
+                    <p class="empty__title">Không có món nào khớp</p>
+                    <p class="empty__text">Thử chọn thêm nguyên liệu khác hoặc bớt nguyên liệu ít phổ biến.</p>
+                </div>
+            }
+            else
+            {
+                <div class="sortbar">
+                    <span class="sortbar__label">Xếp hạng theo độ phù hợp</span>
+                    <span class="sortbar__count"><span class="tnum">@Model.Results.Count</span> món phù hợp</span>
+                </div>
+
+                <div class="product-grid">
+                    @foreach (var recipe in Model.Results)
+                    {
+                        <article class="product-card">
+                            <div class="product-card__media">
+                                <img class="product-card__img"
+                                     src="@(string.IsNullOrEmpty(recipe.ImageUrl) ? placeholder : recipe.ImageUrl)"
+                                     alt="@recipe.Name" data-fallback="@placeholder"
+                                     width="400" height="400" loading="lazy"/>
+                                @if (recipe.CanCookNow)
+                                {
+                                    <span class="ribbon ribbon--ok">Đủ nguyên liệu</span>
+                                }
+                                else
+                                {
+                                    <span class="ribbon ribbon--warn">Thiếu @recipe.MissingIngredients.Count nguyên liệu</span>
+                                }
+                            </div>
+                            <div class="product-card__body">
+                                <h3 class="product-card__title">
+                                    <a asp-controller="Recipe" asp-action="Details" asp-route-id="@recipe.RecipeId">@recipe.Name</a>
+                                </h3>
+                                <div class="product-card__meta">
+                                    <span class="tag">@recipe.CategoryName</span>
+                                    <span class="tag"><span class="tnum">@recipe.MatchedCount</span>/<span class="tnum">@recipe.TotalIngredientCount</span> nguyên liệu</span>
+                                </div>
+                                @if (!recipe.CanCookNow)
+                                {
+                                    <div class="row-inline">
+                                        @foreach (var missing in recipe.MissingIngredients)
+                                        {
+                                            <span class="pill pill--warn">@missing</span>
+                                        }
+                                    </div>
+                                }
+                                <div class="product-card__foot">
+                                    <span class="price">@recipe.CaloriesPerServing<span class="price__unit">kcal</span></span>
+                                    <span class="sold"><span class="tnum">@recipe.TotalMinutes</span> phút</span>
+                                </div>
+                            </div>
+                        </article>
+                    }
+                </div>
+            }
+        }
+    </div>
 </div>
-
-@section Scripts {
-    <script>
-        (function () {
-            const searchInput = document.getElementById('ingredientSearch');
-            const addBtn = document.getElementById('addIngredientBtn');
-            const container = document.getElementById('selectedIngredients');
-            const notice = document.getElementById('noIngredientsNotice');
-            const submitBtn = document.getElementById('submitBtn');
-            const options = Array.from(document.getElementById('ingredientOptions').querySelectorAll('option'));
-
-            function findOptionByName(name) {
-                const normalized = name.trim().toLowerCase();
-                return options.find(opt => opt.value.toLowerCase() === normalized);
-            }
-
-            function chipExists(id) {
-                return container.querySelector('[data-ingredient-chip][data-id="' + id + '"]') !== null;
-            }
-
-            function updateEmptyState() {
-                const hasChips = container.querySelectorAll('[data-ingredient-chip]').length > 0;
-                submitBtn.disabled = !hasChips;
-                notice.hidden = hasChips;
-            }
-
-            function bindRemove(chip) {
-                chip.querySelector('.chip__remove').addEventListener('click', () => {
-                    chip.remove();
-                    updateEmptyState();
-                });
-            }
-
-            function addChip(id, name) {
-                if (chipExists(id)) return;
-                const span = document.createElement('span');
-                span.className = 'chip';
-                span.setAttribute('data-ingredient-chip', '');
-                span.setAttribute('data-id', id);
-                span.innerHTML = name +
-                    ' <button type="button" class="chip__remove" aria-label="Xoá ' + name + '">' +
-                    '<svg class="ico" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#i-x"/></svg>' +
-                    '</button>' +
-                    '<input type="hidden" name="ingredientIds" value="' + id + '">';
-                bindRemove(span);
-                container.appendChild(span);
-                updateEmptyState();
-            }
-
-            addBtn.addEventListener('click', () => {
-                const option = findOptionByName(searchInput.value);
-                if (!option) return;
-                addChip(option.dataset.id, option.value);
-                searchInput.value = '';
-                searchInput.focus();
-            });
-
-            searchInput.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    addBtn.click();
-                }
-            });
-
-            container.querySelectorAll('[data-ingredient-chip]').forEach(bindRemove);
-        })();
-    </script>
-}

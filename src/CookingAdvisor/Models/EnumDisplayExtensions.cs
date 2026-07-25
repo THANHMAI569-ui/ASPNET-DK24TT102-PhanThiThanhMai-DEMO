@@ -17,4 +17,13 @@ public static class EnumDisplayExtensions
         Region.South => "Miền Nam",
         _ => region.ToString()
     };
+
+    public static string ToDisplayName(this RecipeSortOrder sort) => sort switch
+    {
+        RecipeSortOrder.Name => "Tên A-Z",
+        RecipeSortOrder.TimeAsc => "Nấu nhanh",
+        RecipeSortOrder.CaloriesAsc => "Calo thấp",
+        RecipeSortOrder.CaloriesDesc => "Calo cao",
+        _ => sort.ToString()
+    };
 }

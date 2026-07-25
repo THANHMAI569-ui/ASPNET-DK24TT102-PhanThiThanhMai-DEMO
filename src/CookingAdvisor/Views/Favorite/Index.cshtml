@@ -23,32 +23,32 @@
 }
 else
 {
-    <div class="grid-cards">
+    <div class="product-grid">
         @foreach (var recipe in Model)
         {
-            <article class="dish-card">
-                <div class="dish-card__media">
-                    <img class="dish-card__img"
+            <article class="product-card">
+                <div class="product-card__media">
+                    <img class="product-card__img"
                          src="@(string.IsNullOrEmpty(recipe.ImageUrl) ? placeholder : recipe.ImageUrl)"
                          alt="@recipe.Name" data-fallback="@placeholder"
-                         width="900" height="675" loading="lazy"/>
-                    <span class="pill pill--accent media-tag">@recipe.CategoryName</span>
+                         width="400" height="400" loading="lazy"/>
                 </div>
-                <div class="dish-card__body">
-                    <h3 class="dish-card__title">
+                <div class="product-card__body">
+                    <h3 class="product-card__title">
                         <a asp-controller="Recipe" asp-action="Details" asp-route-id="@recipe.Id">@recipe.Name</a>
                     </h3>
-                    <ul class="meta-list meta-list--tight">
-                        <li><icon name="map-pin"/> @recipe.Region.ToDisplayName()</li>
-                        <li><icon name="chart-bar"/> @recipe.Difficulty.ToDisplayName()</li>
-                    </ul>
-                    <div class="dish-card__foot">
-                        <div class="dish-card__aside">
+                    <div class="product-card__meta">
+                        <span class="tag">@recipe.CategoryName</span>
+                        <span class="tag">@recipe.Region.ToDisplayName()</span>
+                        <span class="tag">@recipe.Difficulty.ToDisplayName()</span>
+                    </div>
+                    <div class="product-card__foot">
+                        <div class="product-card__aside">
                             <form asp-controller="Favorite" asp-action="Toggle" method="post">
                                 <input type="hidden" name="recipeId" value="@recipe.Id"/>
                                 <input type="hidden" name="returnUrl" value="@Context.Request.Path"/>
                                 <button type="submit" class="icon-btn" aria-label="Bỏ yêu thích @recipe.Name">
-                                    <icon name="heart"/>
+                                    <icon name="trash"/>
                                 </button>
                             </form>
                         </div>

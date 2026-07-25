@@ -2,21 +2,33 @@
 @{
     ViewData["Title"] = Model.Name;
     var placeholder = Url.Content("~/images/recipe-placeholder.svg");
+    // Instructions are stored as prose, one sentence per cooking step. Split on
+    // whitespace that follows a full stop so a decimal such as "1.5 lit" stays
+    // intact; a bare '.' split would break it in two.
+    string[] steps = string.IsNullOrWhiteSpace(Model.Instructions)
+        ? []
+        : System.Text.RegularExpressions.Regex
+            .Split(Model.Instructions.Trim(), @"(?<=\.)\s+")
+            .Where(s => !string.IsNullOrWhiteSpace(s))
+            .ToArray();
 }
 
-<div class="recipe-hero">
-    <div class="recipe-hero__media">
-        <img src="@(string.IsNullOrEmpty(Model.ImageUrl) ? placeholder : Model.ImageUrl)"
-             alt="@Model.Name" data-fallback="@placeholder"
-             width="900" height="675" loading="lazy"/>
-    </div>
-    <div class="recipe-hero__copy">
-        <span class="pill pill--accent">@Model.CategoryName</span>
+<div class="split">
+    <img src="@(string.IsNullOrEmpty(Model.ImageUrl) ? placeholder : Model.ImageUrl)"
+         alt="@Model.Name" data-fallback="@placeholder"
+         width="600" height="600" loading="lazy"/>
+    <div class="split__copy">
+        <span class="tag">@Model.CategoryName</span>
         <h1>@Model.Name</h1>
         @if (!string.IsNullOrEmpty(Model.Description))
         {
-            <p class="text-muted-2">@Model.Description</p>
+            <p class="text-muted-3">@Model.Description</p>
         }
+        <ul class="meta-list">
+            <li><icon name="clock"/> <span class="tnum">@Model.TotalMinutes</span> phút</li>
+            <li><icon name="flame"/> <span class="tnum">@Model.CaloriesPerServing</span> kcal</li>
+            <li><icon name="map-pin"/> @Model.Region.ToDisplayName()</li>
+        </ul>
         @if (User.Identity?.IsAuthenticated == true)
         {
             <form asp-controller="Favorite" asp-action="Toggle" method="post">
@@ -27,59 +39,64 @@
                 </button>
             </form>
         }
-        <div class="spec-grid">
-            <div class="spec">
-                <span class="spec__label">Khẩu phần</span>
-                <span class="spec__value">@Model.Servings người</span>
-            </div>
-            <div class="spec">
-                <span class="spec__label">Chuẩn bị</span>
-                <span class="spec__value">@Model.PrepMinutes phút</span>
-            </div>
-            <div class="spec">
-                <span class="spec__label">Nấu</span>
-                <span class="spec__value">@Model.CookMinutes phút</span>
-            </div>
-            <div class="spec">
-                <span class="spec__label">Độ khó</span>
-                <span class="spec__value">@Model.Difficulty.ToDisplayName()</span>
-            </div>
-            <div class="spec">
-                <span class="spec__label">Vùng miền</span>
-                <span class="spec__value">@Model.Region.ToDisplayName()</span>
-            </div>
-            <div class="spec">
-                <span class="spec__label">Calo/khẩu phần</span>
-                <span class="spec__value">@Model.CaloriesPerServing kcal</span>
-            </div>
-        </div>
     </div>
 </div>
 
-<div class="recipe-body">
-    <div class="stack">
-        <h2>Nguyên liệu</h2>
-        <ul class="ing-list">
-            @foreach (var ingredient in Model.Ingredients)
+<div class="spec-grid">
+    <div class="spec">
+        <span class="spec__label">Khẩu phần</span>
+        <span class="spec__value">@Model.Servings người</span>
+    </div>
+    <div class="spec">
+        <span class="spec__label">Chuẩn bị</span>
+        <span class="spec__value">@Model.PrepMinutes phút</span>
+    </div>
+    <div class="spec">
+        <span class="spec__label">Nấu</span>
+        <span class="spec__value">@Model.CookMinutes phút</span>
+    </div>
+    <div class="spec">
+        <span class="spec__label">Độ khó</span>
+        <span class="spec__value">@Model.Difficulty.ToDisplayName()</span>
+    </div>
+    <div class="spec">
+        <span class="spec__label">Vùng miền</span>
+        <span class="spec__value">@Model.Region.ToDisplayName()</span>
+    </div>
+    <div class="spec">
+        <span class="spec__label">Calo/khẩu phần</span>
+        <span class="spec__value">@Model.CaloriesPerServing kcal</span>
+    </div>
+</div>
+
+<div class="stack">
+    <h2>Nguyên liệu</h2>
+    <ul class="ing-list">
+        @foreach (var ingredient in Model.Ingredients)
+        {
+            <li class="ing-list__item">
+                <span>@ingredient.Name</span>
+                <span class="ing-list__qty">@ingredient.Quantity.ToString("0.##") @ingredient.Unit</span>
+            </li>
+        }
+    </ul>
+</div>
+
+<div class="stack">
+    <h2>Cách làm</h2>
+    @if (steps.Length == 0)
+    {
+        <p class="notice">Chưa có hướng dẫn cho món này.</p>
+    }
+    else
+    {
+        <ol class="step-list">
+            @foreach (var step in steps)
             {
-                <li class="ing-list__item">
-                    <span>@ingredient.Name</span>
-                    <span class="ing-list__qty">@ingredient.Quantity.ToString("0.##") @ingredient.Unit</span>
-                </li>
+                <li>@step</li>
             }
-        </ul>
-    </div>
-    <div class="stack">
-        <h2>Cách làm</h2>
-        @if (string.IsNullOrEmpty(Model.Instructions))
-        {
-            <p class="text-muted-3">Chưa có hướng dẫn cho món này.</p>
-        }
-        else
-        {
-            <p class="steps">@Model.Instructions</p>
-        }
-    </div>
+        </ol>
+    }
 </div>
 
 <a class="btn btn--quiet" asp-action="Index"><icon name="arrow-left"/> Quay lại</a>

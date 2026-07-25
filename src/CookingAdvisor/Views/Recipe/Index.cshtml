@@ -3,6 +3,22 @@
     ViewData["Title"] = "Danh sách món ăn";
     var f = Model.Filter;
     var placeholder = Url.Content("~/images/recipe-placeholder.svg");
+
+    // Every sort and pager link has to carry the whole filter state, otherwise
+    // changing page silently drops the filters. Built once here instead of
+    // repeating asp-route-* on four separate anchors.
+    Dictionary<string, string> LinkTo(int page, RecipeSortOrder sort)
+    {
+        var values = new Dictionary<string, string>();
+        if (!string.IsNullOrWhiteSpace(f.Keyword)) values["Keyword"] = f.Keyword;
+        if (f.CategoryId is { } categoryId) values["CategoryId"] = categoryId.ToString();
+        if (f.Region is { } region) values["Region"] = region.ToString();
+        if (f.Difficulty is { } difficulty) values["Difficulty"] = difficulty.ToString();
+        if (f.MaxCookMinutes is { } minutes) values["MaxCookMinutes"] = minutes.ToString();
+        if (sort != RecipeSortOrder.Name) values["Sort"] = sort.ToString();
+        if (page > 1) values["Page"] = page.ToString();
+        return values;
+    }
 }
 
 <div class="page-head">
@@ -12,125 +28,153 @@
     </div>
 </div>
 
-<form asp-action="Index" method="get" class="filter-bar">
-    <div class="field filter-bar__search">
-        <label class="field__label" for="Keyword">Tìm theo tên</label>
-        <input type="search" id="Keyword" name="Keyword" value="@f.Keyword"
-               class="input" placeholder="Ví dụ: phở, gà, canh chua"/>
-    </div>
-    <div class="field">
-        <label class="field__label" for="CategoryId">Danh mục</label>
-        <select id="CategoryId" name="CategoryId" class="select">
-            <option value="">Tất cả</option>
-            @foreach (var c in Model.Categories)
-            {
-                <option value="@c.Id" selected="@(f.CategoryId == c.Id)">@c.Name</option>
-            }
-        </select>
-    </div>
-    <div class="field">
-        <label class="field__label" for="Region">Vùng miền</label>
-        <select id="Region" name="Region" class="select">
-            <option value="">Tất cả</option>
-            @foreach (var region in Enum.GetValues<Region>())
-            {
-                <option value="@region" selected="@(f.Region == region)">@region.ToDisplayName()</option>
-            }
-        </select>
-    </div>
-    <div class="field">
-        <label class="field__label" for="Difficulty">Độ khó</label>
-        <select id="Difficulty" name="Difficulty" class="select">
-            <option value="">Tất cả</option>
-            @foreach (var difficulty in Enum.GetValues<Difficulty>())
-            {
-                <option value="@difficulty" selected="@(f.Difficulty == difficulty)">@difficulty.ToDisplayName()</option>
-            }
-        </select>
-    </div>
-    <div class="field">
-        <label class="field__label" for="MaxCookMinutes">Thời gian nấu tối đa (phút)</label>
-        <input type="number" id="MaxCookMinutes" name="MaxCookMinutes" value="@f.MaxCookMinutes"
-               min="0" step="5" class="input" placeholder="Không giới hạn"/>
-    </div>
-    <div class="filter-bar__actions">
-        <button type="submit" class="btn btn--accent">Lọc</button>
-        <a asp-action="Index" class="btn btn--quiet">Xoá lọc</a>
-    </div>
-</form>
+<div class="filter-backdrop" data-filter-backdrop></div>
 
-<p class="text-sm text-muted-3">Tìm thấy <span class="tnum">@Model.TotalCount</span> món.</p>
+<div class="shell">
+    <aside class="filter-side" id="filter-panel">
+        <div class="filter-side__head">
+            <span>Bộ lọc</span>
+            <button class="icon-btn" type="button" data-filter-close aria-label="Đóng bộ lọc">
+                <icon name="x"/>
+            </button>
+        </div>
+        <form asp-action="Index" method="get" class="stack">
+            @* Keeps the chosen sort when the filter form is submitted. *@
+            <input type="hidden" name="Sort" value="@f.Sort"/>
+            <div class="filter-group">
+                <span class="filter-group__title">Tìm theo tên</span>
+                <input type="search" name="Keyword" value="@f.Keyword"
+                       class="input" placeholder="Ví dụ: phở, gà, canh chua"/>
+            </div>
+            <div class="filter-group">
+                <span class="filter-group__title">Danh mục</span>
+                <select name="CategoryId" class="select">
+                    <option value="">Tất cả</option>
+                    @foreach (var c in Model.Categories)
+                    {
+                        <option value="@c.Id" selected="@(f.CategoryId == c.Id)">@c.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="filter-group">
+                <span class="filter-group__title">Vùng miền</span>
+                <label class="checkline">
+                    <input type="radio" name="Region" value="" checked="@(f.Region == null)"/>
+                    Tất cả
+                </label>
+                @foreach (var region in Enum.GetValues<Region>())
+                {
+                    <label class="checkline">
+                        <input type="radio" name="Region" value="@region" checked="@(f.Region == region)"/>
+                        @region.ToDisplayName()
+                    </label>
+                }
+            </div>
+            <div class="filter-group">
+                <span class="filter-group__title">Độ khó</span>
+                <label class="checkline">
+                    <input type="radio" name="Difficulty" value="" checked="@(f.Difficulty == null)"/>
+                    Tất cả
+                </label>
+                @foreach (var difficulty in Enum.GetValues<Difficulty>())
+                {
+                    <label class="checkline">
+                        <input type="radio" name="Difficulty" value="@difficulty" checked="@(f.Difficulty == difficulty)"/>
+                        @difficulty.ToDisplayName()
+                    </label>
+                }
+            </div>
+            <div class="filter-group">
+                <span class="filter-group__title">Thời gian nấu tối đa</span>
+                <input type="number" name="MaxCookMinutes" value="@f.MaxCookMinutes"
+                       min="0" step="5" class="input" placeholder="Phút"/>
+            </div>
+            <button type="submit" class="btn btn--accent btn--block">Lọc</button>
+            <a asp-action="Index" class="btn btn--outline btn--block">Xoá tất cả</a>
+        </form>
+    </aside>
 
-@if (Model.Recipes.Count == 0)
-{
-    <div class="empty">
-        <span class="empty__icon"><icon name="soup" class="ico--lg"/></span>
-        <p class="empty__title">Chưa có món nào khớp</p>
-        <p class="empty__text">Thử bỏ một điều kiện lọc hoặc tăng thời gian nấu tối đa.</p>
-        <a class="btn btn--outline" asp-action="Index">Xoá lọc</a>
-    </div>
-}
-else
-{
-    <div class="grid-cards">
-        @foreach (var recipe in Model.Recipes)
+    <div class="stack">
+        <button class="btn btn--outline filter-toggle self-start" type="button"
+                data-filter-toggle aria-expanded="false" aria-controls="filter-panel">
+            <icon name="adjustments-horizontal"/> Bộ lọc
+        </button>
+
+        <div class="sortbar">
+            <span class="sortbar__label">Sắp xếp theo</span>
+            @foreach (var sort in Enum.GetValues<RecipeSortOrder>())
+            {
+                var isActive = f.Sort == sort;
+                <a class="sortbar__opt @(isActive ? "is-active" : "")"
+                   asp-action="Index" asp-all-route-data="LinkTo(1, sort)"
+                   aria-current="@(isActive ? "true" : null)">@sort.ToDisplayName()</a>
+            }
+            <span class="sortbar__count">Tìm thấy <span class="tnum">@Model.TotalCount</span> món</span>
+        </div>
+
+        @if (Model.Recipes.Count == 0)
         {
-            <article class="dish-card">
-                <div class="dish-card__media">
-                    <img class="dish-card__img"
-                         src="@(string.IsNullOrEmpty(recipe.ImageUrl) ? placeholder : recipe.ImageUrl)"
-                         alt="@recipe.Name" data-fallback="@placeholder"
-                         width="900" height="675" loading="lazy"/>
-                    <span class="pill pill--accent media-tag">@recipe.CategoryName</span>
-                </div>
-                <div class="dish-card__body">
-                    <h3 class="dish-card__title">
-                        <a asp-action="Details" asp-route-id="@recipe.Id">@recipe.Name</a>
-                    </h3>
-                    <ul class="meta-list meta-list--tight">
-                        <li><icon name="clock"/> <span class="tnum">@recipe.TotalMinutes</span> phút</li>
-                        <li><icon name="flame"/> <span class="tnum">@recipe.CaloriesPerServing</span> kcal</li>
-                        <li><icon name="chart-bar"/> @recipe.Difficulty.ToDisplayName()</li>
-                    </ul>
-                </div>
-            </article>
+            <div class="empty">
+                <span class="empty__icon"><icon name="soup" class="ico--lg"/></span>
+                <p class="empty__title">Chưa có món nào khớp</p>
+                <p class="empty__text">Thử bỏ một điều kiện lọc hoặc tăng thời gian nấu tối đa.</p>
+                <a class="btn btn--outline" asp-action="Index">Xoá lọc</a>
+            </div>
+        }
+        else
+        {
+            <div class="product-grid">
+                @foreach (var recipe in Model.Recipes)
+                {
+                    <article class="product-card">
+                        <div class="product-card__media">
+                            <img class="product-card__img"
+                                 src="@(string.IsNullOrEmpty(recipe.ImageUrl) ? placeholder : recipe.ImageUrl)"
+                                 alt="@recipe.Name" data-fallback="@placeholder"
+                                 width="400" height="400" loading="lazy"/>
+                        </div>
+                        <div class="product-card__body">
+                            <h3 class="product-card__title">
+                                <a asp-action="Details" asp-route-id="@recipe.Id">@recipe.Name</a>
+                            </h3>
+                            <div class="product-card__meta">
+                                <span class="tag">@recipe.CategoryName</span>
+                                <span class="tag">@recipe.Region.ToDisplayName()</span>
+                            </div>
+                            <div class="product-card__foot">
+                                <span class="price">@recipe.CaloriesPerServing<span class="price__unit">kcal</span></span>
+                                @* Total, not cook-only: both the "Nấu nhanh" sort and the
+                                   max-minutes filter work on prep + cook, and every other
+                                   card on the site already shows the total. *@
+                                <span class="sold"><span class="tnum">@recipe.TotalMinutes</span> phút</span>
+                            </div>
+                        </div>
+                    </article>
+                }
+            </div>
+
+            @if (Model.TotalPages > 1)
+            {
+                <nav class="pager" aria-label="Phân trang">
+                    <a class="pager__link @(Model.HasPrevious ? "" : "is-disabled")"
+                       asp-action="Index" asp-all-route-data="LinkTo(Model.Page - 1, f.Sort)"
+                       aria-label="Trang trước">
+                        <icon name="chevron-left"/>
+                    </a>
+                    @for (var p = 1; p <= Model.TotalPages; p++)
+                    {
+                        var isCurrent = p == Model.Page;
+                        <a class="pager__link @(isCurrent ? "is-active" : "")"
+                           asp-action="Index" asp-all-route-data="LinkTo(p, f.Sort)"
+                           aria-current="@(isCurrent ? "page" : null)">@p</a>
+                    }
+                    <a class="pager__link @(Model.HasNext ? "" : "is-disabled")"
+                       asp-action="Index" asp-all-route-data="LinkTo(Model.Page + 1, f.Sort)"
+                       aria-label="Trang sau">
+                        <icon name="chevron-right"/>
+                    </a>
+                </nav>
+            }
         }
     </div>
-
-    @if (Model.TotalPages > 1)
-    {
-        <nav class="pager" aria-label="Phân trang">
-            <a class="pager__link @(Model.HasPrevious ? "" : "is-disabled")"
-               asp-action="Index"
-               asp-route-Keyword="@f.Keyword"
-               asp-route-CategoryId="@f.CategoryId"
-               asp-route-Region="@f.Region"
-               asp-route-Difficulty="@f.Difficulty"
-               asp-route-MaxCookMinutes="@f.MaxCookMinutes"
-               asp-route-Page="@(Model.Page - 1)" aria-label="Trang trước">
-                <icon name="chevron-left"/>
-            </a>
-            @for (var p = 1; p <= Model.TotalPages; p++)
-            {
-                <a class="pager__link @(p == Model.Page ? "is-active" : "")"
-                   asp-action="Index"
-                   asp-route-Keyword="@f.Keyword"
-                   asp-route-CategoryId="@f.CategoryId"
-                   asp-route-Region="@f.Region"
-                   asp-route-Difficulty="@f.Difficulty"
-                   asp-route-MaxCookMinutes="@f.MaxCookMinutes"
-                   asp-route-Page="@p">@p</a>
-            }
-            <a class="pager__link @(Model.HasNext ? "" : "is-disabled")"
-               asp-action="Index"
-               asp-route-Keyword="@f.Keyword"
-               asp-route-CategoryId="@f.CategoryId"
-               asp-route-Region="@f.Region"
-               asp-route-Difficulty="@f.Difficulty"
-               asp-route-MaxCookMinutes="@f.MaxCookMinutes"
-               asp-route-Page="@(Model.Page + 1)" aria-label="Trang sau">
-                <icon name="chevron-right"/>
-            </a>
-        </nav>
-    }
-}
+</div>
