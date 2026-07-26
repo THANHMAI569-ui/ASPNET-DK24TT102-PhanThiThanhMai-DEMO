@@ -12,7 +12,14 @@
 \setmonofont{Courier New}[Scale=MatchLowercase]
 \usepackage[vietnamese]{babel}
 \usepackage[top=2cm, bottom=2cm, left=3cm, right=2cm]{geometry}
+% etoolbox va setspace phai co: tikz-styles.tex dung \AtBeginEnvironment de ep
+% gian dong don trong so do. Thieu chung thi khung xem thu lech voi ban in.
+\usepackage{etoolbox}
+\usepackage{setspace}
+\setstretch{1.5}
 \usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{rotating}
 \usepackage{float}
 \usepackage{caption}
 \captionsetup{font=small, labelfont=bf, justification=centering}

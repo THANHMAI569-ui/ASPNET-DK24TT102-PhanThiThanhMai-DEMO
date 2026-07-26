@@ -118,6 +118,9 @@
 
 % === Hinh anh ================================================
 \usepackage{graphicx}
+% adjustbox: thu so do vua CA chieu rong lan chieu cao khung chu, tranh
+% truong hop ep theo chieu cao roi tran ra ngoai le phai.
+\usepackage{adjustbox}
 \graphicspath{{../images/}{../diagrams/}{figures/}}
 \usepackage{float}
 \usepackage{rotating}  % so do qua rong: xoay ngang tron trang
@@ -128,18 +131,18 @@
 \captionsetup[table]{skip=2pt}
 
 % === Bang ====================================================
-\usepackage{booktabs}
+% Bang ke khung day du: co ca vien ngang lan vien doc, giong mau Word cua khoa.
 \usepackage{tabularx}
 \usepackage{longtable}
 \usepackage{multirow}
 \usepackage{array}
 \usepackage{etoolbox}
-\usepackage{colortbl}
-\usepackage{xcolor}
-\definecolor{rowgray}{gray}{0.93}
 \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
-\newcommand{\rowhl}{\rowcolor{rowgray}}
-\renewcommand{\arraystretch}{1.15}
+% Cot rong co dinh cung can canh trai: o hep ma can deu hai ben se ho
+% nhung khoang trang rat lon giua cac tu.
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+\renewcommand{\arraystretch}{1.25}
+\setlength{\arrayrulewidth}{0.5pt}
 
 % Bang va hinh dung gian dong don cho gon
 % Cot p{} trong bang can canh trai (khong can deu hai ben) de tranh cac
@@ -161,8 +164,9 @@
   breaksymbolleft={},
   breaksymbolright={},
   breakindent=2em,
-  xleftmargin=4pt,
-  xrightmargin=2pt,
+  % Chua cho khung (framesep 4pt + net ke) nam gon trong khoi chu
+  xleftmargin=8pt,
+  xrightmargin=8pt,
   samepage=false
 }
 \DefineVerbatimEnvironment{codeblock}{Verbatim}{}

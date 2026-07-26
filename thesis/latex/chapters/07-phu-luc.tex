@@ -57,20 +57,18 @@ dotnet user-secrets set "ConnectionStrings:DefaultConnection" "<chuoi phu hop>"
 \centering
 \caption{Chuỗi kết nối theo từng môi trường}
 \label{tab:chuoi-ket-noi}
-\begin{tabularx}{\textwidth}{p{4.0cm} Y}
-\toprule
-\bfseries Môi trường & \bfseries Chuỗi kết nối \\
-\midrule
+\begin{tabularx}{\textwidth}{|P{4.0cm}|Y|}
+\hline
+\bfseries Môi trường & \bfseries Chuỗi kết nối \\ \hline
 Docker (macOS hoặc Windows) &
   \codelong{Server=localhost,1433;Database=CookingAdvisor;User Id=sa;
-  Password=CookAdvisor@2026;TrustServerCertificate=True} \\
-\rowhl SQL Server cài trực tiếp (Windows) &
+  Password=CookAdvisor@2026;TrustServerCertificate=True} \\ \hline
+SQL Server cài trực tiếp (Windows) &
   \codelong{Server=localhost;Database=CookingAdvisor;User Id=sa;
-  Password=<mật khẩu của bạn>;TrustServerCertificate=True} \\
+  Password=<mật khẩu của bạn>;TrustServerCertificate=True} \\ \hline
 LocalDB (Windows) &
   \codelong{Server=(localdb)\textbackslash MSSQLLocalDB;Database=CookingAdvisor;
-  Trusted\_\allowbreak{}Connection=True;TrustServerCertificate=True} \\
-\bottomrule
+  Trusted\_\allowbreak{}Connection=True;TrustServerCertificate=True} \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -112,12 +110,10 @@ nằm trong tệp SQL.
 \centering
 \caption{Tài khoản quản trị mặc định của môi trường demo}
 \label{tab:tai-khoan}
-\begin{tabularx}{\textwidth}{p{3.4cm} Y Y}
-\toprule
-\bfseries Vai trò & \bfseries Email & \bfseries Mật khẩu \\
-\midrule
-Quản trị viên & \codelong{admin@cookingadvisor.local} & \code{Admin@2026!Cook} \\
-\bottomrule
+\begin{tabularx}{\textwidth}{|P{3.4cm}|Y|Y|}
+\hline
+\bfseries Vai trò & \bfseries Email & \bfseries Mật khẩu \\ \hline
+Quản trị viên & \codelong{admin@cookingadvisor.local} & \code{Admin@2026!Cook} \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -177,19 +173,17 @@ Bảng~\ref{tab:nguon-anh} trích một số mục tiêu biểu.
 \centering
 \caption{Một số nguồn ảnh minh họa món ăn tiêu biểu}
 \label{tab:nguon-anh}
-\begin{tabularx}{\textwidth}{Y Y p{3.4cm}}
-\toprule
-\bfseries Món ăn & \bfseries Tác giả & \bfseries Giấy phép \\
-\midrule
-Phở bò & Andy Li & CC0 \\
-\rowhl Bún chả & Phương Huy & Public Domain \\
-Bún bò Huế & Baoothersks & CC BY-SA 4.0 \\
-\rowhl Cơm tấm thịt nướng & Tokeisan & Public Domain \\
-Gỏi cuốn & Tran Hai Duong & CC0 \\
-\rowhl Chả giò & Satdeep Gill & CC BY-SA 4.0 \\
-Bánh xèo & Orderinchaos & CC BY-SA 4.0 \\
-\rowhl Rau muống xào tỏi & Andy Wright & CC BY 2.0 \\
-\bottomrule
+\begin{tabularx}{\textwidth}{|Y|Y|P{3.4cm}|}
+\hline
+\bfseries Món ăn & \bfseries Tác giả & \bfseries Giấy phép \\ \hline
+Phở bò & Andy Li & CC0 \\ \hline
+Bún chả & Phương Huy & Public Domain \\ \hline
+Bún bò Huế & Baoothersks & CC BY-SA 4.0 \\ \hline
+Cơm tấm thịt nướng & Tokeisan & Public Domain \\ \hline
+Gỏi cuốn & Tran Hai Duong & CC0 \\ \hline
+Chả giò & Satdeep Gill & CC BY-SA 4.0 \\ \hline
+Bánh xèo & Orderinchaos & CC BY-SA 4.0 \\ \hline
+Rau muống xào tỏi & Andy Wright & CC BY 2.0 \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -197,7 +191,7 @@ Bánh xèo & Orderinchaos & CC BY-SA 4.0 \\
 
 \unnumberedsubsection{D.1. Thuật toán gợi ý theo nguyên liệu}
 
-Trích từ \codelong{src/CookingAdvisor/Services/SuggestionService.cs}:
+{\raggedright Trích từ \codelong{src/CookingAdvisor/Services/SuggestionService.cs}:\par}
 
 \begin{codeblock}
 public async Task<List<RecipeSuggestionViewModel>> SuggestAsync(
@@ -241,9 +235,9 @@ public async Task<List<RecipeSuggestionViewModel>> SuggestAsync(
 \unnumberedsubsection{D.2. Xử lý trường hợp phải lặp món trong thuật toán lập
 thực đơn}
 
-Trích từ \codelong{src/CookingAdvisor/Services/MenuPlannerService.cs}. Đây là đoạn
+{\raggedright Trích từ \codelong{src/CookingAdvisor/Services/MenuPlannerService.cs}. Đây là đoạn
 khắc phục khiếm khuyết suy thoái tính đa dạng đã trình bày ở
-mục~\ref{sec:khiem-khuyet}:
+mục~\ref{sec:khiem-khuyet}:\par}
 
 \begin{codeblock}
 var suitable = candidates.Where(c => c.SuitableMealTypes.HasFlag(flag)).ToList();
@@ -271,7 +265,7 @@ var chosen = ordered
 
 \unnumberedsubsection{D.3. Gộp nhóm sinh danh sách đi chợ}
 
-Trích từ \codelong{src/CookingAdvisor/Services/ShoppingListService.cs}:
+{\raggedright Trích từ \codelong{src/CookingAdvisor/Services/ShoppingListService.cs}:\par}
 
 \begin{codeblock}
 var plan = await db.MenuPlans
@@ -296,9 +290,9 @@ var aggregated = plan.Items
 
 \unnumberedsubsection{D.4. Ca kiểm thử tiêu biểu}
 
-Trích từ \codelong{src/CookingAdvisor.Tests/Services/RecipeServiceSortTests.cs}. Ca
+{\raggedright Trích từ \codelong{src/CookingAdvisor.Tests/Services/RecipeServiceSortTests.cs}. Ca
 kiểm thử này đã được xác nhận là có hiệu lực bằng cách tạm gỡ khóa sắp xếp phụ
-khỏi mã nguồn và quan sát ca kiểm thử chuyển sang trạng thái không đạt:
+khỏi mã nguồn và quan sát ca kiểm thử chuyển sang trạng thái không đạt:\par}
 
 \begin{codeblock}
 [Fact]

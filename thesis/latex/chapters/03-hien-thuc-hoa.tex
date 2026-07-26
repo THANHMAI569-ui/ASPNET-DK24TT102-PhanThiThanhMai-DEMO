@@ -64,16 +64,14 @@ Hệ thống có ba tác nhân, phân biệt theo mức quyền truy cập tăng
 \centering
 \caption{Các tác nhân của hệ thống}
 \label{tab:tac-nhan}
-\begin{tabularx}{\textwidth}{p{3.0cm} Y p{4.8cm}}
-\toprule
-\bfseries Tác nhân & \bfseries Mô tả & \bfseries Cơ chế nhận diện \\
-\midrule
-\textbf{Khách} & Người truy cập chưa đăng nhập & Không có phiên đăng nhập \\
-\rowhl \textbf{Người dùng} & Tài khoản đã đăng nhập, vai trò \code{User} &
-  Thuộc tính \code{[Authorize]} \\
+\begin{tabularx}{\textwidth}{|P{3.0cm}|Y|P{4.8cm}|}
+\hline
+\bfseries Tác nhân & \bfseries Mô tả & \bfseries Cơ chế nhận diện \\ \hline
+\textbf{Khách} & Người truy cập chưa đăng nhập & Không có phiên đăng nhập \\ \hline
+\textbf{Người dùng} & Tài khoản đã đăng nhập, vai trò \code{User} &
+  Thuộc tính \code{[Authorize]} \\ \hline
 \textbf{Quản trị viên} & Tài khoản thuộc vai trò \code{Admin} &
-  \code{[Authorize(Roles = "Admin")]} \\
-\bottomrule
+  \code{[Authorize(Roles = "Admin")]} \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -92,25 +90,23 @@ Hình~\ref{fig:phan-ra} thể hiện sơ đồ phân rã chức năng của toà
 \centering
 \caption{Yêu cầu chức năng dành cho Khách}
 \label{tab:chuc-nang-a}
-\begin{tabularx}{\textwidth}{p{0.9cm} p{4.6cm} Y}
-\toprule
-\bfseries Mã & \bfseries Tên chức năng & \bfseries Mô tả \\
-\midrule
-A1 & Xem trang chủ & Hiển thị danh mục, món nổi bật, số liệu tổng quan \\
-\rowhl A2 & Duyệt danh sách món ăn & Hiển thị dạng lưới, phân trang 9 món mỗi
-  trang \\
-A3 & Tìm kiếm theo tên món & Tìm theo chuỗi con trong tên \\
-\rowhl A4 & Lọc nâng cao & Theo danh mục, vùng miền, độ khó, thời gian nấu tối
-  đa \\
-A5 & Sắp xếp kết quả & Theo tên, thời gian nấu, năng lượng tăng hoặc giảm \\
-\rowhl A6 & Xem chi tiết món ăn & Thông số, nguyên liệu định lượng, các bước
-  nấu \\
+\begin{tabularx}{\textwidth}{|P{0.9cm}|P{4.6cm}|Y|}
+\hline
+\bfseries Mã & \bfseries Tên chức năng & \bfseries Mô tả \\ \hline
+A1 & Xem trang chủ & Hiển thị danh mục, món nổi bật, số liệu tổng quan \\ \hline
+A2 & Duyệt danh sách món ăn & Hiển thị dạng lưới, phân trang 9 món mỗi
+  trang \\ \hline
+A3 & Tìm kiếm theo tên món & Tìm theo chuỗi con trong tên \\ \hline
+A4 & Lọc nâng cao & Theo danh mục, vùng miền, độ khó, thời gian nấu tối
+  đa \\ \hline
+A5 & Sắp xếp kết quả & Theo tên, thời gian nấu, năng lượng tăng hoặc giảm \\ \hline
+A6 & Xem chi tiết món ăn & Thông số, nguyên liệu định lượng, các bước
+  nấu \\ \hline
 A7 & Gợi ý theo nguyên liệu & Chọn nguyên liệu đang có, nhận danh sách món xếp
-  hạng \\
-\rowhl A8 & Đăng ký tài khoản & Tạo tài khoản mới, tự động gán vai trò
-  \code{User} \\
-A9 & Đăng nhập, đăng xuất & Xác thực bằng email và mật khẩu \\
-\bottomrule
+  hạng \\ \hline
+A8 & Đăng ký tài khoản & Tạo tài khoản mới, tự động gán vai trò
+  \code{User} \\ \hline
+A9 & Đăng nhập, đăng xuất & Xác thực bằng email và mật khẩu \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -118,20 +114,18 @@ A9 & Đăng nhập, đăng xuất & Xác thực bằng email và mật khẩu \\
 \centering
 \caption{Yêu cầu chức năng dành cho Người dùng đã đăng nhập}
 \label{tab:chuc-nang-b}
-\begin{tabularx}{\textwidth}{p{0.9cm} p{4.6cm} Y}
-\toprule
-\bfseries Mã & \bfseries Tên chức năng & \bfseries Mô tả \\
-\midrule
-B1 & Sinh thực đơn tuần & Tự động lấp 21 suất ăn, có tùy chọn vùng miền \\
-\rowhl B2 & Xem lịch thực đơn & Bảng 7 ngày $\times$ 3 bữa kèm tổng năng lượng
-  theo ngày \\
-B3 & Sửa thủ công từng bữa & Đổi món hoặc xóa món khỏi một ô \\
-\rowhl B4 & Xem danh sách thực đơn đã lưu & Liệt kê các thực đơn của riêng người
-  dùng \\
-B5 & Tạo danh sách đi chợ & Sinh từ một thực đơn, gộp và cộng dồn nguyên liệu \\
-\rowhl B6 & Đánh dấu đã mua & Tick từng nguyên liệu, hiển thị tiến độ \\
-B7 & Quản lý món yêu thích & Thêm, bỏ và xem danh sách \\
-\bottomrule
+\begin{tabularx}{\textwidth}{|P{0.9cm}|P{4.6cm}|Y|}
+\hline
+\bfseries Mã & \bfseries Tên chức năng & \bfseries Mô tả \\ \hline
+B1 & Sinh thực đơn tuần & Tự động lấp 21 suất ăn, có tùy chọn vùng miền \\ \hline
+B2 & Xem lịch thực đơn & Bảng 7 ngày $\times$ 3 bữa kèm tổng năng lượng
+  theo ngày \\ \hline
+B3 & Sửa thủ công từng bữa & Đổi món hoặc xóa món khỏi một ô \\ \hline
+B4 & Xem danh sách thực đơn đã lưu & Liệt kê các thực đơn của riêng người
+  dùng \\ \hline
+B5 & Tạo danh sách đi chợ & Sinh từ một thực đơn, gộp và cộng dồn nguyên liệu \\ \hline
+B6 & Đánh dấu đã mua & Tick từng nguyên liệu, hiển thị tiến độ \\ \hline
+B7 & Quản lý món yêu thích & Thêm, bỏ và xem danh sách \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -139,16 +133,14 @@ B7 & Quản lý món yêu thích & Thêm, bỏ và xem danh sách \\
 \centering
 \caption{Yêu cầu chức năng dành cho Quản trị viên}
 \label{tab:chuc-nang-c}
-\begin{tabularx}{\textwidth}{p{0.9cm} p{4.6cm} Y}
-\toprule
-\bfseries Mã & \bfseries Tên chức năng & \bfseries Mô tả \\
-\midrule
-C1 & Xem bảng điều khiển & Thống kê số món, nguyên liệu, danh mục \\
-\rowhl C2 & Quản lý món ăn & Thêm, sửa, xóa; gán nguyên liệu kèm định lượng \\
-C3 & Quản lý nguyên liệu & Thêm, sửa, xóa; có kiểm tra ràng buộc tham chiếu \\
-\rowhl C4 & Quản lý danh mục & Thêm, sửa, xóa; có kiểm tra ràng buộc tham
-  chiếu \\
-\bottomrule
+\begin{tabularx}{\textwidth}{|P{0.9cm}|P{4.6cm}|Y|}
+\hline
+\bfseries Mã & \bfseries Tên chức năng & \bfseries Mô tả \\ \hline
+C1 & Xem bảng điều khiển & Thống kê số món, nguyên liệu, danh mục \\ \hline
+C2 & Quản lý món ăn & Thêm, sửa, xóa; gán nguyên liệu kèm định lượng \\ \hline
+C3 & Quản lý nguyên liệu & Thêm, sửa, xóa; có kiểm tra ràng buộc tham chiếu \\ \hline
+C4 & Quản lý danh mục & Thêm, sửa, xóa; có kiểm tra ràng buộc tham
+  chiếu \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -159,20 +151,18 @@ C3 & Quản lý nguyên liệu & Thêm, sửa, xóa; có kiểm tra ràng buộc
 \centering
 \caption{Yêu cầu phi chức năng}
 \label{tab:phi-chuc-nang}
-\begin{tabularx}{\textwidth}{p{0.9cm} p{4.0cm} Y}
-\toprule
-\bfseries Mã & \bfseries Yêu cầu & \bfseries Tiêu chí nghiệm thu \\
-\midrule
-N1 & Bảo mật mật khẩu & Mật khẩu lưu dưới dạng băm, tối thiểu 8 ký tự \\
-\rowhl N2 & Phân quyền & Người dùng thường không truy cập được khu quản trị \\
-N3 & Cách ly dữ liệu & Người dùng chỉ thao tác được trên thực đơn của mình \\
-\rowhl N4 & Tương thích màn hình & Hiển thị đúng từ 375 px tới 1440 px, không
-  cuộn ngang \\
-N5 & Khả năng tiếp cận & Tương phản màu đạt WCAG 2.1 mức AA \\
-\rowhl N6 & Tính đúng đắn thuật toán & Có kiểm thử đơn vị tự động cho ba thuật
-  toán lõi \\
-N7 & Khả năng tái lập & Dựng lại cơ sở dữ liệu bằng một lệnh trên máy khác \\
-\bottomrule
+\begin{tabularx}{\textwidth}{|P{0.9cm}|P{4.0cm}|Y|}
+\hline
+\bfseries Mã & \bfseries Yêu cầu & \bfseries Tiêu chí nghiệm thu \\ \hline
+N1 & Bảo mật mật khẩu & Mật khẩu lưu dưới dạng băm, tối thiểu 8 ký tự \\ \hline
+N2 & Phân quyền & Người dùng thường không truy cập được khu quản trị \\ \hline
+N3 & Cách ly dữ liệu & Người dùng chỉ thao tác được trên thực đơn của mình \\ \hline
+N4 & Tương thích màn hình & Hiển thị đúng từ 375 px tới 1440 px, không
+  cuộn ngang \\ \hline
+N5 & Khả năng tiếp cận & Tương phản màu đạt WCAG 2.1 mức AA \\ \hline
+N6 & Tính đúng đắn thuật toán & Có kiểm thử đơn vị tự động cho ba thuật
+  toán lõi \\ \hline
+N7 & Khả năng tái lập & Dựng lại cơ sở dữ liệu bằng một lệnh trên máy khác \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -202,14 +192,12 @@ Bảng danh mục món ăn, dùng để phân loại và làm bộ lọc trên t
 \centering
 \caption{Cấu trúc bảng Categories}
 \label{tab:bang-category}
-\begin{tabularx}{\textwidth}{p{2.6cm} p{3.4cm} Y}
-\toprule
-\bfseries Trường & \bfseries Kiểu & \bfseries Mô tả \\
-\midrule
-\code{Id} & int, IDENTITY & Khóa chính, tự tăng \\
-\rowhl \code{Name} & nvarchar, NOT NULL & Tên danh mục, ví dụ Món canh, Món
-  xào \\
-\bottomrule
+\begin{tabularx}{\textwidth}{|P{2.6cm}|P{3.4cm}|Y|}
+\hline
+\bfseries Trường & \bfseries Kiểu & \bfseries Mô tả \\ \hline
+\code{Id} & int, IDENTITY & Khóa chính, tự tăng \\ \hline
+\code{Name} & nvarchar, NOT NULL & Tên danh mục, ví dụ Món canh, Món
+  xào \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -222,16 +210,14 @@ danh sách đi chợ gom các dòng thành từng nhóm khi hiển thị.
 \centering
 \caption{Cấu trúc bảng Ingredients}
 \label{tab:bang-ingredient}
-\begin{tabularx}{\textwidth}{p{2.6cm} p{3.4cm} Y}
-\toprule
-\bfseries Trường & \bfseries Kiểu & \bfseries Mô tả \\
-\midrule
-\code{Id} & int, IDENTITY & Khóa chính, tự tăng \\
-\rowhl \code{Name} & nvarchar, NOT NULL & Tên nguyên liệu \\
-\code{Unit} & nvarchar, NOT NULL & Đơn vị đo mặc định của nguyên liệu \\
-\rowhl \code{Group} & nvarchar, NOT NULL & Nhóm nguyên liệu, ví dụ Rau củ, Thịt,
-  Gia vị \\
-\bottomrule
+\begin{tabularx}{\textwidth}{|P{2.6cm}|P{3.4cm}|Y|}
+\hline
+\bfseries Trường & \bfseries Kiểu & \bfseries Mô tả \\ \hline
+\code{Id} & int, IDENTITY & Khóa chính, tự tăng \\ \hline
+\code{Name} & nvarchar, NOT NULL & Tên nguyên liệu \\ \hline
+\code{Unit} & nvarchar, NOT NULL & Đơn vị đo mặc định của nguyên liệu \\ \hline
+\code{Group} & nvarchar, NOT NULL & Nhóm nguyên liệu, ví dụ Rau củ, Thịt,
+  Gia vị \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -243,24 +229,22 @@ Bảng trung tâm của hệ thống, lưu toàn bộ thông tin của một mó
 \centering
 \caption{Cấu trúc bảng Recipes}
 \label{tab:bang-recipe}
-\begin{tabularx}{\textwidth}{p{4.8cm} p{3.0cm} Y}
-\toprule
-\bfseries Trường & \bfseries Kiểu & \bfseries Mô tả \\
-\midrule
-\code{Id} & int, IDENTITY & Khóa chính, tự tăng \\
-\rowhl \code{Name} & nvarchar, NOT NULL & Tên món, bắt buộc \\
-\code{Description} & nvarchar, NULL & Mô tả ngắn \\
-\rowhl \code{Instructions} & nvarchar, NULL & Các bước nấu, lưu dạng văn xuôi \\
-\code{Servings} & int & Số khẩu phần \\
-\rowhl \code{PrepMinutes} & int & Thời gian chuẩn bị, tính bằng phút \\
-\code{CookMinutes} & int & Thời gian nấu, tính bằng phút \\
-\rowhl \code{Difficulty} & int & Độ khó: 0 Dễ, 1 Trung bình, 2 Khó \\
-\code{Region} & int & Vùng miền: 0 Bắc, 1 Trung, 2 Nam \\
-\rowhl \code{CaloriesPerServing} & int & Năng lượng mỗi khẩu phần, kcal \\
-\code{ImageUrl} & nvarchar, NULL & Đường dẫn ảnh minh họa \\
-\rowhl \code{SuitableMealTypes} & int & Cờ nhị phân các bữa phù hợp \\
-\code{CategoryId} & int, FK & Khóa ngoại tới \code{Categories} \\
-\bottomrule
+\begin{tabularx}{\textwidth}{|P{4.8cm}|P{3.0cm}|Y|}
+\hline
+\bfseries Trường & \bfseries Kiểu & \bfseries Mô tả \\ \hline
+\code{Id} & int, IDENTITY & Khóa chính, tự tăng \\ \hline
+\code{Name} & nvarchar, NOT NULL & Tên món, bắt buộc \\ \hline
+\code{Description} & nvarchar, NULL & Mô tả ngắn \\ \hline
+\code{Instructions} & nvarchar, NULL & Các bước nấu, lưu dạng văn xuôi \\ \hline
+\code{Servings} & int & Số khẩu phần \\ \hline
+\code{PrepMinutes} & int & Thời gian chuẩn bị, tính bằng phút \\ \hline
+\code{CookMinutes} & int & Thời gian nấu, tính bằng phút \\ \hline
+\code{Difficulty} & int & Độ khó: 0 Dễ, 1 Trung bình, 2 Khó \\ \hline
+\code{Region} & int & Vùng miền: 0 Bắc, 1 Trung, 2 Nam \\ \hline
+\code{CaloriesPerServing} & int & Năng lượng mỗi khẩu phần, kcal \\ \hline
+\code{ImageUrl} & nvarchar, NULL & Đường dẫn ảnh minh họa \\ \hline
+\code{SuitableMealTypes} & int & Cờ nhị phân các bữa phù hợp \\ \hline
+\code{CategoryId} & int, FK & Khóa ngoại tới \code{Categories} \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -284,17 +268,15 @@ Bảng trung gian giữa món ăn và nguyên liệu, là mấu chốt của c�
 \centering
 \caption{Cấu trúc bảng RecipeIngredients}
 \label{tab:bang-recipe-ingredient}
-\begin{tabularx}{\textwidth}{p{3.8cm} p{3.4cm} Y}
-\toprule
-\bfseries Trường & \bfseries Kiểu & \bfseries Mô tả \\
-\midrule
+\begin{tabularx}{\textwidth}{|P{3.8cm}|P{3.4cm}|Y|}
+\hline
+\bfseries Trường & \bfseries Kiểu & \bfseries Mô tả \\ \hline
 \code{RecipeId} & int, PK, FK & Khóa chính thành phần, khóa ngoại tới
-  \code{Recipes} \\
-\rowhl \code{IngredientId} & int, PK, FK & Khóa chính thành phần, khóa ngoại tới
-  \code{Ingredients} \\
-\code{Quantity} & decimal(10,2) & Khối lượng cần dùng \\
-\rowhl \code{Unit} & nvarchar, NOT NULL & Đơn vị đo dùng trong công thức này \\
-\bottomrule
+  \code{Recipes} \\ \hline
+\code{IngredientId} & int, PK, FK & Khóa chính thành phần, khóa ngoại tới
+  \code{Ingredients} \\ \hline
+\code{Quantity} & decimal(10,2) & Khối lượng cần dùng \\ \hline
+\code{Unit} & nvarchar, NOT NULL & Đơn vị đo dùng trong công thức này \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -317,17 +299,15 @@ Lưu thông tin chung của một thực đơn tuần.
 \centering
 \caption{Cấu trúc bảng MenuPlans}
 \label{tab:bang-menuplan}
-\begin{tabularx}{\textwidth}{p{3.8cm} p{3.4cm} Y}
-\toprule
-\bfseries Trường & \bfseries Kiểu & \bfseries Mô tả \\
-\midrule
-\code{Id} & int, IDENTITY & Khóa chính, tự tăng \\
-\rowhl \code{UserId} & nvarchar, FK & Khóa ngoại tới bảng người dùng của
-  Identity \\
-\code{Name} & nvarchar, NOT NULL & Tên thực đơn do người dùng đặt \\
-\rowhl \code{WeekStartDate} & date & Ngày bắt đầu của tuần được lập \\
-\code{CreatedAt} & datetime2 & Thời điểm tạo thực đơn \\
-\bottomrule
+\begin{tabularx}{\textwidth}{|P{3.8cm}|P{3.4cm}|Y|}
+\hline
+\bfseries Trường & \bfseries Kiểu & \bfseries Mô tả \\ \hline
+\code{Id} & int, IDENTITY & Khóa chính, tự tăng \\ \hline
+\code{UserId} & nvarchar, FK & Khóa ngoại tới bảng người dùng của
+  Identity \\ \hline
+\code{Name} & nvarchar, NOT NULL & Tên thực đơn do người dùng đặt \\ \hline
+\code{WeekStartDate} & date & Ngày bắt đầu của tuần được lập \\ \hline
+\code{CreatedAt} & datetime2 & Thời điểm tạo thực đơn \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -339,16 +319,14 @@ Lưu từng ô của lưới thực đơn. Một thực đơn đầy đủ gồm
 \centering
 \caption{Cấu trúc bảng MenuPlanItems}
 \label{tab:bang-menuplanitem}
-\begin{tabularx}{\textwidth}{p{3.8cm} p{3.4cm} Y}
-\toprule
-\bfseries Trường & \bfseries Kiểu & \bfseries Mô tả \\
-\midrule
-\code{Id} & int, IDENTITY & Khóa chính, tự tăng \\
-\rowhl \code{MenuPlanId} & int, FK & Khóa ngoại tới \code{MenuPlans} \\
-\code{DayOfWeek} & int & Thứ trong tuần, nhận giá trị từ 0 tới 6 \\
-\rowhl \code{MealType} & int & Bữa ăn: 0 Sáng, 1 Trưa, 2 Tối \\
-\code{RecipeId} & int, FK & Khóa ngoại tới \code{Recipes} \\
-\bottomrule
+\begin{tabularx}{\textwidth}{|P{3.8cm}|P{3.4cm}|Y|}
+\hline
+\bfseries Trường & \bfseries Kiểu & \bfseries Mô tả \\ \hline
+\code{Id} & int, IDENTITY & Khóa chính, tự tăng \\ \hline
+\code{MenuPlanId} & int, FK & Khóa ngoại tới \code{MenuPlans} \\ \hline
+\code{DayOfWeek} & int & Thứ trong tuần, nhận giá trị từ 0 tới 6 \\ \hline
+\code{MealType} & int & Bữa ăn: 0 Sáng, 1 Trưa, 2 Tối \\ \hline
+\code{RecipeId} & int, FK & Khóa ngoại tới \code{Recipes} \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -360,15 +338,13 @@ Lưu dấu yêu thích của người dùng đối với một món.
 \centering
 \caption{Cấu trúc bảng Favorites}
 \label{tab:bang-favorite}
-\begin{tabularx}{\textwidth}{p{3.8cm} p{3.4cm} Y}
-\toprule
-\bfseries Trường & \bfseries Kiểu & \bfseries Mô tả \\
-\midrule
+\begin{tabularx}{\textwidth}{|P{3.8cm}|P{3.4cm}|Y|}
+\hline
+\bfseries Trường & \bfseries Kiểu & \bfseries Mô tả \\ \hline
 \code{UserId} & nvarchar, PK, FK & Khóa chính thành phần, khóa ngoại tới bảng
-  người dùng \\
-\rowhl \code{RecipeId} & int, PK, FK & Khóa chính thành phần, khóa ngoại tới
-  \code{Recipes} \\
-\bottomrule
+  người dùng \\ \hline
+\code{RecipeId} & int, PK, FK & Khóa chính thành phần, khóa ngoại tới
+  \code{Recipes} \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -384,16 +360,14 @@ Lưu thông tin chung của một danh sách đi chợ.
 \centering
 \caption{Cấu trúc bảng ShoppingLists}
 \label{tab:bang-shoppinglist}
-\begin{tabularx}{\textwidth}{p{3.8cm} p{3.8cm} Y}
-\toprule
-\bfseries Trường & \bfseries Kiểu & \bfseries Mô tả \\
-\midrule
-\code{Id} & int, IDENTITY & Khóa chính, tự tăng \\
-\rowhl \code{MenuPlanId} & int, FK, UNIQUE & Khóa ngoại tới \code{MenuPlans},
-  có ràng buộc duy nhất \\
-\code{UserId} & nvarchar, FK & Khóa ngoại tới bảng người dùng \\
-\rowhl \code{CreatedAt} & datetime2 & Thời điểm sinh danh sách \\
-\bottomrule
+\begin{tabularx}{\textwidth}{|P{3.8cm}|P{3.8cm}|Y|}
+\hline
+\bfseries Trường & \bfseries Kiểu & \bfseries Mô tả \\ \hline
+\code{Id} & int, IDENTITY & Khóa chính, tự tăng \\ \hline
+\code{MenuPlanId} & int, FK, UNIQUE & Khóa ngoại tới \code{MenuPlans},
+  có ràng buộc duy nhất \\ \hline
+\code{UserId} & nvarchar, FK & Khóa ngoại tới bảng người dùng \\ \hline
+\code{CreatedAt} & datetime2 & Thời điểm sinh danh sách \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -410,18 +384,16 @@ Lưu từng dòng nguyên liệu đã gộp của một danh sách đi chợ.
 \centering
 \caption{Cấu trúc bảng ShoppingListItems}
 \label{tab:bang-shoppinglistitem}
-\begin{tabularx}{\textwidth}{p{4.0cm} p{3.4cm} Y}
-\toprule
-\bfseries Trường & \bfseries Kiểu & \bfseries Mô tả \\
-\midrule
-\code{Id} & int, IDENTITY & Khóa chính, tự tăng \\
-\rowhl \code{ShoppingListId} & int, FK & Khóa ngoại tới \code{ShoppingLists} \\
-\code{IngredientId} & int, FK & Khóa ngoại tới \code{Ingredients} \\
-\rowhl \code{Quantity} & decimal(10,2) & Tổng khối lượng cần mua sau khi cộng
-  dồn \\
-\code{Unit} & nvarchar, NOT NULL & Đơn vị đo, là một nửa của khóa gộp nhóm \\
-\rowhl \code{IsPurchased} & bit & Đã mua hay chưa, phục vụ thanh tiến độ \\
-\bottomrule
+\begin{tabularx}{\textwidth}{|P{4.0cm}|P{3.4cm}|Y|}
+\hline
+\bfseries Trường & \bfseries Kiểu & \bfseries Mô tả \\ \hline
+\code{Id} & int, IDENTITY & Khóa chính, tự tăng \\ \hline
+\code{ShoppingListId} & int, FK & Khóa ngoại tới \code{ShoppingLists} \\ \hline
+\code{IngredientId} & int, FK & Khóa ngoại tới \code{Ingredients} \\ \hline
+\code{Quantity} & decimal(10,2) & Tổng khối lượng cần mua sau khi cộng
+  dồn \\ \hline
+\code{Unit} & nvarchar, NOT NULL & Đơn vị đo, là một nửa của khóa gộp nhóm \\ \hline
+\code{IsPurchased} & bit & Đã mua hay chưa, phục vụ thanh tiến độ \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -444,34 +416,32 @@ Hành vi xóa được cấu hình có chủ đích cho từng quan hệ, chia l
 \centering
 \caption{Hành vi xóa của các quan hệ trong cơ sở dữ liệu}
 \label{tab:hanh-vi-xoa}
-\begin{tabularx}{\textwidth}{p{5.0cm} p{1.9cm} Y}
-\toprule
-\bfseries Quan hệ & \bfseries Hành vi & \bfseries Lý do \\
-\midrule
+\begin{tabularx}{\textwidth}{|P{5.0cm}|P{1.9cm}|Y|}
+\hline
+\bfseries Quan hệ & \bfseries Hành vi & \bfseries Lý do \\ \hline
 \code{Recipe} tới \code{RecipeIngredient} & Cascade & Xóa món thì các dòng
-  nguyên liệu của nó không còn ý nghĩa \\
-\rowhl \code{MenuPlan} tới \code{MenuPlanItem} & Cascade & Tương tự, các ô thuộc
-  về thực đơn \\
+  nguyên liệu của nó không còn ý nghĩa \\ \hline
+\code{MenuPlan} tới \code{MenuPlanItem} & Cascade & Tương tự, các ô thuộc
+  về thực đơn \\ \hline
 \code{MenuPlan} tới \code{ShoppingList} & Cascade & Danh sách đi chợ phụ thuộc
-  hoàn toàn vào thực đơn \\
-\rowhl \code{ShoppingList} tới \code{ShoppingListItem} & Cascade & Các dòng thuộc
-  về danh sách \\
+  hoàn toàn vào thực đơn \\ \hline
+\code{ShoppingList} tới \code{ShoppingListItem} & Cascade & Các dòng thuộc
+  về danh sách \\ \hline
 \code{ApplicationUser} tới \code{MenuPlan}, \code{Favorite} & Cascade & Xóa tài
-  khoản thì dữ liệu cá nhân đi theo \\
-\rowhl \code{Recipe} tới \code{Favorite} & Cascade & Món bị xóa thì dấu yêu thích
-  trên món đó không còn ý nghĩa \\
+  khoản thì dữ liệu cá nhân đi theo \\ \hline
+\code{Recipe} tới \code{Favorite} & Cascade & Món bị xóa thì dấu yêu thích
+  trên món đó không còn ý nghĩa \\ \hline
 \code{Category} tới \code{Recipe} & \textbf{Restrict} & Không cho xóa danh mục
-  đang có món sử dụng \\
-\rowhl \code{Ingredient} tới \code{RecipeIngredient} & \textbf{Restrict} & Không
-  cho xóa nguyên liệu đang được dùng \\
+  đang có món sử dụng \\ \hline
+\code{Ingredient} tới \code{RecipeIngredient} & \textbf{Restrict} & Không
+  cho xóa nguyên liệu đang được dùng \\ \hline
 \code{Ingredient} tới \code{ShoppingListItem} & \textbf{Restrict} & Không cho xóa
-  nguyên liệu đang nằm trong danh sách đi chợ \\
-\rowhl \code{ApplicationUser} tới \code{ShoppingList} & \textbf{Restrict} & Danh
+  nguyên liệu đang nằm trong danh sách đi chợ \\ \hline
+\code{ApplicationUser} tới \code{ShoppingList} & \textbf{Restrict} & Danh
   sách đi chợ đã xóa lan truyền theo thực đơn, không cần thêm một đường Cascade
-  thứ hai từ tài khoản \\
+  thứ hai từ tài khoản \\ \hline
 \code{Recipe} tới \code{MenuPlanItem} & \textbf{Restrict} & Không cho xóa món
-  đang nằm trong thực đơn của người dùng \\
-\bottomrule
+  đang nằm trong thực đơn của người dùng \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -519,309 +489,276 @@ nhân, mục tiêu, tiền điều kiện, luồng chính, luồng thay thế v�
 
 \paragraph{UC01. Gợi ý món theo nguyên liệu sẵn có.}
 
-\begin{longtable}{p{3.4cm} p{10.6cm}}
+\begin{longtable}{|P{3.4cm}|P{10.6cm}|}
 \caption{Đặc tả ca sử dụng UC01. Gợi ý món theo nguyên liệu sẵn có}
 \label{tab:uc01}\\
-\toprule
-\bfseries Thành phần & \bfseries Nội dung \\
-\midrule
+\hline
+\bfseries Thành phần & \bfseries Nội dung \\ \hline
 \endfirsthead
-\toprule
-\bfseries Thành phần & \bfseries Nội dung \\
-\midrule
+\hline
+\bfseries Thành phần & \bfseries Nội dung \\ \hline
 \endhead
-\bottomrule
 \endfoot
-Tác nhân & Khách, Người dùng, Quản trị viên \\
+Tác nhân & Khách, Người dùng, Quản trị viên \\ \hline
 Mục tiêu & Tìm những món có thể nấu từ tập nguyên liệu đang có, xếp theo mức độ
-  phù hợp \\
-Tiền điều kiện & Kho dữ liệu đã có món ăn và nguyên liệu; không cần đăng nhập \\
+  phù hợp \\ \hline
+Tiền điều kiện & Kho dữ liệu đã có món ăn và nguyên liệu; không cần đăng nhập \\ \hline
 Luồng chính & Người dùng mở mục Gợi ý nguyên liệu; hệ thống nạp danh sách nguyên
   liệu sắp theo tên; người dùng tick các nguyên liệu đang có rồi bấm Gợi ý món;
   hệ thống tính độ phủ cho từng món, xếp hạng theo bốn tiêu chí và hiển thị lưới
-  kết quả kèm nhãn tình trạng nguyên liệu \\
+  kết quả kèm nhãn tình trạng nguyên liệu \\ \hline
 Luồng thay thế & Nếu người dùng chưa chọn nguyên liệu nào, hệ thống giữ nguyên
   trạng thái ban đầu kèm hướng dẫn thay vì trả về kết quả rỗng. Nếu không có món
-  nào chung nguyên liệu với tập đã chọn, hệ thống hiển thị trạng thái rỗng \\
+  nào chung nguyên liệu với tập đã chọn, hệ thống hiển thị trạng thái rỗng \\ \hline
 Hậu điều kiện & Danh sách món được hiển thị theo đúng thứ tự ưu tiên đã thiết
-  kế; hệ thống không ghi dữ liệu nào xuống cơ sở dữ liệu \\
+  kế; hệ thống không ghi dữ liệu nào xuống cơ sở dữ liệu \\ \hline
 \end{longtable}
 
 \paragraph{UC02. Sinh thực đơn tuần tự động.}
 
-\begin{longtable}{p{3.4cm} p{10.6cm}}
+\begin{longtable}{|P{3.4cm}|P{10.6cm}|}
 \caption{Đặc tả ca sử dụng UC02. Sinh thực đơn tuần tự động}
 \label{tab:uc02}\\
-\toprule
-\bfseries Thành phần & \bfseries Nội dung \\
-\midrule
+\hline
+\bfseries Thành phần & \bfseries Nội dung \\ \hline
 \endfirsthead
-\toprule
-\bfseries Thành phần & \bfseries Nội dung \\
-\midrule
+\hline
+\bfseries Thành phần & \bfseries Nội dung \\ \hline
 \endhead
-\bottomrule
 \endfoot
-Tác nhân & Người dùng \\
-Mục tiêu & Sinh tự động một thực đơn đủ 21 suất ăn cho bảy ngày \\
+Tác nhân & Người dùng \\ \hline
+Mục tiêu & Sinh tự động một thực đơn đủ 21 suất ăn cho bảy ngày \\ \hline
 Tiền điều kiện & Người dùng đã đăng nhập; kho dữ liệu có ít nhất một món thỏa bộ
-  lọc vùng miền \\
+  lọc vùng miền \\ \hline
 Luồng chính & Người dùng mở mục Thực đơn tuần, nhập tên thực đơn, chọn tuần bắt
   đầu và vùng miền nếu muốn, rồi bấm Tạo thực đơn; hệ thống kiểm tra dữ liệu
   nhập, gọi thuật toán sinh 21 suất ăn, lưu thực đơn cùng 21 suất và chuyển sang
-  trang chi tiết \\
+  trang chi tiết \\ \hline
 Luồng thay thế & Nếu dữ liệu nhập không hợp lệ, hệ thống hiển thị lỗi ngay dưới
   ô nhập tương ứng và giữ nguyên giá trị đã nhập. Nếu không có món nào thỏa bộ
   lọc vùng miền, thuật toán ném ngoại lệ và hệ thống hiển thị thông báo không
-  sinh được thực đơn \\
+  sinh được thực đơn \\ \hline
 Hậu điều kiện & Một bản ghi \code{MenuPlan} và 21 bản ghi \code{MenuPlanItem}
-  được lưu, gắn với đúng tài khoản đang đăng nhập \\
+  được lưu, gắn với đúng tài khoản đang đăng nhập \\ \hline
 \end{longtable}
 
 \paragraph{UC03. Chỉnh sửa thủ công một suất ăn.}
 
-\begin{longtable}{p{3.4cm} p{10.6cm}}
+\begin{longtable}{|P{3.4cm}|P{10.6cm}|}
 \caption{Đặc tả ca sử dụng UC03. Chỉnh sửa thủ công một suất ăn}
 \label{tab:uc03}\\
-\toprule
-\bfseries Thành phần & \bfseries Nội dung \\
-\midrule
+\hline
+\bfseries Thành phần & \bfseries Nội dung \\ \hline
 \endfirsthead
-\toprule
-\bfseries Thành phần & \bfseries Nội dung \\
-\midrule
+\hline
+\bfseries Thành phần & \bfseries Nội dung \\ \hline
 \endhead
-\bottomrule
 \endfoot
-Tác nhân & Người dùng \\
-Mục tiêu & Thay món hoặc bỏ trống một ô trong lưới thực đơn \\
-Tiền điều kiện & Thực đơn đã tồn tại và thuộc về người dùng đang đăng nhập \\
+Tác nhân & Người dùng \\ \hline
+Mục tiêu & Thay món hoặc bỏ trống một ô trong lưới thực đơn \\ \hline
+Tiền điều kiện & Thực đơn đã tồn tại và thuộc về người dùng đang đăng nhập \\ \hline
 Luồng chính & Người dùng mở chi tiết thực đơn, chọn món khác từ hộp chọn trong ô
   cần sửa hoặc bấm nút xóa; hệ thống cập nhật suất ăn tương ứng, tính lại tổng
-  năng lượng của ngày đó và hiển thị lại lưới \\
+  năng lượng của ngày đó và hiển thị lại lưới \\ \hline
 Luồng thay thế & Nếu mã thực đơn không thuộc về người dùng, hệ thống trả về lỗi
   không tìm thấy. Nếu một ngày bị xóa hết cả ba bữa, cột của ngày đó vẫn được
-  giữ trong lưới để người dùng gán món trở lại \\
+  giữ trong lưới để người dùng gán món trở lại \\ \hline
 Hậu điều kiện & Bản ghi \code{MenuPlanItem} tương ứng được cập nhật hoặc xóa;
-  danh sách đi chợ đã sinh trước đó có thể tạo lại để phản ánh thay đổi \\
+  danh sách đi chợ đã sinh trước đó có thể tạo lại để phản ánh thay đổi \\ \hline
 \end{longtable}
 
 \paragraph{UC04. Tạo danh sách đi chợ.}
 
-\begin{longtable}{p{3.4cm} p{10.6cm}}
+\begin{longtable}{|P{3.4cm}|P{10.6cm}|}
 \caption{Đặc tả ca sử dụng UC04. Tạo danh sách đi chợ}
 \label{tab:uc04}\\
-\toprule
-\bfseries Thành phần & \bfseries Nội dung \\
-\midrule
+\hline
+\bfseries Thành phần & \bfseries Nội dung \\ \hline
 \endfirsthead
-\toprule
-\bfseries Thành phần & \bfseries Nội dung \\
-\midrule
+\hline
+\bfseries Thành phần & \bfseries Nội dung \\ \hline
 \endhead
-\bottomrule
 \endfoot
-Tác nhân & Người dùng \\
-Mục tiêu & Tổng hợp toàn bộ nguyên liệu của thực đơn thành danh sách cần mua \\
-Tiền điều kiện & Thực đơn đã tồn tại và thuộc về người dùng đang đăng nhập \\
+Tác nhân & Người dùng \\ \hline
+Mục tiêu & Tổng hợp toàn bộ nguyên liệu của thực đơn thành danh sách cần mua \\ \hline
+Tiền điều kiện & Thực đơn đã tồn tại và thuộc về người dùng đang đăng nhập \\ \hline
 Luồng chính & Người dùng bấm Tạo danh sách ở trang chi tiết thực đơn; hệ thống
   nạp thực đơn kèm điều kiện lọc theo tài khoản, duyệt toàn bộ suất ăn, gộp
   nhóm theo cặp nguyên liệu và đơn vị, cộng dồn khối lượng rồi lưu danh sách và
-  chuyển sang trang chi tiết danh sách \\
+  chuyển sang trang chi tiết danh sách \\ \hline
 Luồng thay thế & Nếu thực đơn không tồn tại hoặc không thuộc về người dùng, hệ
   thống trả về lỗi không tìm thấy. Nếu thực đơn đã có danh sách đi chợ, hệ thống
-  xóa toàn bộ dòng cũ rồi ghi lại thay vì tạo bản ghi mới \\
+  xóa toàn bộ dòng cũ rồi ghi lại thay vì tạo bản ghi mới \\ \hline
 Hậu điều kiện & Một bản ghi \code{ShoppingList} và các bản ghi
-  \code{ShoppingListItem} đã gộp được lưu \\
+  \code{ShoppingListItem} đã gộp được lưu \\ \hline
 \end{longtable}
 
 \paragraph{UC05. Đánh dấu đã mua.}
 
-\begin{longtable}{p{3.4cm} p{10.6cm}}
+\begin{longtable}{|P{3.4cm}|P{10.6cm}|}
 \caption{Đặc tả ca sử dụng UC05. Đánh dấu đã mua}
 \label{tab:uc05}\\
-\toprule
-\bfseries Thành phần & \bfseries Nội dung \\
-\midrule
+\hline
+\bfseries Thành phần & \bfseries Nội dung \\ \hline
 \endfirsthead
-\toprule
-\bfseries Thành phần & \bfseries Nội dung \\
-\midrule
+\hline
+\bfseries Thành phần & \bfseries Nội dung \\ \hline
 \endhead
-\bottomrule
 \endfoot
-Tác nhân & Người dùng \\
-Mục tiêu & Theo dõi tiến độ mua sắm khi đang đi chợ \\
-Tiền điều kiện & Danh sách đi chợ đã tồn tại và thuộc về người dùng \\
+Tác nhân & Người dùng \\ \hline
+Mục tiêu & Theo dõi tiến độ mua sắm khi đang đi chợ \\ \hline
+Tiền điều kiện & Danh sách đi chợ đã tồn tại và thuộc về người dùng \\ \hline
 Luồng chính & Người dùng tick vào ô của một dòng nguyên liệu; hệ thống đảo trạng
-  thái đã mua của dòng đó, gạch ngang dòng và cập nhật thanh tiến độ \\
+  thái đã mua của dòng đó, gạch ngang dòng và cập nhật thanh tiến độ \\ \hline
 Luồng thay thế & Nếu dòng không thuộc danh sách của người dùng, hệ thống trả về
-  lỗi không tìm thấy \\
-Hậu điều kiện & Cột \code{IsPurchased} của dòng tương ứng được cập nhật \\
+  lỗi không tìm thấy \\ \hline
+Hậu điều kiện & Cột \code{IsPurchased} của dòng tương ứng được cập nhật \\ \hline
 \end{longtable}
 
 \paragraph{UC06. Duyệt, tìm kiếm, lọc và sắp xếp món ăn.}
 
-\begin{longtable}{p{3.4cm} p{10.6cm}}
+\begin{longtable}{|P{3.4cm}|P{10.6cm}|}
 \caption{Đặc tả ca sử dụng UC06. Duyệt, tìm kiếm, lọc và sắp xếp món ăn}
 \label{tab:uc06}\\
-\toprule
-\bfseries Thành phần & \bfseries Nội dung \\
-\midrule
+\hline
+\bfseries Thành phần & \bfseries Nội dung \\ \hline
 \endfirsthead
-\toprule
-\bfseries Thành phần & \bfseries Nội dung \\
-\midrule
+\hline
+\bfseries Thành phần & \bfseries Nội dung \\ \hline
 \endhead
-\bottomrule
 \endfoot
-Tác nhân & Khách, Người dùng, Quản trị viên \\
-Mục tiêu & Tìm ra món cần xem trong kho dữ liệu \\
-Tiền điều kiện & Không có \\
+Tác nhân & Khách, Người dùng, Quản trị viên \\ \hline
+Mục tiêu & Tìm ra món cần xem trong kho dữ liệu \\ \hline
+Tiền điều kiện & Không có \\ \hline
 Luồng chính & Người dùng mở trang danh sách món; nhập từ khóa, chọn danh mục,
   vùng miền, độ khó, thời gian nấu tối đa và tùy chọn sắp xếp; hệ thống ghép các
   điều kiện vào một truy vấn duy nhất, phân trang 9 món mỗi trang và hiển thị
-  kết quả \\
+  kết quả \\ \hline
 Luồng thay thế & Nếu không có món nào thỏa điều kiện, hệ thống hiển thị trạng
   thái rỗng kèm gợi ý bỏ bớt bộ lọc. Nếu tham số sắp xếp trên thanh địa chỉ
-  không hợp lệ, hệ thống dùng giá trị mặc định \\
+  không hợp lệ, hệ thống dùng giá trị mặc định \\ \hline
 Hậu điều kiện & Trạng thái lọc và sắp xếp được giữ nguyên trên các liên kết phân
-  trang \\
+  trang \\ \hline
 \end{longtable}
 
 \paragraph{UC07. Xem chi tiết món ăn.}
 
-\begin{longtable}{p{3.4cm} p{10.6cm}}
+\begin{longtable}{|P{3.4cm}|P{10.6cm}|}
 \caption{Đặc tả ca sử dụng UC07. Xem chi tiết món ăn}
 \label{tab:uc07}\\
-\toprule
-\bfseries Thành phần & \bfseries Nội dung \\
-\midrule
+\hline
+\bfseries Thành phần & \bfseries Nội dung \\ \hline
 \endfirsthead
-\toprule
-\bfseries Thành phần & \bfseries Nội dung \\
-\midrule
+\hline
+\bfseries Thành phần & \bfseries Nội dung \\ \hline
 \endhead
-\bottomrule
 \endfoot
-Tác nhân & Khách, Người dùng, Quản trị viên \\
-Mục tiêu & Xem đầy đủ công thức, nguyên liệu định lượng và các bước nấu \\
-Tiền điều kiện & Món ăn tồn tại trong cơ sở dữ liệu \\
+Tác nhân & Khách, Người dùng, Quản trị viên \\ \hline
+Mục tiêu & Xem đầy đủ công thức, nguyên liệu định lượng và các bước nấu \\ \hline
+Tiền điều kiện & Món ăn tồn tại trong cơ sở dữ liệu \\ \hline
 Luồng chính & Người dùng bấm vào một món trong lưới; hệ thống nạp món kèm danh
   mục và danh sách nguyên liệu, hiển thị thông số, định lượng từng nguyên liệu
-  và các bước nấu \\
+  và các bước nấu \\ \hline
 Luồng thay thế & Nếu mã món không tồn tại, hệ thống trả về trang không tìm thấy.
-  Nếu người dùng đã đăng nhập, trang hiển thị thêm nút thêm hoặc bỏ yêu thích \\
-Hậu điều kiện & Không thay đổi dữ liệu \\
+  Nếu người dùng đã đăng nhập, trang hiển thị thêm nút thêm hoặc bỏ yêu thích \\ \hline
+Hậu điều kiện & Không thay đổi dữ liệu \\ \hline
 \end{longtable}
 
 \paragraph{UC08. Đăng ký tài khoản.}
 
-\begin{longtable}{p{3.4cm} p{10.6cm}}
+\begin{longtable}{|P{3.4cm}|P{10.6cm}|}
 \caption{Đặc tả ca sử dụng UC08. Đăng ký tài khoản}
 \label{tab:uc08}\\
-\toprule
-\bfseries Thành phần & \bfseries Nội dung \\
-\midrule
+\hline
+\bfseries Thành phần & \bfseries Nội dung \\ \hline
 \endfirsthead
-\toprule
-\bfseries Thành phần & \bfseries Nội dung \\
-\midrule
+\hline
+\bfseries Thành phần & \bfseries Nội dung \\ \hline
 \endhead
-\bottomrule
 \endfoot
-Tác nhân & Khách \\
-Mục tiêu & Tạo tài khoản để dùng nhóm chức năng dành cho Người dùng \\
-Tiền điều kiện & Chưa đăng nhập \\
+Tác nhân & Khách \\ \hline
+Mục tiêu & Tạo tài khoản để dùng nhóm chức năng dành cho Người dùng \\ \hline
+Tiền điều kiện & Chưa đăng nhập \\ \hline
 Luồng chính & Khách nhập họ tên, thư điện tử, mật khẩu và xác nhận mật khẩu; hệ
   thống kiểm tra hợp lệ, tạo tài khoản với mật khẩu lưu dạng băm, gán vai trò
-  \code{User} rồi đăng nhập luôn cho người dùng \\
+  \code{User} rồi đăng nhập luôn cho người dùng \\ \hline
 Luồng thay thế & Nếu thư điện tử sai định dạng hoặc đã tồn tại, mật khẩu ngắn
   hơn 8 ký tự hoặc mật khẩu xác nhận không khớp, hệ thống hiển thị lỗi tiếng
-  Việt ngay dưới ô nhập tương ứng và không tạo tài khoản \\
-Hậu điều kiện & Tài khoản mới tồn tại với vai trò \code{User} \\
+  Việt ngay dưới ô nhập tương ứng và không tạo tài khoản \\ \hline
+Hậu điều kiện & Tài khoản mới tồn tại với vai trò \code{User} \\ \hline
 \end{longtable}
 
 \paragraph{UC09. Đăng nhập và đăng xuất.}
 
-\begin{longtable}{p{3.4cm} p{10.6cm}}
+\begin{longtable}{|P{3.4cm}|P{10.6cm}|}
 \caption{Đặc tả ca sử dụng UC09. Đăng nhập và đăng xuất}
 \label{tab:uc09}\\
-\toprule
-\bfseries Thành phần & \bfseries Nội dung \\
-\midrule
+\hline
+\bfseries Thành phần & \bfseries Nội dung \\ \hline
 \endfirsthead
-\toprule
-\bfseries Thành phần & \bfseries Nội dung \\
-\midrule
+\hline
+\bfseries Thành phần & \bfseries Nội dung \\ \hline
 \endhead
-\bottomrule
 \endfoot
-Tác nhân & Khách, Người dùng, Quản trị viên \\
-Mục tiêu & Xác thực danh tính để mở khóa nhóm chức năng tương ứng với vai trò \\
-Tiền điều kiện & Tài khoản đã tồn tại \\
+Tác nhân & Khách, Người dùng, Quản trị viên \\ \hline
+Mục tiêu & Xác thực danh tính để mở khóa nhóm chức năng tương ứng với vai trò \\ \hline
+Tiền điều kiện & Tài khoản đã tồn tại \\ \hline
 Luồng chính & Người dùng nhập thư điện tử và mật khẩu; hệ thống xác thực, tạo
   phiên đăng nhập và chuyển về trang trước đó hoặc trang chủ. Khi bấm đăng xuất,
-  hệ thống hủy phiên và quay về trang chủ \\
+  hệ thống hủy phiên và quay về trang chủ \\ \hline
 Luồng thay thế & Nếu thông tin đăng nhập sai, hệ thống báo lỗi chung mà không
-  tiết lộ sai ở trường nào \\
-Hậu điều kiện & Phiên đăng nhập được tạo hoặc hủy tương ứng \\
+  tiết lộ sai ở trường nào \\ \hline
+Hậu điều kiện & Phiên đăng nhập được tạo hoặc hủy tương ứng \\ \hline
 \end{longtable}
 
 \paragraph{UC10. Quản lý món ăn.}
 
-\begin{longtable}{p{3.4cm} p{10.6cm}}
+\begin{longtable}{|P{3.4cm}|P{10.6cm}|}
 \caption{Đặc tả ca sử dụng UC10. Quản lý món ăn}
 \label{tab:uc10}\\
-\toprule
-\bfseries Thành phần & \bfseries Nội dung \\
-\midrule
+\hline
+\bfseries Thành phần & \bfseries Nội dung \\ \hline
 \endfirsthead
-\toprule
-\bfseries Thành phần & \bfseries Nội dung \\
-\midrule
+\hline
+\bfseries Thành phần & \bfseries Nội dung \\ \hline
 \endhead
-\bottomrule
 \endfoot
-Tác nhân & Quản trị viên \\
-Mục tiêu & Duy trì kho dữ liệu món ăn cùng danh sách nguyên liệu định lượng \\
-Tiền điều kiện & Đã đăng nhập bằng tài khoản thuộc vai trò \code{Admin} \\
+Tác nhân & Quản trị viên \\ \hline
+Mục tiêu & Duy trì kho dữ liệu món ăn cùng danh sách nguyên liệu định lượng \\ \hline
+Tiền điều kiện & Đã đăng nhập bằng tài khoản thuộc vai trò \code{Admin} \\ \hline
 Luồng chính & Quản trị viên mở khu quản trị, chọn thêm hoặc sửa một món; nhập
   thông tin món, chọn danh mục, vùng miền, độ khó, các bữa phù hợp; gán từng
-  nguyên liệu kèm khối lượng và đơn vị rồi lưu \\
+  nguyên liệu kèm khối lượng và đơn vị rồi lưu \\ \hline
 Luồng thay thế & Nếu dữ liệu không hợp lệ, biểu mẫu hiển thị lỗi và giữ nguyên
   các dòng nguyên liệu đã nhập. Nếu món đang nằm trong thực đơn của người dùng,
   thao tác xóa bị chặn theo ràng buộc Restrict ở
-  Bảng~\ref{tab:hanh-vi-xoa} \\
+  Bảng~\ref{tab:hanh-vi-xoa} \\ \hline
 Hậu điều kiện & Bảng \code{Recipes} và \code{RecipeIngredients} được cập nhật
-  đồng bộ \\
+  đồng bộ \\ \hline
 \end{longtable}
 
 \paragraph{UC11. Quản lý nguyên liệu và danh mục.}
 
-\begin{longtable}{p{3.4cm} p{10.6cm}}
+\begin{longtable}{|P{3.4cm}|P{10.6cm}|}
 \caption{Đặc tả ca sử dụng UC11. Quản lý nguyên liệu và danh mục}
 \label{tab:uc11}\\
-\toprule
-\bfseries Thành phần & \bfseries Nội dung \\
-\midrule
+\hline
+\bfseries Thành phần & \bfseries Nội dung \\ \hline
 \endfirsthead
-\toprule
-\bfseries Thành phần & \bfseries Nội dung \\
-\midrule
+\hline
+\bfseries Thành phần & \bfseries Nội dung \\ \hline
 \endhead
-\bottomrule
 \endfoot
-Tác nhân & Quản trị viên \\
-Mục tiêu & Duy trì danh mục món ăn và kho nguyên liệu dùng chung \\
-Tiền điều kiện & Đã đăng nhập bằng tài khoản thuộc vai trò \code{Admin} \\
+Tác nhân & Quản trị viên \\ \hline
+Mục tiêu & Duy trì danh mục món ăn và kho nguyên liệu dùng chung \\ \hline
+Tiền điều kiện & Đã đăng nhập bằng tài khoản thuộc vai trò \code{Admin} \\ \hline
 Luồng chính & Quản trị viên xem danh sách, thêm mới, sửa hoặc xóa một nguyên
-  liệu hay một danh mục; hệ thống lưu thay đổi và quay lại danh sách \\
+  liệu hay một danh mục; hệ thống lưu thay đổi và quay lại danh sách \\ \hline
 Luồng thay thế & Nếu nguyên liệu đang được dùng trong công thức hoặc đang nằm
   trong danh sách đi chợ, thao tác xóa bị chặn và hệ thống hiển thị thông báo
-  giải thích. Tương tự với danh mục đang có món sử dụng \\
+  giải thích. Tương tự với danh mục đang có món sử dụng \\ \hline
 Hậu điều kiện & Bảng \code{Ingredients} hoặc \code{Categories} được cập nhật mà
-  không phá vỡ toàn vẹn tham chiếu \\
+  không phá vỡ toàn vẹn tham chiếu \\ \hline
 \end{longtable}
 
 \section{Kiến trúc hệ thống}
@@ -894,17 +831,15 @@ Bảng~\ref{tab:trach-nhiem-service} tóm tắt trách nhiệm của từng lớ
 \centering
 \caption{Trách nhiệm của các lớp dịch vụ}
 \label{tab:trach-nhiem-service}
-\begin{tabularx}{\textwidth}{p{5.2cm} Y}
-\toprule
-\bfseries Lớp & \bfseries Trách nhiệm chính \\
-\midrule
+\begin{tabularx}{\textwidth}{|P{5.2cm}|Y|}
+\hline
+\bfseries Lớp & \bfseries Trách nhiệm chính \\ \hline
 \code{RecipeService} & Tìm kiếm, lọc, sắp xếp, phân trang; lấy chi tiết món; dữ
-  liệu trang chủ \\
-\rowhl \code{SuggestionService} & Thuật toán gợi ý theo nguyên liệu \\
-\code{MenuPlannerService} & Thuật toán sinh thực đơn tuần \\
-\rowhl \code{ShoppingListService} & Thuật toán gộp nhóm sinh danh sách đi chợ \\
-\code{FavoriteService} & Thêm, bỏ, kiểm tra và liệt kê món yêu thích \\
-\bottomrule
+  liệu trang chủ \\ \hline
+\code{SuggestionService} & Thuật toán gợi ý theo nguyên liệu \\ \hline
+\code{MenuPlannerService} & Thuật toán sinh thực đơn tuần \\ \hline
+\code{ShoppingListService} & Thuật toán gộp nhóm sinh danh sách đi chợ \\ \hline
+\code{FavoriteService} & Thêm, bỏ, kiểm tra và liệt kê món yêu thích \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -1197,17 +1132,15 @@ trình bày ở mục~\ref{sec:khiem-khuyet}.
 \centering
 \caption{Nguy cơ bảo mật và biện pháp áp dụng}
 \label{tab:bao-mat}
-\begin{tabularx}{\textwidth}{p{5.0cm} Y}
-\toprule
-\bfseries Nguy cơ & \bfseries Biện pháp trong hệ thống \\
-\midrule
-Chèn mã SQL & Toàn bộ truy vấn qua LINQ của EF Core, tham số hóa tự động \\
-\rowhl Lộ mật khẩu & Identity lưu giá trị băm có muối, không lưu mật khẩu gốc \\
-Giả mạo yêu cầu liên trang & Token chống giả mạo trên mọi biểu mẫu POST \\
-\rowhl Truy cập vượt quyền chức năng & \code{[Authorize(Roles = "Admin")]} trên
-  toàn bộ khu quản trị \\
-Truy cập vượt quyền dữ liệu & Lọc theo \code{UserId} ngay trong truy vấn \\
-\rowhl Lộ chuỗi kết nối & Lưu trong User Secrets, không đưa vào mã nguồn \\
-\bottomrule
+\begin{tabularx}{\textwidth}{|P{5.0cm}|Y|}
+\hline
+\bfseries Nguy cơ & \bfseries Biện pháp trong hệ thống \\ \hline
+Chèn mã SQL & Toàn bộ truy vấn qua LINQ của EF Core, tham số hóa tự động \\ \hline
+Lộ mật khẩu & Identity lưu giá trị băm có muối, không lưu mật khẩu gốc \\ \hline
+Giả mạo yêu cầu liên trang & Token chống giả mạo trên mọi biểu mẫu POST \\ \hline
+Truy cập vượt quyền chức năng & \code{[Authorize(Roles = "Admin")]} trên
+  toàn bộ khu quản trị \\ \hline
+Truy cập vượt quyền dữ liệu & Lọc theo \code{UserId} ngay trong truy vấn \\ \hline
+Lộ chuỗi kết nối & Lưu trong User Secrets, không đưa vào mã nguồn \\ \hline
 \end{tabularx}
 \end{table}

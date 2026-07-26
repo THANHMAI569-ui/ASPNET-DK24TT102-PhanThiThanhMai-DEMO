@@ -1,84 +1,70 @@
 % ============================================================
 %  TRANG NHAN XET CUA GVHD VA CUA THANH VIEN HOI DONG
+%  Moi trang phai gon trong dung mot khuon giay: khoi ky ten duoc
+%  day xuong day bang \vfill, so dong ke duoc chon de khong tran trang.
 % ============================================================
-\clearpage
-\thispagestyle{empty}
-\begin{center}
-{\bfseries ĐẠI HỌC TRÀ VINH}\\[2pt]
-{\bfseries TRƯỜNG KỸ THUẬT VÀ CÔNG NGHỆ}\\[2pt]
-{\bfseries KHOA CÔNG NGHỆ THÔNG TIN}
 
-\vspace{1.2cm}
-{\large\bfseries NHẬN XÉT CỦA GIẢNG VIÊN HƯỚNG DẪN}
-\end{center}
+% Khoi dong ke de nguoi cham viet tay. Dung \vbox cao co dinh, cac dong
+% chia deu bang \vfil: chieu cao khoi khong phu thuoc gian dong nen trang
+% chac chan khong bi tran sang to sau.
+\newcommand{\khoidongke}[1]{%
+  \par\noindent
+  \vbox to #1{%
+    \vfil\hbox{\rule{\textwidth}{0.4pt}}
+    \vfil\hbox{\rule{\textwidth}{0.4pt}}
+    \vfil\hbox{\rule{\textwidth}{0.4pt}}
+    \vfil\hbox{\rule{\textwidth}{0.4pt}}
+    \vfil\hbox{\rule{\textwidth}{0.4pt}}
+    \vfil\hbox{\rule{\textwidth}{0.4pt}}
+    \vfil\hbox{\rule{\textwidth}{0.4pt}}
+    \vfil\hbox{\rule{\textwidth}{0.4pt}}
+    \vfil\hbox{\rule{\textwidth}{0.4pt}}
+    \vfil}%
+  \par}
 
-\vspace{0.4cm}
-\noindent Tên đề tài: \textbf{Xây dựng website gợi ý nấu ăn và lập thực đơn cho
-gia đình}
+% Mot trang nhan xet: #1 la tieu de trang, #2 la chuc danh nguoi ky
+\newcommand{\trangnhanxet}[2]{%
+  \clearpage
+  \thispagestyle{empty}
+  \begin{center}
+    {\bfseries ĐẠI HỌC TRÀ VINH}\\[2pt]
+    {\bfseries TRƯỜNG KỸ THUẬT VÀ CÔNG NGHỆ}\\[2pt]
+    {\bfseries KHOA CÔNG NGHỆ THÔNG TIN}
 
-\noindent Sinh viên thực hiện: \textbf{Phan Thị Thanh Mai} \hfill Lớp:
-\textbf{DK24TT102}
+    \vspace{1.0cm}
+    {\large\bfseries #1}
+  \end{center}
 
-\noindent MSSV: \placeholder{\makebox[5cm]{\dotfill}}
+  \vspace{0.3cm}
+  \noindent Tên đề tài: \textbf{Xây dựng website gợi ý nấu ăn và lập thực đơn
+  cho gia đình}
 
-\vspace{0.6cm}
-\noindent\textbf{Nội dung nhận xét}
+  \noindent Sinh viên thực hiện: \textbf{Phan Thị Thanh Mai} \hfill Lớp:
+  \textbf{DK24TT102}
 
-\vspace{0.2cm}
-\newcommand{\dongtrong}{\noindent\rule{\textwidth}{0.4pt}\\[16pt]}
-\dongtrong \dongtrong \dongtrong \dongtrong \dongtrong \dongtrong
-\dongtrong \dongtrong \dongtrong \dongtrong \dongtrong
+  \noindent MSSV: \placeholder{\makebox[5cm]{\dotfill}}
 
-\vspace{0.4cm}
-\noindent\textbf{Điểm đánh giá:} \placeholder{\makebox[5cm]{\dotfill}}
+  \vspace{0.4cm}
+  \noindent\textbf{Nội dung nhận xét}
 
-\vspace{1.0cm}
-\begin{flushright}
-\begin{minipage}{7.6cm}
-\centering
-Vĩnh Long, ngày \makebox[1.4cm]{\dotfill}\ tháng \makebox[1.4cm]{\dotfill}\ năm 2026\\[4pt]
-\textbf{Giảng viên hướng dẫn}\\
-\textit{(Ký và ghi rõ họ tên)}\\[2.4cm]
-\end{minipage}
-\end{flushright}
+  \vspace{0.2cm}
+  \khoidongke{10.4cm}
 
-% ------------------------------------------------------------
-\clearpage
-\thispagestyle{empty}
-\begin{center}
-{\bfseries ĐẠI HỌC TRÀ VINH}\\[2pt]
-{\bfseries TRƯỜNG KỸ THUẬT VÀ CÔNG NGHỆ}\\[2pt]
-{\bfseries KHOA CÔNG NGHỆ THÔNG TIN}
+  \vspace{0.3cm}
+  \noindent\textbf{Điểm đánh giá:} \placeholder{\makebox[5cm]{\dotfill}}
 
-\vspace{1.2cm}
-{\large\bfseries NHẬN XÉT CỦA THÀNH VIÊN HỘI ĐỒNG}
-\end{center}
+  \vfill
+  \begin{flushright}
+  \begin{minipage}{9.4cm}
+  \setstretch{1.2}
+  \centering
+  Vĩnh Long, ngày \makebox[1.4cm]{\dotfill}\ tháng \makebox[1.4cm]{\dotfill}\
+  năm 2026\\[4pt]
+  \textbf{#2}\\
+  \textit{(Ký và ghi rõ họ tên)}\\[2.2cm]
+  \end{minipage}
+  \end{flushright}
+}
 
-\vspace{0.4cm}
-\noindent Tên đề tài: \textbf{Xây dựng website gợi ý nấu ăn và lập thực đơn cho
-gia đình}
-
-\noindent Sinh viên thực hiện: \textbf{Phan Thị Thanh Mai} \hfill Lớp:
-\textbf{DK24TT102}
-
-\noindent MSSV: \placeholder{\makebox[5cm]{\dotfill}}
-
-\vspace{0.6cm}
-\noindent\textbf{Nội dung nhận xét}
-
-\vspace{0.2cm}
-\dongtrong \dongtrong \dongtrong \dongtrong \dongtrong \dongtrong
-\dongtrong \dongtrong \dongtrong \dongtrong \dongtrong
-
-\vspace{0.4cm}
-\noindent\textbf{Điểm đánh giá:} \placeholder{\makebox[5cm]{\dotfill}}
-
-\vspace{1.0cm}
-\begin{flushright}
-\begin{minipage}{7.6cm}
-\centering
-Vĩnh Long, ngày \makebox[1.4cm]{\dotfill}\ tháng \makebox[1.4cm]{\dotfill}\ năm 2026\\[4pt]
-\textbf{Thành viên hội đồng}\\
-\textit{(Ký và ghi rõ họ tên)}\\[2.4cm]
-\end{minipage}
-\end{flushright}
+\trangnhanxet{NHẬN XÉT CỦA GIẢNG VIÊN HƯỚNG DẪN}{Giảng viên hướng dẫn}
+\trangnhanxet{NHẬN XÉT CỦA THÀNH VIÊN HỘI ĐỒNG}{Thành viên hội đồng}

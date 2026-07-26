@@ -5,9 +5,9 @@
 
   % --- Lan boi (swimlane) ---------------------------------------
   \draw[thin] (-4.2,0.9) rectangle (4.5,-26.3);
-  \draw[thin] (4.5,0.9) rectangle (17.2,-26.3);
+  \draw[thin] (4.5,0.9) rectangle (18.0,-26.3);
   \node[font=\bfseries\small] at (0.15,0.55) {Người dùng};
-  \node[font=\bfseries\small] at (10.85,0.55) {Hệ thống};
+  \node[font=\bfseries\small] at (11.25,0.55) {Hệ thống};
 
   % --- Cac nut --------------------------------------------------
   \node[term]  (B0)  at (0,0)      {Bắt đầu};
@@ -33,7 +33,9 @@
   \draw[fl] (B0.south) -- (B1.north);
   \draw[fl] (B1.east)  -- (B2.west);
   \draw[fl] (B2.east)  -- node[lbl, above]{Chưa} (B3.west);
-  \draw[fl] (B3.south) -- (B4.north);
+  % Ve theo goc vuong: noi thang hai nut o hai dau so do se thanh mot
+  % duong cheo cat qua ca luoc do.
+  \draw[fl] (B3.south) |- (B4.east);
   \draw[fl] (B4.north) -- (-1.3,-4.0) -- (B2.west);
   \draw[fl] (B2.south) -- node[lbl, right]{Rồi} (B5.north);
   \draw[fl] (B5.south) -- (B6.north);

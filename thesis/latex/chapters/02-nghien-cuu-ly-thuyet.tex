@@ -83,24 +83,22 @@ thể trong hệ thống CookingAdvisor.
 \centering
 \caption{Các cơ chế của ASP.NET Core MVC và cách áp dụng trong đồ án}
 \label{tab:mvc-ap-dung}
-\begin{tabularx}{\textwidth}{p{3.4cm} Y}
-\toprule
-\bfseries Cơ chế & \bfseries Áp dụng cụ thể trong CookingAdvisor \\
-\midrule
+\begin{tabularx}{\textwidth}{|P{3.4cm}|Y|}
+\hline
+\bfseries Cơ chế & \bfseries Áp dụng cụ thể trong CookingAdvisor \\ \hline
 Định tuyến & Toàn bộ chức năng dùng định tuyến theo quy ước, ví dụ
-  \code{/Recipe/Details/5}, \code{/Suggestion}, \code{/Menu/Generate} \\
-\rowhl Model binding & Gom toàn bộ tham số tìm kiếm, lọc, sắp xếp và phân trang
-  của trang danh sách món vào một lớp \code{RecipeFilterViewModel} duy nhất \\
+  \code{/Recipe/Details/5}, \code{/Suggestion}, \code{/Menu/Generate} \\ \hline
+Model binding & Gom toàn bộ tham số tìm kiếm, lọc, sắp xếp và phân trang
+  của trang danh sách món vào một lớp \code{RecipeFilterViewModel} duy nhất \\ \hline
 Kiểm tra hợp lệ & Biểu mẫu đăng ký, đăng nhập và biểu mẫu thêm hoặc sửa món ăn
-  trong khu quản trị \\
-\rowhl Tiêm phụ thuộc & Năm lớp Service được đăng ký vòng đời \code{Scoped} và
-  đưa vào Controller qua hàm khởi tạo \\
+  trong khu quản trị \\ \hline
+Tiêm phụ thuộc & Năm lớp Service được đăng ký vòng đời \code{Scoped} và
+  đưa vào Controller qua hàm khởi tạo \\ \hline
 Bộ lọc & \code{[Authorize]} cho nhóm chức năng của Người dùng,
-  \code{[Authorize(Roles = "Admin")]} cho toàn bộ khu quản trị \\
-\rowhl Areas & Khu vực quản trị tách riêng thành \code{Areas/Admin} \\
+  \code{[Authorize(Roles = "Admin")]} cho toàn bộ khu quản trị \\ \hline
+Areas & Khu vực quản trị tách riêng thành \code{Areas/Admin} \\ \hline
 Razor và Tag Helpers & Toàn bộ giao diện; ngoài ra đồ án tự viết Tag Helper
-  riêng cho hệ thống biểu tượng, đặt trong thư mục \code{TagHelpers} \\
-\bottomrule
+  riêng cho hệ thống biểu tượng, đặt trong thư mục \code{TagHelpers} \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -320,20 +318,18 @@ biệt giữa hai độ đo trên chính ví dụ vừa nêu.
 \centering
 \caption{So sánh hệ số Jaccard và độ phủ trên cùng một tình huống}
 \label{tab:so-sanh-do-do}
-\begin{tabularx}{\textwidth}{p{3.6cm} Y Y}
-\toprule
-\bfseries Tiêu chí & \bfseries Hệ số Jaccard & \bfseries Độ phủ \\
-\midrule
+\begin{tabularx}{\textwidth}{|P{3.6cm}|Y|Y|}
+\hline
+\bfseries Tiêu chí & \bfseries Hệ số Jaccard & \bfseries Độ phủ \\ \hline
 Tính đối xứng & Đối xứng, phạt cả phần dư của người dùng &
-  Không đối xứng, chỉ xét phần nguyên liệu của món \\
-\rowhl Mẫu số & $|A \cup I_R|$, phụ thuộc số nguyên liệu người dùng khai báo &
-  $|I_R|$, chỉ phụ thuộc bản thân món ăn \\
+  Không đối xứng, chỉ xét phần nguyên liệu của món \\ \hline
+Mẫu số & $|A \cup I_R|$, phụ thuộc số nguyên liệu người dùng khai báo &
+  $|I_R|$, chỉ phụ thuộc bản thân món ăn \\ \hline
 Giá trị trong ví dụ ($|A| = 40$, $|I_R| = 3$, giao bằng 3) &
-  $3/40 = 0{,}075$ & $3/3 = 1{,}0$ \\
-\rowhl Thứ hạng thu được & Gần cuối danh sách & Cao nhất, đúng thực tế \\
+  $3/40 = 0{,}075$ & $3/3 = 1{,}0$ \\ \hline
+Thứ hạng thu được & Gần cuối danh sách & Cao nhất, đúng thực tế \\ \hline
 Điều kiện nấu được ngay & Không biểu diễn trực tiếp được &
-  Tương đương với giá trị bằng 1 \\
-\bottomrule
+  Tương đương với giá trị bằng 1 \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -461,20 +457,18 @@ cứ cho phần cài đặt ở mục~\ref{sec:cai-dat-thuat-toan}.
 \centering
 \caption{Tổng hợp cơ sở thuật toán của ba chức năng lõi}
 \label{tab:tong-hop-thuat-toan}
-\begin{tabularx}{\textwidth}{p{2.9cm} Y Y p{2.9cm}}
-\toprule
+\begin{tabularx}{\textwidth}{|P{2.9cm}|Y|Y|P{2.9cm}|}
+\hline
 \bfseries Chức năng & \bfseries Lớp bài toán & \bfseries Kỹ thuật sử dụng &
-\bfseries Độ phức tạp \\
-\midrule
+\bfseries Độ phức tạp \\ \hline
 Gợi ý theo nguyên liệu & Xếp hạng theo độ tương đồng tập hợp &
   Độ phủ không đối xứng, sắp xếp theo thứ tự từ điển bốn tiêu chí &
-  $O(nk + n \log n)$ \\
-\rowhl Sinh thực đơn tuần & Xếp lịch có ràng buộc &
+  $O(nk + n \log n)$ \\ \hline
+Sinh thực đơn tuần & Xếp lịch có ràng buộc &
   Tham lam có thứ tự nới lỏng xác định, cân bằng theo tần suất sử dụng &
-  $O(S \cdot n \log n)$ \\
+  $O(S \cdot n \log n)$ \\ \hline
 Sinh danh sách đi chợ & Gộp nhóm và tổng hợp &
-  Bảng băm với khóa ghép (nguyên liệu, đơn vị) & $O(S \cdot k)$ \\
-\bottomrule
+  Bảng băm với khóa ghép (nguyên liệu, đơn vị) & $O(S \cdot k)$ \\ \hline
 \end{tabularx}
 \end{table}
 

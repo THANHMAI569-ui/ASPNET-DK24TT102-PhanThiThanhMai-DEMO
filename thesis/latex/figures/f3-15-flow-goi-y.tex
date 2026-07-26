@@ -1,6 +1,6 @@
 \begin{figure}[H]
 \centering
-\resizebox{!}{0.85\textheight}{%
+\adjustbox{max totalsize={\textwidth}{0.85\textheight}}{%
 \begin{tikzpicture}[node distance=8mm and 20mm]
 
 \node[term] (START) {Bắt đầu};
@@ -18,7 +18,7 @@
 \node[procs, below=of P4] (P5) {coverage = matched / $|I_R|$};
 \node[procs, below=of P5] (P6) {canCookNow = (missing rỗng)};
 
-\node[proc, below=13mm of D2, text width=7.4cm] (PRANK) {Xếp hạng theo thứ tự từ điển:\\
+\node[proc, below=13mm of D2, text width=7.4cm, align=left] (PRANK) {Xếp hạng theo thứ tự từ điển:\\
 1. canCookNow giảm dần,\\
 2. coverage giảm dần,\\
 3. $|$missing$|$ tăng dần,\\
@@ -36,7 +36,9 @@
 \draw[fl] (P3) -- (P4);
 \draw[fl] (P4) -- (P5);
 \draw[fl] (P5) -- (P6);
-\draw[fl] (P6.south) -- ++(0,-4mm) -| ($(D2.east)+(2.4,0)$) -- (D2.east);
+% Duong quay vong di vong ben phai cot tinh toan roi nhap vao D2 tu phia
+% tren: neu nhap tu canh phai se de len chinh mui ten D2 -> P3.
+\draw[fl] (P6.east) -- ++(1.2,0) |- ($(D2.north)+(0,0.7)$) -- (D2.north);
 \draw[fl] (D2) -- (PRANK) node[lbl, midway] {Không};
 \draw[fl] (PRANK) -- (PFINAL);
 \draw[fl] (PFINAL) -- (END2);
