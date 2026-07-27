@@ -19,10 +19,10 @@
 \setmainfont{Times New Roman}
 \setmonofont{Courier New}[Scale=MatchLowercase]
 \usepackage{unicode-math}
-\setmathfont{XITSMath-Regular.otf}[
-  BoldFont = XITSMath-Bold.otf,
-  math-style = TeX
-]
+% Font toan lay ban TeX Gyre Termes: day la ban Times cua bo ky hieu toan, nho
+% do cac ky hieu (giao, hop, tap rong, tri tuyet doi) cung mot dang chu voi
+% phan chu Times New Roman thay vi lech sang XITS.
+\setmathfont{texgyretermes-math.otf}[math-style = TeX]
 
 % === Tieng Viet ==============================================
 \usepackage[vietnamese]{babel}
@@ -34,7 +34,7 @@
 % le tren 2cm (dat sau khi nap goi thi geometry khong tinh lai, dau trang se
 % bi day len sat mep giay).
 \usepackage[top=2cm, bottom=2cm, left=3cm, right=2cm,
-            headheight=14pt, headsep=12pt, footskip=0.8cm]{geometry}
+            headheight=17pt, headsep=5pt, footskip=0.9cm]{geometry}
 
 % === Gian dong 1.5, cach doan 6pt (quy dinh TVU) =============
 \usepackage{setspace}
@@ -55,23 +55,25 @@
 % chan trang mang ho ten sinh vien va so trang. Quy dinh TVU chi rang buoc
 % so trang phai nam o goc phai duoi, dieu nay van duoc giu.
 \usepackage{fancyhdr}
-\newcommand{\dttendetai}{Xây dựng website gợi ý nấu ăn và lập thực đơn cho gia đình}
+% Dau trang chi mang ten de tai rut gon: o 13pt, ten day du cong voi ten
+% GVHD vuot qua 16cm khoi chu va hai khoi trai/phai se de len nhau.
+\newcommand{\dttendetai}{Website gợi ý nấu ăn và lập thực đơn}
 \newcommand{\dtgvhd}{GV hướng dẫn: TS. Đoàn Minh Phước}
 \newcommand{\dtsvth}{SVTH: Phan Thị Thanh Mai}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\footnotesize\itshape\dttendetai}
-\fancyhead[R]{\footnotesize\itshape\dtgvhd}
-\fancyfoot[L]{\footnotesize\dtsvth}
+\fancyhead[L]{\itshape\dttendetai}
+\fancyhead[R]{\itshape\dtgvhd}
+\fancyfoot[L]{\dtsvth}
 \fancyfoot[R]{\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0pt}
 % Trang mo dau chuong dung kieu plain, van phai co du dau va chan trang.
 \fancypagestyle{plain}{%
   \fancyhf{}%
-  \fancyhead[L]{\footnotesize\itshape\dttendetai}%
-  \fancyhead[R]{\footnotesize\itshape\dtgvhd}%
-  \fancyfoot[L]{\footnotesize\dtsvth}%
+  \fancyhead[L]{\itshape\dttendetai}%
+  \fancyhead[R]{\itshape\dtgvhd}%
+  \fancyfoot[L]{\dtsvth}%
   \fancyfoot[R]{\thepage}%
   \renewcommand{\headrulewidth}{0.4pt}%
 }
@@ -154,7 +156,9 @@
 \usepackage{rotating}  % so do qua rong: xoay ngang tron trang
 \usepackage{caption}
 % Nhan hinh/bang dang "Hinh 3.1." va "Bang 3.1." theo thoi quen tieng Viet
-\captionsetup{font=small, labelfont=bf, justification=centering,
+% Chu thich hinh, bang giu nguyen co 13pt nhu than bai (mau cua khoa khong thu
+% nho chu trong bang lan chu thich).
+\captionsetup{font=normalsize, labelfont=bf, justification=centering,
               labelsep=period, skip=4pt}
 \captionsetup[table]{skip=2pt}
 
@@ -175,9 +179,9 @@
 % Bang va hinh dung gian dong don cho gon
 % Cot p{} trong bang can canh trai (khong can deu hai ben) de tranh cac
 % khoang trang lon giua tu trong o hep.
-\AtBeginEnvironment{tabular}{\setstretch{1.0}\small\raggedright\arraybackslash}
-\AtBeginEnvironment{tabularx}{\setstretch{1.0}\small\raggedright\arraybackslash}
-\AtBeginEnvironment{longtable}{\setstretch{1.0}\small\raggedright\arraybackslash}
+\AtBeginEnvironment{tabular}{\setstretch{1.0}\raggedright\arraybackslash}
+\AtBeginEnvironment{tabularx}{\setstretch{1.0}\raggedright\arraybackslash}
+\AtBeginEnvironment{longtable}{\setstretch{1.0}\raggedright\arraybackslash}
 
 % === Ma nguon, ma gia ========================================
 % Dung fancyvrb/fvextra chu KHONG dung listings: goi listings cat nho cac ky
