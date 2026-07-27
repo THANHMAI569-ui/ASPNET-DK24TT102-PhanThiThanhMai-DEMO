@@ -5,11 +5,10 @@
 \label{ch:ly-thuyet}
 
 Chương này trình bày cơ sở lý thuyết của hai nhóm nội dung: nhóm công nghệ nền
-tảng dùng để xây dựng hệ thống (mục 2.1 đến 2.4) và nhóm cơ sở thuật toán dùng để
-giải các bài toán nghiệp vụ (mục 2.5). Với mỗi công nghệ, chương không dừng ở
-việc mô tả lý thuyết mà còn có một mục riêng chỉ rõ công nghệ đó được vận dụng
-vào đâu trong đồ án, để phần thiết kế ở Chương~\ref{ch:hien-thuc} có căn cứ tham
-chiếu trực tiếp.
+tảng dùng để xây dựng hệ thống (mục 2.1 đến 2.4) và nhóm cơ sở thuật toán dùng
+để giải các bài toán nghiệp vụ (mục 2.5). Với mỗi công nghệ, chương chỉ rõ luôn
+công nghệ đó được vận dụng vào đâu trong đồ án để phần thiết kế ở
+Chương~\ref{ch:hien-thuc} có căn cứ tham chiếu trực tiếp.
 
 \section{Kiến trúc MVC và nền tảng ASP.NET Core}
 \label{sec:mvc}
@@ -85,19 +84,16 @@ Razor và Tag Helpers & Toàn bộ giao diện; ngoài ra đồ án tự viết 
 \section{Entity Framework Core và tiếp cận Code-First}
 \label{sec:efcore}
 
-\subsection{Vai trò của bộ ánh xạ đối tượng quan hệ}
+\subsection{Vai trò của bộ ánh xạ đối tượng quan hệ và cơ chế migrations}
 
-Entity Framework Core (EF Core) là bộ ánh xạ đối tượng - quan hệ (Object
-Relational Mapper) cho .NET, cho phép thao tác với cơ sở dữ liệu quan hệ thông
-qua các đối tượng .NET thay vì viết câu lệnh SQL trực tiếp.
-
-Ngoài lợi ích về năng suất, cách tiếp cận này còn mang lại một lợi ích về an toàn
-thông tin thường bị bỏ qua: các truy vấn viết bằng LINQ được EF Core dịch thành
-câu lệnh SQL có tham số hóa, nên giá trị do người dùng nhập không bao giờ được
-ghép trực tiếp vào chuỗi lệnh. Nguy cơ chèn mã SQL vì vậy được loại bỏ ngay tại
-tầng truy cập dữ liệu chứ không phụ thuộc vào kỷ luật của từng lập trình viên.
-
-\subsection{Cơ chế migrations}
+Entity Framework Core (EF Core) là bộ ánh xạ đối tượng - quan hệ cho .NET, cho
+phép thao tác với cơ sở dữ liệu quan hệ thông qua các đối tượng .NET thay vì
+viết câu lệnh SQL trực tiếp. Ngoài lợi ích về năng suất, cách tiếp cận này còn
+mang lại một lợi ích về an toàn thông tin thường bị bỏ qua: truy vấn viết bằng
+LINQ được EF Core dịch thành câu lệnh SQL có tham số hóa, nên giá trị do người
+dùng nhập không bao giờ được ghép trực tiếp vào chuỗi lệnh; nguy cơ chèn mã SQL
+được loại bỏ ngay tại tầng truy cập dữ liệu chứ không phụ thuộc vào kỷ luật của
+từng lập trình viên.
 
 Đồ án sử dụng tiếp cận \textbf{Code-First}, trong đó lược đồ cơ sở dữ liệu được
 sinh ra từ các lớp thực thể trong mã nguồn. Cơ chế bảo đảm sự đồng bộ giữa mã
@@ -143,33 +139,25 @@ người dùng vào các vai trò và giới hạn truy cập theo vai trò; k�
 \code{[Authorize]} của MVC [12], hệ thống khai báo phân quyền ngay tại lớp
 Controller.
 
-\subsection{Phân biệt xác thực và phân quyền}
+\subsection{Phân biệt xác thực, phân quyền và cách áp dụng}
 
 Cần phân biệt rõ hai khái niệm thường bị nhầm lẫn: \textbf{xác thực}
 (authentication) trả lời câu hỏi \textit{người dùng này là ai}, còn \textbf{phân
 quyền} (authorization) trả lời câu hỏi \textit{người dùng này được phép làm gì}.
 Một hệ thống chỉ kiểm tra xác thực mà bỏ qua phân quyền vẫn có lỗ hổng: người
 dùng đã đăng nhập hợp lệ vẫn có thể truy cập tài nguyên không thuộc quyền của
-mình.
+mình. Từ đó có hai mức phân quyền: \textbf{mức chức năng} kiểm tra người dùng có
+được phép gọi một hành động hay không, thường cài đặt bằng thuộc tính khai báo
+trên Controller; \textbf{mức bản ghi} kiểm tra người dùng có được thao tác trên
+\textit{đúng bản ghi đang xét} hay không, mức này phải đưa điều kiện lọc vào
+chính câu truy vấn.
 
-Từ đó có thể phân biệt tiếp hai mức phân quyền. \textbf{Phân quyền mức chức năng}
-kiểm tra người dùng có được phép gọi một hành động hay không, thường cài đặt bằng
-thuộc tính khai báo trên Controller. \textbf{Phân quyền mức bản ghi} kiểm tra
-người dùng có được phép thao tác trên \textit{đúng bản ghi đang xét} hay không;
-mức này không thể giải quyết bằng thuộc tính khai báo mà phải đưa điều kiện lọc
-vào chính câu truy vấn.
-
-\subsection{Áp dụng trong đồ án}
-
-Đồ án định nghĩa hai vai trò là \code{Admin} và \code{User}. Toàn bộ khu vực quản
-trị được bảo vệ bằng \code{[Authorize(Roles = "Admin")]}, đó là phân quyền mức
-chức năng.
-
-Ở mức bản ghi, các thao tác trên thực đơn và danh sách đi chợ đều kiểm tra bản
-ghi có thuộc về đúng người dùng đang đăng nhập hay không, và phép kiểm tra này
-được đặt ngay trong biểu thức truy vấn chứ không đặt trong một câu lệnh điều kiện
-sau khi đã nạp dữ liệu. Cách cài đặt cụ thể được phân tích ở
-mục~\ref{sec:thuat-toan-di-cho}.
+Đồ án định nghĩa hai vai trò là \code{Admin} và \code{User}. Toàn bộ khu vực
+quản trị được bảo vệ bằng \code{[Authorize(Roles = "Admin")]}, đó là phân quyền
+mức chức năng. Ở mức bản ghi, các thao tác trên thực đơn và danh sách đi chợ đều
+kiểm tra bản ghi có thuộc về đúng người dùng đang đăng nhập hay không, và phép
+kiểm tra này được đặt ngay trong biểu thức truy vấn chứ không đặt trong một câu
+lệnh điều kiện sau khi đã nạp dữ liệu (mục~\ref{sec:thuat-toan-di-cho}).
 
 \section{Hệ quản trị cơ sở dữ liệu SQL Server và triển khai đa nền tảng}
 \label{sec:sqlserver}
@@ -271,32 +259,17 @@ Tiêu chí thứ tư có vai trò kỹ thuật quan trọng: nó bảo đảm \t
 cùng một truy vấn có thể cho ra thứ tự khác nhau, gây khó khăn cho việc kiểm thử
 tự động và tạo trải nghiệm không nhất quán cho người dùng.
 
-\textbf{Độ phức tạp.} Gọi $n$ là số món trong kho dữ liệu và $k$ là số nguyên
-liệu trung bình của một món. Nếu biểu diễn $A$ bằng bảng băm, việc kiểm tra một
-nguyên liệu có thuộc $A$ hay không tốn thời gian trung bình $O(1)$. Khi đó chi
-phí tính toán độ phủ cho toàn bộ kho dữ liệu là $O(nk)$, cộng thêm $O(n \log n)$
-cho bước sắp xếp, tổng cộng là $O(nk + n \log n)$.
-
 \subsection{Thuật toán tham lam có ràng buộc cho bài toán lập thực đơn}
 \label{sec:tham-lam}
 
 \textbf{Phát biểu bài toán.} Cần gán món ăn vào $D \times M$ ô, với $D = 7$ ngày
-và $M = 3$ bữa, tức 21 suất ăn, thỏa mãn các ràng buộc:
-
-\begin{itemize}
-  \item \textbf{Ràng buộc cứng:} món được gán phải thuộc vùng miền người dùng
-        chọn (nếu có).
-  \item \textbf{Ràng buộc mềm 1:} món phải phù hợp với bữa được gán (sáng, trưa
-        hoặc tối).
-  \item \textbf{Ràng buộc mềm 2:} hạn chế lặp món trong cùng một tuần.
-  \item \textbf{Tiêu chí tối ưu:} tổng năng lượng trong ngày tiệm cận mức mục
-        tiêu.
-\end{itemize}
-
-Bài toán tối ưu toàn cục với đầy đủ các ràng buộc trên thuộc lớp bài toán khó.
-Tuy nhiên, với quy mô thực tế của đề tài (21 suất, vài chục món), lời giải tối ưu
-tuyệt đối không phải là yêu cầu bắt buộc: người dùng chỉ cần một thực đơn hợp lý
-và luôn có thể chỉnh sửa thủ công.
+và $M = 3$ bữa, tức 21 suất ăn, thỏa mãn một \textbf{ràng buộc cứng} là món phải
+thuộc vùng miền người dùng chọn (nếu có), hai \textbf{ràng buộc mềm} là món phải
+hợp bữa được gán và hạn chế lặp món trong tuần, cùng \textbf{tiêu chí tối ưu} là
+tổng năng lượng trong ngày tiệm cận mức mục tiêu. Bài toán tối ưu toàn cục với
+đầy đủ các ràng buộc đó thuộc lớp bài toán khó, nhưng với quy mô thực tế của đề
+tài (21 suất, vài chục món), lời giải tối ưu tuyệt đối không phải yêu cầu bắt
+buộc: người dùng chỉ cần một thực đơn hợp lý và luôn có thể chỉnh sửa thủ công.
 
 \textbf{Lựa chọn chiến lược tham lam.} Thuật toán tham lam là chiến lược tại mỗi
 bước chọn phương án có vẻ tốt nhất ở thời điểm hiện tại, không quay lui để xét
@@ -331,10 +304,6 @@ nhất}, về bản chất là chuyển sang chiến lược cân bằng tải t
 áp dụng, thực đơn sinh ra đạt 17 món khác nhau trên 21 suất; chi tiết kiểm chứng
 trình bày ở Chương~\ref{ch:ket-qua}.
 
-\textbf{Độ phức tạp.} Với $S = D \times M = 21$ suất và $n$ món ứng viên, mỗi
-suất cần duyệt và sắp xếp tập ứng viên, cho độ phức tạp $O(S \cdot n \log n)$.
-Với quy mô thực tế, chi phí này là không đáng kể.
-
 \subsection{Bài toán gộp nhóm cho danh sách đi chợ}
 \label{sec:gop-nhom}
 
@@ -350,34 +319,13 @@ Q(i, u) = \sum_{\substack{s \in P \\ (i, q, u) \in R_s}} q
 
 trong đó $R_s$ là tập nguyên liệu của món ở suất $s$.
 
-Có hai điểm cần lưu ý về mặt thiết kế.
-
-\textbf{Thứ nhất, khóa gộp nhóm phải là cặp (nguyên liệu, đơn vị) chứ không chỉ
-là nguyên liệu.} Cùng một nguyên liệu có thể được định lượng bằng các đơn vị khác
-nhau ở những công thức khác nhau, ví dụ hành lá tính theo gam ở món này nhưng
-tính theo bó ở món khác. Cộng dồn hai giá trị khác đơn vị sẽ cho kết quả vô
-nghĩa. Việc đưa đơn vị vào khóa gộp nhóm bảo đảm chỉ những giá trị cùng đơn vị
-mới được cộng với nhau.
-
-\textbf{Thứ hai, phép duyệt phải theo suất ăn chứ không theo món.} Nếu một món
-xuất hiện ba lần trong tuần thì nguyên liệu của nó phải được tính ba lần. Nói
-cách khác, phép duyệt thực hiện trên tập các suất ăn, không phải trên tập các món
-khác nhau.
+Có hai điểm cần lưu ý về mặt thiết kế. \textbf{Thứ nhất}, khóa gộp nhóm phải là
+cặp (nguyên liệu, đơn vị) chứ không chỉ là nguyên liệu: cùng một nguyên liệu có
+thể được định lượng bằng đơn vị khác nhau ở những công thức khác nhau, ví dụ
+hành lá tính theo gam ở món này nhưng theo bó ở món khác, nên cộng dồn hai giá
+trị khác đơn vị sẽ cho kết quả vô nghĩa. \textbf{Thứ hai}, phép duyệt phải theo
+suất ăn chứ không theo món: nếu một món xuất hiện ba lần trong tuần thì nguyên
+liệu của nó phải được tính ba lần.
 
 Độ phức tạp của thuật toán là $O(S \cdot k)$ với $S$ là số suất ăn và $k$ là số
 nguyên liệu trung bình mỗi món, khi sử dụng bảng băm cho thao tác gộp nhóm.
-
-\section{Kết luận chương}
-
-Chương 2 đã trình bày hai nhóm cơ sở lý thuyết của đồ án. Về công nghệ, mẫu kiến
-trúc MVC cùng nguyên tắc phân tách mối quan tâm là căn cứ cho quyết định tách
-tầng Service khỏi Controller; EF Core theo tiếp cận Code-First cùng cơ chế
-migrations bảo đảm lược đồ cơ sở dữ liệu luôn đồng bộ với mã nguồn và tái tạo
-được trên máy khác chỉ bằng một lệnh; ASP.NET Core Identity cung cấp nền tảng
-xác thực và phân quyền theo vai trò đã được kiểm chứng. Về thuật toán, chương đã
-lập luận cho ba lựa chọn then chốt: dùng độ phủ thay cho hệ số Jaccard do tính
-chất không đối xứng phù hợp với ngữ nghĩa bài toán; dùng chiến lược tham lam có
-thứ tự nới lỏng ràng buộc xác định kèm cơ chế cân bằng tần suất cho bài toán lập
-thực đơn; và dùng khóa gộp nhóm ghép cặp (nguyên liệu, đơn vị) để bảo đảm tính
-đúng đắn của phép cộng dồn khối lượng. Các cơ sở này được vận dụng trực tiếp vào
-phần thiết kế và cài đặt ở Chương~\ref{ch:hien-thuc}.

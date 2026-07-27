@@ -38,23 +38,17 @@ liền mạch, thay vì chỉ giải quyết riêng lẻ từng khâu.
 
 Đồ án đặt ra các mục tiêu cụ thể sau:
 
-\begin{enumerate}[label=\arabic*.]
-  \item Xây dựng ứng dụng web quản lý được kho dữ liệu món ăn Việt Nam, bao gồm
-        công thức, nguyên liệu, danh mục, vùng miền, độ khó và thông tin năng
-        lượng.
-  \item Thiết kế và cài đặt thuật toán \textbf{gợi ý món ăn theo tập nguyên liệu
-        sẵn có}, có khả năng xếp hạng kết quả theo mức độ phù hợp và chỉ rõ
-        những nguyên liệu còn thiếu của từng món.
-  \item Thiết kế và cài đặt thuật toán \textbf{sinh thực đơn tuần tự động} với
-        các ràng buộc về tính đa dạng, sự phù hợp theo bữa và cân đối năng
-        lượng, đồng thời cho phép người dùng chỉnh sửa thủ công từng suất ăn.
-  \item Xây dựng chức năng \textbf{sinh danh sách đi chợ} tự động từ thực đơn đã
-        lập, có gộp nhóm và cộng dồn khối lượng nguyên liệu.
-  \item Triển khai cơ chế xác thực và phân quyền theo vai trò, tách bạch chức
-        năng dành cho khách, người dùng đã đăng nhập và quản trị viên.
-  \item Kiểm chứng tính đúng đắn của các thuật toán lõi bằng kiểm thử đơn vị tự
-        động.
-\end{enumerate}
+Một là xây dựng ứng dụng web quản lý được kho dữ liệu món ăn Việt Nam gồm công
+thức, nguyên liệu, danh mục, vùng miền, độ khó và thông tin năng lượng. Hai là
+thiết kế và cài đặt thuật toán \textbf{gợi ý món ăn theo tập nguyên liệu sẵn có}
+biết xếp hạng kết quả theo mức độ phù hợp và chỉ rõ nguyên liệu còn thiếu của
+từng món. Ba là thuật toán \textbf{sinh thực đơn tuần tự động} với các ràng buộc
+về tính đa dạng, sự phù hợp theo bữa và cân đối năng lượng, đồng thời cho phép
+chỉnh sửa thủ công từng suất ăn. Bốn là chức năng \textbf{sinh danh sách đi chợ}
+tự động từ thực đơn đã lập, có gộp nhóm và cộng dồn khối lượng. Năm là cơ chế
+xác thực và phân quyền theo vai trò, tách bạch chức năng của khách, người dùng
+đã đăng nhập và quản trị viên. Sáu là kiểm chứng tính đúng đắn của các thuật
+toán lõi bằng kiểm thử đơn vị tự động.
 
 \unnumberedsection{3. Đối tượng và phạm vi nghiên cứu}
 
@@ -66,20 +60,14 @@ xếp hạng, và các thuật toán tham lam có ràng buộc phục vụ bài 
 
 \textbf{Phạm vi nghiên cứu.} Đồ án giới hạn trong các nội dung sau:
 
-\begin{itemize}
-  \item Hình thức triển khai là \textbf{ứng dụng web} chạy trên trình duyệt,
-        không phát triển ứng dụng di động gốc.
-  \item Thuật toán gợi ý dựa trên \textbf{đối sánh tập hợp nguyên liệu}, không
-        sử dụng các mô hình học máy hay lọc cộng tác. Lựa chọn này xuất phát từ
-        đặc thù bài toán: hệ thống mới, chưa có dữ liệu hành vi người dùng để
-        huấn luyện mô hình.
-  \item Thuật toán lập thực đơn theo hướng \textbf{tham lam có ràng buộc}, không
-        giải bài toán tối ưu toàn cục.
-  \item Thông tin dinh dưỡng giới hạn ở mức \textbf{năng lượng (kcal) theo khẩu
-        phần}, chưa bóc tách các thành phần đạm, béo, tinh bột hay vi chất.
-  \item Dữ liệu mẫu gồm 26 món ăn Việt Nam phổ biến, đủ để minh họa và kiểm
-        chứng thuật toán, không nhằm mục tiêu xây dựng kho công thức quy mô lớn.
-\end{itemize}
+Hình thức triển khai là \textbf{ứng dụng web} chạy trên trình duyệt, không phát
+triển ứng dụng di động gốc. Thuật toán gợi ý dựa trên \textbf{đối sánh tập hợp
+nguyên liệu}, không dùng học máy hay lọc cộng tác, vì hệ thống mới chưa có dữ
+liệu hành vi người dùng để huấn luyện mô hình. Thuật toán lập thực đơn theo
+hướng \textbf{tham lam có ràng buộc}, không giải bài toán tối ưu toàn cục. Thông
+tin dinh dưỡng giới hạn ở mức \textbf{năng lượng (kcal) theo khẩu phần}. Dữ liệu
+mẫu gồm 26 món ăn Việt Nam phổ biến, đủ để minh họa và kiểm chứng thuật toán,
+không nhằm xây dựng kho công thức quy mô lớn.
 
 \unnumberedsection{4. Phương pháp nghiên cứu}
 

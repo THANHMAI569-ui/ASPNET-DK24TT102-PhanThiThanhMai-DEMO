@@ -297,3 +297,377 @@ var aggregated = plan.Items
     .ToList();
 \end{codeblock}
 
+\unnumberedsection{Phụ lục E. Đặc tả chi tiết ba ca sử dụng lõi}
+
+Ba ca sử dụng ứng với ba thuật toán lõi được đặc tả đầy đủ dưới đây; các ca còn
+lại đã tóm tắt ở Bảng~\ref{tab:uc-tom-tat}.
+
+\unnumberedsubsection{E.1. UC01. Gợi ý món theo nguyên liệu sẵn có}
+
+\begin{longtable}{|P{3.4cm}|P{10.6cm}|}
+\caption{Đặc tả ca sử dụng UC01. Gợi ý món theo nguyên liệu sẵn có}
+\label{tab:uc01}\\
+\hline
+\bfseries Thành phần & \bfseries Nội dung \\ \hline
+\endfirsthead
+\hline
+\bfseries Thành phần & \bfseries Nội dung \\ \hline
+\endhead
+\endfoot
+Tác nhân & Khách, Người dùng, Quản trị viên \\ \hline
+Mục tiêu & Tìm những món có thể nấu từ tập nguyên liệu đang có, xếp theo mức độ
+  phù hợp \\ \hline
+Tiền điều kiện & Kho dữ liệu đã có món ăn và nguyên liệu; không cần đăng nhập \\ \hline
+Luồng chính & Người dùng mở mục Gợi ý nguyên liệu; hệ thống nạp danh sách nguyên
+  liệu sắp theo tên; người dùng tick các nguyên liệu đang có rồi bấm Gợi ý món;
+  hệ thống tính độ phủ cho từng món, xếp hạng theo bốn tiêu chí và hiển thị lưới
+  kết quả kèm nhãn tình trạng nguyên liệu \\ \hline
+Luồng thay thế & Nếu người dùng chưa chọn nguyên liệu nào, hệ thống giữ nguyên
+  trạng thái ban đầu kèm hướng dẫn thay vì trả về kết quả rỗng. Nếu không có món
+  nào chung nguyên liệu với tập đã chọn, hệ thống hiển thị trạng thái rỗng \\ \hline
+Hậu điều kiện & Danh sách món được hiển thị theo đúng thứ tự ưu tiên đã thiết
+  kế; hệ thống không ghi dữ liệu nào xuống cơ sở dữ liệu \\ \hline
+\end{longtable}
+
+\unnumberedsubsection{E.2. UC02. Sinh thực đơn tuần tự động}
+
+\begin{longtable}{|P{3.4cm}|P{10.6cm}|}
+\caption{Đặc tả ca sử dụng UC02. Sinh thực đơn tuần tự động}
+\label{tab:uc02}\\
+\hline
+\bfseries Thành phần & \bfseries Nội dung \\ \hline
+\endfirsthead
+\hline
+\bfseries Thành phần & \bfseries Nội dung \\ \hline
+\endhead
+\endfoot
+Tác nhân & Người dùng \\ \hline
+Mục tiêu & Sinh tự động một thực đơn đủ 21 suất ăn cho bảy ngày \\ \hline
+Tiền điều kiện & Người dùng đã đăng nhập; kho dữ liệu có ít nhất một món thỏa bộ
+  lọc vùng miền \\ \hline
+Luồng chính & Người dùng mở mục Thực đơn tuần, nhập tên thực đơn, chọn tuần bắt
+  đầu và vùng miền nếu muốn, rồi bấm Tạo thực đơn; hệ thống kiểm tra dữ liệu
+  nhập, gọi thuật toán sinh 21 suất ăn, lưu thực đơn cùng 21 suất và chuyển sang
+  trang chi tiết \\ \hline
+Luồng thay thế & Nếu dữ liệu nhập không hợp lệ, hệ thống hiển thị lỗi ngay dưới
+  ô nhập tương ứng và giữ nguyên giá trị đã nhập. Nếu không có món nào thỏa bộ
+  lọc vùng miền, thuật toán ném ngoại lệ và hệ thống hiển thị thông báo không
+  sinh được thực đơn \\ \hline
+Hậu điều kiện & Một bản ghi \code{MenuPlan} và 21 bản ghi \code{MenuPlanItem}
+  được lưu, gắn với đúng tài khoản đang đăng nhập \\ \hline
+\end{longtable}
+
+\unnumberedsubsection{E.3. UC04. Tạo danh sách đi chợ}
+
+\begin{longtable}{|P{3.4cm}|P{10.6cm}|}
+\caption{Đặc tả ca sử dụng UC04. Tạo danh sách đi chợ}
+\label{tab:uc04}\\
+\hline
+\bfseries Thành phần & \bfseries Nội dung \\ \hline
+\endfirsthead
+\hline
+\bfseries Thành phần & \bfseries Nội dung \\ \hline
+\endhead
+\endfoot
+Tác nhân & Người dùng \\ \hline
+Mục tiêu & Tổng hợp toàn bộ nguyên liệu của thực đơn thành danh sách cần mua \\ \hline
+Tiền điều kiện & Thực đơn đã tồn tại và thuộc về người dùng đang đăng nhập \\ \hline
+Luồng chính & Người dùng bấm Tạo danh sách ở trang chi tiết thực đơn; hệ thống
+  nạp thực đơn kèm điều kiện lọc theo tài khoản, duyệt toàn bộ suất ăn, gộp
+  nhóm theo cặp nguyên liệu và đơn vị, cộng dồn khối lượng rồi lưu danh sách và
+  chuyển sang trang chi tiết danh sách \\ \hline
+Luồng thay thế & Nếu thực đơn không tồn tại hoặc không thuộc về người dùng, hệ
+  thống trả về lỗi không tìm thấy. Nếu thực đơn đã có danh sách đi chợ, hệ thống
+  xóa toàn bộ dòng cũ rồi ghi lại thay vì tạo bản ghi mới \\ \hline
+Hậu điều kiện & Một bản ghi \code{ShoppingList} và các bản ghi
+  \code{ShoppingListItem} đã gộp được lưu \\ \hline
+\end{longtable}
+
+\unnumberedsection{Phụ lục F. Danh sách ca kiểm thử}
+
+\begin{longtable}{|P{1.3cm}|P{5.4cm}|P{5.2cm}|P{1.2cm}|}
+\caption{Bảng ca kiểm thử của bốn nhóm chức năng}
+\label{tab:tc}\\
+\hline
+\bfseries Mã & \bfseries Tên ca kiểm thử & \bfseries Mục tiêu kiểm chứng &
+\bfseries Kết quả \\ \hline
+\endfirsthead
+\hline
+\bfseries Mã & \bfseries Tên ca kiểm thử & \bfseries Mục tiêu kiểm chứng &
+\bfseries Kết quả \\ \hline
+\endhead
+\endfoot
+\multicolumn{4}{|P{14.37cm}|}{\bfseries Nhóm 1. Thuật toán gợi ý theo nguyên liệu (SuggestionService)} \\ \hline
+TC-01 & \codelong{SuggestAsync\_\allowbreak{}EmptyIngredientSet\_\allowbreak{}ReturnsEmpty} & Tập nguyên liệu
+  rỗng trả về danh sách rỗng & Đạt \\ \hline
+TC-02 & \codelong{SuggestAsync\_\allowbreak{}AllIngredientsOwned\_\allowbreak{}IsCookableWithNoMissing}
+  & Có đủ nguyên liệu thì món được đánh dấu nấu được ngay, danh sách thiếu
+  rỗng & Đạt \\ \hline
+TC-03 & \codelong{SuggestAsync\_\allowbreak{}SomeIngredientsMissing\_\allowbreak{}ListsMissingNamesAndCoverage}
+  & Liệt kê đúng tên nguyên liệu thiếu và tính đúng độ phủ & Đạt \\ \hline
+TC-04 & \codelong{SuggestAsync\_\allowbreak{}NoMatchedIngredient\_\allowbreak{}RecipeIsExcluded} & Món
+  không chung nguyên liệu nào bị loại khỏi kết quả & Đạt \\ \hline
+TC-05 & \codelong{SuggestAsync\_\allowbreak{}RanksCookableFirstThenCoverageThenFewerMissing} &
+  Thứ tự xếp hạng đúng theo bốn tiêu chí & Đạt \\ \hline
+TC-06 &
+  \codelong{GetIngredientOptionsAsync\_\allowbreak{}ReturnsAllIngredientsOrderedByName} & Danh
+  sách nguyên liệu trả về đầy đủ và sắp theo tên & Đạt \\ \hline
+\multicolumn{4}{|P{14.37cm}|}{\bfseries Nhóm 2. Thuật toán sinh thực đơn tuần (MenuPlannerService)} \\ \hline
+TC-07 & \codelong{GenerateWeeklyPlanAsync\_\allowbreak{}FillsAll21Slots} & Sinh đủ 21 suất ăn &
+  Đạt \\ \hline
+TC-08 & \codelong{GenerateWeeklyPlanAsync\_\allowbreak{}EnoughRecipes\_\allowbreak{}NoRepeatsWithinWeek}
+  & Thư viện đủ lớn thì không lặp món trong tuần & Đạt \\ \hline
+TC-09 &
+  \codelong{GenerateWeeklyPlanAsync\_\allowbreak{}FewRecipes\_\allowbreak{}AllowsRepeatsButStillFills21} & Thư
+  viện nhỏ vẫn lấp đủ 21 suất bằng cách cho lặp & Đạt \\ \hline
+TC-10 & \codelong{GenerateWeeklyPlanAsync\_\allowbreak{}FewRecipes\_\allowbreak{}SpreadsRepeatsEvenly} &
+  Khi buộc lặp thì rải đều, không dồn vào một món & Đạt \\ \hline
+TC-11 &
+  \codelong{GenerateWeeklyPlanAsync\_\allowbreak{}ScarceBreakfastRecipes\_\allowbreak{}VariesBreakfastAcrossWeek}
+  & Bữa sáng thiếu món vẫn đa dạng qua các ngày & Đạt \\ \hline
+TC-12 & \codelong{GenerateWeeklyPlanAsync\_\allowbreak{}RespectsRegionFilter} & Ràng buộc
+  vùng miền không bị nới & Đạt \\ \hline
+TC-13 & \codelong{GenerateWeeklyPlanAsync\_\allowbreak{}PrefersFavoriteRecipe} & Món yêu thích
+  được ưu tiên chọn & Đạt \\ \hline
+TC-14 & \codelong{GenerateWeeklyPlanAsync\_\allowbreak{}NoRecipesAvailable\_\allowbreak{}Throws} & Không
+  có món nào thì ném ngoại lệ & Đạt \\ \hline
+TC-15 & \codelong{GenerateWeeklyPlanAsync\_\allowbreak{}PersistsMenuPlanAndItems} & Thực đơn và
+  các suất được lưu xuống cơ sở dữ liệu & Đạt \\ \hline
+\multicolumn{4}{|P{14.37cm}|}{\bfseries Nhóm 3. Thuật toán sinh danh sách đi chợ (ShoppingListService)} \\ \hline
+TC-16 &
+  \codelong{GenerateFromMenuPlanAsync\_\allowbreak{}AggregatesSameIngredientAndUnitAcrossRecipes}
+  & Cùng nguyên liệu, cùng đơn vị ở nhiều món được cộng dồn & Đạt \\ \hline
+TC-17 &
+  \codelong{GenerateFromMenuPlanAsync\_\allowbreak{}KeepsSeparateRowsForDifferentUnits} & Cùng
+  nguyên liệu khác đơn vị được tách thành hai dòng & Đạt \\ \hline
+TC-18 &
+  \codelong{GenerateFromMenuPlanAsync\_\allowbreak{}RepeatedRecipeOccurrences\_\allowbreak{}MultipliesQuantity}
+  & Món lặp trong tuần thì khối lượng nhân lên tương ứng & Đạt \\ \hline
+TC-19 & \codelong{GenerateFromMenuPlanAsync\_\allowbreak{}Regenerate\_\allowbreak{}ReplacesOldItems} &
+  Tạo lại thì ghi đè, không nhân đôi dữ liệu & Đạt \\ \hline
+TC-20 &
+  \codelong{GenerateFromMenuPlanAsync\_\allowbreak{}EmptyPlan\_\allowbreak{}CreatesShoppingListWithNoItems} &
+  Thực đơn rỗng vẫn tạo được danh sách rỗng hợp lệ & Đạt \\ \hline
+TC-21 & \codelong{GenerateFromMenuPlanAsync\_\allowbreak{}NonexistentPlan\_\allowbreak{}Throws} & Thực
+  đơn không tồn tại thì ném ngoại lệ & Đạt \\ \hline
+TC-22 & \codelong{GenerateFromMenuPlanAsync\_\allowbreak{}PlanOwnedByDifferentUser\_\allowbreak{}Throws} &
+  Không truy cập được thực đơn của người dùng khác & Đạt \\ \hline
+TC-23 & \codelong{GenerateFromMenuPlanAsync\_\allowbreak{}PersistsMenuPlanIdAndUserId} &
+  Lưu đúng liên kết tới thực đơn và người dùng & Đạt \\ \hline
+\multicolumn{4}{|P{14.37cm}|}{\bfseries Nhóm 4. Chức năng tìm kiếm và sắp xếp (RecipeService)} \\ \hline
+TC-24 & \codelong{Defaults\_\allowbreak{}to\_\allowbreak{}alphabetical\_\allowbreak{}order} & Mặc định sắp theo tên món &
+  Đạt \\ \hline
+TC-25 & \codelong{Sorts\_\allowbreak{}by\_\allowbreak{}total\_\allowbreak{}time\_\allowbreak{}using\_\allowbreak{}prep\_\allowbreak{}plus\_\allowbreak{}cook} & Sắp theo
+  tổng thời gian chuẩn bị cộng nấu & Đạt \\ \hline
+TC-26 & \codelong{Sorts\_\allowbreak{}by\_\allowbreak{}calories\_\allowbreak{}in\_\allowbreak{}both\_\allowbreak{}directions} (calo tăng dần) & Sắp
+  đúng chiều tăng & Đạt \\ \hline
+TC-27 & \codelong{Sorts\_\allowbreak{}by\_\allowbreak{}calories\_\allowbreak{}in\_\allowbreak{}both\_\allowbreak{}directions} (calo giảm dần) &
+  Sắp đúng chiều giảm & Đạt \\ \hline
+TC-28 & \codelong{Breaks\_\allowbreak{}ties\_\allowbreak{}by\_\allowbreak{}name\_\allowbreak{}so\_\allowbreak{}paging\_\allowbreak{}cannot\_\allowbreak{}repeat\_\allowbreak{}a\_\allowbreak{}dish} & Có
+  khóa phá vỡ thế cân bằng, phân trang không lặp món & Đạt \\ \hline
+TC-29 & \codelong{Sort\_\allowbreak{}survives\_\allowbreak{}alongside\_\allowbreak{}a\_\allowbreak{}filter\_\allowbreak{}and\_\allowbreak{}is\_\allowbreak{}echoed\_\allowbreak{}back}
+  & Sắp xếp hoạt động cùng bộ lọc và được phản hồi lại giao diện & Đạt \\ \hline
+\end{longtable}
+
+\unnumberedsection{Phụ lục G. Cấu trúc chi tiết các bảng cơ sở dữ liệu}
+
+Kiểu dữ liệu ghi trong bảng là kiểu trên SQL Server sau khi EF Core ánh xạ từ
+lớp thực thể; các cột khóa chính tự tăng (\code{Id}, kiểu int IDENTITY) không
+lặp lại trong phần mô tả. Vai trò và khóa của từng bảng đã tóm tắt ở
+Bảng~\ref{tab:tom-tat-bang}.
+
+\begin{longtable}{|P{4.2cm}|P{3.0cm}|P{6.2cm}|}
+\caption{Cấu trúc chi tiết các bảng của cơ sở dữ liệu}
+\label{tab:cau-truc-bang}\\
+\hline
+\bfseries Trường & \bfseries Kiểu & \bfseries Mô tả \\ \hline
+\endfirsthead
+\hline
+\bfseries Trường & \bfseries Kiểu & \bfseries Mô tả \\ \hline
+\endhead
+\endfoot
+\multicolumn{3}{|P{14.24cm}|}{\bfseries Bảng Categories: danh mục món ăn, làm bộ lọc
+  trên trang danh sách} \\ \hline
+\code{Name} & nvarchar, NOT NULL & Tên danh mục, ví dụ Món canh, Món xào \\ \hline
+\multicolumn{3}{|P{14.24cm}|}{\bfseries Bảng Ingredients: kho nguyên liệu dùng chung} \\ \hline
+\code{Name} & nvarchar, NOT NULL & Tên nguyên liệu \\ \hline
+\code{Unit} & nvarchar, NOT NULL & Đơn vị đo mặc định khi hiển thị \\ \hline
+\code{Group} & nvarchar, NOT NULL & Nhóm nguyên liệu (Rau củ, Thịt, Gia vị...),
+  căn cứ gom nhóm của danh sách đi chợ \\ \hline
+\multicolumn{3}{|P{14.24cm}|}{\bfseries Bảng Recipes: bảng trung tâm, lưu thông tin món
+  ăn} \\ \hline
+\code{Name} & nvarchar, NOT NULL & Tên món, bắt buộc \\ \hline
+\code{Description} & nvarchar, NULL & Mô tả ngắn \\ \hline
+\code{Instructions} & nvarchar, NULL & Các bước nấu, lưu dạng văn xuôi \\ \hline
+\code{Servings} & int & Số khẩu phần \\ \hline
+\code{PrepMinutes} & int & Thời gian chuẩn bị, tính bằng phút \\ \hline
+\code{CookMinutes} & int & Thời gian nấu, tính bằng phút \\ \hline
+\code{Difficulty} & int & Độ khó: 0 Dễ, 1 Trung bình, 2 Khó \\ \hline
+\code{Region} & int & Vùng miền: 0 Bắc, 1 Trung, 2 Nam \\ \hline
+\codelong{CaloriesPerServing} & int & Năng lượng mỗi khẩu phần, kcal \\ \hline
+\code{ImageUrl} & nvarchar, NULL & Đường dẫn ảnh minh họa \\ \hline
+\codelong{SuitableMealTypes} & int & Cờ nhị phân các bữa phù hợp \\ \hline
+\code{CategoryId} & int, FK & Khóa ngoại tới \code{Categories} \\ \hline
+\multicolumn{3}{|P{14.24cm}|}{\bfseries Bảng RecipeIngredients: bảng trung gian món ăn -
+  nguyên liệu, mấu chốt của cả ba thuật toán} \\ \hline
+\code{RecipeId} & int, PK, FK & Khóa chính thành phần, trỏ tới \code{Recipes} \\ \hline
+\code{IngredientId} & int, PK, FK & Khóa chính thành phần, trỏ tới
+  \code{Ingredients} \\ \hline
+\code{Quantity} & decimal(10,2) & Khối lượng cần dùng \\ \hline
+\code{Unit} & nvarchar, NOT NULL & Đơn vị đo dùng trong công thức này \\ \hline
+\multicolumn{3}{|P{14.24cm}|}{\bfseries Bảng MenuPlans: thông tin chung của một thực đơn
+  tuần} \\ \hline
+\code{UserId} & nvarchar, FK & Khóa ngoại tới bảng người dùng của Identity \\ \hline
+\code{Name} & nvarchar, NOT NULL & Tên thực đơn do người dùng đặt \\ \hline
+\code{WeekStartDate} & date & Ngày bắt đầu của tuần được lập \\ \hline
+\code{CreatedAt} & datetime2 & Thời điểm tạo thực đơn \\ \hline
+\multicolumn{3}{|P{14.24cm}|}{\bfseries Bảng MenuPlanItems: từng ô của lưới thực đơn, một
+  thực đơn đầy đủ gồm 21 bản ghi} \\ \hline
+\code{MenuPlanId} & int, FK & Khóa ngoại tới \code{MenuPlans} \\ \hline
+\code{DayOfWeek} & int & Thứ trong tuần, nhận giá trị từ 0 tới 6 \\ \hline
+\code{MealType} & int & Bữa ăn: 0 Sáng, 1 Trưa, 2 Tối \\ \hline
+\code{RecipeId} & int, FK & Khóa ngoại tới \code{Recipes} \\ \hline
+\multicolumn{3}{|P{14.24cm}|}{\bfseries Bảng Favorites: dấu yêu thích của người dùng đối
+  với một món} \\ \hline
+\code{UserId} & nvarchar, PK, FK & Khóa chính thành phần, trỏ tới bảng người
+  dùng \\ \hline
+\code{RecipeId} & int, PK, FK & Khóa chính thành phần, trỏ tới \code{Recipes} \\ \hline
+\multicolumn{3}{|P{14.24cm}|}{\bfseries Bảng ShoppingLists: thông tin chung của một danh
+  sách đi chợ} \\ \hline
+\code{MenuPlanId} & int, FK, UNIQUE & Khóa ngoại tới \code{MenuPlans}, có ràng
+  buộc duy nhất \\ \hline
+\code{UserId} & nvarchar, FK & Khóa ngoại tới bảng người dùng \\ \hline
+\code{CreatedAt} & datetime2 & Thời điểm sinh danh sách \\ \hline
+\multicolumn{3}{|P{14.24cm}|}{\bfseries Bảng ShoppingListItems: từng dòng nguyên liệu đã
+  gộp} \\ \hline
+\code{ShoppingListId} & int, FK & Khóa ngoại tới \code{ShoppingLists} \\ \hline
+\code{IngredientId} & int, FK & Khóa ngoại tới \code{Ingredients} \\ \hline
+\code{Quantity} & decimal(10,2) & Tổng khối lượng cần mua sau khi cộng dồn \\ \hline
+\code{Unit} & nvarchar, NOT NULL & Đơn vị đo, là một nửa của khóa gộp nhóm \\ \hline
+\code{IsPurchased} & bit & Đã mua hay chưa, phục vụ thanh tiến độ \\ \hline
+\end{longtable}
+
+\unnumberedsection{Phụ lục H. Mã giả ba thuật toán lõi}
+
+Các quyết định cài đặt của ba thuật toán được phân tích ở
+mục~\ref{sec:cai-dat-thuat-toan}, tham chiếu theo số dòng của mã giả dưới đây.
+
+\unnumberedsubsection{H.1. Thuật toán gợi ý theo nguyên liệu}
+
+\begin{codeblock}
+THUẬT TOÁN GoiYTheoNguyenLieu
+Đầu vào : A - tập mã nguyên liệu người dùng đang có
+Đầu ra  : danh sách món đã xếp hạng kèm nguyên liệu thiếu
+
+ 1  nếu A rỗng thì
+ 2      trả về danh sách rỗng
+ 3  hết nếu
+ 4
+ 5  A <- chuyển A thành bảng băm      // tra cứu O(1)
+ 6  R <- truy vấn món có ít nhất 1 nguyên liệu thuộc A
+ 7  KetQua <- danh sách rỗng
+ 8
+ 9  với mỗi món r thuộc R lặp
+10      I_r      <- tập nguyên liệu của r
+11      missing  <- { i thuộc I_r | i không thuộc A }
+12      missing  <- sắp xếp missing theo bảng chữ cái
+13      matched  <- |I_r| - |missing|
+14      coverage <- matched / |I_r|
+15      canCook  <- (missing rỗng)
+16      thêm (r, missing, coverage, canCook) vào KetQua
+17  hết lặp
+18
+19  sắp xếp KetQua theo thứ tự từ điển:
+20      khóa 1: canCook    giảm dần  // nấu được ngay trước
+21      khóa 2: coverage   giảm dần
+22      khóa 3: |missing|  tăng dần
+23      khóa 4: tên món    tăng dần  // giữ thứ tự tất định
+24
+25  trả về KetQua
+\end{codeblock}
+
+\unnumberedsubsection{H.2. Thuật toán sinh thực đơn tuần}
+
+\begin{codeblock}
+THUẬT TOÁN SinhThucDonTuan
+Đầu vào : userId, tenThucDon, tuanBatDau, vungMien (tuỳ chọn)
+Đầu ra  : đối tượng MenuPlan chứa 21 MenuPlanItem
+Hằng số : MUC_TIEU_CALO_NGAY = 2000
+          BUA[] = [ (Sáng, cờ Breakfast), (Trưa, cờ Lunch),
+                    (Tối, cờ Dinner) ]
+
+ 1  candidates <- các món thoả vùng miền   // ràng buộc CỨNG
+ 2  nếu candidates rỗng thì ném ngoại lệ
+ 3
+ 4  favoriteIds <- tập mã món yêu thích của userId
+ 5  used      <- tập rỗng      // món đã dùng trong tuần
+ 6  useCounts <- từ điển rỗng  // số lần mỗi món đã dùng
+ 7  items     <- danh sách rỗng
+ 8
+ 9  với d <- 0 đến 6 lặp                   // 7 ngày
+10      dayCalories <- 0
+11      với m <- 0 đến 2 lặp               // 3 bữa
+12          (bua, co) <- BUA[m]
+13          mealTarget <- MUC_TIEU_CALO_NGAY x (m+1) / 3
+14
+15          suitable <- { c thuộc candidates | c hợp cờ co }
+16          pool     <- suitable \ used
+17          repeating <- (pool rỗng)
+18
+19          nếu repeating: pool <- suitable   // nới KHÔNG LẶP
+20          nếu pool rỗng: pool <- candidates // nới HỢP BỮA
+21
+22          nếu repeating thì
+23              ordered <- sắp pool theo: useCounts[c] tăng,
+24                            rồi (c thuộc favoriteIds) giảm
+25          ngược lại
+26              ordered <- sắp pool theo: c thuộc favoriteIds
+27          hết nếu
+28
+29          chosen <- phần tử đầu của ordered sau khi sắp:
+30                  |dayCalories + c.Calo - mealTarget| tăng,
+31                    rồi c.Id tăng dần
+32
+33          dayCalories <- dayCalories + chosen.Calo
+34          thêm chosen vào used
+35          useCounts[chosen] <- useCounts[chosen] + 1
+36          thêm MenuPlanItem(d, bua, chosen) vào items
+37      hết lặp
+38  hết lặp
+39
+40  lưu MenuPlan(userId, tenThucDon, tuanBatDau, items)
+41  trả về MenuPlan
+\end{codeblock}
+
+\unnumberedsubsection{H.3. Thuật toán sinh danh sách đi chợ}
+
+\begin{codeblock}
+THUẬT TOÁN SinhDanhSachDiCho
+Đầu vào : userId, menuPlanId
+Đầu ra  : đối tượng ShoppingList
+
+ 1  plan <- nạp MenuPlan kèm Items, Recipe, RecipeIngredients
+ 2          với điều kiện Id = menuPlanId VÀ UserId = userId
+ 3  nếu plan là null thì ném ngoại lệ  // chặn truy cập chéo
+ 4
+ 5  tatCa <- danh sách rỗng
+ 6  với mỗi suất s thuộc plan.Items lặp  // duyệt theo SUẤT
+ 7      thêm toàn bộ s.Recipe.RecipeIngredients vào tatCa
+ 8  hết lặp
+ 9
+10  nhom <- gộp nhóm tatCa theo khóa (IngredientId, Unit)
+11  kq <- danh sách rỗng
+12  với mỗi nhóm g thuộc nhom lặp
+13      thêm ShoppingListItem(g.Key, tổng g.Quantity) vào kq
+14  hết lặp
+15
+16  list <- tìm ShoppingList có MenuPlanId = menuPlanId
+17  nếu list tồn tại thì
+18      xóa toàn bộ dòng cũ của list      // ghi đè bản cũ
+19  ngược lại
+20      list <- tạo ShoppingList mới
+21  hết nếu
+22
+23  gán kq vào list.Items và lưu
+24  trả về list
+\end{codeblock}

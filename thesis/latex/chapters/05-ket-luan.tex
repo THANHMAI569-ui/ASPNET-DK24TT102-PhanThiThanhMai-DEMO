@@ -19,20 +19,13 @@ Việt Nam, 40 nguyên liệu và 10 danh mục. Toàn bộ sáu mục tiêu đ�
 mục~\ref{sec:ket-qua-dat-duoc}.
 
 \textbf{Về mặt thuật toán,} ba thuật toán lõi đã được thiết kế, cài đặt và kiểm
-chứng:
-
-\begin{itemize}
-  \item \textit{Thuật toán gợi ý theo nguyên liệu} sử dụng độ phủ tập hợp kết hợp
-        xếp hạng bốn tiêu chí. Đóng góp đáng chú ý ở đây là lập luận chọn độ phủ
-        thay cho hệ số Jaccard: do Jaccard là độ đo đối xứng nên nó phạt cả phần
-        nguyên liệu dư của người dùng, dẫn tới việc một món nấu được ngay có thể
-        bị xếp hạng rất thấp.
-  \item \textit{Thuật toán sinh thực đơn tuần} theo hướng tham lam có ràng buộc,
-        với thứ tự nới lỏng ràng buộc được quy định rõ ràng và ràng buộc vùng
-        miền được giữ cứng.
-  \item \textit{Thuật toán sinh danh sách đi chợ} gộp nhóm theo khóa ghép (nguyên
-        liệu, đơn vị), bảo đảm không cộng dồn nhầm hai giá trị khác đơn vị.
-\end{itemize}
+chứng: thuật toán gợi ý dùng độ phủ tập hợp kết hợp xếp hạng bốn tiêu chí, với
+lập luận chọn độ phủ thay cho hệ số Jaccard vì Jaccard là độ đo đối xứng nên
+phạt cả phần nguyên liệu dư, khiến một món nấu được ngay có thể bị xếp rất thấp;
+thuật toán sinh thực đơn tuần theo hướng tham lam có ràng buộc với thứ tự nới
+lỏng quy định rõ ràng và ràng buộc vùng miền giữ cứng; thuật toán sinh danh sách
+đi chợ gộp nhóm theo khóa ghép (nguyên liệu, đơn vị) nên không cộng dồn nhầm hai
+giá trị khác đơn vị.
 
 \textbf{Về mặt kiểm chứng,} bộ 29 ca kiểm thử đơn vị đã phát hiện được hai khiếm
 khuyết mà việc quan sát bằng mắt thường khó nhận ra: suy thoái tính đa dạng của
@@ -63,17 +56,12 @@ lưu đồ và có ca kiểm thử tương ứng.
 
 \subsection{Hạn chế}
 
-Đồ án còn tám hạn chế đã nêu chi tiết ở mục~\ref{sec:han-che}. Trong đó, ba hạn
-chế có ảnh hưởng lớn nhất tới trải nghiệm người dùng là:
-
-\begin{itemize}
-  \item Thuật toán gợi ý mới xét việc \textbf{có hay không có} một nguyên liệu,
-        chưa xét người dùng có \textbf{đủ khối lượng} hay không.
-  \item Kết quả gợi ý \textbf{giống nhau với mọi người dùng}, chưa khai thác lịch
-        sử nấu ăn để cá nhân hóa.
-  \item Thông tin dinh dưỡng mới dừng ở \textbf{năng lượng theo khẩu phần}, chưa
-        bóc tách các thành phần dinh dưỡng chi tiết.
-\end{itemize}
+Đồ án còn tám hạn chế đã nêu chi tiết ở mục~\ref{sec:han-che}. Ba hạn chế ảnh
+hưởng lớn nhất tới trải nghiệm người dùng là: thuật toán gợi ý mới xét việc
+\textbf{có hay không có} một nguyên liệu chứ chưa xét \textbf{đủ khối lượng} hay
+không; kết quả gợi ý \textbf{giống nhau với mọi người dùng} vì chưa khai thác
+lịch sử nấu ăn; và thông tin dinh dưỡng mới dừng ở \textbf{năng lượng theo khẩu
+phần}.
 
 \section{Hướng phát triển}
 
