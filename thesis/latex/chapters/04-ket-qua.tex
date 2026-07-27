@@ -53,74 +53,49 @@ Tài khoản mặc định & 1 quản trị viên \\ \hline
 
 \begin{figure}[H]
 \centering
-\includegraphics[height=0.70\textheight]{h4-01-trang-chu.jpg}
+\includegraphics[height=0.50\textheight]{h4-01-trang-chu.jpg}
 \caption{Trang chủ}
 \label{fig:h4-01}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.92\textwidth]{h4-02-danh-sach-mon.jpg}
+\includegraphics[width=0.80\textwidth]{h4-02-danh-sach-mon.jpg}
 \caption{Trang danh sách món ăn với bộ lọc bên trái và lưới kết quả}
 \label{fig:h4-02}
 \end{figure}
 
-Bảng~\ref{tab:man-hinh-danh-sach} mô tả các thành phần chính của màn hình danh
-sách món ăn và chức năng tương ứng của từng thành phần.
-
-\begin{table}[H]
-\centering
-\caption{Thành phần màn hình danh sách món ăn và chức năng tương ứng}
-\label{tab:man-hinh-danh-sach}
-\begin{tabularx}{\textwidth}{|P{4.4cm}|Y|}
-\hline
-\bfseries Thành phần giao diện & \bfseries Chức năng \\ \hline
-Ô tìm kiếm theo tên & Lọc theo chuỗi con trong tên món, ứng với chức năng A3 \\ \hline
-Nhóm bộ lọc bên trái & Lọc theo danh mục, vùng miền, độ khó và thời gian
-  nấu tối đa, ứng với chức năng A4 \\ \hline
-Hộp chọn sắp xếp & Bốn phương án: tên A-Z, nấu nhanh, calo thấp, calo cao \\ \hline
-Lưới thẻ món & Mỗi thẻ hiển thị ảnh, tên món, danh mục, thời gian và năng
-  lượng; bấm vào thẻ mở trang chi tiết \\ \hline
-Thanh phân trang & Chia 9 món mỗi trang, giữ nguyên trạng thái lọc và sắp xếp
-  trên mọi liên kết \\ \hline
-Nút thêm yêu thích trên thẻ & Chỉ hiện với người dùng đã đăng nhập \\ \hline
-\end{tabularx}
-\end{table}
+Màn hình danh sách gồm ô tìm kiếm theo tên (chức năng A3), nhóm bộ lọc bên trái
+theo danh mục, vùng miền, độ khó và thời gian nấu tối đa (A4), hộp chọn sắp xếp
+với bốn phương án tên A-Z, nấu nhanh, calo thấp, calo cao (A5), và lưới thẻ món
+phân trang 9 món mỗi trang; các liên kết phân trang giữ nguyên trạng thái lọc và
+sắp xếp hiện tại. Nút thêm yêu thích trên từng thẻ chỉ hiện với người dùng đã
+đăng nhập.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.92\textwidth]{h4-04-chi-tiet-mon.jpg}
+\includegraphics[width=0.80\textwidth]{h4-04-chi-tiet-mon.jpg}
 \caption{Trang chi tiết món ăn}
 \label{fig:h4-03}
 \end{figure}
 
 \subsection{Tìm kiếm, lọc và sắp xếp}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.92\textwidth]{h4-03-loc-va-sap-xep.jpg}
-\caption{Kết quả khi lọc theo vùng miền Nam, độ khó Dễ và sắp xếp theo năng
-lượng tăng dần}
-\label{fig:h4-04}
-\end{figure}
-
-Kết quả cho thấy bộ lọc và tùy chọn sắp xếp hoạt động đồng thời: số món giảm từ
-26 xuống còn tập con thỏa mãn cả hai điều kiện, đồng thời thứ tự hiển thị tuân
-theo tiêu chí đã chọn. Các liên kết sắp xếp và phân trang đều giữ nguyên trạng
-thái lọc hiện tại.
+Khi lọc theo vùng miền Nam, độ khó Dễ và sắp xếp theo năng lượng tăng dần, số
+món giảm từ 26 xuống còn tập con thỏa mãn cả hai điều kiện, đồng thời thứ tự
+hiển thị tuân theo tiêu chí đã chọn; các liên kết sắp xếp và phân trang đều giữ
+nguyên trạng thái lọc hiện tại. Tính đúng đắn của từng phương án sắp xếp được
+kiểm chứng bằng các ca kiểm thử TC-24 tới TC-29 ở mục~\ref{sec:kiem-thu}.
 
 \subsection{Gợi ý theo nguyên liệu}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.92\textwidth]{h4-05-goi-y-chua-chon.jpg}
-\caption{Trạng thái ban đầu khi người dùng chưa chọn nguyên liệu nào}
-\label{fig:h4-05}
-\end{figure}
+Trang gợi ý liệt kê toàn bộ nguyên liệu dưới dạng bảng hộp kiểm sắp theo tên.
+Khi người dùng chưa chọn nguyên liệu nào, trang giữ trạng thái ban đầu kèm hướng
+dẫn sử dụng thay vì trả về danh sách rỗng.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.92\textwidth]{h4-06-goi-y-ket-qua.jpg}
+\includegraphics[width=0.82\textwidth]{h4-06-goi-y-ket-qua.jpg}
 \caption{Kết quả gợi ý với 8 nguyên liệu đầu vào}
 \label{fig:h4-06}
 \end{figure}
@@ -130,134 +105,68 @@ muống, tỏi), hệ thống trả về \textbf{24 món phù hợp}, trong đó
 được ngay} và 22 món còn thiếu nguyên liệu. Hai món nấu được ngay được xếp lên
 đầu danh sách và mang nhãn màu xanh ``Đủ nguyên liệu''; các món còn lại mang nhãn
 màu hổ phách ghi rõ số nguyên liệu còn thiếu, kèm danh sách tên nguyên liệu đó
-ngay dưới tên món. Kết quả này thể hiện đúng thứ tự ưu tiên đã thiết kế ở
-mục~\ref{sec:thuat-toan-goi-y}.
-
-\begin{table}[H]
-\centering
-\caption{Thành phần màn hình gợi ý theo nguyên liệu và chức năng tương ứng}
-\label{tab:man-hinh-goi-y}
-\begin{tabularx}{\textwidth}{|P{4.4cm}|Y|}
-\hline
-\bfseries Thành phần giao diện & \bfseries Chức năng \\ \hline
-Bảng hộp kiểm nguyên liệu & Liệt kê toàn bộ nguyên liệu sắp theo tên, cho phép
-  tick nhiều lựa chọn \\ \hline
-Nút Gợi ý món & Gửi tập nguyên liệu đã chọn lên máy chủ bằng tham số chuỗi
-  truy vấn \\ \hline
-Nhãn Đủ nguyên liệu & Gắn cho món có độ phủ bằng 1, tương ứng
-  $M = \emptyset$ \\ \hline
-Nhãn Thiếu N nguyên liệu & Ghi rõ số nguyên liệu còn thiếu, kèm danh sách
-  tên ngay dưới tên món \\ \hline
-Thứ tự các thẻ kết quả & Phản ánh trực tiếp bốn tiêu chí xếp hạng của thuật
-  toán \\ \hline
-Trạng thái ban đầu & Hiện khi chưa chọn nguyên liệu nào, kèm hướng dẫn
-  thay vì danh sách rỗng \\ \hline
-\end{tabularx}
-\end{table}
+ngay dưới tên món. Nhãn ``Đủ nguyên liệu'' được gắn cho món có độ phủ bằng 1,
+tương ứng $M = \emptyset$; thứ tự các thẻ kết quả phản ánh trực tiếp bốn tiêu
+chí xếp hạng đã thiết kế ở mục~\ref{sec:thuat-toan-goi-y}.
 
 \subsection{Thực đơn tuần}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.92\textwidth]{h4-07-thuc-don-danh-sach.jpg}
-\caption{Biểu mẫu sinh thực đơn và danh sách thực đơn đã lưu}
-\label{fig:h4-07}
-\end{figure}
+Trang thực đơn gồm biểu mẫu sinh thực đơn (nhập tên, chọn tuần bắt đầu và vùng
+miền nếu muốn, ứng với chức năng B1) và danh sách các thực đơn đã lưu của riêng
+người dùng đang đăng nhập (B4).
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.92\textwidth]{h4-08-thuc-don-tuan.jpg}
+\includegraphics[width=0.86\textwidth]{h4-08-thuc-don-tuan.jpg}
 \caption{Lịch thực đơn 7 ngày $\times$ 3 bữa}
 \label{fig:h4-08}
 \end{figure}
 
-Lưới thực đơn hiển thị đủ 21 suất ăn. Mỗi ô gồm tên món, năng lượng của món, một
-hộp chọn để đổi sang món khác và một nút xóa. Dòng cuối cùng hiển thị tổng năng
-lượng theo từng ngày, lần lượt là 1580, 1270, 1130, 1270, 1110, 1030 và 820 kcal.
-
-\begin{table}[H]
-\centering
-\caption{Thành phần màn hình lịch thực đơn và chức năng tương ứng}
-\label{tab:man-hinh-thuc-don}
-\begin{tabularx}{\textwidth}{|P{4.4cm}|Y|}
-\hline
-\bfseries Thành phần giao diện & \bfseries Chức năng \\ \hline
-Lưới 7 cột $\times$ 3 hàng & Mỗi ô là một suất ăn, ứng với một bản ghi
-  \code{MenuPlanItem} \\ \hline
-Tên món và số kcal trong ô & Hiển thị món đang được gán và năng lượng theo
-  khẩu phần \\ \hline
-Hộp chọn trong ô & Đổi sang món khác, ứng với chức năng B3 \\ \hline
-Nút xóa trong ô & Bỏ trống suất ăn; cột của ngày vẫn được giữ lại kể cả
-  khi cả ba bữa đều trống \\ \hline
-Dòng tổng năng lượng & Cộng năng lượng ba bữa của từng ngày, tính lại sau mỗi
-  lần chỉnh \\ \hline
-Nút Tạo danh sách đi chợ & Chuyển sang chức năng B5 với mã thực đơn hiện
-  tại \\ \hline
-\end{tabularx}
-\end{table}
+Lưới thực đơn hiển thị đủ 21 suất ăn, mỗi ô ứng với một bản ghi
+\code{MenuPlanItem} gồm tên món, năng lượng theo khẩu phần, một hộp chọn để đổi
+sang món khác và một nút xóa (chức năng B3); cột của ngày vẫn được giữ lại kể cả
+khi cả ba bữa đều trống. Dòng cuối cùng hiển thị tổng năng lượng theo từng ngày,
+lần lượt là 1580, 1270, 1130, 1270, 1110, 1030 và 820 kcal, được tính lại sau
+mỗi lần chỉnh sửa. Nút ``Tạo danh sách đi chợ'' chuyển sang chức năng B5 với mã
+thực đơn hiện tại.
 
 \subsection{Danh sách đi chợ}
 
 \begin{figure}[H]
 \centering
-\includegraphics[height=0.72\textheight]{h4-09-di-cho.jpg}
+\includegraphics[height=0.55\textheight]{h4-09-di-cho.jpg}
 \caption{Danh sách đi chợ sinh từ thực đơn ở Hình~\ref{fig:h4-08}}
 \label{fig:h4-09}
 \end{figure}
 
 Từ thực đơn 21 suất ăn, hệ thống sinh ra danh sách gồm \textbf{35 dòng nguyên
 liệu} được gộp theo \textbf{8 nhóm}: Đậu/Đỗ, Gia vị, Hải sản, Nấm, Ngũ cốc/Tinh
-bột, Rau củ, Thịt và Trứng/Sữa. Thanh tiến độ ở đầu trang cập nhật theo số nguyên
-liệu đã đánh dấu mua.
-
-\begin{table}[H]
-\centering
-\caption{Thành phần màn hình danh sách đi chợ và chức năng tương ứng}
-\label{tab:man-hinh-di-cho}
-\begin{tabularx}{\textwidth}{|P{4.4cm}|Y|}
-\hline
-\bfseries Thành phần giao diện & \bfseries Chức năng \\ \hline
-Thanh tiến độ đầu trang & Tỉ lệ số dòng đã đánh dấu mua trên tổng số dòng \\ \hline
-Tiêu đề nhóm nguyên liệu & Gom các dòng theo cột \code{Group} của bảng
-  \code{Ingredients} \\ \hline
-Dòng nguyên liệu & Tên nguyên liệu, tổng khối lượng đã cộng dồn và đơn vị \\ \hline
-Hộp kiểm đã mua & Đảo trạng thái \code{IsPurchased}, dòng được gạch
-  ngang \\ \hline
-Nút tạo lại danh sách & Ghi đè danh sách cũ để phản ánh thực đơn vừa chỉnh sửa \\ \hline
-\end{tabularx}
-\end{table}
+bột, Rau củ, Thịt và Trứng/Sữa; tiêu đề nhóm lấy theo cột \code{Group} của bảng
+\code{Ingredients}. Mỗi dòng hiển thị tên nguyên liệu, tổng khối lượng đã cộng
+dồn và đơn vị, kèm hộp kiểm ``đã mua'' đảo trạng thái \code{IsPurchased}; thanh
+tiến độ ở đầu trang cập nhật theo số dòng đã đánh dấu. Nút tạo lại danh sách ghi
+đè danh sách cũ để phản ánh thực đơn vừa chỉnh sửa.
 
 \subsection{Tài khoản và phân quyền}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.86\textwidth]{h4-15-dang-nhap.jpg}
-\caption{Màn hình đăng nhập}
-\label{fig:h4-10}
-\end{figure}
+Biểu mẫu đăng nhập xác thực bằng thư điện tử và mật khẩu; khi thông tin sai, hệ
+thống báo lỗi chung mà không tiết lộ sai ở trường nào.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.86\textwidth]{h4-20-dang-ky.jpg}
-\caption{Màn hình đăng ký tài khoản}
-\label{fig:h4-11}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.86\textwidth]{h4-21-loi-kiem-tra-hop-le.jpg}
-\caption{Thông báo lỗi khi nhập dữ liệu không hợp lệ}
+\includegraphics[width=0.72\textwidth]{h4-21-loi-kiem-tra-hop-le.jpg}
+\caption{Thông báo lỗi khi nhập dữ liệu không hợp lệ trên biểu mẫu đăng ký}
 \label{fig:h4-12}
 \end{figure}
 
-Hình~\ref{fig:h4-12} minh họa cơ chế kiểm tra hợp lệ hoạt động đồng thời trên ba
-trường: sai định dạng email, mật khẩu ngắn hơn 8 ký tự và mật khẩu xác nhận không
-khớp. Thông báo lỗi hiển thị bằng tiếng Việt ngay dưới ô nhập tương ứng, viền ô
-nhập chuyển sang màu đỏ.
+Hình~\ref{fig:h4-12} minh họa cơ chế kiểm tra hợp lệ của biểu mẫu đăng ký tài
+khoản hoạt động đồng thời trên ba trường: sai định dạng email, mật khẩu ngắn hơn
+8 ký tự và mật khẩu xác nhận không khớp. Thông báo lỗi hiển thị bằng tiếng Việt
+ngay dưới ô nhập tương ứng, viền ô nhập chuyển sang màu đỏ.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.86\textwidth]{h4-22-chan-quyen.jpg}
+\includegraphics[width=0.78\textwidth]{h4-22-chan-quyen.jpg}
 \caption{Kết quả khi tài khoản không phải quản trị viên truy cập khu vực quản
 trị}
 \label{fig:h4-13}
@@ -268,119 +177,63 @@ với vai trò \code{User} khi truy cập đường dẫn \code{/Admin/Recipes} 
 hướng sang trang thông báo không đủ quyền, kèm tham số \code{ReturnUrl} ghi nhận
 trang đã bị chặn.
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.92\textwidth]{h4-10-yeu-thich.jpg}
-\caption{Danh sách món yêu thích}
-\label{fig:h4-14}
-\end{figure}
+Sau khi đăng nhập, người dùng còn sử dụng được trang danh sách món yêu thích
+(chức năng B7): thêm hoặc bỏ yêu thích ngay trên thẻ món và xem lại toàn bộ món
+đã đánh dấu; các món này được thuật toán sinh thực đơn ưu tiên chọn.
 
 \subsection{Khu vực quản trị}
 
+Khu vực quản trị gồm bảng điều khiển với thẻ số liệu tổng quan (chức năng C1),
+các bảng quản lý món ăn, nguyên liệu và danh mục với nút thêm, sửa, xóa (C2 tới
+C4). Thao tác xóa nguyên liệu đang được tham chiếu hoặc danh mục còn món sử dụng
+bị chặn kèm thông báo giải thích, đúng như thiết kế hành vi xóa ở
+mục~\ref{sec:hanh-vi-xoa}.
+
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.92\textwidth]{h4-11-admin-tong-quan.jpg}
+\includegraphics[width=0.80\textwidth]{h4-11-admin-tong-quan.jpg}
 \caption{Bảng điều khiển quản trị}
 \label{fig:h4-15}
 \end{figure}
 
-\begin{table}[H]
-\centering
-\caption{Thành phần khu vực quản trị và chức năng tương ứng}
-\label{tab:man-hinh-admin}
-\begin{tabularx}{\textwidth}{|P{4.4cm}|Y|}
-\hline
-\bfseries Thành phần giao diện & \bfseries Chức năng \\ \hline
-Thẻ số liệu tổng quan & Đếm số món ăn, nguyên liệu và danh mục hiện có, ứng với
-  chức năng C1 \\ \hline
-Bảng quản lý món ăn & Danh sách toàn bộ món kèm nút sửa và xóa, ứng với
-  chức năng C2 \\ \hline
-Biểu mẫu món ăn & Nhập thông số món và gán từng nguyên liệu kèm khối lượng, đơn
-  vị \\ \hline
-Bảng quản lý nguyên liệu & Thêm, sửa, xóa nguyên liệu; chặn xóa khi nguyên
-  liệu đang được tham chiếu \\ \hline
-Bảng quản lý danh mục & Thêm, sửa, xóa danh mục; chặn xóa khi còn món sử dụng \\ \hline
-\end{tabularx}
-\end{table}
-
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.92\textwidth]{h4-12-admin-mon-an.jpg}
-\caption{Danh sách quản lý món ăn}
-\label{fig:h4-16}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[height=0.70\textheight]{h4-13-admin-form-mon.jpg}
+\includegraphics[height=0.54\textheight]{h4-13-admin-form-mon.jpg}
 \caption{Biểu mẫu sửa món ăn với phần gán nguyên liệu}
 \label{fig:h4-17}
 \end{figure}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.92\textwidth]{h4-14-admin-nguyen-lieu.jpg}
-\caption{Danh sách quản lý nguyên liệu}
-\label{fig:h4-18}
-\end{figure}
-
 \subsection{Giao diện đáp ứng và chế độ tối}
 
+Trên màn hình hẹp, bố cục các trang tự sắp xếp lại thành một cột và nhóm bộ lọc
+của trang danh sách chuyển thành ngăn kéo trượt mở từ cạnh màn hình
+(Hình~\ref{fig:h4-19}). Hệ thống cũng hỗ trợ chế độ tối: toàn bộ cặp màu chữ và
+nền được định nghĩa lại qua biến CSS, và các trang hiển thị trạng thái rỗng có
+hướng dẫn thay vì bảng trống khi chưa có dữ liệu.
+
 \begin{figure}[H]
 \centering
-\includegraphics[height=0.58\textheight]{h4-18-mobile-trang-chu.jpg}
+\includegraphics[height=0.45\textheight]{h4-18-mobile-trang-chu.jpg}
 \caption{Trang chủ trên màn hình rộng 390 px}
 \label{fig:h4-19}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[height=0.58\textheight]{h4-19-mobile-bo-loc.jpg}
-\caption{Bộ lọc chuyển thành ngăn kéo trượt trên màn hình hẹp}
-\label{fig:h4-20}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.92\textwidth]{h4-17-che-do-toi.jpg}
-\caption{Giao diện ở chế độ tối}
-\label{fig:h4-21}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.92\textwidth]{h4-16-trang-thai-rong.jpg}
-\caption{Ví dụ trạng thái khi chưa có dữ liệu}
-\label{fig:h4-22}
 \end{figure}
 
 \section{Kịch bản demo}
 \label{sec:demo}
 
-Kịch bản sau minh họa luồng sử dụng xuyên suốt ba chức năng lõi.
-
-\textbf{Bước 1, tìm món từ nguyên liệu sẵn có.} Người dùng mở mục ``Gợi ý nguyên
-liệu'', tick 8 nguyên liệu đang có trong bếp rồi bấm ``Gợi ý món''. Hệ thống trả
-về 24 món xếp hạng, trong đó 2 món nấu được ngay nằm ở đầu danh sách
-(Hình~\ref{fig:h4-06}).
-
-\textbf{Bước 2, đánh dấu món yêu thích.} Người dùng mở chi tiết một vài món và
-bấm ``Thêm yêu thích''. Các món này sẽ được ưu tiên khi sinh thực đơn ở bước sau.
-
-\textbf{Bước 3, sinh thực đơn tuần.} Người dùng chuyển sang mục ``Thực đơn
-tuần'', nhập tên thực đơn, chọn tuần bắt đầu và bấm ``Tạo thực đơn''. Hệ thống
-sinh đủ 21 suất ăn trong một thao tác (Hình~\ref{fig:h4-08}).
-
-\textbf{Bước 4, chỉnh tay từng bữa.} Với ô nào chưa vừa ý, người dùng chọn món
-khác từ hộp chọn ngay trong ô đó. Tổng năng lượng của ngày tương ứng được tính
-lại.
-
-\textbf{Bước 5, xuất danh sách đi chợ.} Người dùng bấm ``Tạo danh sách''. Hệ
-thống gộp nguyên liệu của toàn bộ 21 suất thành 35 dòng theo 8 nhóm
-(Hình~\ref{fig:h4-09}).
-
-\textbf{Bước 6, đi chợ.} Khi mua xong từng nguyên liệu, người dùng tick vào ô
-tương ứng; dòng đó bị gạch ngang và thanh tiến độ tăng lên.
+Kịch bản sau minh họa luồng sử dụng xuyên suốt ba chức năng lõi, gồm sáu bước.
+\textbf{Bước 1:} người dùng mở mục ``Gợi ý nguyên liệu'', tick 8 nguyên liệu
+đang có trong bếp rồi bấm ``Gợi ý món''; hệ thống trả về 24 món xếp hạng, trong
+đó 2 món nấu được ngay nằm ở đầu danh sách (Hình~\ref{fig:h4-06}).
+\textbf{Bước 2:} người dùng mở chi tiết một vài món và bấm ``Thêm yêu thích'';
+các món này được ưu tiên khi sinh thực đơn. \textbf{Bước 3:} chuyển sang mục
+``Thực đơn tuần'', nhập tên, chọn tuần bắt đầu và bấm ``Tạo thực đơn''; hệ thống
+sinh đủ 21 suất ăn trong một thao tác (Hình~\ref{fig:h4-08}). \textbf{Bước 4:}
+với ô nào chưa vừa ý, người dùng chọn món khác ngay trong ô đó, tổng năng lượng
+của ngày được tính lại. \textbf{Bước 5:} bấm ``Tạo danh sách''; hệ thống gộp
+nguyên liệu của 21 suất thành 35 dòng theo 8 nhóm (Hình~\ref{fig:h4-09}).
+\textbf{Bước 6:} khi mua xong từng nguyên liệu, người dùng tick vào ô tương
+ứng; dòng đó bị gạch ngang và thanh tiến độ tăng lên.
 
 \section{Kết quả kiểm thử}
 \label{sec:kiem-thu}
@@ -408,14 +261,22 @@ kiểm tra thủ công trên môi trường chạy thật.
 
 \subsection{Bảng ca kiểm thử}
 
-\begin{table}[H]
-\centering
-\caption{Ca kiểm thử thuật toán gợi ý theo nguyên liệu}
-\label{tab:tc-goi-y}
-\begin{tabularx}{\textwidth}{|P{1.3cm}|P{5.4cm}|Y|P{1.2cm}|}
+Bảng~\ref{tab:tc} liệt kê toàn bộ 29 ca kiểm thử theo bốn nhóm, kèm mục tiêu
+kiểm chứng và kết quả của từng ca.
+
+\begin{longtable}{|P{1.3cm}|P{5.4cm}|P{5.2cm}|P{1.2cm}|}
+\caption{Bảng ca kiểm thử của bốn nhóm chức năng}
+\label{tab:tc}\\
 \hline
 \bfseries Mã & \bfseries Tên ca kiểm thử & \bfseries Mục tiêu kiểm chứng &
 \bfseries Kết quả \\ \hline
+\endfirsthead
+\hline
+\bfseries Mã & \bfseries Tên ca kiểm thử & \bfseries Mục tiêu kiểm chứng &
+\bfseries Kết quả \\ \hline
+\endhead
+\endfoot
+\multicolumn{4}{|P{14.37cm}|}{\bfseries Nhóm 1. Thuật toán gợi ý theo nguyên liệu (SuggestionService)} \\ \hline
 TC-01 & \codelong{SuggestAsync\_\allowbreak{}EmptyIngredientSet\_\allowbreak{}ReturnsEmpty} & Tập nguyên liệu
   rỗng trả về danh sách rỗng & Đạt \\ \hline
 TC-02 & \codelong{SuggestAsync\_\allowbreak{}AllIngredientsOwned\_\allowbreak{}IsCookableWithNoMissing}
@@ -430,17 +291,7 @@ TC-05 & \codelong{SuggestAsync\_\allowbreak{}RanksCookableFirstThenCoverageThenF
 TC-06 &
   \codelong{GetIngredientOptionsAsync\_\allowbreak{}ReturnsAllIngredientsOrderedByName} & Danh
   sách nguyên liệu trả về đầy đủ và sắp theo tên & Đạt \\ \hline
-\end{tabularx}
-\end{table}
-
-\begin{table}[H]
-\centering
-\caption{Ca kiểm thử thuật toán sinh thực đơn tuần}
-\label{tab:tc-thuc-don}
-\begin{tabularx}{\textwidth}{|P{1.3cm}|P{5.4cm}|Y|P{1.2cm}|}
-\hline
-\bfseries Mã & \bfseries Tên ca kiểm thử & \bfseries Mục tiêu kiểm chứng &
-\bfseries Kết quả \\ \hline
+\multicolumn{4}{|P{14.37cm}|}{\bfseries Nhóm 2. Thuật toán sinh thực đơn tuần (MenuPlannerService)} \\ \hline
 TC-07 & \codelong{GenerateWeeklyPlanAsync\_\allowbreak{}FillsAll21Slots} & Sinh đủ 21 suất ăn &
   Đạt \\ \hline
 TC-08 & \codelong{GenerateWeeklyPlanAsync\_\allowbreak{}EnoughRecipes\_\allowbreak{}NoRepeatsWithinWeek}
@@ -461,17 +312,7 @@ TC-14 & \codelong{GenerateWeeklyPlanAsync\_\allowbreak{}NoRecipesAvailable\_\all
   có món nào thì ném ngoại lệ & Đạt \\ \hline
 TC-15 & \codelong{GenerateWeeklyPlanAsync\_\allowbreak{}PersistsMenuPlanAndItems} & Thực đơn và
   các suất được lưu xuống cơ sở dữ liệu & Đạt \\ \hline
-\end{tabularx}
-\end{table}
-
-\begin{table}[H]
-\centering
-\caption{Ca kiểm thử thuật toán sinh danh sách đi chợ}
-\label{tab:tc-di-cho}
-\begin{tabularx}{\textwidth}{|P{1.3cm}|P{5.4cm}|Y|P{1.2cm}|}
-\hline
-\bfseries Mã & \bfseries Tên ca kiểm thử & \bfseries Mục tiêu kiểm chứng &
-\bfseries Kết quả \\ \hline
+\multicolumn{4}{|P{14.37cm}|}{\bfseries Nhóm 3. Thuật toán sinh danh sách đi chợ (ShoppingListService)} \\ \hline
 TC-16 &
   \codelong{GenerateFromMenuPlanAsync\_\allowbreak{}AggregatesSameIngredientAndUnitAcrossRecipes}
   & Cùng nguyên liệu, cùng đơn vị ở nhiều món được cộng dồn & Đạt \\ \hline
@@ -492,17 +333,7 @@ TC-22 & \codelong{GenerateFromMenuPlanAsync\_\allowbreak{}PlanOwnedByDifferentUs
   Không truy cập được thực đơn của người dùng khác & Đạt \\ \hline
 TC-23 & \codelong{GenerateFromMenuPlanAsync\_\allowbreak{}PersistsMenuPlanIdAndUserId} &
   Lưu đúng liên kết tới thực đơn và người dùng & Đạt \\ \hline
-\end{tabularx}
-\end{table}
-
-\begin{table}[H]
-\centering
-\caption{Ca kiểm thử chức năng tìm kiếm và sắp xếp}
-\label{tab:tc-sap-xep}
-\begin{tabularx}{\textwidth}{|P{1.3cm}|P{5.4cm}|Y|P{1.2cm}|}
-\hline
-\bfseries Mã & \bfseries Tên ca kiểm thử & \bfseries Mục tiêu kiểm chứng &
-\bfseries Kết quả \\ \hline
+\multicolumn{4}{|P{14.37cm}|}{\bfseries Nhóm 4. Chức năng tìm kiếm và sắp xếp (RecipeService)} \\ \hline
 TC-24 & \codelong{Defaults\_\allowbreak{}to\_\allowbreak{}alphabetical\_\allowbreak{}order} & Mặc định sắp theo tên món &
   Đạt \\ \hline
 TC-25 & \codelong{Sorts\_\allowbreak{}by\_\allowbreak{}total\_\allowbreak{}time\_\allowbreak{}using\_\allowbreak{}prep\_\allowbreak{}plus\_\allowbreak{}cook} & Sắp theo
@@ -515,8 +346,8 @@ TC-28 & \codelong{Breaks\_\allowbreak{}ties\_\allowbreak{}by\_\allowbreak{}name\
   khóa phá vỡ thế cân bằng, phân trang không lặp món & Đạt \\ \hline
 TC-29 & \codelong{Sort\_\allowbreak{}survives\_\allowbreak{}alongside\_\allowbreak{}a\_\allowbreak{}filter\_\allowbreak{}and\_\allowbreak{}is\_\allowbreak{}echoed\_\allowbreak{}back}
   & Sắp xếp hoạt động cùng bộ lọc và được phản hồi lại giao diện & Đạt \\ \hline
-\end{tabularx}
-\end{table}
+\end{longtable}
+
 
 \subsection{Kết quả chạy kiểm thử}
 

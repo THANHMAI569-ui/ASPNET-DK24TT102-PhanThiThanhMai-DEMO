@@ -36,12 +36,9 @@ biến môi trường \code{MSSQL\_\allowbreak{}SA\_\allowbreak{}PASSWORD} trư�
 Apple Silicon, ảnh container chạy dưới giả lập amd64, cấu hình đã có sẵn trong
 tệp compose.
 
-\textbf{Cách B, SQL Server cài trực tiếp trên Windows.} Cài bản Express hoặc
-Developer, bật chế độ xác thực hỗn hợp và dùng tài khoản \code{sa} hoặc tạo login
-riêng.
-
-\textbf{Cách C, LocalDB (Windows, nhẹ nhất cho demo).} Có sẵn khi cài Visual
-Studio.
+\textbf{Cách B, SQL Server cài trực tiếp trên Windows:} cài bản Express hoặc
+Developer, bật chế độ xác thực hỗn hợp. \textbf{Cách C, LocalDB (Windows, nhẹ
+nhất cho demo):} có sẵn khi cài Visual Studio.
 
 \unnumberedsubsection{A.3. Cấu hình chuỗi kết nối}
 
@@ -288,42 +285,3 @@ var aggregated = plan.Items
     .ToList();
 \end{codeblock}
 
-\unnumberedsubsection{D.4. Ca kiểm thử tiêu biểu}
-
-{\raggedright Trích từ \codelong{src/CookingAdvisor.Tests/Services/RecipeServiceSortTests.cs}. Ca
-kiểm thử này đã được xác nhận là có hiệu lực bằng cách tạm gỡ khóa sắp xếp phụ
-khỏi mã nguồn và quan sát ca kiểm thử chuyển sang trạng thái không đạt:\par}
-
-\begin{codeblock}
-[Fact]
-public async Task Breaks_ties_by_name_so_paging_cannot_repeat_a_dish()
-{
-    using var db = CreateDb();
-    // Every dish shares one calorie value, so the tie-break is the only thing
-    // deciding the order. Seeded in reverse name order on purpose: if the
-    // tie-break were missing, the provider would fall back to insertion order
-    // and page 1 would start at "Mon 12" instead of "Mon 01".
-    var recipes = Enumerable.Range(1, RecipeService.PageSize + 3)
-        .Select(i => BuildRecipe(i, $"Mon {i:D2}", 10, 10, 500))
-        .Reverse()
-        .ToArray();
-    await SeedAsync(db, recipes);
-
-    var service = new RecipeService(db);
-    var firstPage = await service.SearchRecipesAsync(
-        new RecipeFilterViewModel { Sort = RecipeSortOrder.CaloriesDesc, Page = 1 });
-    var secondPage = await service.SearchRecipesAsync(
-        new RecipeFilterViewModel { Sort = RecipeSortOrder.CaloriesDesc, Page = 2 });
-
-    Assert.Equal(
-        Enumerable.Range(1, RecipeService.PageSize).Select(i => $"Mon {i:D2}"),
-        firstPage.Recipes.Select(r => r.Name));
-
-    var seen = firstPage.Recipes.Select(r => r.Id)
-        .Concat(secondPage.Recipes.Select(r => r.Id))
-        .ToList();
-
-    Assert.Equal(seen.Count, seen.Distinct().Count());
-    Assert.Equal(recipes.Length, seen.Count);
-}
-\end{codeblock}

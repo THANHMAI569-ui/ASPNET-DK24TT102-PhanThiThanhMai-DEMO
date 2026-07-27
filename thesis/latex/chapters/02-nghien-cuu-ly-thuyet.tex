@@ -50,34 +50,14 @@ riêng một tầng \textbf{Service} để chứa ba thuật toán lõi, còn Co
 \subsection{Các thành phần của ASP.NET Core MVC được sử dụng}
 
 ASP.NET Core MVC là khung làm việc mã nguồn mở, nhẹ và có tính kiểm thử cao dành
-cho tầng trình bày [12]. Đồ án sử dụng trực tiếp các cơ chế sau của khung này:
-
-\begin{itemize}
-  \item \textbf{Định tuyến (routing):} ánh xạ URL tới hành động của Controller.
-        Đồ án sử dụng định tuyến theo quy ước với khuôn dạng
-        \code{\{controller\}/\{action\}/\{id?\}} [12].
-  \item \textbf{Model binding:} tự động chuyển dữ liệu từ yêu cầu HTTP (giá trị
-        biểu mẫu, dữ liệu tuyến, tham số chuỗi truy vấn) thành đối tượng mà
-        Controller xử lý được [12].
-  \item \textbf{Kiểm tra hợp lệ (model validation):} thực hiện thông qua các
-        thuộc tính chú giải dữ liệu, được kiểm tra ở cả phía máy khách trước khi
-        gửi và phía máy chủ trước khi hành động của Controller được gọi [12].
-  \item \textbf{Tiêm phụ thuộc (dependency injection):} Controller yêu cầu các
-        dịch vụ cần thiết thông qua hàm khởi tạo [12].
-  \item \textbf{Bộ lọc (filters):} đóng gói các mối quan tâm cắt ngang như xử lý
-        ngoại lệ hay phân quyền; thuộc tính \code{[Authorize]} chính là bộ lọc
-        phân quyền có sẵn của khung [12].
-  \item \textbf{Areas:} cơ chế phân hoạch ứng dụng lớn thành các nhóm chức năng
-        nhỏ hơn [12].
-  \item \textbf{Razor và Tag Helpers:} Razor là ngôn ngữ đánh dấu mẫu cho phép
-        nhúng mã C\# vào HTML để sinh nội dung phía máy chủ; Tag Helpers cho phép
-        mã phía máy chủ tham gia vào việc tạo và kết xuất phần tử HTML [12].
-\end{itemize}
-
-\subsection{Áp dụng trong đồ án}
-
-Bảng~\ref{tab:mvc-ap-dung} đối chiếu từng cơ chế nêu trên với vị trí sử dụng cụ
-thể trong hệ thống CookingAdvisor.
+cho tầng trình bày [12]. Đồ án sử dụng trực tiếp các cơ chế: định tuyến theo quy
+ước với khuôn dạng \code{\{controller\}/\{action\}/\{id?\}}; model binding tự
+động chuyển dữ liệu của yêu cầu HTTP thành đối tượng; kiểm tra hợp lệ bằng thuộc
+tính chú giải dữ liệu ở cả phía máy khách lẫn máy chủ; tiêm phụ thuộc qua hàm
+khởi tạo; bộ lọc phân quyền \code{[Authorize]}; cơ chế Areas để phân hoạch ứng
+dụng; cùng Razor và Tag Helpers cho việc sinh giao diện phía máy chủ [12].
+Bảng~\ref{tab:mvc-ap-dung} đối chiếu từng cơ chế với vị trí sử dụng cụ thể trong
+hệ thống CookingAdvisor.
 
 \begin{table}[H]
 \centering
@@ -121,50 +101,29 @@ tầng truy cập dữ liệu chứ không phụ thuộc vào kỷ luật của 
 
 Đồ án sử dụng tiếp cận \textbf{Code-First}, trong đó lược đồ cơ sở dữ liệu được
 sinh ra từ các lớp thực thể trong mã nguồn. Cơ chế bảo đảm sự đồng bộ giữa mã
-nguồn và cơ sở dữ liệu là \textbf{migrations}. Tài liệu của Microsoft mô tả:
-trong các dự án thực tế, mô hình dữ liệu thay đổi khi các tính năng được hiện
-thực hóa, và lược đồ cơ sở dữ liệu cần thay đổi tương ứng để đồng bộ với ứng
-dụng; tính năng migrations của EF Core cung cấp cách cập nhật lược đồ một cách
-tăng dần nhằm giữ đồng bộ với mô hình dữ liệu trong khi vẫn bảo toàn dữ liệu hiện
-có [11].
-
-Cơ chế hoạt động của migrations gồm hai bước [11]:
-
-\begin{enumerate}[label=\arabic*.]
-  \item Khi mô hình thay đổi, lập trình viên dùng công cụ dòng lệnh của EF Core
-        để tạo một migration mô tả các cập nhật cần thiết. EF Core so sánh mô
-        hình hiện tại với \textbf{ảnh chụp} (snapshot) của mô hình cũ để xác định
-        khác biệt và sinh ra các tệp mã nguồn migration; các tệp này được quản lý
-        phiên bản như mọi tệp mã nguồn khác.
-  \item Migration sau khi được sinh ra sẽ được áp dụng vào cơ sở dữ liệu. EF Core
-        ghi nhận mọi migration đã áp dụng vào một \textbf{bảng lịch sử} đặc biệt,
-        nhờ đó biết được migration nào đã và chưa được áp dụng.
-\end{enumerate}
-
-Hai lệnh chính được sử dụng là \code{dotnet ef migrations add <Tên>} để tạo
-migration và \code{dotnet ef database update} để áp dụng vào cơ sở dữ liệu [11].
+nguồn và cơ sở dữ liệu là \textbf{migrations}: khi mô hình dữ liệu thay đổi, EF
+Core so sánh mô hình hiện tại với ảnh chụp (snapshot) của mô hình cũ để sinh ra
+các tệp migration mô tả phần khác biệt; các tệp này được quản lý phiên bản như
+mọi tệp mã nguồn khác. Khi áp dụng, EF Core ghi nhận mọi migration đã chạy vào
+một bảng lịch sử đặc biệt, nhờ đó lược đồ được cập nhật tăng dần trong khi vẫn
+bảo toàn dữ liệu hiện có [11]. Hai lệnh chính được sử dụng là \code{dotnet ef
+migrations add <Tên>} để tạo migration và \code{dotnet ef database update} để áp
+dụng vào cơ sở dữ liệu [11].
 
 \subsection{Áp dụng trong đồ án}
 
 Lựa chọn Code-First mang lại ba lợi ích thực tiễn được khai thác trực tiếp trong
-đồ án.
-
-Thứ nhất, hội đồng đánh giá có thể dựng lại toàn bộ cơ sở dữ liệu trên máy của
-mình chỉ bằng một lệnh, không cần tệp sao lưu cơ sở dữ liệu và không phụ thuộc
-vào phiên bản cụ thể của công cụ quản trị. Đây chính là nội dung của yêu cầu phi
-chức năng về khả năng tái lập trình bày ở mục~\ref{sec:yeu-cau-phi-chuc-nang}.
-
-Thứ hai, các quy tắc ràng buộc phức tạp như khóa chính ghép của bảng
-\code{RecipeIngredient} và bảng \code{Favorite}, ràng buộc duy nhất trên cột
-\code{MenuPlanId} của bảng \code{ShoppingList}, và hành vi xóa của từng quan hệ
-đều được khai báo tập trung tại một chỗ là phương thức \code{OnModelCreating} của
-lớp \code{AppDbContext}. Toàn bộ thiết kế này được trình bày chi tiết ở
-mục~\ref{sec:mo-hinh-csdl}.
-
-Thứ ba, do các tệp migration nằm trong hệ thống quản lý phiên bản cùng với mã
-nguồn, lịch sử thay đổi lược đồ có thể truy vết được. Đồ án cũng xuất toàn bộ
-chuỗi migration ra một script T-SQL đặt tại \code{setup/sql/InitialCreate.sql} để
-phục vụ trường hợp máy đánh giá chưa cài công cụ dòng lệnh \code{dotnet-ef}.
+đồ án. Thứ nhất, hội đồng đánh giá có thể dựng lại toàn bộ cơ sở dữ liệu trên
+máy của mình chỉ bằng một lệnh, không cần tệp sao lưu; đây chính là yêu cầu phi
+chức năng về khả năng tái lập ở mục~\ref{sec:yeu-cau-phi-chuc-nang}. Thứ hai,
+các ràng buộc phức tạp như khóa chính ghép của bảng \code{RecipeIngredient} và
+\code{Favorite}, ràng buộc duy nhất trên cột \code{MenuPlanId} của bảng
+\code{ShoppingList}, và hành vi xóa của từng quan hệ đều được khai báo tập trung
+trong phương thức \code{OnModelCreating} của lớp \code{AppDbContext} (chi tiết ở
+mục~\ref{sec:mo-hinh-csdl}). Thứ ba, lịch sử thay đổi lược đồ truy vết được;
+đồ án cũng xuất toàn bộ chuỗi migration ra script T-SQL tại
+\code{setup/sql/InitialCreate.sql} cho trường hợp máy đánh giá chưa cài công cụ
+dòng lệnh \code{dotnet-ef}.
 
 \section{ASP.NET Core Identity}
 \label{sec:identity}
@@ -174,21 +133,15 @@ phục vụ trường hợp máy đánh giá chưa cài công cụ dòng lệnh 
 ASP.NET Core Identity là hệ thống quản lý thành viên của nền tảng, cung cấp sẵn
 các chức năng đăng ký, đăng nhập, lưu trữ thông tin người dùng và quản lý vai trò
 [10]. Việc sử dụng Identity thay vì tự cài đặt cơ chế xác thực mang lại ba lợi
-ích mà đồ án khai thác.
-
-\textbf{Thứ nhất, về lưu trữ mật khẩu.} Identity không lưu mật khẩu dạng nguyên
-bản mà lưu giá trị băm sinh bởi hàm băm mật khẩu chuyên dụng có kèm muối (salt).
-Đây là yêu cầu bắt buộc về an toàn thông tin: nếu cơ sở dữ liệu bị lộ, kẻ tấn
-công không thu được mật khẩu gốc của người dùng.
-
-\textbf{Thứ hai, về chính sách mật khẩu.} Identity cho phép cấu hình các ràng
-buộc như độ dài tối thiểu, yêu cầu chữ số, chữ hoa hay ký tự đặc biệt [10]. Đồ án
-cấu hình độ dài tối thiểu là 8 ký tự.
-
-\textbf{Thứ ba, về phân quyền theo vai trò.} Identity hỗ trợ mô hình vai trò
-(role-based authorization), cho phép gán người dùng vào các vai trò và giới hạn
-truy cập theo vai trò. Kết hợp với bộ lọc \code{[Authorize]} của MVC [12], hệ
-thống có thể khai báo phân quyền ngay tại lớp Controller.
+ích mà đồ án khai thác. \textbf{Về lưu trữ mật khẩu}, Identity không lưu mật
+khẩu dạng nguyên bản mà lưu giá trị băm sinh bởi hàm băm chuyên dụng có kèm muối
+(salt), nên nếu cơ sở dữ liệu bị lộ, kẻ tấn công không thu được mật khẩu gốc.
+\textbf{Về chính sách mật khẩu}, Identity cho phép cấu hình các ràng buộc như độ
+dài tối thiểu, yêu cầu chữ số hay ký tự đặc biệt [10]; đồ án cấu hình độ dài tối
+thiểu là 8 ký tự. \textbf{Về phân quyền theo vai trò}, Identity cho phép gán
+người dùng vào các vai trò và giới hạn truy cập theo vai trò; kết hợp với bộ lọc
+\code{[Authorize]} của MVC [12], hệ thống khai báo phân quyền ngay tại lớp
+Controller.
 
 \subsection{Phân biệt xác thực và phân quyền}
 
@@ -234,37 +187,24 @@ từng quan hệ, trong đó một số quan hệ được đặt ở chế đ�
 liệu của người dùng khác. Cơ chế này chỉ có hiệu lực khi hệ quản trị thực thi
 ràng buộc khóa ngoại ở mức máy chủ.
 
-\subsection{Vấn đề đa nền tảng và giải pháp}
+\subsection{Triển khai đa nền tảng và quản lý chuỗi kết nối}
 
 Một vấn đề thực tiễn phát sinh trong quá trình thực hiện là môi trường phát triển
-và môi trường đánh giá không đồng nhất về hệ điều hành. Giải pháp được áp dụng
-như sau:
-
-\begin{itemize}
-  \item \textbf{Trên macOS:} SQL Server được chạy trong \textbf{container} thông
-        qua OrbStack hoặc Docker Desktop, sử dụng ảnh chính thức của Microsoft.
-        Cấu hình container được mô tả trong tệp \code{docker-compose.yml} kèm
-        theo mã nguồn.
-  \item \textbf{Trên Windows:} SQL Server được cài đặt trực tiếp theo bản Express
-        hoặc Developer.
-\end{itemize}
-
-Điểm cần nhấn mạnh là \textbf{sự khác biệt này không ảnh hưởng tới mã nguồn}. Ứng
-dụng chỉ giao tiếp với cơ sở dữ liệu qua chuỗi kết nối; thay đổi giữa hai môi
-trường chỉ là thay đổi giá trị chuỗi kết nối, không có bất kỳ đoạn mã nào phân
-nhánh theo hệ điều hành. Mô hình triển khai tương ứng được thể hiện ở
+và môi trường đánh giá không đồng nhất về hệ điều hành. Giải pháp được áp dụng:
+trên macOS, SQL Server chạy trong \textbf{container} thông qua OrbStack hoặc
+Docker Desktop với cấu hình mô tả trong tệp \code{docker-compose.yml} kèm theo mã
+nguồn; trên Windows, SQL Server được cài trực tiếp theo bản Express hoặc
+Developer. Sự khác biệt này \textbf{không ảnh hưởng tới mã nguồn}: ứng dụng chỉ
+giao tiếp với cơ sở dữ liệu qua chuỗi kết nối, không có đoạn mã nào phân nhánh
+theo hệ điều hành. Mô hình triển khai tương ứng được thể hiện ở
 Hình~\ref{fig:trien-khai}.
-
-\subsection{Quản lý chuỗi kết nối}
 
 Về an toàn thông tin, chuỗi kết nối chứa thông tin nhạy cảm nên \textbf{không
 được lưu trong mã nguồn}. Đồ án sử dụng cơ chế User Secrets của .NET trong môi
 trường phát triển; tệp \code{appsettings.json} được đưa vào hệ thống quản lý
-phiên bản chỉ chứa giá trị rỗng làm chỗ giữ chỗ.
-
-Cách làm này giữ cho kho mã nguồn công khai không chứa mật khẩu, đồng thời vẫn
-cho phép mỗi máy tự khai báo chuỗi kết nối phù hợp với môi trường của mình mà
-không cần sửa bất kỳ tệp nào đang được quản lý phiên bản.
+phiên bản chỉ chứa giá trị rỗng làm chỗ giữ chỗ. Nhờ đó kho mã nguồn công khai
+không chứa mật khẩu, mỗi máy tự khai báo chuỗi kết nối phù hợp với môi trường của
+mình mà không cần sửa tệp nào đang được quản lý phiên bản.
 
 \section{Cơ sở thuật toán}
 \label{sec:co-so-thuat-toan}
@@ -309,29 +249,11 @@ trên thực tế việc có dư nguyên liệu hoàn toàn không phải là đ
 \end{equation}
 
 Với ví dụ trên, $\mathrm{coverage} = 3/3 = 1{,}0$, phản ánh đúng thực tế là món
-nấu được ngay. Độ phủ luôn nhận giá trị trong đoạn $[0, 1]$; giá trị bằng 1 tương
-đương với điều kiện $I_R \subseteq A$, tức là tập nguyên liệu còn thiếu
-$M = I_R \setminus A$ là tập rỗng. Bảng~\ref{tab:so-sanh-do-do} tóm tắt sự khác
-biệt giữa hai độ đo trên chính ví dụ vừa nêu.
-
-\begin{table}[H]
-\centering
-\caption{So sánh hệ số Jaccard và độ phủ trên cùng một tình huống}
-\label{tab:so-sanh-do-do}
-\begin{tabularx}{\textwidth}{|P{3.6cm}|Y|Y|}
-\hline
-\bfseries Tiêu chí & \bfseries Hệ số Jaccard & \bfseries Độ phủ \\ \hline
-Tính đối xứng & Đối xứng, phạt cả phần dư của người dùng &
-  Không đối xứng, chỉ xét phần nguyên liệu của món \\ \hline
-Mẫu số & $|A \cup I_R|$, phụ thuộc số nguyên liệu người dùng khai báo &
-  $|I_R|$, chỉ phụ thuộc bản thân món ăn \\ \hline
-Giá trị trong ví dụ ($|A| = 40$, $|I_R| = 3$, giao bằng 3) &
-  $3/40 = 0{,}075$ & $3/3 = 1{,}0$ \\ \hline
-Thứ hạng thu được & Gần cuối danh sách & Cao nhất, đúng thực tế \\ \hline
-Điều kiện nấu được ngay & Không biểu diễn trực tiếp được &
-  Tương đương với giá trị bằng 1 \\ \hline
-\end{tabularx}
-\end{table}
+nấu được ngay, trong khi Jaccard chỉ đạt $3/40 = 0{,}075$. Độ phủ luôn nhận giá
+trị trong đoạn $[0, 1]$; giá trị bằng 1 tương đương với điều kiện
+$I_R \subseteq A$, tức là tập nguyên liệu còn thiếu $M = I_R \setminus A$ là tập
+rỗng. Mẫu số của độ phủ chỉ phụ thuộc bản thân món ăn, không phụ thuộc số nguyên
+liệu người dùng khai báo, nên thứ hạng không bị kéo tụt bởi phần nguyên liệu dư.
 
 \textbf{Xếp hạng nhiều tiêu chí.} Chỉ dùng một mình độ phủ vẫn chưa đủ, vì hai
 món có cùng độ phủ nhưng khác nhau về số nguyên liệu còn thiếu sẽ không phân biệt
@@ -398,19 +320,16 @@ là quy định \textbf{thứ tự nới lỏng} khi tập ứng viên trở nê
         sự linh hoạt.
 \end{enumerate}
 
-\textbf{Vấn đề suy thoái tính đa dạng.} Trong quá trình kiểm thử, một khiếm
-khuyết đã được phát hiện ở bước 2. Khi buộc phải lặp món, nếu tiêu chí lựa chọn
-vẫn là ``gần mức năng lượng mục tiêu nhất'', thì do trạng thái năng lượng tích
-lũy trong ngày lặp lại theo chu kỳ, thuật toán có xu hướng chọn \textbf{đúng một
-món} cho mọi suất còn trống. Kết quả đo được trên dữ liệu thử nghiệm là một món
-xuất hiện 12 lần trong khi nhiều món khác không được sử dụng lần nào.
-
-\textbf{Giải pháp.} Bổ sung một tiêu chí ưu tiên đứng trước tiêu chí năng lượng,
+\textbf{Vấn đề suy thoái tính đa dạng và giải pháp.} Trong quá trình kiểm thử,
+một khiếm khuyết đã được phát hiện ở bước 2: khi buộc phải lặp món, nếu tiêu chí
+lựa chọn vẫn là ``gần mức năng lượng mục tiêu nhất'' thì do trạng thái năng
+lượng tích lũy trong ngày lặp lại theo chu kỳ, thuật toán có xu hướng chọn
+\textbf{đúng một món} cho mọi suất còn trống; kết quả đo được là một món xuất
+hiện 12 lần. Giải pháp là bổ sung một tiêu chí đứng trước tiêu chí năng lượng,
 chỉ áp dụng trong nhánh phải lặp: \textbf{ưu tiên món có số lần đã sử dụng ít
-nhất}. Về bản chất, đây là chuyển từ chiến lược tham lam thuần túy sang chiến
-lược cân bằng tải theo tần suất sử dụng. Sau khi áp dụng, thực đơn sinh ra đạt 17
-món khác nhau trên 21 suất. Chi tiết kiểm chứng được trình bày ở
-Chương~\ref{ch:ket-qua}.
+nhất}, về bản chất là chuyển sang chiến lược cân bằng tải theo tần suất. Sau khi
+áp dụng, thực đơn sinh ra đạt 17 món khác nhau trên 21 suất; chi tiết kiểm chứng
+trình bày ở Chương~\ref{ch:ket-qua}.
 
 \textbf{Độ phức tạp.} Với $S = D \times M = 21$ suất và $n$ món ứng viên, mỗi
 suất cần duyệt và sắp xếp tập ứng viên, cho độ phức tạp $O(S \cdot n \log n)$.
@@ -448,48 +367,17 @@ khác nhau.
 Độ phức tạp của thuật toán là $O(S \cdot k)$ với $S$ là số suất ăn và $k$ là số
 nguyên liệu trung bình mỗi món, khi sử dụng bảng băm cho thao tác gộp nhóm.
 
-\subsection{Tổng hợp cơ sở thuật toán của ba chức năng lõi}
-
-Bảng~\ref{tab:tong-hop-thuat-toan} tổng hợp ba thuật toán vừa trình bày, làm căn
-cứ cho phần cài đặt ở mục~\ref{sec:cai-dat-thuat-toan}.
-
-\begin{table}[H]
-\centering
-\caption{Tổng hợp cơ sở thuật toán của ba chức năng lõi}
-\label{tab:tong-hop-thuat-toan}
-\begin{tabularx}{\textwidth}{|P{2.9cm}|Y|Y|P{2.9cm}|}
-\hline
-\bfseries Chức năng & \bfseries Lớp bài toán & \bfseries Kỹ thuật sử dụng &
-\bfseries Độ phức tạp \\ \hline
-Gợi ý theo nguyên liệu & Xếp hạng theo độ tương đồng tập hợp &
-  Độ phủ không đối xứng, sắp xếp theo thứ tự từ điển bốn tiêu chí &
-  $O(nk + n \log n)$ \\ \hline
-Sinh thực đơn tuần & Xếp lịch có ràng buộc &
-  Tham lam có thứ tự nới lỏng xác định, cân bằng theo tần suất sử dụng &
-  $O(S \cdot n \log n)$ \\ \hline
-Sinh danh sách đi chợ & Gộp nhóm và tổng hợp &
-  Bảng băm với khóa ghép (nguyên liệu, đơn vị) & $O(S \cdot k)$ \\ \hline
-\end{tabularx}
-\end{table}
-
 \section{Kết luận chương}
 
-Chương 2 đã trình bày hai nhóm cơ sở lý thuyết của đồ án.
-
-Về công nghệ, mẫu kiến trúc MVC cùng nguyên tắc phân tách mối quan tâm là căn cứ
-cho quyết định tách tầng Service khỏi Controller, nhờ đó các thuật toán lõi có
-thể được kiểm thử độc lập với giao diện. EF Core theo tiếp cận Code-First cùng cơ
-chế migrations bảo đảm lược đồ cơ sở dữ liệu luôn đồng bộ với mã nguồn và có thể
-tái tạo trên máy khác chỉ bằng một lệnh. ASP.NET Core Identity cung cấp nền tảng
-xác thực và phân quyền theo vai trò đã được kiểm chứng, tránh được các sai sót
-thường gặp khi tự cài đặt.
-
-Về thuật toán, chương đã lập luận cho ba lựa chọn thiết kế then chốt: dùng độ phủ
-thay cho hệ số Jaccard do tính chất không đối xứng phù hợp với ngữ nghĩa bài
-toán; dùng chiến lược tham lam có thứ tự nới lỏng ràng buộc xác định cho bài toán
-lập thực đơn, kèm cơ chế cân bằng tần suất để bảo toàn tính đa dạng; và dùng khóa
-gộp nhóm ghép cặp (nguyên liệu, đơn vị) để bảo đảm tính đúng đắn của phép cộng
-dồn khối lượng.
-
-Các cơ sở lý thuyết này sẽ được vận dụng trực tiếp vào phần thiết kế và cài đặt ở
-Chương~\ref{ch:hien-thuc}.
+Chương 2 đã trình bày hai nhóm cơ sở lý thuyết của đồ án. Về công nghệ, mẫu kiến
+trúc MVC cùng nguyên tắc phân tách mối quan tâm là căn cứ cho quyết định tách
+tầng Service khỏi Controller; EF Core theo tiếp cận Code-First cùng cơ chế
+migrations bảo đảm lược đồ cơ sở dữ liệu luôn đồng bộ với mã nguồn và tái tạo
+được trên máy khác chỉ bằng một lệnh; ASP.NET Core Identity cung cấp nền tảng
+xác thực và phân quyền theo vai trò đã được kiểm chứng. Về thuật toán, chương đã
+lập luận cho ba lựa chọn then chốt: dùng độ phủ thay cho hệ số Jaccard do tính
+chất không đối xứng phù hợp với ngữ nghĩa bài toán; dùng chiến lược tham lam có
+thứ tự nới lỏng ràng buộc xác định kèm cơ chế cân bằng tần suất cho bài toán lập
+thực đơn; và dùng khóa gộp nhóm ghép cặp (nguyên liệu, đơn vị) để bảo đảm tính
+đúng đắn của phép cộng dồn khối lượng. Các cơ sở này được vận dụng trực tiếp vào
+phần thiết kế và cài đặt ở Chương~\ref{ch:hien-thuc}.

@@ -35,24 +35,13 @@ chứng:
 \end{itemize}
 
 \textbf{Về mặt kiểm chứng,} bộ 29 ca kiểm thử đơn vị đã phát hiện được hai khiếm
-khuyết mà việc quan sát bằng mắt thường khó nhận ra:
-
-\begin{enumerate}[label=\arabic*.]
-  \item \textit{Suy thoái tính đa dạng của thực đơn.} Khi thư viện món không đủ
-        lớn, tiêu chí phụ theo năng lượng khiến thuật toán chọn lại đúng một món
-        cho hầu hết các suất còn trống, đo được là một món chiếm 12 suất. Sau khi
-        bổ sung tiêu chí rải đều theo số lần đã dùng, thực đơn đạt 17 món khác
-        nhau trên 21 suất.
-  \item \textit{Thứ tự không xác định khi phân trang.} Việc sắp xếp chỉ theo một
-        khóa duy nhất khiến các bản ghi có giá trị bằng nhau không có thứ tự ổn
-        định, dẫn tới nguy cơ một món xuất hiện ở hai trang. Đã khắc phục bằng
-        khóa sắp xếp phụ theo tên món.
-\end{enumerate}
-
-Việc phát hiện được hai khiếm khuyết này là minh chứng cho giá trị thực tế của
-kiểm thử tự động, đồng thời cho thấy quyết định kiến trúc tách tầng Service khỏi
-tầng Controller (mục~\ref{sec:kien-truc}) đã phát huy tác dụng: nếu logic nằm
-trong Controller, việc viết các ca kiểm thử này sẽ khó khăn hơn nhiều.
+khuyết mà việc quan sát bằng mắt thường khó nhận ra: suy thoái tính đa dạng của
+thực đơn (một món chiếm 12 suất trước khi vá, đạt 17 món khác nhau trên 21 suất
+sau khi bổ sung tiêu chí rải đều theo số lần đã dùng) và thứ tự không xác định
+khi phân trang (khắc phục bằng khóa sắp xếp phụ theo tên món), chi tiết ở
+mục~\ref{sec:khiem-khuyet}. Kết quả này là minh chứng cho giá trị thực tế của
+kiểm thử tự động, đồng thời cho thấy quyết định tách tầng Service khỏi tầng
+Controller (mục~\ref{sec:kien-truc}) đã phát huy tác dụng.
 
 \textbf{Về mặt giao diện,} hệ thống hiển thị đúng trên dải màn hình từ 375 px tới
 1440 px, không xuất hiện cuộn ngang, hỗ trợ chế độ tối và đạt chuẩn tương phản
@@ -64,17 +53,11 @@ So với các ứng dụng đã khảo sát ở mục~\ref{sec:khao-sat}, đồ 
 biệt.
 
 \textbf{Thứ nhất, tích hợp trọn vẹn ba chức năng trong một luồng công việc liền
-mạch.} Các sản phẩm khảo sát thường mạnh ở một khâu và thiếu ở khâu khác. Mealime
-lập được thực đơn nhưng không hỗ trợ truy vấn ngược từ nguyên liệu. Paprika quản
-lý công thức và danh sách đi chợ tốt nhưng không tự động hóa việc lập thực đơn.
-Các trang trong nước chủ yếu dừng ở việc cung cấp nội dung.
-
-\textbf{Thứ hai, dữ liệu món ăn Việt Nam được chuẩn hóa về định lượng.} Bảng
-trung gian giữa món ăn và nguyên liệu mang thêm thuộc tính khối lượng và đơn vị.
-Đây là điều kiện tiên quyết để danh sách đi chợ có thể cộng dồn chính xác, điều
-mà các nền tảng có nội dung do cộng đồng đóng góp khó bảo đảm.
-
-\textbf{Thứ ba, thuật toán minh bạch và kiểm chứng được.} Toàn bộ tiêu chí xếp
+mạch,} trong khi các sản phẩm khảo sát thường mạnh ở một khâu và thiếu ở khâu
+khác. \textbf{Thứ hai, dữ liệu món ăn Việt Nam được chuẩn hóa về định lượng:}
+bảng trung gian giữa món ăn và nguyên liệu mang thêm thuộc tính khối lượng và
+đơn vị, điều kiện tiên quyết để danh sách đi chợ cộng dồn chính xác.
+\textbf{Thứ ba, thuật toán minh bạch và kiểm chứng được:} toàn bộ tiêu chí xếp
 hạng và thứ tự nới lỏng ràng buộc đều được phát biểu tường minh, có mã giả, có
 lưu đồ và có ca kiểm thử tương ứng.
 
@@ -97,22 +80,19 @@ chế có ảnh hưởng lớn nhất tới trải nghiệm người dùng là:
 \subsection{Hoàn thiện các thuật toán hiện có}
 
 \textbf{Gợi ý có xét định lượng.} Mở rộng mô hình dữ liệu để người dùng khai báo
-được khối lượng nguyên liệu đang có, không chỉ khai báo có hay không. Khi đó điều
-kiện ``nấu được ngay'' trở thành: với mọi nguyên liệu $i$ của món, khối lượng
-người dùng có phải lớn hơn hoặc bằng khối lượng công thức yêu cầu. Thay đổi này
-cũng cho phép danh sách đi chợ \textbf{trừ đi phần đã có}, chỉ liệt kê phần còn
-thiếu.
+được khối lượng nguyên liệu đang có; khi đó điều kiện ``nấu được ngay'' trở
+thành khối lượng người dùng có lớn hơn hoặc bằng khối lượng công thức yêu cầu
+với mọi nguyên liệu của món, đồng thời danh sách đi chợ có thể \textbf{trừ đi
+phần đã có}, chỉ liệt kê phần còn thiếu.
 
-\textbf{Lập thực đơn theo hướng tối ưu.} Thay chiến lược tham lam bằng một thuật
-toán tìm kiếm cục bộ hoặc quy hoạch ràng buộc, để tổng năng lượng theo ngày bám
-sát mục tiêu hơn. Có thể bổ sung các ràng buộc mới như cân đối nhóm thực phẩm
-trong tuần hoặc tránh lặp cùng một nguyên liệu chính trong hai ngày liên tiếp.
+\textbf{Lập thực đơn theo hướng tối ưu.} Thay chiến lược tham lam bằng thuật
+toán tìm kiếm cục bộ hoặc quy hoạch ràng buộc để tổng năng lượng theo ngày bám
+sát mục tiêu hơn, có thể kèm ràng buộc mới như cân đối nhóm thực phẩm trong tuần.
 
 \textbf{Cá nhân hóa kết quả gợi ý.} Khi hệ thống đã tích lũy đủ dữ liệu về lịch
-sử nấu ăn và món yêu thích, có thể áp dụng kỹ thuật lọc cộng tác để bổ sung một
-tiêu chí xếp hạng dựa trên mức độ phù hợp với khẩu vị của từng người dùng. Cần
-lưu ý đây là hướng chỉ khả thi khi đã có người dùng thực, do các phương pháp này
-gặp vấn đề khởi đầu nguội trên hệ thống mới.
+sử nấu ăn và món yêu thích, có thể áp dụng kỹ thuật lọc cộng tác để bổ sung tiêu
+chí xếp hạng theo khẩu vị từng người dùng; hướng này chỉ khả thi khi đã có người
+dùng thực, do vấn đề khởi đầu nguội trên hệ thống mới.
 
 \subsection{Mở rộng chức năng}
 
