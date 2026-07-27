@@ -13,7 +13,7 @@ kết nối}, vốn nằm trong cấu hình chứ không nằm trong mã nguồn
 \unnumberedsubsection{A.1. Chuẩn bị công cụ}
 
 \begin{codeblock}
-dotnet --version                          # can tu 10.0 tro len
+dotnet --version                     # can tu 10.0 tro len
 dotnet tool install --global dotnet-ef    # neu chua co
 \end{codeblock}
 
@@ -28,7 +28,8 @@ dùng OrbStack hoặc Docker Desktop; Windows dùng Docker Desktop. Cùng một 
 \begin{codeblock}
 cd setup
 docker compose up -d
-# SQL Server lang nghe o localhost:1433, tai khoan sa / CookAdvisor@2026
+# SQL Server lang nghe o localhost:1433
+# tai khoan sa / CookAdvisor@2026
 \end{codeblock}
 
 Mật khẩu SA mặc định chỉ dùng cho môi trường phát triển cục bộ, có thể đổi bằng
@@ -47,7 +48,8 @@ User Secrets:
 
 \begin{codeblock}
 cd src/CookingAdvisor
-dotnet user-secrets set "ConnectionStrings:DefaultConnection" "<chuoi phu hop>"
+dotnet user-secrets set \
+  "ConnectionStrings:DefaultConnection" "<chuoi phu hop>"
 \end{codeblock}
 
 \begin{table}[H]
@@ -77,8 +79,10 @@ phát triển là chứng chỉ tự ký. Tiếng Việt được lưu bằng ki
 
 \begin{codeblock}
 # tu thu muc goc cua repository
-dotnet ef database update --project src/CookingAdvisor   # dung luoc do
-dotnet run --project src/CookingAdvisor                  # chay ung dung
+# dung luoc do co so du lieu
+dotnet ef database update --project src/CookingAdvisor
+# chay ung dung
+dotnet run --project src/CookingAdvisor
 \end{codeblock}
 
 Ở lần chạy đầu tiên, lớp \code{DbInitializer} nạp dữ liệu mẫu gồm danh mục,
@@ -139,19 +143,19 @@ CookingAdvisor/
     CookingAdvisor/            Project web
       Controllers/             Tang dieu khien
       Areas/Admin/             Khu vuc quan tri
-      Services/                Tang nghiep vu, chua ba thuat toan loi
-      Models/                  Thuc the EF Core va kieu liet ke
+      Services/                Tang nghiep vu, 3 thuat toan
+      Models/                  Thuc the EF Core, kieu liet ke
       ViewModels/              Du lieu truyen cho View
       Data/                    AppDbContext va DbInitializer
       Views/                   Giao dien Razor
-      TagHelpers/              Tag helper cho he thong bieu tuong
+      TagHelpers/              Tag helper he thong bieu tuong
       Migrations/              Lich su thay doi luoc do
       wwwroot/                 CSS, JavaScript, phong chu, anh
     CookingAdvisor.Tests/      Du an kiem thu xUnit
   thesis/                      Tai lieu do an
     doc/                       Ban .docx cua bao cao
     pdf/                       Ban .pdf de nop
-    latex/                     Nguon LaTeX cua ban bao cao chinh
+    latex/                     Nguon LaTeX ban bao cao chinh
     images/                    Anh chup giao dien
     diagrams/                  So do (ma nguon Mermaid va anh)
 \end{codeblock}
@@ -191,16 +195,18 @@ Rau muống xào tỏi & Andy Wright & CC BY 2.0 \\ \hline
 {\raggedright Trích từ \codelong{src/CookingAdvisor/Services/SuggestionService.cs}:\par}
 
 \begin{codeblock}
-public async Task<List<RecipeSuggestionViewModel>> SuggestAsync(
-    IReadOnlyCollection<int> ownedIngredientIds)
+public async Task<List<RecipeSuggestionViewModel>>
+    SuggestAsync(IReadOnlyCollection<int> ownedIngredientIds)
 {
     var owned = ownedIngredientIds.ToHashSet();
     if (owned.Count == 0)
         return [];
 
-    // Recipes sharing no ingredient with the owned set are not worth suggesting.
+    // Recipes sharing no ingredient with the owned set are
+    // not worth suggesting.
     var recipes = await db.Recipes
-        .Where(r => r.RecipeIngredients.Any(ri => owned.Contains(ri.IngredientId)))
+        .Where(r => r.RecipeIngredients
+            .Any(ri => owned.Contains(ri.IngredientId)))
         .Select(r => new { /* ... */ })
         .ToListAsync();
 
@@ -216,7 +222,8 @@ public async Task<List<RecipeSuggestionViewModel>> SuggestAsync(
             return new RecipeSuggestionViewModel
             {
                 TotalIngredientCount = r.Ingredients.Count,
-                MatchedCount = r.Ingredients.Count - missing.Count,
+                MatchedCount =
+                    r.Ingredients.Count - missing.Count,
                 MissingIngredients = missing
                 /* ... */
             };
@@ -237,25 +244,28 @@ khắc phục khiếm khuyết suy thoái tính đa dạng đã trình bày ở
 mục~\ref{sec:khiem-khuyet}:\par}
 
 \begin{codeblock}
-var suitable = candidates.Where(c => c.SuitableMealTypes.HasFlag(flag)).ToList();
+var suitable = candidates
+    .Where(c => c.SuitableMealTypes.HasFlag(flag)).ToList();
 var pool = suitable.Where(c => !used.Contains(c.Id)).ToList();
 
-// Repeats only become necessary once every suitable dish has been
-// used; meal-type suitability is relaxed only after that.
+// Repeats only become necessary once every suitable dish
+// has been used; meal-type suitability is relaxed after that.
 var repeating = pool.Count == 0;
 if (repeating) pool = suitable;
 if (pool.Count == 0) pool = candidates;
 
 var ordered = repeating
-    // Variety beats preference once repeats are unavoidable: without
-    // this key the calorie tie-break returns the same dish for every
-    // remaining slot, so one dish fills the week and the rest go unused.
+    // Variety beats preference once repeats are unavoidable:
+    // without this key the calorie tie-break returns the same
+    // dish for every remaining slot, so one dish fills the
+    // week and the rest go unused.
     ? pool.OrderBy(c => useCounts.GetValueOrDefault(c.Id))
         .ThenByDescending(c => favoriteIds.Contains(c.Id))
     : pool.OrderByDescending(c => favoriteIds.Contains(c.Id));
 
 var chosen = ordered
-    .ThenBy(c => Math.Abs(dayCalories + c.CaloriesPerServing - mealTarget))
+    .ThenBy(c => Math.Abs(
+        dayCalories + c.CaloriesPerServing - mealTarget))
     .ThenBy(c => c.Id)
     .First();
 \end{codeblock}
@@ -268,10 +278,12 @@ var chosen = ordered
 var plan = await db.MenuPlans
     .Include(p => p.Items).ThenInclude(i => i.Recipe)
         .ThenInclude(r => r.RecipeIngredients)
-    .FirstOrDefaultAsync(p => p.Id == menuPlanId && p.UserId == userId);
+    .FirstOrDefaultAsync(p =>
+        p.Id == menuPlanId && p.UserId == userId);
 
 if (plan is null)
-    throw new InvalidOperationException("Menu plan not found.");
+    throw new InvalidOperationException(
+        "Menu plan not found.");
 
 var aggregated = plan.Items
     .SelectMany(i => i.Recipe.RecipeIngredients)

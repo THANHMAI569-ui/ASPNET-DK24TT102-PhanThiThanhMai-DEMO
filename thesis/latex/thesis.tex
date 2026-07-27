@@ -40,7 +40,10 @@
 \usepackage{setspace}
 \setstretch{1.5}
 \usepackage{parskip}
-\setlength{\parskip}{6pt}
+% Quy dinh: gian cach doan truoc 6pt va sau 6pt. Word cong ca hai nen khe ho
+% giua hai doan lien tiep la 12pt; LaTeX chi co mot tham so \parskip nen dat
+% thang 12pt de ra dung khoang cach do.
+\setlength{\parskip}{12pt}
 % Thut dau dong 1,27cm dung nhu mau Word cua khoa (720 twips).
 \setlength{\parindent}{1.27cm}
 % Word thut ca doan dau tien sau moi tieu de; LaTeX mac dinh thi khong.
@@ -80,11 +83,11 @@
 
 % === Tieu de chuong / muc: danh so A-rap 1.1, 1.1.1 ==========
 \usepackage{titlesec}
-% Tieu de chuong mot dong "CHUONG n: TEN", can giua, dam, 14pt (theo mau
-% 4_MAU_BAO_CAO.doc).
+% Tieu de chuong mot dong "CHUONG n. TEN", can giua, dam, 14pt: co chu theo
+% mau 4_MAU_BAO_CAO.doc, dau cham theo muc 2 cua ban quy dinh.
 \titleformat{\chapter}[block]
   {\normalfont\centering\fontsize{14}{21}\selectfont\bfseries}
-  {\MakeUppercase{\chaptername} \thechapter:}{0.4em}{\MakeUppercase}
+  {\MakeUppercase{\chaptername} \thechapter.}{0.4em}{\MakeUppercase}
 \titlespacing*{\chapter}{0pt}{0pt}{14pt}
 \titleformat{\section}{\normalfont\bfseries}{\thesection.}{0.6em}{}
 \titleformat{\subsection}{\normalfont\bfseries}{\thesubsection.}{0.6em}{}
@@ -129,9 +132,9 @@
 \renewcommand{\cftafterlottitle}{\hfill}
 \renewcommand{\cftchapfont}{\bfseries}
 \renewcommand{\cftchappagefont}{\bfseries}
-% Muc luc doc la "CHUONG 1: TONG QUAN" giong tieu de trong than bai
+% Muc luc doc la "CHUONG 1. TONG QUAN" giong tieu de trong than bai
 \renewcommand{\cftchappresnum}{\MakeUppercase{\chaptername}\ }
-\renewcommand{\cftchapaftersnum}{:}
+\renewcommand{\cftchapaftersnum}{.}
 \setlength{\cftchapnumwidth}{5.9em}
 \renewcommand{\cftsecaftersnum}{.}
 \renewcommand{\cftsubsecaftersnum}{.}
